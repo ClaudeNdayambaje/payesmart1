@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PayeSmart - Redirection</title>
+    <meta name="robots" content="noindex, follow">
+    
+    <!-- Balises hreflang pour le SEO -->
+    <link rel="alternate" hreflang="fr" href="/fr/index.html">
+    <link rel="stylesheet" href="css/language-selector.css">
+    <link rel="stylesheet" href="css/navigation-overlap-fix.css">
+    <link rel="alternate" hreflang="nl" href="/nl/index.html">
+    <link rel="alternate" hreflang="en" href="/en/index.html">
+    <link rel="alternate" hreflang="x-default" href="/fr/index.html">
+    
+    <!-- Script fix-links.js désactivé pour éviter les changements de langue automatiques -->
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #F5F7FA;
+            color: #333;
+        }
+        
+        .loader {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #F29D38;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .message {
+            text-align: center;
+            max-width: 80%;
+        }
+        
+        .logo {
+            margin-bottom: 30px;
+            max-width: 200px;
+        }
+        
+        .language-options {
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+        }
+        
+        .language-link {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #fff;
+            color: #333;
+            text-decoration: none;
+            border-radius: 6px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .language-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+    </style>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Langues disponibles
+            const availableLanguages = ['fr', 'nl', 'en'];
+            const defaultLanguage = 'fr';
+            
+            // Détecter la langue du navigateur
+            function detectBrowserLanguage() {
+                const browserLang = navigator.language.split('-')[0];
+                return availableLanguages.includes(browserLang) ? browserLang : defaultLanguage;
+            }
+            
+            // Obtenir la langue préférée (stockée ou détectée)
+            function getPreferredLanguage() {
+                return localStorage.getItem('paysmart-language') || detectBrowserLanguage();
+            }
+            
+            // Sauvegarder la langue préférée
+            function savePreferredLanguage(lang) {
+                localStorage.setItem('paysmart-language', lang);
+            }
+            
+            // Fonction pour détecter si une URL contient déjà un préfixe de langue
+            function hasLanguagePrefix() {
+                const path = window.location.pathname;
+                for (let lang of availableLanguages) {
+                    if (path.includes(`/${lang}/`) || path.endsWith(`/${lang}`)) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+            
+            // Rediriger vers la langue appropriée
+            function redirectToLanguage() {
+                // Si nous sommes déjà dans une URL avec langue, extraire cette langue et la sauvegarder
+                if (hasLanguagePrefix()) {
+                    const path = window.location.pathname;
+                    for (let lang of availableLanguages) {
+                        if (path.includes(`/${lang}/`) || path.endsWith(`/${lang}`)) {
+                            savePreferredLanguage(lang);
+                            return; // Déjà sur une page avec langue, ne pas rediriger
+                        }
+                    }
+                    return;
+                }
+                
+                // Obtenir la langue préférée (stockage local ou navigateur)
+                const preferredLanguage = getPreferredLanguage();
+                savePreferredLanguage(preferredLanguage);
+                
+                // Redirection immédiate vers la langue préférée
+                const baseUrl = window.location.origin;
+                const currentPath = window.location.pathname;
+                
+                // Déterminer le chemin de base en fonction de notre emplacement actuel
+                const basePath = currentPath.includes('/marketing') ? '/marketing' : '';
+                
+                // Construction de l'URL cible avec le chemin de base approprié
+                const targetUrl = `${baseUrl}${basePath}/${preferredLanguage}/index.html`;
+                
+                // Redirection immédiate
+                window.location.href = targetUrl;
+            }
+            
+            // Exécuter la redirection
+            redirectToLanguage();
+        });
+    </script>
+</head>
+<body>
+    <img src="img/logo.png" alt="PayeSmart Logo" class="logo">
+    <div id="loader" class="loader"></div>
+    <div class="message">
+        <h2>Redirection en cours...</h2>
+        <p>Vous allez être redirigé automatiquement vers la version appropriée du site.</p>
+    </div>
+    <div id="manual-links" class="language-options" style="display: none;">
+        <p><strong>La redirection automatique n'a pas fonctionné. Veuillez choisir votre langue manuellement :</strong></p>
+        <a href="javascript:void(0)" onclick="manualRedirect('fr')" class="language-link">Français</a>
+        <a href="javascript:void(0)" onclick="manualRedirect('nl')" class="language-link">Nederlands</a>
+        <a href="javascript:void(0)" onclick="manualRedirect('en')" class="language-link">English</a>
+    </div>
+    
+    <script>
+        function manualRedirect(lang) {
+            const baseUrl = window.location.origin;
+            window.location.href = `${baseUrl}/${lang}/index.html`;
+        }
+    </script>
+</body>
+</html>

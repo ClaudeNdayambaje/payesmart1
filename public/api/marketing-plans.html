@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Plans d'abonnement Marketing</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f7f9;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2563eb;
+            margin-top: 0;
+        }
+        pre {
+            background-color: #f1f5f9;
+            padding: 15px;
+            border-radius: 4px;
+            overflow: auto;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .note {
+            background-color: #fffbeb;
+            border-left: 4px solid #f59e0b;
+            padding: 10px 15px;
+            margin-bottom: 20px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>API Plans d'abonnement PayeSmart (Marketing)</h1>
+        
+        <div class="note">
+            Cette page sert d'API pour les plans d'abonnement spécifiquement configurés pour le site marketing.
+            Les plans affichés ici sont synchronisés automatiquement avec l'administration.
+        </div>
+        
+        <h2>Plans d'abonnement marketing :</h2>
+        <pre id="marketing-plans-data">Chargement des plans marketing...</pre>
+    </div>
+    
+    <script type="module" src="marketing-plans.js"></script>
+</body>
+</html>

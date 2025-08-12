@@ -1,0 +1,59 @@
+/* Styles pour le titre sur trois lignes */
+.two-line-title {
+    font-size: 3.5rem; /* Taille optimale */
+    line-height: 1.1; /* Réduit l'espacement entre les lignes */
+    margin-bottom: 1.5rem; /* Réduit l'espace en dessous */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    text-align: left;
+    font-weight: 700;
+    letter-spacing: -0.02em; /* Légère compression des caractères */
+}
+
+.two-line-title .text-highlight {
+    font-size: 3.8rem; /* Légèrement plus petit pour équilibrer */
+    font-weight: 800;
+    display: inline-block;
+    margin-top: 0.1rem; /* Espacement réduit */
+    margin-bottom: 0.1rem; /* Espacement réduit */
+    color: #F7941D; /* Couleur orange PayeSmart */
+    text-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Styles pour le sous-titre */
+.two-line-subtitle {
+    font-size: 1.5rem; /* Taille légèrement ajustée */
+    line-height: 1.5; /* Espacement des lignes réduit */
+    margin-top: 0.5rem; /* Réduit l'espace après le titre */
+    margin-bottom: 2rem; /* Espace avant les boutons */
+    max-width: 700px;
+    text-align: left;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: 500;
+}
+
+/* Media queries pour la responsivité */
+@media (max-width: 768px) {
+    .two-line-title {
+        font-size: 2.8rem;
+    }
+    
+    .two-line-title .text-highlight {
+        font-size: 3.2rem;
+    }
+    
+    .two-line-subtitle {
+        font-size: 1.1rem;
+        padding: 0 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .two-line-title {
+        font-size: 2.2rem;
+    }
+    
+    .two-line-title .text-highlight {
+        font-size: 2.5rem;
+    }
+}

@@ -1,0 +1,275 @@
+/* Styles pour les composants de chargement
+   Utilisant les couleurs thématiques :
+   - Orange: #F7941D (principal pour les spinners)
+   - Gris foncé: #2F2F2F (backgrounds)
+*/
+
+:root {
+  --spinner-color: #F7941D;
+  --spinner-background: rgba(47, 47, 47, 0.1);
+  --spinner-text-color: #2F2F2F;
+  --spinner-overlay-bg: rgba(47, 47, 47, 0.6);
+}
+
+/* Container principal */
+.spinner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Spinner centré dans son conteneur */
+.spinner-centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+/* Texte de label */
+.spinner-label {
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  color: var(--spinner-text-color);
+  text-align: center;
+}
+
+/* Spinner circulaire */
+.spinner-circle {
+  border-radius: 50%;
+  border: 3px solid var(--spinner-background);
+  border-top: 3px solid var(--spinner-color);
+  animation: spin 1s linear infinite;
+}
+
+/* Spinner avec pulse */
+.spinner-pulse {
+  border-radius: 50%;
+  background-color: var(--spinner-color);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Spinner avec barres */
+.spinner-bars {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.spinner-bar {
+  background-color: var(--spinner-color);
+  border-radius: 2px;
+  animation: bar-grow 1s ease-in-out infinite;
+}
+
+.spinner-bar:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.spinner-bar:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.spinner-bar:nth-child(4) {
+  animation-delay: 0.6s;
+}
+
+/* Spinner avec points */
+.spinner-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.spinner-dot {
+  border-radius: 50%;
+  background-color: var(--spinner-color);
+  animation: dot-fade 1.4s ease-in-out infinite;
+}
+
+.spinner-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.spinner-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+/* Spinner à l'intérieur d'un bouton */
+.spinner-mini {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid white;
+  animation: spin 1s linear infinite;
+}
+
+/* Barre de progression */
+.progress-container {
+  width: 100%;
+  max-width: 300px;
+  height: 6px;
+  background-color: var(--spinner-background);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0;
+  background-color: var(--spinner-color);
+  border-radius: 3px;
+  animation: progress 2.5s ease-in-out infinite;
+}
+
+/* Spinner en plein écran */
+.spinner-fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--spinner-overlay-bg);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Tailles de spinners */
+.spinner-xs {
+  width: 12px;
+  height: 12px;
+}
+
+.spinner-sm {
+  width: 20px;
+  height: 20px;
+}
+
+.spinner-md {
+  width: 32px;
+  height: 32px;
+}
+
+.spinner-lg {
+  width: 48px;
+  height: 48px;
+}
+
+.spinner-xl {
+  width: 64px;
+  height: 64px;
+}
+
+/* Tailles spécifiques pour les barres */
+.spinner-bars.spinner-xs .spinner-bar {
+  width: 2px;
+  height: 12px;
+}
+
+.spinner-bars.spinner-sm .spinner-bar {
+  width: 3px;
+  height: 18px;
+}
+
+.spinner-bars.spinner-md .spinner-bar {
+  width: 4px;
+  height: 24px;
+}
+
+.spinner-bars.spinner-lg .spinner-bar {
+  width: 5px;
+  height: 36px;
+}
+
+.spinner-bars.spinner-xl .spinner-bar {
+  width: 6px;
+  height: 48px;
+}
+
+/* Tailles spécifiques pour les points */
+.spinner-dots.spinner-xs .spinner-dot {
+  width: 6px;
+  height: 6px;
+}
+
+.spinner-dots.spinner-sm .spinner-dot {
+  width: 8px;
+  height: 8px;
+}
+
+.spinner-dots.spinner-md .spinner-dot {
+  width: 12px;
+  height: 12px;
+}
+
+.spinner-dots.spinner-lg .spinner-dot {
+  width: 16px;
+  height: 16px;
+}
+
+.spinner-dots.spinner-xl .spinner-dot {
+  width: 20px;
+  height: 20px;
+}
+
+/* Animations */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { 
+    transform: scale(0.6);
+    opacity: 0.5;
+  }
+  50% { 
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes bar-grow {
+  0%, 100% { 
+    transform: scaleY(0.5);
+    opacity: 0.5;
+  }
+  50% { 
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+@keyframes dot-fade {
+  0%, 100% { 
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  50% { 
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes progress {
+  0% { width: 0; }
+  50% { width: 100%; }
+  100% { width: 0; }
+}

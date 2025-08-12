@@ -1,0 +1,57 @@
+/* 
+ * CORRECTION DES COULEURS DE BOUTONS
+ * Force l'application de la couleur bleue aux boutons secondaires
+ * Date: Août 2025
+ */
+
+/* Sélecteur très spécifique pour surcharger tous les autres styles */
+html body .btn-secondary,
+body .btn-secondary,
+.btn-secondary,
+a.btn-secondary,
+button.btn-secondary,
+input.btn-secondary,
+.hero-buttons .btn-secondary,
+section .btn-secondary,
+div .btn-secondary {
+    background: #3498db !important;
+    background-color: #3498db !important;
+    color: #ffffff !important;
+    border-color: #3498db !important;
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4) !important;
+}
+
+html body .btn-secondary:hover,
+body .btn-secondary:hover,
+.btn-secondary:hover,
+a.btn-secondary:hover,
+button.btn-secondary:hover,
+input.btn-secondary:hover,
+.hero-buttons .btn-secondary:hover,
+section .btn-secondary:hover,
+div .btn-secondary:hover {
+    background: #2980b9 !important;
+    background-color: #2980b9 !important;
+    border-color: #2980b9 !important;
+    box-shadow: 0 8px 20px rgba(52, 152, 219, 0.5) !important;
+}
+
+/* Assurer la bonne répartition des boutons dans les hero-sections */
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+/* Responsive pour mobile */
+@media (max-width: 767px) {
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .hero-buttons .btn {
+        width: 100%;
+        max-width: 250px;
+        text-align: center;
+    }
+}

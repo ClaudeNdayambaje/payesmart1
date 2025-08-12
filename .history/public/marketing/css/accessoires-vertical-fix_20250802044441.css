@@ -1,0 +1,53 @@
+/* 
+ * ACCESSOIRES - CORRECTIF VERTICAL POUR MOBILE
+ * Force l'affichage vertical des cartes d'accessoires sur mobile
+ * Priorité maximale pour écraser tous les autres styles
+ * Version 1.0
+ */
+
+/* Règles générales pour forcer l'affichage vertical */
+@media (max-width: 768px) {
+    /* Reset complet de la grille d'accessoires */
+    .accessoires-grid {
+        display: block !important;
+        grid-template-columns: unset !important;
+        width: 100% !important;
+        margin: 0 auto !important;
+    }
+    
+    /* Style des cartes individuelles */
+    .accessoire-card {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 0 20px 0 !important;
+        float: none !important;
+    }
+    
+    /* Force les cartes à prendre toute la largeur disponible */
+    .accessoire-card > * {
+        width: 100% !important;
+    }
+    
+    /* Ajustement des marges et paddings */
+    .accessoires-section .container {
+        padding: 0 15px !important;
+    }
+    
+    /* Annuler tout display: flex ou grid dans les conteneurs parents qui pourrait causer le problème */
+    .accessoires-section > .container > * {
+        display: block !important;
+    }
+}
+
+/* Très petits écrans */
+@media (max-width: 576px) {
+    /* Ajustements supplémentaires pour les très petits écrans */
+    .accessoire-card {
+        margin-bottom: 15px !important;
+    }
+    
+    .accessoire-image {
+        height: 180px !important;
+    }
+}

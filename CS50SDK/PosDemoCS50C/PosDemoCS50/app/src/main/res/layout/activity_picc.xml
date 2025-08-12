@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    >
+
+    <!--
+    <RadioGroup
+        android:id="@+id/radioGroupPICC"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radio_buttonPICC_A"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@drawable/radio_button_style"
+            android:tag="A"
+            android:text="A"
+            android:textSize="25sp"
+            android:textColor="@color/colorPrimaryDark" />
+
+        <RadioButton
+            android:id="@+id/radio_buttonPICC_B"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@drawable/radio_button_style"
+            android:tag="B"
+            android:text="B"
+            android:textSize="25sp"
+            android:textColor="@color/colorPrimaryDark" />
+
+        <RadioButton
+            android:id="@+id/radio_buttonPICC_M"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@drawable/radio_button_style"
+            android:tag="M"
+            android:text="M"
+            android:textSize="25sp"
+            android:textColor="@color/colorPrimaryDark" />
+
+    </RadioGroup>
+
+    -->
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="20dp"
+        android:text="@string/result"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/textView_picc"
+        android:layout_width="match_parent"
+        android:layout_height="128dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/shape_msg"
+        android:gravity="center"
+        android:text="@string/wait_time"
+        android:textColor="@color/colorAccent"
+        android:textSize="20sp" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnReadM1"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_marginRight="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_button"
+            android:text="M1 Read"
+            android:textColor="@color/white"
+            android:textSize="25sp" />
+
+        <Button
+            android:id="@+id/btnWriteM1"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_button"
+            android:text="M1 Write"
+            android:textColor="@color/white"
+            android:textSize="25sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="20dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:text="block No. :"
+                android:textColor="@color/colorAccent"
+                android:textSize="25sp" />
+
+            <EditText
+                android:id="@+id/editBlkNo"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:background="@drawable/shape_msg"
+                android:inputType="number"
+                android:textColor="@color/colorAccent"
+                android:textSize="25sp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:text="write data:"
+                android:textColor="@color/colorAccent"
+                android:textSize="25sp" />
+
+            <EditText
+                android:id="@+id/editWriteData"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:background="@drawable/shape_msg"
+                android:textColor="@color/colorAccent"
+                android:textSize="25sp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnReadM1Block"
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            android:layout_marginRight="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_button"
+            android:text="M1 Read Block"
+            android:textColor="@color/white"
+            android:textSize="22sp" />
+
+        <Button
+            android:id="@+id/btnWriteM1Block"
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_button"
+            android:text="M1 Write Block"
+            android:textColor="@color/white"
+            android:textSize="22sp" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="2dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnPiccTest"
+            android:layout_width="wrap_content"
+            android:layout_height="17dp"
+            android:layout_marginRight="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_button"
+            android:text="Picc Test"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btnNfc"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_marginRight="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_button"
+            android:text="nfc card"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            />
+
+        <Button
+            android:id="@+id/btnPiccPoll"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_button"
+            android:text="PiccPoll"
+            android:textColor="@color/white"
+            android:textSize="22sp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Selct Operate Type :"
+                android:textColor="@color/colorAccent"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tvOpereteType"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:textColor="@color/colorAccent"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <RadioGroup
+            android:id="@+id/rg_operate"
+            android:orientation="horizontal"
+            android:layout_height="38dp"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            >
+            <RadioButton
+                android:id="@+id/rb_add"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@drawable/radio_button_style"
+                android:text=" + "
+                android:textSize="25sp"
+                android:textColor="@color/colorAccent"/>
+            <RadioButton
+                android:id="@+id/rb_Subtraction"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@drawable/radio_button_style"
+                android:text=" - "
+                android:textSize="25sp"
+                android:textColor="@color/colorAccent"/>
+            <RadioButton
+                android:id="@+id/rb_equal"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@drawable/radio_button_style"
+                android:text=" = "
+                android:textSize="25sp"
+                android:textColor="@color/colorAccent"/>
+        </RadioGroup>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:text="Start blkNo.:"
+                android:textColor="@color/colorAccent"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/editM1OperateBlkNo"
+                android:layout_width="50dp"
+                android:layout_height="28dp"
+                android:background="@drawable/shape_msg"
+                android:inputType="number"
+                android:textColor="@color/colorAccent"
+                android:textSize="25sp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:text="Update blkNo:"
+                android:textColor="@color/colorAccent"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/editM1OperateUpdateNo"
+                android:layout_width="50dp"
+                android:layout_height="28dp"
+                android:background="@drawable/shape_msg"
+                android:inputType="number"
+                android:textColor="@color/colorAccent"
+                android:textSize="25sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="4dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:text="Operete  Data  : "
+                android:textColor="@color/colorAccent"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/editM1OperateData"
+                android:layout_width="match_parent"
+                android:layout_height="28dp"
+                android:background="@drawable/shape_msg"
+                android:textColor="@color/colorAccent"
+                android:textSize="25sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btnOperateM1"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/shape_button"
+            android:text="operate m1"
+            android:textColor="@color/white"
+            android:textSize="25sp" />
+    </LinearLayout>
+
+</LinearLayout>
+

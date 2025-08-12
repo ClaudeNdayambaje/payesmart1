@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test de Persistance de Langue - PayeSmart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .success { background-color: #d4edda; border-color: #c3e6cb; }
+        .info { background-color: #d1ecf1; border-color: #bee5eb; }
+        .warning { background-color: #fff3cd; border-color: #ffeaa7; }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover { background: #0056b3; }
+        .language-selector {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+        .current-info {
+            font-weight: bold;
+            color: #007bff;
+        }
+        .links {
+            margin-top: 20px;
+        }
+        .links a {
+            display: inline-block;
+            margin: 5px 10px;
+            padding: 8px 15px;
+            background: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .links a:hover { background: #1e7e34; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌐 Test de Persistance de Langue PayeSmart</h1>
+        
+        <div class="test-section info">
+            <h3>📊 Informations Actuelles</h3>
+            <p><strong>Langue détectée :</strong> <span id="currentLang" class="current-info">-</span></p>
+            <p><strong>Langue sauvegardée :</strong> <span id="savedLang" class="current-info">-</span></p>
+            <p><strong>URL actuelle :</strong> <span id="currentUrl" class="current-info">-</span></p>
+        </div>
+
+        <div class="test-section">
+            <h3>🎛️ Sélecteur de Langue Simulé</h3>
+            <div class="language-selector">
+                <button onclick="testLanguageChange('fr')">🇫🇷 Français</button>
+                <button onclick="testLanguageChange('nl')">🇳🇱 Nederlands</button>
+                <button onclick="testLanguageChange('en')">🇬🇧 English</button>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h3>🧪 Actions de Test</h3>
+            <button onclick="clearLanguagePreference()">🗑️ Effacer Préférence</button>
+            <button onclick="refreshInfo()">🔄 Actualiser Infos</button>
+            <button onclick="testRedirection()">🔀 Tester Redirection</button>
+        </div>
+
+        <div class="test-section">
+            <h3>🔗 Navigation Test</h3>
+            <div class="links">
+                <a href="/marketing/fr/index.html">Page d'accueil FR</a>
+                <a href="/marketing/nl/index.html">Page d'accueil NL</a>
+                <a href="/marketing/fr/solutions.html">Produits FR</a>
+                <a href="/marketing/nl/solutions.html">Produits NL</a>
+            </div>
+        </div>
+
+        <div id="testResults" class="test-section" style="display: none;">
+            <h3>✅ Résultats des Tests</h3>
+            <div id="resultsContent"></div>
+        </div>
+    </div>
+
+    <script>
+        // Fonctions utilitaires pour les tests
+        function getCurrentLanguage() {
+            const path = window.location.pathname;
+            if (path.includes('/fr/')) return 'fr';
+            if (path.includes('/nl/')) return 'nl';
+            if (path.includes('/en/')) return 'en';
+            return document.documentElement.lang || 'fr';
+        }
+
+        function getSavedLanguage() {
+            return localStorage.getItem('preferredLanguage');
+        }
+
+        function saveLanguage(lang) {
+            localStorage.setItem('preferredLanguage', lang);
+            console.log('Langue sauvegardée:', lang);
+        }
+
+        function testLanguageChange(lang) {
+            saveLanguage(lang);
+            refreshInfo();
+            showResult(`Langue changée vers: ${lang}`, 'success');
+        }
+
+        function clearLanguagePreference() {
+            localStorage.removeItem('preferredLanguage');
+            refreshInfo();
+            showResult('Préférence de langue effacée', 'warning');
+        }
+
+        function testRedirection() {
+            const savedLang = getSavedLanguage();
+            const currentLang = getCurrentLanguage();
+            
+            if (savedLang && savedLang !== currentLang) {
+                showResult(`Redirection nécessaire de ${currentLang} vers ${savedLang}`, 'info');
+                // Simuler la redirection après 2 secondes
+                setTimeout(() => {
+                    const newUrl = window.location.origin + `/marketing/${savedLang}/index.html`;
+                    showResult(`Redirection vers: ${newUrl}`, 'success');
+                    // window.location.href = newUrl; // Décommentez pour vraie redirection
+                }, 2000);
+            } else {
+                showResult('Aucune redirection nécessaire', 'success');
+            }
+        }
+
+        function refreshInfo() {
+            document.getElementById('currentLang').textContent = getCurrentLanguage();
+            document.getElementById('savedLang').textContent = getSavedLanguage() || 'Aucune';
+            document.getElementById('currentUrl').textContent = window.location.pathname;
+        }
+
+        function showResult(message, type) {
+            const resultsDiv = document.getElementById('testResults');
+            const contentDiv = document.getElementById('resultsContent');
+            
+            const resultItem = document.createElement('div');
+            resultItem.className = `test-section ${type}`;
+            resultItem.innerHTML = `<p>${new Date().toLocaleTimeString()} - ${message}</p>`;
+            
+            contentDiv.appendChild(resultItem);
+            resultsDiv.style.display = 'block';
+            
+            // Scroll vers le résultat
+            resultItem.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            refreshInfo();
+            showResult('Page de test chargée', 'info');
+        });
+    </script>
+</body>
+</html>

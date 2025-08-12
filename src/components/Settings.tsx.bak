@@ -1,0 +1,1616 @@
+import React, { useState, useEffect } from 'react';
+import { useTheme } from '../contexts/ThemeContext';
+import { 
+  Settings as SettingsIcon, 
+  Store, 
+  Euro,
+  Printer,
+  Bell,
+  Shield,
+  Database,
+  Palette,
+  Sun,
+  Moon,
+  Monitor,
+  Smartphone,
+  Laptop,
+  Loader2,
+  Check,
+  AlertCircle,
+  ChevronRight,
+  Eye,
+  Paintbrush,
+  Globe,
+  CreditCard,
+  Receipt,
+  Download,
+  Upload,
+  Sliders,
+  LayoutGrid
+} from 'lucide-react';
+import { getSettings, saveSettings, AppSettings, defaultSettings } from '../services/settingsService';
+
+interface SettingsProps {
+  onSave?: (settings: AppSettings) => void;
+}
+
+const Settings: React.FC<SettingsProps> = ({ onSave }) => {
+  const [settings, setSettings] = useState<AppSettings>(defaultSettings);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [saving, setSaving] = useState<boolean>(false);
+  const [saveStatus, setSaveStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [activeTab, setActiveTab] = useState<string>('general');
+  const [showPasswordModal, setShowPasswordModal] = useState<boolean>(false);
+  const [currentPassword, setCurrentPassword] = useState<string>('');
+  const [newPassword, setNewPassword] = useState<string>('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
+  const [passwordError, setPasswordError] = useState<string>('');
+  const [showCurrentPassword, setShowCurrentPassword] = useState<boolean>(false);
+  const [showNewPassword, setShowNewPassword] = useState<boolean>(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
+  
+  // Utiliser le contexte de thème
+  const { setTheme, updateColor } = useTheme();
+
+  useEffect(() => {
+    const loadSettings = async () => {
+      try {
+        const loadedSettings = await getSettings();
+        setSettings(loadedSettings);
+        setLoading(false);
+      } catch (error) {
+        console.error('Erreur lors du chargement des paramètres:', error);
+        setLoading(false);
+      }
+    };
+
+    loadSettings();
+  }, []);
+
+  const handleSave = () => {
+    // Sauvegarder les paramètres
+    saveSettings(settings)
+      .then(() => {
+        setSaveStatus('success');
+        // Appeler le callback onSave si défini
+        if (onSave) {
+          onSave(settings);
+        }
+      })
+      .catch(() => {
+        setSaveStatus('error');
+      })
+      .finally(() => {
+        setSaving(false);
+        // Réinitialiser le statut après 3 secondes
+        setTimeout(() => setSaveStatus('idle'), 3000);
+      });
+  };
+
+  const renderGeneralSettings = () => (
+    <div className="space-y-8 animate-fadeIn">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 p-6 transition-all duration-300 hover:shadow-xl">
+        <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4 flex items-center gap-2">
+          <Store size={18} className="text-indigo-500" />
+          Informations du magasin
+        </h3>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                Nom du magasin
+              </label>
+              <input
+                type="text"
+                value={settings.general.storeName}
+                onChange={(e) => setSettings({
+                  ...settings,
+                  general: { ...settings.general, storeName: e.target.value }
+                })}
+                className="w-full border dark:border-gray-700 rounded-lg px-4 py-2.5 bg-white dark:bg-gray-800 shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-200 dark:text-white"
+                placeholder="Nom de votre commerce"
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                Adresse
+              </label>
+              <input
+                type="text"
+                value={settings.general.address}
+                onChange={(e) => setSettings({
+                  ...settings,
+                  general: { ...settings.general, address: e.target.value }
+                })}
+                className="w-full border dark:border-gray-700 rounded-lg px-4 py-2.5 bg-white dark:bg-gray-800 shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-200 dark:text-white"
+                placeholder="Adresse complète"
+              />
+            </div>
+          </div>
+          
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                Numéro de TVA
+              </label>
+              <input
+                type="text"
+                value={settings.general.vatNumber}
+                onChange={(e) => setSettings({
+                  ...settings,
+                  general: { ...settings.general, vatNumber: e.target.value }
+                })}
+                className="w-full border dark:border-gray-700 rounded-lg px-4 py-2.5 bg-white dark:bg-gray-800 shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-200 dark:text-white"
+                placeholder="BE0123456789"
+              />
+            </div>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                  Téléphone
+                </label>
+                <input
+                  type="tel"
+                  value={settings.general.phone}
+                  onChange={(e) => setSettings({
+                    ...settings,
+                    general: { ...settings.general, phone: e.target.value }
+                  })}
+                  className="w-full border dark:border-gray-700 rounded-lg px-4 py-2.5 bg-white dark:bg-gray-800 shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-200 dark:text-white"
+                  placeholder="+32 123 45 67 89"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  value={settings.general.email}
+                  onChange={(e) => setSettings({
+                    ...settings,
+                    general: { ...settings.general, email: e.target.value }
+                  })}
+                  className="w-full border dark:border-gray-700 rounded-lg px-4 py-2.5 bg-white dark:bg-gray-800 shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-200 dark:text-white"
+                  placeholder="contact@exemple.com"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 p-6 transition-all duration-300 hover:shadow-xl">
+        <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4 flex items-center gap-2">
+          <Globe size={18} className="text-indigo-500" />
+          Paramètres régionaux
+        </h3>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+              Thème
+            </label>
+            <div className="relative">
+              <select
+                value={settings.general.theme}
+                onChange={(e) => setSettings({
+                  ...settings,
+                  general: { ...settings.general, theme: e.target.value as 'light' | 'dark' | 'system' }
+                })}
+                className="w-full border dark:border-gray-700 rounded-lg px-4 py-2.5 bg-white dark:bg-gray-800 shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-200 dark:text-white appearance-none pr-10"
+              >
+                <option value="light">Clair</option>
+                <option value="dark">Sombre</option>
+                <option value="system">Système</option>
+              </select>
+              <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+              Langue
+            </label>
+            <div className="relative">
+              <select
+                value={settings.general.language}
+                onChange={(e) => setSettings({
+                  ...settings,
+                  general: { ...settings.general, language: e.target.value as 'fr' | 'nl' | 'en' }
+                })}
+                className="w-full border dark:border-gray-700 rounded-lg px-4 py-2.5 bg-white dark:bg-gray-800 shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-200 dark:text-white appearance-none pr-10"
+              >
+                <option value="fr">Français</option>
+                <option value="nl">Nederlands</option>
+                <option value="en">English</option>
+              </select>
+              <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+              Fuseau horaire
+            </label>
+            <div className="relative">
+              <select
+                value={settings.general.timezone}
+                onChange={(e) => setSettings({
+                  ...settings,
+                  general: { ...settings.general, timezone: e.target.value }
+                })}
+                className="w-full border dark:border-gray-700 rounded-lg px-4 py-2.5 bg-white dark:bg-gray-800 shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-200 dark:text-white appearance-none pr-10"
+              >
+                <option value="Europe/Brussels">Europe/Bruxelles</option>
+                <option value="Europe/Paris">Europe/Paris</option>
+                <option value="Europe/Amsterdam">Europe/Amsterdam</option>
+              </select>
+              <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  const renderPaymentSettings = () => (
+    <div className="space-y-8 animate-fadeIn">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 p-6 transition-all duration-300 hover:shadow-xl">
+        <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4 flex items-center gap-2">
+          <Euro size={18} className="text-indigo-500" />
+          Méthodes de paiement acceptées
+        </h3>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="bg-gray-50 dark:bg-gray-900/50 p-4 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-indigo-300 dark:hover:border-indigo-700 transition-all duration-300">
+            <label className="flex items-center gap-3 cursor-pointer">
+              <div className="relative">
+                <input
+                  type="checkbox"
+                  checked={settings.payment.acceptedMethods?.cash || false}
+                  onChange={(e) => setSettings({
+                    ...settings,
+                    payment: { 
+                      ...settings.payment, 
+                      acceptedMethods: { 
+                        ...(settings.payment.acceptedMethods || { cash: false, card: false, contactless: false }),
+                        cash: e.target.checked 
+                      } 
+                    }
+                  })}
+                  className="rounded text-indigo-600 h-5 w-5 focus:ring-indigo-500 focus:ring-offset-0 cursor-pointer"
+                />
+              </div>
+              <div>
+                <span className="font-medium text-gray-800 dark:text-gray-200">Espèces</span>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Paiement traditionnel en liquide</p>
+              </div>
+            </label>
+          </div>
+          
+          <div className="bg-gray-50 dark:bg-gray-900/50 p-4 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-indigo-300 dark:hover:border-indigo-700 transition-all duration-300">
+            <label className="flex items-center gap-3 cursor-pointer">
+              <div className="relative">
+                <input
+                  type="checkbox"
+                  checked={settings.payment.acceptedMethods?.card || false}
+                  onChange={(e) => setSettings({
+                    ...settings,
+                    payment: { 
+                      ...settings.payment, 
+                      acceptedMethods: { 
+                        ...(settings.payment.acceptedMethods || { cash: false, card: false, contactless: false }),
+                        card: e.target.checked 
+                      } 
+                    }
+                  })}
+                  className="rounded text-indigo-600 h-5 w-5 focus:ring-indigo-500 focus:ring-offset-0 cursor-pointer"
+                />
+              </div>
+              <div>
+                <span className="font-medium text-gray-800 dark:text-gray-200">Carte bancaire</span>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Cartes de débit et crédit</p>
+              </div>
+            </label>
+          </div>
+          
+          <div className="bg-gray-50 dark:bg-gray-900/50 p-4 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-indigo-300 dark:hover:border-indigo-700 transition-all duration-300">
+            <label className="flex items-center gap-3 cursor-pointer">
+              <div className="relative">
+                <input
+                  type="checkbox"
+                  checked={settings.payment.acceptedMethods?.contactless || false}
+                  onChange={(e) => setSettings({
+                    ...settings,
+                    payment: { 
+                      ...settings.payment, 
+                      acceptedMethods: { 
+                        ...(settings.payment.acceptedMethods || { cash: false, card: false, contactless: false }),
+                        contactless: e.target.checked 
+                      } 
+                    }
+                  })}
+                  className="rounded text-indigo-600 h-5 w-5 focus:ring-indigo-500 focus:ring-offset-0 cursor-pointer"
+                />
+              </div>
+              <div>
+                <span className="font-medium text-gray-800 dark:text-gray-200">Sans contact</span>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">NFC, Apple Pay, Google Pay</p>
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 p-6 transition-all duration-300 hover:shadow-xl">
+          <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4 flex items-center gap-2">
+            <CreditCard size={18} className="text-indigo-500" />
+            Options de carte
+          </h3>
+          
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                Montant minimum carte
+              </label>
+              <div className="flex items-center">
+                <input
+                  type="number"
+                  value={settings.payment.minimumCardAmount}
+                  onChange={(e) => setSettings({
+                    ...settings,
+                    payment: { ...settings.payment, minimumCardAmount: parseFloat(e.target.value) }
+                  })}
+                  className="w-full border dark:border-gray-700 rounded-lg px-4 py-2.5 bg-white dark:bg-gray-800 shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-200 dark:text-white"
+                  min="0"
+                  step="0.01"
+                />
+                <span className="ml-2 text-gray-700 dark:text-gray-300">€</span>
+              </div>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Montant minimum pour accepter un paiement par carte</p>
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                Méthode par défaut
+              </label>
+              <div className="relative">
+                <select
+                  value={settings.payment.defaultMethod}
+                  onChange={(e) => setSettings({
+                    ...settings,
+                    payment: { ...settings.payment, defaultMethod: e.target.value as 'cash' | 'card' }
+                  })}
+                  className="w-full border dark:border-gray-700 rounded-lg px-4 py-2.5 bg-white dark:bg-gray-800 shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-200 dark:text-white appearance-none pr-10"
+                >
+                  <option value="cash">Espèces</option>
+                  <option value="card">Carte</option>
+                </select>
+                <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                  <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                  </svg>
+                </div>
+              </div>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Méthode de paiement sélectionnée par défaut</p>
+            </div>
+          </div>
+        </div>
+        
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 p-6 transition-all duration-300 hover:shadow-xl">
+          <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4 flex items-center gap-2">
+            <Receipt size={18} className="text-indigo-500" />
+            Options de caisse
+          </h3>
+          
+          <div className="space-y-4">
+            <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-900/50 rounded-lg">
+              <div>
+                <span className="font-medium text-gray-800 dark:text-gray-200">Arrondir les montants en espèces</span>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                  Arrondir automatiquement les montants pour faciliter le rendu de monnaie
+                </p>
+              </div>
+              <div className="relative">
+                <label className="inline-flex items-center cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={settings.payment.roundCashAmounts}
+                    onChange={(e) => setSettings({
+                      ...settings,
+                      payment: { ...settings.payment, roundCashAmounts: e.target.checked }
+                    })}
+                    className="sr-only peer"
+                  />
+                  <div className="w-11 h-6 bg-gray-200 dark:bg-gray-700 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 dark:peer-focus:ring-indigo-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600 dark:peer-checked:bg-indigo-500"></div>
+                </label>
+              </div>
+            </div>
+            
+            <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-900/50 rounded-lg">
+              <div>
+                <span className="font-medium text-gray-800 dark:text-gray-200">Calculatrice de monnaie</span>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                  Afficher la calculatrice de monnaie lors des paiements en espèces
+                </p>
+              </div>
+              <div className="relative">
+                <label className="inline-flex items-center cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={settings.payment.showChangeCalculator || false}
+                    onChange={(e) => {
+                      const updatedPayment = { ...settings.payment };
+                      // @ts-ignore
+                      updatedPayment.showChangeCalculator = e.target.checked;
+                      setSettings({
+                        ...settings,
+                        payment: updatedPayment
+                      });
+                    }}
+                    className="sr-only peer"
+                  />
+                  <div className="w-11 h-6 bg-gray-200 dark:bg-gray-700 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 dark:peer-focus:ring-indigo-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600 dark:peer-checked:bg-indigo-500"></div>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  const renderPrinterSettings = () => (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between bg-gray-50 p-4 rounded-lg">
+        <div>
+          <h3 className="font-medium">Impression automatique</h3>
+          <p className="text-sm text-gray-500">
+            Dernière impression: {new Date(settings.printer.lastPrint).toLocaleDateString('fr-FR', { 
+              day: '2-digit', 
+              month: '2-digit', 
+              year: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit'
+            })}
+          </p>
+        </div>
+        <label className="relative inline-flex items-center cursor-pointer">
+          <input
+            type="checkbox"
+            checked={settings.printer.enabled}
+            onChange={(e) => setSettings({
+              ...settings,
+              printer: { ...settings.printer, enabled: e.target.checked }
+            })}
+            className="sr-only peer"
+          />
+          <div className="w-11 h-6 bg-gray-200 dark:bg-gray-700 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 dark:peer-focus:ring-indigo-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600 dark:peer-checked:bg-indigo-500"></div>
+        </label>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label className="block text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">
+            Nombre de copies
+          </label>
+          <input
+            type="number"
+            min="1"
+            value={settings.printer.copies}
+            onChange={(e) => setSettings({
+              ...settings,
+              printer: { ...settings.printer, copies: parseInt(e.target.value) }
+            })}
+            className="w-full border dark:border-gray-700 rounded-lg px-4 py-2.5 bg-white dark:bg-gray-800 shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-200 dark:text-white"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">
+            Format
+          </label>
+          <select
+            value={settings.printer.format}
+            onChange={(e) => setSettings({
+              ...settings,
+              printer: { ...settings.printer, format: e.target.value }
+            })}
+            className="w-full border dark:border-gray-700 rounded-lg px-4 py-2.5 bg-white dark:bg-gray-800 shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-200 dark:text-white appearance-none"
+          >
+            <option value="A4">A4</option>
+            <option value="A5">A5</option>
+            <option value="80mm">80mm</option>
+            <option value="58mm">58mm</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">
+          Nom de l'imprimante
+        </label>
+        <input
+          type="text"
+          value={settings.printer.printerName}
+          onChange={(e) => setSettings({
+            ...settings,
+            printer: { ...settings.printer, printerName: e.target.value }
+          })}
+          className="w-full border rounded-lg px-3 py-2"
+        />
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">
+          Texte de bas de page
+        </label>
+        <textarea
+          value={settings.printer.footerText}
+          onChange={(e) => setSettings({
+            ...settings,
+            printer: { ...settings.printer, footerText: e.target.value }
+          })}
+          className="w-full border rounded-lg px-3 py-2 h-24"
+        />
+      </div>
+
+      <div className="space-y-3">
+        <label className="flex items-center gap-2">
+          <input
+            type="checkbox"
+            checked={settings.printer.showLogo}
+            onChange={(e) => setSettings({
+              ...settings,
+              printer: { ...settings.printer, showLogo: e.target.checked }
+            })}
+            className="rounded text-indigo-600"
+          />
+          <span>Afficher le logo sur les tickets</span>
+        </label>
+      </div>
+
+      <div className="mt-4">
+        <button
+          className="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 flex items-center gap-2"
+          onClick={() => {
+            // Logique pour imprimer un ticket de test
+          }}
+        >
+          <Printer size={16} />
+          Imprimer un ticket de test
+        </button>
+      </div>
+    </div>
+  );
+
+  const renderNotificationSettings = () => (
+    <div className="space-y-6">
+      <div className="bg-gray-50 p-4 rounded-lg">
+        <h3 className="font-medium mb-3">Alertes de stock</h3>
+        <div className="space-y-3">
+          <label className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              checked={settings.notifications.lowStock}
+              onChange={(e) => setSettings({
+                ...settings,
+                notifications: { ...settings.notifications, lowStock: e.target.checked }
+              })}
+              className="rounded text-indigo-600"
+            />
+            <span>Activer les alertes de stock bas</span>
+          </label>
+          <div className="pl-6">
+            <label className="block text-sm text-gray-700 mb-1">
+              Seuil d'alerte
+            </label>
+            <input
+              type="number"
+              min="0"
+              value={settings.notifications.lowStockThreshold}
+              onChange={(e) => setSettings({
+                ...settings,
+                notifications: { ...settings.notifications, lowStockThreshold: parseInt(e.target.value) }
+              })}
+              className="w-32 border rounded-lg px-3 py-2"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="space-y-3">
+        <label className="flex items-center gap-2">
+          <input
+            type="checkbox"
+            checked={settings.notifications.newOrders}
+            onChange={(e) => setSettings({
+              ...settings,
+              notifications: { ...settings.notifications, newOrders: e.target.checked }
+            })}
+            className="rounded text-indigo-600"
+          />
+          <span>Nouvelles commandes fournisseurs</span>
+        </label>
+        <label className="flex items-center gap-2">
+          <input
+            type="checkbox"
+            checked={settings.notifications.orderStatus}
+            onChange={(e) => setSettings({
+              ...settings,
+              notifications: { ...settings.notifications, orderStatus: e.target.checked }
+            })}
+            className="rounded text-indigo-600"
+          />
+          <span>Changements de statut des commandes</span>
+        </label>
+        <label className="flex items-center gap-2">
+          <input
+            type="checkbox"
+            checked={settings.notifications.employeeLogin}
+            onChange={(e) => setSettings({
+              ...settings,
+              notifications: { ...settings.notifications, employeeLogin: e.target.checked }
+            })}
+            className="rounded text-indigo-600"
+          />
+          <span>Connexions des employés</span>
+        </label>
+        <label className="flex items-center gap-2">
+          <input
+            type="checkbox"
+            checked={settings.notifications.dailyReport}
+            onChange={(e) => setSettings({
+              ...settings,
+              notifications: { ...settings.notifications, dailyReport: e.target.checked }
+            })}
+            className="rounded text-indigo-600"
+          />
+          <span>Rapport quotidien</span>
+        </label>
+      </div>
+
+      <div className="border-t pt-4">
+        <label className="flex items-center gap-2">
+          <input
+            type="checkbox"
+            checked={settings.notifications.emailNotifications}
+            onChange={(e) => setSettings({
+              ...settings,
+              notifications: { ...settings.notifications, emailNotifications: e.target.checked }
+            })}
+            className="rounded text-indigo-600"
+          />
+          <span>Recevoir les notifications par email</span>
+        </label>
+      </div>
+    </div>
+  );
+
+  const renderSecuritySettings = () => (
+    <div className="space-y-6">
+      <div className="bg-gray-50 p-4 rounded-lg">
+        <h3 className="font-medium mb-3">Protection par code PIN</h3>
+        <div className="space-y-3">
+          <label className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              checked={settings.security.requirePinForRefunds}
+              onChange={(e) => setSettings({
+                ...settings,
+                security: { ...settings.security, requirePinForRefunds: e.target.checked }
+              })}
+              className="rounded text-indigo-600"
+            />
+            <span>Remboursements</span>
+          </label>
+          <label className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              checked={settings.security.requirePinForDiscounts}
+              onChange={(e) => setSettings({
+                ...settings,
+                security: { ...settings.security, requirePinForDiscounts: e.target.checked }
+              })}
+              className="rounded text-indigo-600"
+            />
+            <span>Remises</span>
+          </label>
+          <label className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              checked={settings.security.requirePinForVoid}
+              onChange={(e) => setSettings({
+                ...settings,
+                security: { ...settings.security, requirePinForVoid: e.target.checked }
+              })}
+              className="rounded text-indigo-600"
+            />
+            <span>Annulation de tickets</span>
+          </label>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Expiration du mot de passe (jours)
+          </label>
+          <input
+            type="number"
+            min="0"
+            value={settings.security.passwordExpiration}
+            onChange={(e) => setSettings({
+              ...settings,
+              security: { ...settings.security, passwordExpiration: parseInt(e.target.value) }
+            })}
+            className="w-full border rounded-lg px-3 py-2"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Tentatives de connexion max.
+          </label>
+          <input
+            type="number"
+            min="1"
+            value={settings.security.maxLoginAttempts}
+            onChange={(e) => setSettings({
+              ...settings,
+              security: { ...settings.security, maxLoginAttempts: parseInt(e.target.value) }
+            })}
+            className="w-full border rounded-lg px-3 py-2"
+          />
+        </div>
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">
+          Délai d'inactivité (minutes)
+        </label>
+        <input
+          type="number"
+          min="1"
+          value={settings.security.sessionTimeout}
+          onChange={(e) => setSettings({
+            ...settings,
+            security: { ...settings.security, sessionTimeout: parseInt(e.target.value) }
+          })}
+          className="w-full border rounded-lg px-3 py-2"
+        />
+      </div>
+
+      <div className="border-t pt-4">
+        <label className="flex items-center gap-2">
+          <input
+            type="checkbox"
+            checked={settings.security.twoFactorAuth}
+            onChange={(e) => setSettings({
+              ...settings,
+              security: { ...settings.security, twoFactorAuth: e.target.checked }
+            })}
+            className="rounded text-indigo-600"
+          />
+          <span>Activer l'authentification à deux facteurs</span>
+        </label>
+      </div>
+    </div>
+  );
+
+  const renderBackupSettings = () => (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between bg-gray-50 p-4 rounded-lg">
+        <div>
+          <h3 className="font-medium">Sauvegarde automatique</h3>
+          <p className="text-sm text-gray-500">
+            Dernière sauvegarde: {new Date(settings.backup.lastBackup).toLocaleDateString('fr-FR', { 
+              day: '2-digit', 
+              month: '2-digit', 
+              year: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit'
+            })}
+          </p>
+        </div>
+        <label className="relative inline-flex items-center cursor-pointer">
+          <input
+            type="checkbox"
+            checked={settings.backup.autoBackup}
+            onChange={(e) => setSettings({
+              ...settings,
+              backup: { ...settings.backup, autoBackup: e.target.checked }
+            })}
+            className="sr-only peer"
+          />
+          <div className="w-11 h-6 bg-gray-200 dark:bg-gray-700 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 dark:peer-focus:ring-indigo-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600 dark:peer-checked:bg-indigo-500"></div>
+        </label>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Fréquence
+          </label>
+          <select
+            value={settings.backup.backupFrequency}
+            onChange={(e) => setSettings({
+              ...settings,
+              backup: { ...settings.backup, backupFrequency: e.target.value as 'daily' | 'weekly' | 'monthly' }
+            })}
+            className="w-full border rounded-lg px-3 py-2"
+          >
+            <option value="daily">Quotidienne</option>
+            <option value="weekly">Hebdomadaire</option>
+            <option value="monthly">Mensuelle</option>
+          </select>
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Emplacement
+          </label>
+          <select
+            value={settings.backup.backupLocation}
+            onChange={(e) => setSettings({
+              ...settings,
+              backup: { ...settings.backup, backupLocation: e.target.value as 'local' | 'cloud' }
+            })}
+            className="w-full border rounded-lg px-3 py-2"
+          >
+            <option value="local">Stockage local</option>
+            <option value="cloud">Cloud</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">
+          Nombre de sauvegardes à conserver
+        </label>
+        <input
+          type="number"
+          min="1"
+          value={settings.backup.keepBackups}
+          onChange={(e) => setSettings({
+            ...settings,
+            backup: { ...settings.backup, keepBackups: parseInt(e.target.value) }
+          })}
+          className="w-full border rounded-lg px-3 py-2"
+        />
+      </div>
+
+      <div className="space-y-3">
+        <label className="flex items-center gap-2">
+          <input
+            type="checkbox"
+            checked={settings.backup.includeImages}
+            onChange={(e) => setSettings({
+              ...settings,
+              backup: { ...settings.backup, includeImages: e.target.checked }
+            })}
+            className="rounded text-indigo-600"
+          />
+          <span>Inclure les images des produits</span>
+        </label>
+      </div>
+
+      <div className="flex gap-3 mt-4">
+        <button
+          className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 flex items-center gap-2"
+          onClick={() => {
+            // Logique pour déclencher une sauvegarde manuelle
+            setSettings({
+              ...settings,
+              backup: { ...settings.backup, lastBackup: new Date().toISOString() }
+            });
+          }}
+        >
+          <Download size={16} />
+          Sauvegarder maintenant
+        </button>
+        <button
+          className="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 flex items-center gap-2"
+          onClick={() => {
+            // Logique pour restaurer une sauvegarde
+          }}
+        >
+          <Upload size={16} />
+          Restaurer une sauvegarde
+        </button>
+      </div>
+    </div>
+  );
+
+  const renderAppearanceSettings = () => (
+    <div className="space-y-8 animate-fadeIn">
+      {/* Sélection du thème */}
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 p-6 transition-all duration-300 hover:shadow-xl">
+        <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4 flex items-center gap-2">
+          <Palette size={18} className="text-indigo-500" />
+          Thème principal
+        </h3>
+        
+        <div className="grid grid-cols-2 gap-4 mb-6">
+          {/* Option Mode Clair */}
+          <div 
+            onClick={async () => {
+              // Mettre à jour l'état local
+              const updatedSettings = {
+                ...settings,
+                general: { ...settings.general, theme: 'light' },
+                appearance: { ...settings.appearance, selectedTheme: 'light' }
+              };
+              setSettings(updatedSettings);
+              
+              // Appliquer immédiatement le thème via le contexte
+              setTheme('light');
+              
+              // Sauvegarder les modifications dans Firebase immédiatement
+              await saveSettings(updatedSettings);
+              setSaveStatus('success');
+              setTimeout(() => setSaveStatus('idle'), 3000);
+            }}  
+            className={`flex flex-col items-center p-6 border rounded-xl cursor-pointer transition-all duration-300 ${
+              settings.appearance.selectedTheme === 'light' 
+                ? 'border-indigo-500 bg-gradient-to-br from-indigo-50 to-white dark:from-indigo-900 dark:to-gray-800/50 shadow-md' 
+                : 'border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800/50'
+            }`}
+          >
+            <div className={`p-4 rounded-full ${
+              settings.appearance.selectedTheme === 'light'
+                ? 'bg-gradient-to-br from-indigo-100 to-white dark:from-indigo-900 dark:to-indigo-800'
+                : 'bg-gray-100 dark:bg-gray-700'
+            }`}>
+              <Sun size={36} className={
+                settings.appearance.selectedTheme === 'light' 
+                  ? 'text-indigo-600 dark:text-indigo-400' 
+                  : 'text-gray-500 dark:text-gray-400'
+              } />
+            </div>
+            <span className={`mt-3 font-medium ${
+              settings.appearance.selectedTheme === 'light' 
+                ? 'text-indigo-600 dark:text-indigo-400' 
+                : 'text-gray-700 dark:text-gray-300'
+            }`}>Mode Clair</span>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 text-center">Idéal pour une utilisation en journée</p>
+          </div>
+          
+          {/* Option Mode Sombre */}
+          <div 
+            onClick={async () => {
+              // Mettre à jour l'état local
+              const updatedSettings = {
+                ...settings,
+                general: { ...settings.general, theme: 'dark' },
+                appearance: { ...settings.appearance, selectedTheme: 'dark' }
+              };
+              setSettings(updatedSettings);
+              
+              // Appliquer immédiatement le thème via le contexte
+              setTheme('dark');
+              
+              // Sauvegarder les modifications dans Firebase immédiatement
+              await saveSettings(updatedSettings);
+              setSaveStatus('success');
+              setTimeout(() => setSaveStatus('idle'), 3000);
+            }}  
+            className={`flex flex-col items-center p-6 border rounded-xl cursor-pointer transition-all duration-300 ${
+              settings.appearance.selectedTheme === 'dark' 
+                ? 'border-indigo-500 bg-gradient-to-br from-gray-900/10 to-indigo-900/10 dark:from-indigo-900/40 dark:to-gray-800 shadow-md' 
+                : 'border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800/50'
+            }`}
+          >
+            <div className={`p-4 rounded-full ${
+              settings.appearance.selectedTheme === 'dark'
+                ? 'bg-gradient-to-br from-gray-800 to-indigo-900 dark:from-indigo-800 dark:to-indigo-900'
+                : 'bg-gray-100 dark:bg-gray-700'
+            }`}>
+              <Moon size={36} className={
+                settings.appearance.selectedTheme === 'dark' 
+                  ? 'text-indigo-300 dark:text-indigo-300' 
+                  : 'text-gray-500 dark:text-gray-400'
+              } />
+            </div>
+            <span className={`mt-3 font-medium ${
+              settings.appearance.selectedTheme === 'dark' 
+                ? 'text-indigo-600 dark:text-indigo-400' 
+                : 'text-gray-700 dark:text-gray-300'
+            }`}>Mode Sombre</span>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 text-center">Réduit la fatigue oculaire en conditions de faible luminosité</p>
+          </div>
+        </div>
+        
+        <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4 flex items-center gap-2">
+          <Palette size={18} className="text-indigo-500" />
+          Thèmes de couleurs
+        </h3>
+        
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {/* Thème Bleu */}
+          <div 
+            onClick={async () => {
+              // Mettre à jour l'état local
+              const updatedSettings = {
+                ...settings,
+                appearance: { ...settings.appearance, selectedTheme: 'blue' }
+              };
+              setSettings(updatedSettings);
+              
+              // Appliquer immédiatement le thème
+              setTheme('blue');
+              
+              // Sauvegarder les modifications dans Firebase immédiatement
+              await saveSettings(updatedSettings);
+              setSaveStatus('success');
+              setTimeout(() => setSaveStatus('idle'), 3000);
+            }}  
+            className={`flex flex-col items-center p-4 border rounded-xl cursor-pointer transition-all duration-300 ${
+              settings.appearance.selectedTheme === 'blue' 
+                ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20 shadow-md' 
+                : 'border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800/50'
+            }`}
+          >
+            <div className="w-10 h-10 rounded-full shadow-inner" style={{ backgroundColor: '#2563eb' }}></div>
+            <span className={`mt-2 font-medium ${
+              settings.appearance.selectedTheme === 'blue' 
+                ? 'text-blue-600 dark:text-blue-400' 
+                : 'text-gray-700 dark:text-gray-300'
+            }`}>Bleu</span>
+          </div>
+          
+          {/* Thème Vert */}
+          <div 
+            onClick={async () => {
+              // Mettre à jour l'état local
+              const updatedSettings = {
+                ...settings,
+                appearance: { ...settings.appearance, selectedTheme: 'green' }
+              };
+              setSettings(updatedSettings);
+              
+              // Appliquer immédiatement le thème
+              setTheme('green');
+              
+              // Sauvegarder les modifications dans Firebase immédiatement
+              await saveSettings(updatedSettings);
+              setSaveStatus('success');
+              setTimeout(() => setSaveStatus('idle'), 3000);
+            }}  
+            className={`flex flex-col items-center p-4 border rounded-xl cursor-pointer transition-all duration-300 ${
+              settings.appearance.selectedTheme === 'green' 
+                ? 'border-green-500 bg-green-50 dark:bg-green-900/20 shadow-md' 
+                : 'border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800/50'
+            }`}
+          >
+            <div className="w-10 h-10 rounded-full shadow-inner" style={{ backgroundColor: '#059669' }}></div>
+            <span className={`mt-2 font-medium ${
+              settings.appearance.selectedTheme === 'green' 
+                ? 'text-green-600 dark:text-green-400' 
+                : 'text-gray-700 dark:text-gray-300'
+            }`}>Vert</span>
+          </div>
+          
+          {/* Thème Violet */}
+          <div 
+            onClick={async () => {
+              // Mettre à jour l'état local
+              const updatedSettings = {
+                ...settings,
+                appearance: { ...settings.appearance, selectedTheme: 'purple' }
+              };
+              setSettings(updatedSettings);
+              
+              // Appliquer immédiatement le thème
+              setTheme('purple');
+              
+              // Sauvegarder les modifications dans Firebase immédiatement
+              await saveSettings(updatedSettings);
+              setSaveStatus('success');
+              setTimeout(() => setSaveStatus('idle'), 3000);
+            }}  
+            className={`flex flex-col items-center p-4 border rounded-xl cursor-pointer transition-all duration-300 ${
+              settings.appearance.selectedTheme === 'purple' 
+                ? 'border-purple-500 bg-purple-50 dark:bg-purple-900/20 shadow-md' 
+                : 'border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800/50'
+            }`}
+          >
+            <div className="w-10 h-10 rounded-full shadow-inner" style={{ backgroundColor: '#7c3aed' }}></div>
+            <span className={`mt-2 font-medium ${
+              settings.appearance.selectedTheme === 'purple' 
+                ? 'text-purple-600 dark:text-purple-400' 
+                : 'text-gray-700 dark:text-gray-300'
+            }`}>Violet</span>
+          </div>
+          
+          {/* Thème Orange */}
+          <div 
+            onClick={async () => {
+              // Mettre à jour l'état local
+              const updatedSettings = {
+                ...settings,
+                appearance: { ...settings.appearance, selectedTheme: 'orange' }
+              };
+              setSettings(updatedSettings);
+              
+              // Appliquer immédiatement le thème
+              setTheme('orange');
+              
+              // Sauvegarder les modifications dans Firebase immédiatement
+              await saveSettings(updatedSettings);
+              setSaveStatus('success');
+              setTimeout(() => setSaveStatus('idle'), 3000);
+            }}  
+            className={`flex flex-col items-center p-4 border rounded-xl cursor-pointer transition-all duration-300 ${
+              settings.appearance.selectedTheme === 'orange' 
+                ? 'border-orange-500 bg-orange-50 dark:bg-orange-900/20 shadow-md' 
+                : 'border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800/50'
+            }`}
+          >
+            <div className="w-10 h-10 rounded-full shadow-inner" style={{ backgroundColor: '#ea580c' }}></div>
+            <span className={`mt-2 font-medium ${
+              settings.appearance.selectedTheme === 'orange' 
+                ? 'text-orange-600 dark:text-orange-400' 
+                : 'text-gray-700 dark:text-gray-300'
+            }`}>Orange</span>
+          </div>
+          
+          {/* Nouveau Thème - Noir */}
+          <div 
+            onClick={async () => {
+              // Mettre à jour l'état local
+              const updatedSettings = {
+                ...settings,
+                appearance: { ...settings.appearance, selectedTheme: 'black' }
+              };
+              setSettings(updatedSettings);
+              
+              // Appliquer immédiatement le thème
+              setTheme('black');
+              
+              // Sauvegarder les modifications dans Firebase immédiatement
+              await saveSettings(updatedSettings);
+              setSaveStatus('success');
+              setTimeout(() => setSaveStatus('idle'), 3000);
+            }}  
+            className={`flex flex-col items-center p-4 border rounded-xl cursor-pointer transition-all duration-300 ${
+              settings.appearance.selectedTheme === 'black' 
+                ? 'border-gray-800 bg-gray-100 dark:bg-gray-900/40 shadow-md' 
+                : 'border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800/50'
+            }`}
+          >
+            <div className="w-10 h-10 rounded-full shadow-inner" style={{ backgroundColor: '#000000' }}></div>
+            <span className={`mt-2 font-medium ${
+              settings.appearance.selectedTheme === 'black' 
+                ? 'text-gray-800 dark:text-gray-300' 
+                : 'text-gray-700 dark:text-gray-300'
+            }`}>Noir</span>
+          </div>
+          
+          {/* Nouveau Thème - Gris Foncé */}
+          <div 
+            onClick={async () => {
+              // Mettre à jour l'état local
+              const updatedSettings = {
+                ...settings,
+                appearance: { ...settings.appearance, selectedTheme: 'darkgray' }
+              };
+              setSettings(updatedSettings);
+              
+              // Appliquer immédiatement le thème
+              setTheme('darkgray');
+              
+              // Sauvegarder les modifications dans Firebase immédiatement
+              await saveSettings(updatedSettings);
+              setSaveStatus('success');
+              setTimeout(() => setSaveStatus('idle'), 3000);
+            }}  
+            className={`flex flex-col items-center p-4 border rounded-xl cursor-pointer transition-all duration-300 ${
+              settings.appearance.selectedTheme === 'darkgray' 
+                ? 'border-gray-600 bg-gray-100 dark:bg-gray-800/40 shadow-md' 
+                : 'border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800/50'
+            }`}
+          >
+            <div className="w-10 h-10 rounded-full shadow-inner" style={{ backgroundColor: '#1f2937' }}></div>
+            <span className={`mt-2 font-medium ${
+              settings.appearance.selectedTheme === 'darkgray' 
+                ? 'text-gray-700 dark:text-gray-300' 
+                : 'text-gray-700 dark:text-gray-300'
+            }`}>Gris Foncé</span>
+          </div>
+          
+          {/* Nouveau Thème - Rouge */}
+          <div 
+            onClick={async () => {
+              // Mettre à jour l'état local
+              const updatedSettings = {
+                ...settings,
+                appearance: { ...settings.appearance, selectedTheme: 'red' }
+              };
+              setSettings(updatedSettings);
+              
+              // Appliquer immédiatement le thème
+              setTheme('red');
+              
+              // Sauvegarder les modifications dans Firebase immédiatement
+              await saveSettings(updatedSettings);
+              setSaveStatus('success');
+              setTimeout(() => setSaveStatus('idle'), 3000);
+            }}  
+            className={`flex flex-col items-center p-4 border rounded-xl cursor-pointer transition-all duration-300 ${
+              settings.appearance.selectedTheme === 'red' 
+                ? 'border-red-500 bg-red-50 dark:bg-red-900/20 shadow-md' 
+                : 'border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800/50'
+            }`}
+          >
+            <div className="w-10 h-10 rounded-full shadow-inner" style={{ backgroundColor: '#dc2626' }}></div>
+            <span className={`mt-2 font-medium ${
+              settings.appearance.selectedTheme === 'red' 
+                ? 'text-red-600 dark:text-red-400' 
+                : 'text-gray-700 dark:text-gray-300'
+            }`}>Rouge</span>
+          </div>
+          
+          {/* Nouveau Thème - Bleu Nuit */}
+          <div 
+            onClick={async () => {
+              // Mettre à jour l'état local
+              const updatedSettings = {
+                ...settings,
+                appearance: { ...settings.appearance, selectedTheme: 'navyblue' }
+              };
+              setSettings(updatedSettings);
+              
+              // Appliquer immédiatement le thème
+              setTheme('navyblue');
+              
+              // Sauvegarder les modifications dans Firebase immédiatement
+              await saveSettings(updatedSettings);
+              setSaveStatus('success');
+              setTimeout(() => setSaveStatus('idle'), 3000);
+            }}  
+            className={`flex flex-col items-center p-4 border rounded-xl cursor-pointer transition-all duration-300 ${
+              settings.appearance.selectedTheme === 'navyblue' 
+                ? 'border-blue-800 bg-blue-50 dark:bg-blue-900/30 shadow-md' 
+                : 'border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800/50'
+            }`}
+          >
+            <div className="w-10 h-10 rounded-full shadow-inner" style={{ backgroundColor: '#1e3a8a' }}></div>
+            <span className={`mt-2 font-medium ${
+              settings.appearance.selectedTheme === 'navyblue' 
+                ? 'text-blue-800 dark:text-blue-400' 
+                : 'text-gray-700 dark:text-gray-300'
+            }`}>Bleu Nuit</span>
+          </div>
+
+          {/* Nouveau Thème - Gris Foncé/Vert */}
+          <div 
+            onClick={async () => {
+              // Mettre à jour l'état local
+              const updatedSettings = {
+                ...settings,
+                appearance: { ...settings.appearance, selectedTheme: 'darkgreen' }
+              };
+              setSettings(updatedSettings);
+              
+              // Appliquer immédiatement le thème
+              setTheme('darkgreen');
+              
+              // Sauvegarder les modifications dans Firebase immédiatement
+              await saveSettings(updatedSettings);
+              setSaveStatus('success');
+              setTimeout(() => setSaveStatus('idle'), 3000);
+            }}  
+            className={`flex flex-col items-center p-4 border rounded-xl cursor-pointer transition-all duration-300 ${
+              settings.appearance.selectedTheme === 'darkgreen' 
+                ? 'border-green-600 bg-gray-100 dark:bg-green-900/20 shadow-md' 
+                : 'border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800/50'
+            }`}
+          >
+            <div className="w-10 h-10 rounded-full shadow-inner bg-gradient-to-r from-gray-800 to-green-600"></div>
+            <span className={`mt-2 font-medium ${
+              settings.appearance.selectedTheme === 'darkgreen' 
+                ? 'text-green-600 dark:text-green-400' 
+                : 'text-gray-700 dark:text-gray-300'
+            }`}>Gris/Vert</span>
+          </div>
+
+          {/* Nouveau Thème - Bordeaux/Vert */}
+          <div 
+            onClick={async () => {
+              // Mettre à jour l'état local
+              const updatedSettings = {
+                ...settings,
+                appearance: { ...settings.appearance, selectedTheme: 'burgundy' }
+              };
+              setSettings(updatedSettings);
+              
+              // Appliquer immédiatement le thème
+              setTheme('burgundy');
+              
+              // Sauvegarder les modifications dans Firebase immédiatement
+              await saveSettings(updatedSettings);
+              setSaveStatus('success');
+              setTimeout(() => setSaveStatus('idle'), 3000);
+            }}  
+            className={`flex flex-col items-center p-4 border rounded-xl cursor-pointer transition-all duration-300 ${
+              settings.appearance.selectedTheme === 'burgundy' 
+                ? 'border-red-800 bg-red-50 dark:bg-red-900/20 shadow-md' 
+                : 'border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800/50'
+            }`}
+          >
+            <div className="w-10 h-10 rounded-full shadow-inner bg-gradient-to-r from-red-900 to-green-400"></div>
+            <span className={`mt-2 font-medium ${
+              settings.appearance.selectedTheme === 'burgundy' 
+                ? 'text-red-800 dark:text-red-400' 
+                : 'text-gray-700 dark:text-gray-300'
+            }`}>Bordeaux/Vert</span>
+          </div>
+
+          {/* Nouveau Thème - Bleu-vert/Rose */}
+          <div 
+            onClick={async () => {
+              // Mettre à jour l'état local
+              const updatedSettings = {
+                ...settings,
+                appearance: { ...settings.appearance, selectedTheme: 'teal' }
+              };
+              setSettings(updatedSettings);
+              
+              // Appliquer immédiatement le thème
+              setTheme('teal');
+              
+              // Sauvegarder les modifications dans Firebase immédiatement
+              await saveSettings(updatedSettings);
+              setSaveStatus('success');
+              setTimeout(() => setSaveStatus('idle'), 3000);
+            }}  
+            className={`flex flex-col items-center p-4 border rounded-xl cursor-pointer transition-all duration-300 ${
+              settings.appearance.selectedTheme === 'teal' 
+                ? 'border-teal-600 bg-teal-50 dark:bg-teal-900/20 shadow-md' 
+                : 'border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800/50'
+            }`}
+          >
+            <div className="w-10 h-10 rounded-full shadow-inner bg-gradient-to-r from-teal-700 to-pink-400"></div>
+            <span className={`mt-2 font-medium ${
+              settings.appearance.selectedTheme === 'teal' 
+                ? 'text-teal-600 dark:text-teal-400' 
+                : 'text-gray-700 dark:text-gray-300'
+            }`}>Turquoise/Rose</span>
+          </div>
+
+          {/* Nouveau Thème - Ardoise/Orange */}
+          <div 
+            onClick={async () => {
+              // Mettre à jour l'état local
+              const updatedSettings = {
+                ...settings,
+                appearance: { ...settings.appearance, selectedTheme: 'slate' }
+              };
+              setSettings(updatedSettings);
+              
+              // Appliquer immédiatement le thème
+              setTheme('slate');
+              
+              // Sauvegarder les modifications dans Firebase immédiatement
+              await saveSettings(updatedSettings);
+              setSaveStatus('success');
+              setTimeout(() => setSaveStatus('idle'), 3000);
+            }}  
+            className={`flex flex-col items-center p-4 border rounded-xl cursor-pointer transition-all duration-300 ${
+              settings.appearance.selectedTheme === 'slate' 
+                ? 'border-slate-500 bg-slate-50 dark:bg-slate-800/40 shadow-md' 
+                : 'border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800/50'
+            }`}
+          >
+            <div className="w-10 h-10 rounded-full shadow-inner bg-gradient-to-r from-slate-500 to-orange-500"></div>
+            <span className={`mt-2 font-medium ${
+              settings.appearance.selectedTheme === 'slate' 
+                ? 'text-slate-600 dark:text-slate-400' 
+                : 'text-gray-700 dark:text-gray-300'
+            }`}>Ardoise/Orange</span>
+          </div>
+
+          {/* Nouveau Thème - Chocolat/Bleu */}
+          <div 
+            onClick={async () => {
+              // Mettre à jour l'état local
+              const updatedSettings = {
+                ...settings,
+                appearance: { ...settings.appearance, selectedTheme: 'chocolate' }
+              };
+              setSettings(updatedSettings);
+              
+              // Appliquer immédiatement le thème
+              setTheme('chocolate');
+              
+              // Sauvegarder les modifications dans Firebase immédiatement
+              await saveSettings(updatedSettings);
+              setSaveStatus('success');
+              setTimeout(() => setSaveStatus('idle'), 3000);
+            }}  
+            className={`flex flex-col items-center p-4 border rounded-xl cursor-pointer transition-all duration-300 ${
+              settings.appearance.selectedTheme === 'chocolate' 
+                ? 'border-amber-800 bg-amber-50 dark:bg-amber-900/20 shadow-md' 
+                : 'border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800/50'
+            }`}
+          >
+            <div className="w-10 h-10 rounded-full shadow-inner bg-gradient-to-r from-amber-900 to-blue-500"></div>
+            <span className={`mt-2 font-medium ${
+              settings.appearance.selectedTheme === 'chocolate' 
+                ? 'text-amber-800 dark:text-amber-400' 
+                : 'text-gray-700 dark:text-gray-300'
+            }`}>Chocolat/Bleu</span>
+          </div>
+
+          {/* Nouveau Thème - Indigo/Jaune */}
+          <div 
+            onClick={async () => {
+              // Mettre à jour l'état local
+              const updatedSettings = {
+                ...settings,
+                appearance: { ...settings.appearance, selectedTheme: 'indigo' }
+              };
+              setSettings(updatedSettings);
+              
+              // Appliquer immédiatement le thème
+              setTheme('indigo');
+              
+              // Sauvegarder les modifications dans Firebase immédiatement
+              await saveSettings(updatedSettings);
+              setSaveStatus('success');
+              setTimeout(() => setSaveStatus('idle'), 3000);
+            }}  
+            className={`flex flex-col items-center p-4 border rounded-xl cursor-pointer transition-all duration-300 ${
+              settings.appearance.selectedTheme === 'indigo' 
+                ? 'border-indigo-600 bg-indigo-50 dark:bg-indigo-900/20 shadow-md' 
+                : 'border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800/50'
+            }`}
+          >
+            <div className="w-10 h-10 rounded-full shadow-inner bg-gradient-to-r from-indigo-700 to-yellow-500"></div>
+            <span className={`mt-2 font-medium ${
+              settings.appearance.selectedTheme === 'indigo' 
+                ? 'text-indigo-600 dark:text-indigo-400' 
+                : 'text-gray-700 dark:text-gray-300'
+            }`}>Indigo/Jaune</span>
+          </div>
+
+          {/* Nouveau Thème - Cramoisi/Bleu ciel */}
+          <div 
+            onClick={async () => {
+              // Mettre à jour l'état local
+              const updatedSettings = {
+                ...settings,
+                appearance: { ...settings.appearance, selectedTheme: 'crimson' }
+              };
+              setSettings(updatedSettings);
+              
+              // Appliquer immédiatement le thème
+              setTheme('crimson');
+              
+              // Sauvegarder les modifications dans Firebase immédiatement
+              await saveSettings(updatedSettings);
+              setSaveStatus('success');
+              setTimeout(() => setSaveStatus('idle'), 3000);
+            }}  
+            className={`flex flex-col items-center p-4 border rounded-xl cursor-pointer transition-all duration-300 ${
+              settings.appearance.selectedTheme === 'crimson' 
+                ? 'border-rose-700 bg-rose-50 dark:bg-rose-900/20 shadow-md' 
+                : 'border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800/50'
+            }`}
+          >
+            <div className="w-10 h-10 rounded-full shadow-inner bg-gradient-to-r from-rose-800 to-sky-500"></div>
+            <span className={`mt-2 font-medium ${
+              settings.appearance.selectedTheme === 'crimson' 
+                ? 'text-rose-700 dark:text-rose-400' 
+                : 'text-gray-700 dark:text-gray-300'
+            }`}>Cramoisi/Ciel</span>
+          </div>
+
+          {/* Nouveau Thème - Charbon/Violet */}
+          <div 
+            onClick={async () => {
+              // Mettre à jour l'état local
+              const updatedSettings = {
+                ...settings,
+                appearance: { ...settings.appearance, selectedTheme: 'charcoal' }
+              };
+              setSettings(updatedSettings);
+              
+              // Appliquer immédiatement le thème
+              setTheme('charcoal');
+              
+              // Sauvegarder les modifications dans Firebase immédiatement
+              await saveSettings(updatedSettings);
+              setSaveStatus('success');
+              setTimeout(() => setSaveStatus('idle'), 3000);
+            }}  
+            className={`flex flex-col items-center p-4 border rounded-xl cursor-pointer transition-all duration-300 ${
+              settings.appearance.selectedTheme === 'charcoal' 
+                ? 'border-zinc-700 bg-zinc-100 dark:bg-zinc-800/40 shadow-md' 
+                : 'border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800/50'
+            }`}
+          >
+            <div className="w-10 h-10 rounded-full shadow-inner bg-gradient-to-r from-zinc-800 to-purple-500"></div>
+            <span className={`mt-2 font-medium ${
+              settings.appearance.selectedTheme === 'charcoal' 
+                ? 'text-zinc-700 dark:text-zinc-300' 
+                : 'text-gray-700 dark:text-gray-300'
+            }`}>Charbon/Violet</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="flex flex-col h-screen">
+      <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
+        <h2 className="text-lg font-semibold text-gray-800 dark:text-white">Paramètres</h2>
+        <button
+          className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700"
+          onClick={handleSave}
+        >
+          Enregistrer
+        </button>
+      </div>
+
+      <div className="flex-1 overflow-y-auto p-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">Général</h3>
+            {renderGeneralSettings()}
+          </div>
+          <div>
+            <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">Paiement</h3>
+            {renderPaymentSettings()}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+          <div>
+            <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">Impression</h3>
+            {renderPrinterSettings()}
+          </div>
+          <div>
+            <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">Notifications</h3>
+            {renderNotificationSettings()}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+          <div>
+            <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">Sécurité</h3>
+            {renderSecuritySettings()}
+          </div>
+          <div>
+            <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">Sauvegarde</h3>
+            {renderBackupSettings()}
+          </div>
+        </div>
+
+        <div className="mt-4">
+          <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">Apparence</h3>
+          {renderAppearanceSettings()}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Settings;

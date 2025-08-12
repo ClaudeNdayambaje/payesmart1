@@ -1,0 +1,299 @@
+/* Styles pour la section "Matériel compatible" */
+
+.hardware-section {
+    padding: 80px 0;
+    background-color: #242424; /* Fond gris foncé pur */
+    position: relative;
+    color: #fff;
+}
+
+.hardware-section .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.hardware-section .section-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.hardware-section .section-header h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #ffffff; /* Blanc pour contraster avec le fond sombre */
+    margin-bottom: 15px;
+}
+
+.hardware-section .section-header p {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem;
+    color: #E5E7EB; /* Gris clair pour meilleure lisibilité sur fond sombre */
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Grille de produits */
+.hardware-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-bottom: 50px;
+    max-width: 1200px;
+    margin: 0 auto 50px;
+}
+
+/* Carte produit */
+.hardware-card {
+    background-color: #252525; /* Gris très légèrement plus clair que le fond */
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25), 0 5px 10px rgba(0, 0, 0, 0.15), 0 15px 35px rgba(0, 0, 0, 0.3);
+    transition: transform 0.4s ease;
+    /* Animation gérée par JavaScript */
+    border: none; /* Suppression des bords */
+    position: relative;
+    will-change: transform;
+}
+
+.hardware-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hardware-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 0 10px 25px rgba(0, 0, 0, 0.25), 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+.hardware-image {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 20px 20px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1e1e1e;
+    padding: 20px;
+}
+
+.hardware-image img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.3)); /* Ombre plus prononcée autour des images */
+    transition: transform 0.5s ease, filter 0.5s ease;
+}
+
+.hardware-card:hover .hardware-image img {
+    transform: scale(1.05) translateY(-5px);
+    filter: drop-shadow(0 12px 16px rgba(0, 0, 0, 0.4));
+}
+
+.hardware-content {
+    padding: 25px;
+    border-top: none; /* Suppression de la bordure de séparation */
+    text-align: center;
+    background: linear-gradient(to bottom, #252525, #222222);
+    position: relative;
+    border-radius: 0 0 20px 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.hardware-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 15%;
+    right: 15%;
+    height: 1px;
+    background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.06), rgba(255,255,255,0));
+    opacity: 0.7;
+}
+
+.hardware-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 0 0 12px;
+    color: #ffffff;
+}
+
+.hardware-availability {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    color: #E5E7EB;
+    font-size: 0.95rem;
+    font-family: 'Inter', sans-serif;
+}
+
+.hardware-availability i,
+.fas.fa-shopping-cart {
+    margin-right: 8px;
+    font-size: 1rem;
+    color: #F29D38 !important; /* Orange PayeSmart */
+}
+
+.hardware-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 28px;
+    background-color: #F29D38; /* Orange PayeSmart */
+    color: white;
+    border-radius: 50px; /* Complètement arrondi */
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+    position: relative;
+    overflow: hidden;
+}
+
+.hardware-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(242, 157, 56, 0.5); /* Ombre orange plus intense */
+    background-color: #F7B05B; /* Orange plus clair au survol */
+}
+
+.hardware-btn::after {
+    content: '→';
+    margin-left: 8px;
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+
+.hardware-btn:hover::after {
+    transform: translateX(4px);
+}
+
+/* CTA */
+.hardware-cta {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Bouton principal CTA avec la couleur orange PayeSmart */
+.btn.btn-primary, 
+.hardware-cta .btn-primary {
+    padding: 12px 28px;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    background-color: #F29D38 !important; /* Orange PayeSmart */
+    border: none;
+    border-radius: 50px; /* Complètement arrondi */
+    color: white;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(242, 157, 56, 0.2);
+    position: relative;
+}
+
+.btn.btn-primary::after,
+.hardware-cta .btn-primary::after {
+    content: '→';
+    margin-left: 8px;
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+
+.hardware-cta .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(242, 157, 56, 0.5); /* Ombre orange plus intense */
+    background-color: #F7B05B !important; /* Orange plus clair au survol */
+}
+
+.btn.btn-primary:hover::after,
+.hardware-cta .btn-primary:hover::after {
+    transform: translateX(4px);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .hardware-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .hardware-section {
+        padding: 60px 0;
+    }
+    
+    .hardware-section .section-header h2 {
+        font-size: 2rem;
+    }
+    
+    .hardware-section .section-header p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .hardware-grid {
+        grid-template-columns: 1fr;
+        max-width: 100%;
+    }
+    
+    .hardware-card {
+        width: 90%;
+        max-width: 340px;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+    
+    .hardware-image {
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .hardware-image img {
+        max-height: 200px;
+        object-fit: contain;
+    }
+    
+    .hardware-content {
+        padding: 25px 20px;
+    }
+    
+    .hardware-section .section-header h2 {
+        font-size: 1.8rem;
+    }
+}
+
+/* Animation au défilement - identique à celle des fonctionnalités clés */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Ajout d'un effet de scintillement sur le fond sombre */
+.hardware-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at top, rgba(255, 255, 255, 0.02) 0%, rgba(0, 0, 0, 0) 70%);
+    pointer-events: none;
+}

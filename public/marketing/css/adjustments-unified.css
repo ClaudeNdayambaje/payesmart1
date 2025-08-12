@@ -1,0 +1,246 @@
+/* 
+ * AJUSTEMENTS ET CORRECTIONS STYLES UNIFIÉS
+ * Fichier CSS unifié pour tous les ajustements et corrections de style du site PayeSmart
+ * Regroupe et harmonise les styles des fichiers :
+ * - z-index-adjustments.css
+ * - z-index-fix.css
+ * - category-filters-fix.css
+ * - supprimer-badges.css
+ * Version 1.0 - Août 2025
+ */
+
+/*==================================
+ * 1. AJUSTEMENTS Z-INDEX
+ *==================================*/
+
+/* 
+ * Ajustement des z-index pour les éléments du carrousel
+ * La barre de menu principal a déjà un z-index de 100 dans styles.css
+ * Nous allons définir des z-index inférieurs pour les éléments du carrousel
+ */
+
+/* Réglage du z-index pour les indicateurs du carrousel hero */
+.carousel-indicators {
+    z-index: 90 !important; /* En dessous du menu principal */
+}
+
+/* Réglage du z-index pour les boutons de navigation du carrousel */
+.carousel-nav, 
+.carousel-nav button,
+.prev-slide, 
+.next-slide {
+    z-index: 95 !important; /* En dessous du menu principal mais au-dessus des indicateurs */
+}
+
+/* Réglage du z-index pour les éléments superposés */
+.overlay-content,
+.feature-overlay {
+    z-index: 80 !important; /* En dessous des éléments de navigation du carrousel */
+}
+
+/* Ajustement pour le contenu popup qui doit être visible */
+.popup-content,
+.tooltip-custom,
+.modal-content {
+    z-index: 150 !important; /* Au-dessus du menu principal */
+}
+
+/* Correction spécifique pour le z-index du dropdown dans le menu de navigation */
+.dropdown-menu {
+    z-index: 101 !important; /* Juste au-dessus du menu principal */
+}
+
+/* Correction pour les boutons d'action flottants */
+.floating-action-button {
+    z-index: 99 !important; /* Juste en dessous du menu principal */
+}
+
+/*==================================
+ * 2. CORRECTION Z-INDEX SPÉCIFIQUES
+ *==================================*/
+
+/* Correction pour le header fixe */
+.main-header.fixed-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* Correction pour le dropdown multilangue */
+.language-selector .dropdown-menu {
+    z-index: 1001 !important; /* Au-dessus de tout */
+}
+
+/* Correction pour les modals de contact */
+.contact-modal {
+    z-index: 1050 !important;
+}
+
+/* Correction de superposition pour les cartes interactives */
+.map-overlay {
+    z-index: 50;
+    pointer-events: none;
+}
+
+.map-controls {
+    z-index: 60;
+    pointer-events: auto;
+}
+
+/* Correction pour les tooltips des boutons de paiement */
+.payment-tooltip {
+    z-index: 200 !important;
+}
+
+/*==================================
+ * 3. CORRECTIONS FILTRES DE CATÉGORIE
+ *==================================*/
+
+/* Correction pour les filtres de catégorie qui se chevauchent */
+.category-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px 0;
+    position: relative;
+    z-index: 5;
+}
+
+.filter-button {
+    padding: 8px 16px;
+    border-radius: 20px;
+    background-color: #f0f0f0;
+    border: 1px solid #e0e0e0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filter-button:hover {
+    background-color: #e0e0e0;
+}
+
+.filter-button.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* Correction d'espacement entre les éléments filtrés */
+.filtered-item {
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.filtered-item.hidden {
+    display: none;
+}
+
+/* Amélioration de l'accessibilité des filtres */
+.filter-button:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* Correction pour les filtres sur mobile */
+@media (max-width: 576px) {
+    .category-filters {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        padding-bottom: 10px;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .filter-button {
+        flex: 0 0 auto;
+        white-space: nowrap;
+    }
+}
+
+/*==================================
+ * 4. SUPPRESSION DES BADGES
+ *==================================*/
+
+/* Suppression des badges qui ne sont plus nécessaires */
+.badge-new,
+.badge-promo,
+.badge-soon,
+.badge-beta {
+    display: none !important;
+}
+
+/* Alternative pour les éléments qui avaient des badges */
+.feature-item.had-badge {
+    position: relative;
+}
+
+.feature-item.had-badge::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 20px 20px 0;
+    border-color: transparent var(--primary-color) transparent transparent;
+}
+
+/* Remplacement des badges par des informations dans le texte */
+.feature-title .feature-status {
+    font-size: 0.7em;
+    font-weight: normal;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background-color: var(--primary-color);
+    color: white;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+/*==================================
+ * 5. CORRECTIONS RESPONSIVE
+ *==================================*/
+
+@media (max-width: 992px) {
+    /* Correction de l'ordre d'empilement sur tablette */
+    .mobile-nav-toggle {
+        z-index: 102 !important;
+    }
+    
+    .navbar-collapse {
+        z-index: 101 !important;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Ajustements des z-index pour mobile */
+    .dropdown-menu {
+        position: static !important;
+        float: none;
+        width: auto;
+        margin-top: 0;
+        background-color: transparent;
+        border: 0;
+        box-shadow: none;
+        z-index: auto !important;
+    }
+    
+    /* Correction pour les badges sur mobile */
+    .feature-item.had-badge::after {
+        border-width: 0 15px 15px 0;
+    }
+}
+
+@media (max-width: 576px) {
+    /* Correction pour les éléments qui se superposent sur petit mobile */
+    .popup-content,
+    .tooltip-custom {
+        max-width: 80%;
+        left: 10% !important;
+    }
+}

@@ -1,0 +1,52 @@
+/* Styles pour masquer les barres de défilement sans affecter les interactions */
+
+/* Cibler spécifiquement les éléments avec défilement au lieu d'utiliser le sélecteur universel */
+div.overflow-auto,
+div.overflow-y-auto,
+div.overflow-x-auto,
+div.overflow-scroll,
+div.overflow-y-scroll,
+div.overflow-x-scroll,
+main,
+section,
+article,
+.content-area,
+.product-grid,
+.scrollable-content {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE et Edge */
+}
+
+/* Masquer spécifiquement les barres de défilement pour Chrome, Safari et Opera */
+div.overflow-auto::-webkit-scrollbar,
+div.overflow-y-auto::-webkit-scrollbar,
+div.overflow-x-auto::-webkit-scrollbar,
+div.overflow-scroll::-webkit-scrollbar,
+div.overflow-y-scroll::-webkit-scrollbar,
+div.overflow-x-scroll::-webkit-scrollbar,
+main::-webkit-scrollbar,
+section::-webkit-scrollbar,
+article::-webkit-scrollbar,
+.content-area::-webkit-scrollbar,
+.product-grid::-webkit-scrollbar,
+.scrollable-content::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+/* Cibler la zone de contenu principal sans être trop agressif */
+body,
+#root,
+#main-content-area {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+body::-webkit-scrollbar,
+#root::-webkit-scrollbar,
+#main-content-area::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}

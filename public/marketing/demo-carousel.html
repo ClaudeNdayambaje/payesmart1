@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Démonstration - Design Harmonisé</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/features-carousel.css">
+    <link rel="stylesheet" href="css/compatible-hardware.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://unpkg.com/lucide@0.344.0/dist/umd/lucide.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #111;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .demo-title {
+            text-align: center;
+            margin: 40px 0;
+        }
+        .demo-title h1 {
+            font-size: 2.5rem;
+            color: #F29D38;
+            margin-bottom: 10px;
+        }
+        .demo-title p {
+            font-size: 1.2rem;
+            color: #ccc;
+        }
+        .demo-section {
+            margin-bottom: 80px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="demo-title">
+            <h1>Démonstration du Design Harmonisé</h1>
+            <p>Comparaison entre la section matériel et la section carousel avec le nouveau design</p>
+        </div>
+    </div>
+
+    <!-- Section Matériel compatible -->
+    <section class="hardware-section demo-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Matériel de caisse fiable et design</h2>
+                <p>PayeSmart fonctionne sur une sélection d'équipements performants, disponibles à l'achat ou en location selon vos besoins.</p>
+            </div>
+            
+            <div class="hardware-grid" style="grid-template-columns: repeat(3, 1fr);">
+                <!-- Produit 1 : SUNMI CPad -->
+                <div class="hardware-card">
+                    <div class="hardware-image">
+                        <img src="img/hardware/sunmi-cpad.png" alt="SUNMI CPad Terminal">
+                    </div>
+                    <div class="hardware-content">
+                        <h3 class="hardware-title">SUNMI CPad</h3>
+                        <div class="hardware-availability">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>Achat ou location</span>
+                        </div>
+                        <a href="materiel.html" class="hardware-btn">En savoir plus</a>
+                    </div>
+                </div>
+                
+                <!-- Produit 2 : SUNMI P3 MIX -->
+                <div class="hardware-card">
+                    <div class="hardware-image">
+                        <img src="img/hardware/sunmi-p3mix.png" alt="SUNMI P3 MIX Terminal">
+                    </div>
+                    <div class="hardware-content">
+                        <h3 class="hardware-title">SUNMI P3 MIX</h3>
+                        <div class="hardware-availability">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>Achat ou location</span>
+                        </div>
+                        <a href="materiel.html" class="hardware-btn">En savoir plus</a>
+                    </div>
+                </div>
+                
+                <!-- Produit 3 : SUNMI T3 PRO -->
+                <div class="hardware-card">
+                    <div class="hardware-image">
+                        <img src="img/hardware/sunmi-t3pro.png" alt="SUNMI T3 PRO Terminal">
+                    </div>
+                    <div class="hardware-content">
+                        <h3 class="hardware-title">SUNMI T3 PRO</h3>
+                        <div class="hardware-availability">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>Achat ou location</span>
+                        </div>
+                        <a href="materiel.html" class="hardware-btn">En savoir plus</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Tout-en-un (avec Carrousel) -->
+    <section class="features-carousel-section demo-section">
+        
+        <div class="features-carousel-header">
+            <h2>Une solution complète pour votre commerce</h2>
+            <p>PayeSmart vous offre tous les outils nécessaires pour gérer efficacement votre point de vente et vos transactions.</p>
+        </div>
+        
+        <div class="features-carousel">
+            <div class="carousel-container" style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: center; gap: 30px;">
+                <!-- Solution 1 : Logiciel de Caisse Intuitif -->
+                <div class="carousel-item-visual active" style="position: relative; opacity: 1; transform: none;">
+                    <div class="carousel-item-inner">
+                        <div class="carousel-item-image">
+                            <img src="img/backgrounds/service-client-caisse.jpg" alt="Logiciel de Caisse Intuitif">
+                        </div>
+                        <div class="carousel-item-content">
+                            <div class="carousel-icon">
+                                <i class="fas fa-cash-register"></i>
+                            </div>
+                            <h3>Logiciel de Caisse Intuitif</h3>
+                            <p>Gérez vos ventes, stocks et clients avec une interface simple et puissante.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Solution 2 : Terminaux de Paiement -->
+                <div class="carousel-item-visual active" style="position: relative; opacity: 1; transform: none;">
+                    <div class="carousel-item-inner">
+                        <div class="carousel-item-image">
+                            <img src="img/backgrounds/paiement-sans-contact.jpg" alt="Terminaux de Paiement">
+                        </div>
+                        <div class="carousel-item-content">
+                            <div class="carousel-icon">
+                                <i class="fas fa-credit-card"></i>
+                            </div>
+                            <h3>Terminaux de Paiement</h3>
+                            <p>Compatible avec tous types de cartes, synchronisés en temps réel.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Solution 3 : Compte Bancaire Intégré -->
+                <div class="carousel-item-visual active" style="position: relative; opacity: 1; transform: none;">
+                    <div class="carousel-item-inner">
+                        <div class="carousel-item-image">
+                            <img src="img/backgrounds/experience-client-moderne.jpg" alt="Compte Bancaire Intégré">
+                        </div>
+                        <div class="carousel-item-content">
+                            <div class="carousel-icon">
+                                <i class="fas fa-university"></i>
+                            </div>
+                            <h3>Compte Bancaire Intégré</h3>
+                            <p>Recevez vos fonds instantanément après chaque transaction.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Simuler l'animation d'apparition pour montrer les cartes avec AOS
+            const hardwareCards = document.querySelectorAll('.hardware-card');
+            hardwareCards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = "1";
+                    card.style.transform = "translateY(0)";
+                }, index * 200);
+            });
+        });
+    </script>
+</body>
+</html>

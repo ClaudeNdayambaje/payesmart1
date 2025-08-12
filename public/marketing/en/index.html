@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PayeSmart | Your Smart Cash Register Management Solution</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/navigation-unified.css?v=1.8">
+    <link rel="stylesheet" href="../css/lucide-icons.css">
+    <link rel="stylesheet" href="../css/buttons-unified.css?v=1.0">
+    <link rel="stylesheet" href="../css/responsive-unified.css?v=1.0">
+    <!-- Le fichier hero-unified.css a été migré vers navigation-unified.css v=1.6 -->
+    <link rel="stylesheet" href="../css/title-style.css">
+    <!-- custom-colors.css intégré dans navigation-unified.css v1.8 -->
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/navigation-unified.css?v=1.8">
+    <link rel="stylesheet" href="../css/loading-spinner.css">
+    <link rel="stylesheet" href="../css/content-sections-unified.css?v=1.0">
+    <link rel="stylesheet" href="../css/navigation-unified.css?v=1.8">
+    <link rel="stylesheet" href="../css/solutions-unified.css?v=1.0">
+    <!-- Responsivité uniquement (préserve le design original) -->
+    <link rel="stylesheet" href="../css/adjustments-unified.css?v=1.0">
+    <link rel="stylesheet" href="../css/dashboard-showcase.css">
+    <link rel="stylesheet" href="../css/app-icon.css">
+    <link rel="stylesheet" href="../css/gallery-unified.css?v=1.0">
+    <link rel="stylesheet" href="../css/testimonials-unified.css?v=1.0">
+    <link rel="stylesheet" href="../css/navigation-unified.css?v=1.8">
+    <link rel="stylesheet" href="../css/mobile-responsive-fixes.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/static-buttons.css">
+    <!-- Le fichier hero-unified.css a été migré vers navigation-unified.css v=1.6 -->
+    <!-- Les fichiers fullscreen-carousel.css et carousel-unified.css ont été migrés vers navigation-unified.css v=1.7 -->
+    <link rel="stylesheet" href="../css/menu-harmonization.css">
+    <link rel="stylesheet" href="../css/z-index-adjustments.css">
+    <link rel="stylesheet" href="../css/specialist-button.css">
+    <link rel="stylesheet" href="../css/why-choose-section.css">
+    <link rel="stylesheet" href="../css/key-features.css">
+    <link rel="stylesheet" href="../css/compatible-hardware.css">
+    <link rel="stylesheet" href="../css/testimonials-section.css">
+    <!-- Le fichier footer.css a été migré vers navigation-unified.css v=1.7 -->
+    <!-- language-selector.css intégré dans navigation-unified.css v1.8 -->
+    <link rel="stylesheet" href="../css/static-hero-buttons.css">
+    <link rel="stylesheet" href="../css/dark-gray-subtitle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://unpkg.com/lucide@0.344.0/dist/umd/lucide.min.js"></script>
+    <script src="../js/admin-redirect.js"></script>
+    <script src="../js/language-persistence.js"></script>
+    <script src="../js/hero-indicators-fix.js"></script>
+    <script src="../js/language-switcher.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <img src="../img/logo.png" alt="PayeSmart Logo">
+                </div>
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html" class="active">Home</a></li>
+                        <li><a href="solutions.html">Our Products</a></li>
+                        <li><a href="nos-accessoires.html">Accessories</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="header-buttons">
+                    <div class="language-selector">
+                        <button class="language-button">EN <i class="fas fa-chevron-down"></i></button>
+                        <div class="language-dropdown">
+                            <a href="../fr/index.html" class="language-option" data-lang="fr">Français</a>
+                            <a href="../nl/index.html" class="language-option" data-lang="nl">Nederlands</a>
+                            <a href="../en/index.html" class="language-option active" data-lang="en">English</a>
+                        </div>
+                    </div>
+                    <a href="/#/auth?register=true" class="btn btn-primary">Free Trial</a>
+                    <a href="/#/auth" class="btn btn-primary">Log In</a>
+                </div>
+                <button class="mobile-menu-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section avec arrière-plan -->
+    <section class="hero hero-animated hero-parallax">
+        <!-- Arrière-plan dynamique -->
+        <div class="hero-background"></div>
+        
+        <!-- Indicateurs du carrousel -->
+        <div class="carousel-indicators">
+            <div class="carousel-indicator active"></div>
+            <div class="carousel-indicator"></div>
+            <div class="carousel-indicator"></div>
+            <div class="carousel-indicator"></div>
+            <div class="carousel-indicator"></div>
+        </div>
+
+        <div class="container">
+
+            
+            <div class="hero-content">
+                <div class="hero-text text-left">
+                    <h1 class="two-line-title">La solution <span class="text-highlight">tout-en-un</span><br>pensée pour votre<br>commerce</h1>
+                    <p class="two-line-subtitle">PayeSmart, l'écosystème de caisse tout-en-un<br>Encaissez, gérez, analysez… le tout, sans effort.</p>
+                    <div class="hero-buttons">
+                        <a href="#pricing" class="btn btn-primary">Voir les forfaits</a>
+                        <a href="/#/auth?register=true" class="btn btn-secondary">Essai gratuit</a>
+                    </div>
+
+                </div>
+                <div class="hero-image">
+                    <img src="../img/dashboard-mockup.png" alt="PayeSmart Dashboard" class="dashboard-image">
+                    <div class="mockup-decoration"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Solutions Complètes -->
+    <section class="hardware-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Une solution complète pour votre commerce</h2>
+                <p>PayeSmart vous offre tous les outils nécessaires pour gérer efficacement votre point de vente et vos transactions.</p>
+            </div>
+            
+            <div class="hardware-grid">
+                <!-- Solution 1 : Logiciel de Caisse Intuitif -->
+                <div class="hardware-card">
+                    <div class="hardware-image">
+                        <img src="../img/solutions/logiciel-caisse.png" alt="Logiciel de Caisse Intuitif">
+                    </div>
+                    <div class="hardware-content">
+                        <h3 class="hardware-title">Logiciel de Caisse Intuitif</h3>
+                        <p>Notre logiciel de caisse est conçu pour être simple d'utilisation tout en offrant des fonctionnalités puissantes.</p>
+                        <div class="hardware-availability" style="display: flex; align-items: center; justify-content: center; margin-bottom: 15px; margin-top: 20px;">
+                            <i class="fas fa-cash-register"></i>
+                            <span>Interface intuitive</span>
+                        </div>
+                        <a href="contact.html" class="hardware-btn">En savoir plus</a>
+                    </div>
+                </div>
+                
+                <!-- Solution 2 : Terminaux de Paiement -->
+                <div class="hardware-card">
+                    <div class="hardware-image">
+                        <img src="../img/solutions/terminaux-paiement.png" alt="Terminaux de Paiement">
+                    </div>
+                    <div class="hardware-content">
+                        <h3 class="hardware-title">Terminaux de Paiement</h3>
+                        <p>Des terminaux modernes et sécurisés, compatibles avec tous les moyens de paiement actuels.</p>
+                        <div class="hardware-availability" style="display: flex; align-items: center; justify-content: center; margin-bottom: 15px; margin-top: 20px;">
+                            <i class="fas fa-credit-card"></i>
+                            <span>Tous types de cartes</span>
+                        </div>
+                        <a href="contact.html" class="hardware-btn">En savoir plus</a>
+                    </div>
+                </div>
+                
+                <!-- Solution 3 : Compte Bancaire Intégré -->
+                <div class="hardware-card">
+                    <div class="hardware-image">
+                        <img src="../img/solutions/compte-bancaire.png" alt="Compte Bancaire Intégré">
+                    </div>
+                    <div class="hardware-content">
+                        <h3 class="hardware-title">Compte Bancaire Intégré</h3>
+                        <p>Recevez vos fonds instantanément avec notre solution bancaire intégrée.</p>
+                        <div class="hardware-availability" style="display: flex; align-items: center; justify-content: center; margin-bottom: 15px; margin-top: 20px;">
+                            <i class="fas fa-university"></i>
+                            <span>Fonds instantanés</span>
+                        </div>
+                        <a href="contact.html" class="hardware-btn">En savoir plus</a>
+                    </div>
+                </div>
+                
+                <!-- Solution 4 : Analyses en Temps Réel -->
+                <div class="hardware-card">
+                    <div class="hardware-image">
+                        <img src="../img/solutions/analyses-temps-reel.png" alt="Analyses en Temps Réel">
+                    </div>
+                    <div class="hardware-content">
+                        <h3 class="hardware-title">Analyses en Temps Réel</h3>
+                        <p>Des tableaux de bord intelligents qui analysent vos données de vente.</p>
+                        <div class="hardware-availability" style="display: flex; align-items: center; justify-content: center; margin-bottom: 15px; margin-top: 20px;">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Tableaux de bord</span>
+                        </div>
+                        <a href="contact.html" class="hardware-btn">En savoir plus</a>
+                    </div>
+                </div>
+                
+                <!-- Solution 5 : Mobile et Tablet -->
+                <div class="hardware-card">
+                    <div class="hardware-image">
+                        <img src="../img/solutions/mobile-tablet.png" alt="Mobile et Tablet">
+                    </div>
+                    <div class="hardware-content">
+                        <h3 class="hardware-title">Mobile et Tablet</h3>
+                        <p>PayeSmart s'adapte à tous vos appareils pour une flexibilité totale.</p>
+                        <div class="hardware-availability" style="display: flex; align-items: center; justify-content: center; margin-bottom: 15px; margin-top: 20px;">
+                            <i class="fas fa-mobile-alt"></i>
+                            <span>Multi-appareils</span>
+                        </div>
+                        <a href="contact.html" class="hardware-btn">En savoir plus</a>
+                    </div>
+                </div>
+                
+                <!-- Solution 6 : Support 7j/7 -->
+                <div class="hardware-card">
+                    <div class="hardware-image">
+                        <img src="../img/solutions/support-7j7.png" alt="Support 7j/7">
+                    </div>
+                    <div class="hardware-content">
+                        <h3 class="hardware-title">Support 7j/7</h3>
+                        <p>Notre équipe de support dédiée est disponible tous les jours pour vous accompagner.</p>
+                        <div class="hardware-availability" style="display: flex; align-items: center; justify-content: center; margin-bottom: 15px; margin-top: 20px;">
+                            <i class="fas fa-headset"></i>
+                            <span>Support dédié</span>
+                        </div>
+                        <a href="contact.html" class="hardware-btn">En savoir plus</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Fonctionnalités Clés -->
+    <section class="key-features-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Fonctionnalités Clés</h2>
+                <p>Découvrez les outils essentiels qui font de PayeSmart la solution idéale pour votre commerce</p>
+            </div>
+            <div class="features-grid">
+                <!-- Feature 1 -->
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-icon blue-bg">
+                        <i data-lucide="shopping-cart"></i>
+                    </div>
+                    <h3>Ventes simplifiées</h3>
+                    <div class="feature-content">
+                        <p class="feature-short">Encaissements rapides multi-paiements (espèces, cartes, QR). Intégration Viva Payments.</p>
+                        <div class="feature-full">
+                            <p>Accélérez vos transactions avec notre système d'encaissement optimisé qui accepte tous types de paiements (espèces, cartes bancaires, QR codes, Apple Pay, Google Pay). Entièrement intégré avec Viva Payments et autres services pour une expérience fluide sans risque d'erreur. Traitement des ventes 70% plus rapide qu'avec les caisses traditionnelles.</p>
+                        </div>
+                        <button class="feature-toggle">Voir plus</button>
+                    </div>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-icon orange-bg">
+                        <i data-lucide="package"></i>
+                    </div>
+                    <h3>Stock en temps réel</h3>
+                    <div class="feature-content">
+                        <p class="feature-short">Alertes, historiques et import Excel pour ne jamais être à court.</p>
+                        <div class="feature-full">
+                            <p>Suivez précisément chaque produit avec notre système de gestion des stocks avancé. Recevez des alertes instantanées pour les niveaux bas, accédez à l'historique complet des mouvements, et importez/exportez facilement vos données via Excel. Notre algorithme prédictif anticipe vos besoins de réapprovisionnement basé sur les tendances de ventes saisonnières.</p>
+                        </div>
+                        <button class="feature-toggle">Voir plus</button>
+                    </div>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-icon purple-bg">
+                        <i data-lucide="tag"></i>
+                    </div>
+                    <h3>Fidélité & promos</h3>
+                    <div class="feature-content">
+                        <p class="feature-short">Offres personnalisées, points fidélité, QR codes clients.</p>
+                        <div class="feature-full">
+                            <p>Cultivez une clientèle fidèle grâce à notre module de fidélisation multicouche. Créez des offres personnalisées basées sur l'historique d'achat, déployez des programmes de points avec récompenses automatiques, et facilitez l'identification client par QR codes. Les commerces utilisant ce module constatent une augmentation moyenne de 22% du panier moyen et 35% de taux de retour client.</p>
+                        </div>
+                        <button class="feature-toggle">Voir plus</button>
+                    </div>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-icon blue-bg">
+                        <i data-lucide="bar-chart-3"></i>
+                    </div>
+                    <h3>Rapports visuels</h3>
+                    <div class="feature-content">
+                        <p class="feature-short">Statistiques claires, export Excel, vues par produit ou équipe.</p>
+                        <div class="feature-full">
+                            <p>Prenez des décisions éclairées grâce à nos tableaux de bord analytiques sophistiqués. Visualisez instantanément vos performances avec des graphiques dynamiques, analysez les tendances de vente par période/produit/vendeur, et exportez des rapports personnalisés. Notre moteur d'analyse prédictive identifie les opportunités de croissance et suggère des optimisations basées sur vos données spécifiques.</p>
+                        </div>
+                        <button class="feature-toggle">Voir plus</button>
+                    </div>
+                </div>
+                
+                <!-- Feature 5 -->
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="feature-icon orange-bg">
+                        <i data-lucide="users"></i>
+                    </div>
+                    <h3>Gestion des équipes</h3>
+                    <div class="feature-content">
+                        <p class="feature-short">Comptes multi-rôles, suivi d'activité, permissions sécurisées.</p>
+                        <div class="feature-full">
+                            <p>Optimisez la performance de votre équipe avec notre système de gestion du personnel intégré. Configurez différents niveaux d'accès avec permissions granulaires, suivez l'activité de chaque employé en temps réel, et générez des rapports de performance individuels. Sécurisation complète avec authentification à deux facteurs et historique détaillé des actions pour une traçabilité parfaite.</p>
+                        </div>
+                        <button class="feature-toggle">Voir plus</button>
+                    </div>
+                </div>
+                
+                <!-- Feature 6 -->
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="600">
+                    <div class="feature-icon purple-bg">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3>Synchronisation & Cloud</h3>
+                    <div class="feature-content">
+                        <p class="feature-short">Fonctionne hors-ligne, synchronisation automatique, sauvegarde.</p>
+                        <div class="feature-full">
+                            <p>Travaillez sans interruption grâce à notre technologie hybride cloud/locale. Continuez à vendre même sans connexion internet avec notre mode hors-ligne avancé, puis synchronisez automatiquement toutes les données dès le retour de la connexion. Profitez de sauvegardes chiffrées quotidiennes et d'une restauration instantanée en cas d'incident. Compatible avec tous vos appareils pour une expérience omnicanale.</p>
+                        </div>
+                        <button class="feature-toggle">Voir plus</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="features-cta">
+                <a href="solutions.html" class="btn btn-primary">Voir toutes les fonctionnalités</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Pricing -->
+    <section id="pricing" class="hardware-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Des forfaits adaptés à tous les besoins</h2>
+                <p>Choisissez l'offre qui correspond le mieux à votre entreprise</p>
+            </div>
+            
+            <div class="hardware-grid">
+                <!-- Plan Pay & Go -->
+                <div class="hardware-card">
+                    <div class="hardware-image" style="display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #4A90E2, #357ABD); min-height: 220px;">
+                        <div style="text-align: center; color: white;">
+                            <i class="fas fa-mobile-alt" style="font-size: 3rem; margin-bottom: 15px;"></i>
+                            <div style="font-size: 2.5rem; font-weight: bold; margin-bottom: 5px;">€29</div>
+                            <div style="font-size: 1rem; opacity: 0.9;">/mois</div>
+                        </div>
+                    </div>
+                    <div class="hardware-content">
+                        <h3 class="hardware-title">Pay & Go</h3>
+                        <p>Idéal pour les petites entreprises qui démarrent leur activité commerciale.</p>
+                        <div class="hardware-availability" style="display: flex; align-items: center; justify-content: center; margin-bottom: 15px; margin-top: 20px;">
+                            <i class="fas fa-check"></i>
+                            <span>Starter</span>
+                        </div>
+                        <ul style="font-size: 0.9rem; color: #E5E7EB; margin: 15px 0; padding-left: 20px;">
+                            <li>Gestion des employés</li>
+                            <li>Multi-magasins</li>
+                            <li>Gestion des produits</li>
+                            <li>Programme de fidélité</li>
+                        </ul>
+                        <a href="http://localhost:5173/#/plans" class="hardware-btn">Choisir ce plan</a>
+                    </div>
+                </div>
+                
+                <!-- Plan Print & Go (Populaire) -->
+                <div class="hardware-card" style="border-color: #F29D38; position: relative;">
+                    <div style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: #F29D38; color: white; padding: 5px 15px; border-radius: 15px; font-size: 0.8rem; font-weight: bold;">Le plus choisi</div>
+                    <div class="hardware-image" style="display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #F29D38, #E8890B); min-height: 220px;">
+                        <div style="text-align: center; color: white;">
+                            <i class="fas fa-print" style="font-size: 3rem; margin-bottom: 15px;"></i>
+                            <div style="font-size: 2.5rem; font-weight: bold; margin-bottom: 5px;">€79</div>
+                            <div style="font-size: 1rem; opacity: 0.9;">/mois</div>
+                        </div>
+                    </div>
+                    <div class="hardware-content">
+                        <h3 class="hardware-title">Print & Go</h3>
+                        <p>Plan avec imprimante thermique pour une expérience complète.</p>
+                        <div class="hardware-availability" style="display: flex; align-items: center; justify-content: center; margin-bottom: 15px; margin-top: 20px;">
+                            <i class="fas fa-star"></i>
+                            <span>Pro</span>
+                        </div>
+                        <ul style="font-size: 0.9rem; color: #E5E7EB; margin: 15px 0; padding-left: 20px;">
+                            <li>Gestion des employés</li>
+                            <li>Multi-magasins</li>
+                            <li>Analyses avancées</li>
+                            <li>Support prioritaire</li>
+                        </ul>
+                        <a href="http://localhost:5173/#/plans" class="hardware-btn">Choisir ce plan</a>
+                    </div>
+                </div>
+                
+                <!-- Plan All-In -->
+                <div class="hardware-card">
+                    <div class="hardware-image" style="display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #8B5CF6, #7C3AED); min-height: 220px;">
+                        <div style="text-align: center; color: white;">
+                            <i class="fas fa-star" style="font-size: 3rem; margin-bottom: 15px;"></i>
+                            <div style="font-size: 2.5rem; font-weight: bold; margin-bottom: 5px;">€149</div>
+                            <div style="font-size: 1rem; opacity: 0.9;">/mois</div>
+                        </div>
+                    </div>
+                    <div class="hardware-content">
+                        <h3 class="hardware-title">All-In</h3>
+                        <p>Solution complète pour les entreprises avec des besoins avancés.</p>
+                        <div class="hardware-availability" style="display: flex; align-items: center; justify-content: center; margin-bottom: 15px; margin-top: 20px;">
+                            <i class="fas fa-crown"></i>
+                            <span>Enterprise</span>
+                        </div>
+                        <ul style="font-size: 0.9rem; color: #E5E7EB; margin: 15px 0; padding-left: 20px;">
+                            <li>Multi-magasins illimités</li>
+                            <li>Tableau de bord premium</li>
+                            <li>Support 24/7</li>
+                            <li>API personnalisable</li>
+                        </ul>
+                        <a href="http://localhost:5173/#/plans" class="hardware-btn">Choisir ce plan</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Matériel compatible -->
+    <section class="hardware-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Matériel de caisse fiable et design</h2>
+                <p>PayeSmart fonctionne sur une sélection d'équipements performants, disponibles à l'achat ou en location selon vos besoins.</p>
+            </div>
+            
+            <div class="hardware-grid">
+                <!-- Produit 1 : SUNMI D3 MINI -->
+                <div class="hardware-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="hardware-image">
+                        <img src="../img/hardware/sunmi-d3mini.png" alt="SUNMI D3 MINI Terminal">
+                    </div>
+                    <div class="hardware-content">
+                        <h3 class="hardware-title">SUNMI D3 MINI</h3>
+                        <div class="hardware-availability" style="display: flex; align-items: center; justify-content: center; margin-bottom: 15px; margin-top: 20px;">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>Achat ou location</span>
+                        </div>
+                        <a href="materiel.html" class="hardware-btn">En savoir plus</a>
+                    </div>
+                </div>
+                
+                <!-- Produit 2 : SUNMI P3 MIX -->
+                <div class="hardware-card" data-aos="fade-up" data-aos-delay="200" style="margin: 0 auto;">
+                    <div class="hardware-image">
+                        <img src="../img/hardware/sunmi-p3mix.png" alt="SUNMI P3 MIX Terminal">
+                    </div>
+                    <div class="hardware-content">
+                        <h3 class="hardware-title">SUNMI P3 MIX</h3>
+                        <div class="hardware-availability" style="display: flex; align-items: center; justify-content: center; margin-bottom: 15px; margin-top: 20px;">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>Achat ou location</span>
+                        </div>
+                        <a href="materiel.html" class="hardware-btn">En savoir plus</a>
+                    </div>
+                </div>
+                
+                <!-- Produit 3 : SUNMI T3 PRO -->
+                <div class="hardware-card" data-aos="fade-up" data-aos-delay="300" style="margin: 0 auto;">
+                    <div class="hardware-image">
+                        <img src="../img/hardware/sunmi-t3pro.png" alt="SUNMI T3 PRO Terminal">
+                    </div>
+                    <div class="hardware-content">
+                        <h3 class="hardware-title">SUNMI T3 PRO</h3>
+                        <div class="hardware-availability" style="display: flex; align-items: center; justify-content: center; margin-bottom: 15px; margin-top: 20px;">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>Achat ou location</span>
+                        </div>
+                        <a href="materiel.html" class="hardware-btn">En savoir plus</a>
+                    </div>
+                </div>
+                
+                <!-- Produit 4 : SUNMI P3 -->
+                <div class="hardware-card" data-aos="fade-up" data-aos-delay="400" style="margin: 0 auto;">
+                    <div class="hardware-image">
+                        <img src="../img/hardware/sunmi-p3.png" alt="SUNMI P3 Terminal">
+                    </div>
+                    <div class="hardware-content">
+                        <h3 class="hardware-title">SUNMI P3</h3>
+                        <div class="hardware-availability" style="display: flex; align-items: center; justify-content: center; margin-bottom: 15px; margin-top: 20px;">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>Achat ou location</span>
+                        </div>
+                        <a href="materiel.html" class="hardware-btn">En savoir plus</a>
+                    </div>
+                </div>
+                
+                <!-- Produit 5 : Imprimante Thermique -->
+                <div class="hardware-card" data-aos="fade-up" data-aos-delay="500" style="margin: 0 auto;">
+                    <div class="hardware-image">
+                        <img src="../img/hardware/imprimante-thermique.png" alt="Imprimante Thermique">
+                    </div>
+                    <div class="hardware-content">
+                        <h3 class="hardware-title">Imprimante Thermique</h3>
+                        <div class="hardware-availability" style="display: flex; align-items: center; justify-content: center; margin-bottom: 15px; margin-top: 20px;">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>Achat ou location</span>
+                        </div>
+                        <a href="materiel.html" class="hardware-btn">En savoir plus</a>
+                    </div>
+                </div>
+                
+                <!-- Produit 6 : Scanner & Tiroir-caisse -->
+                <div class="hardware-card" data-aos="fade-up" data-aos-delay="600" style="margin: 0 auto;">
+                    <div class="hardware-image">
+                        <img src="../img/hardware/scanner-tiroir.png" alt="Scanner et Tiroir-caisse">
+                    </div>
+                    <div class="hardware-content">
+                        <h3 class="hardware-title">Scanner & Tiroir-caisse</h3>
+                        <div class="hardware-availability" style="display: flex; align-items: center; justify-content: center; margin-bottom: 15px; margin-top: 20px;">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>Achat ou location</span>
+                        </div>
+                        <a href="materiel.html" class="hardware-btn">En savoir plus</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hardware-cta">
+                <a href="materiel.html" class="btn btn-primary">Découvrir tous nos équipements</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Pourquoi choisir PayeSmart ? -->
+    <section class="why-choose-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Pourquoi choisir PayeSmart ?</h2>
+            </div>
+            <div class="why-choose-grid">
+                <!-- Bloc 1 -->
+                <div class="why-choose-card">
+                    <div class="why-choose-icon">🧩</div>
+                    <h3>Solution tout-en-un</h3>
+                    <p>PayeSmart intègre encaissement, stocks, CRM et analyses en temps réel. Une seule interface intuitive pour gérer votre activité complète, réduisant jusqu'à 70% des tâches administratives.</p>
+                </div>
+                
+                <!-- Bloc 2 -->
+                <div class="why-choose-card">
+                    <div class="why-choose-icon">⚡</div>
+                    <h3>Ultra simple</h3>
+                    <p>Conçue pour une prise en main immédiate, sans complexité inutile. Formation en moins de 30 minutes pour être opérationnel instantanément, même sans expérience technique.</p>
+                </div>
+                
+                <!-- Bloc 3 -->
+                <div class="why-choose-card">
+                    <div class="why-choose-icon">🔄</div>
+                    <h3>Flexible et connectée</h3>
+                    <p>Compatible sur tablettes, smartphones et PC avec synchronisation instantanée entre points de vente. Architecture modulaire avec plus de 30 intégrations pour s'adapter parfaitement à votre métier.</p>
+                </div>
+                
+                <!-- Bloc 4 -->
+                <div class="why-choose-card">
+                    <div class="why-choose-icon">📈</div>
+                    <h3>Efficacité prouvée</h3>
+                    <p>5000+ commerces utilisateurs : +15% de ventes, -30% de temps administratif, -95% d'erreurs de caisse. 89% des utilisateurs obtiennent un ROI positif en moins de 3 mois.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <!-- Ancienne section Download supprimée et son contenu intégré à la section Features ci-dessus -->
+
+    <!-- Payment Solutions Section -->
+
+    <!-- Section Ils nous font confiance -->
+    <section class="testimonials-section hardware-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Ils nous font confiance</h2>
+                <p>Des commerçants, restaurateurs et prestataires de services ont déjà adopté PayeSmart avec succès.</p>
+            </div>
+            
+            <!-- Témoignages clients -->
+            <div class="testimonials-grid">
+                <!-- Témoignage 1 -->
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="testimonial-avatar">
+                        <img src="../img/testimonials/julie.jpg" alt="Julie - Boutique L'Épure">
+                    </div>
+                    <div class="testimonial-content">
+                        <div class="testimonial-name">Julie - Boutique L'Épure</div>
+                        <div class="testimonial-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="testimonial-quote">
+                            <p>"Avec PayeSmart, j'ai réduit le temps de gestion de 40% !"</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Témoignage 2 -->
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="testimonial-avatar">
+                        <img src="../img/testimonials/thomas.jpg" alt="Thomas - Restaurant Le Bistronome">
+                    </div>
+                    <div class="testimonial-content">
+                        <div class="testimonial-name">Thomas - Restaurant Le Bistronome</div>
+                        <div class="testimonial-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <div class="testimonial-quote">
+                            <p>"La gestion des commandes et des stocks n'a jamais été aussi simple !"</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Témoignage 3 -->
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="testimonial-avatar">
+                        <img src="../img/testimonials/sarah.jpg" alt="Sarah - Salon de coiffure Eclat">
+                    </div>
+                    <div class="testimonial-content">
+                        <div class="testimonial-name">Sarah - Salon de coiffure Eclat</div>
+                        <div class="testimonial-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="testimonial-quote">
+                            <p>"Mes clients apprécient la rapidité du paiement et des rendez-vous."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Logos clients -->
+            <div class="client-logos" data-aos="fade-up">
+                <div class="client-logo"><img src="../img/clients/logo1.svg" alt="Client Logo 1"></div>
+                <div class="client-logo"><img src="../img/clients/logo2.svg" alt="Client Logo 2"></div>
+                <div class="client-logo"><img src="../img/clients/logo3.svg" alt="Client Logo 3"></div>
+                <div class="client-logo"><img src="../img/clients/logo4.svg" alt="Client Logo 4"></div>
+                <div class="client-logo"><img src="../img/clients/logo5.svg" alt="Client Logo 5"></div>
+            </div>
+            
+            <!-- Statistiques clés -->
+            <div class="stats-container" data-aos="fade-up">
+                <div class="stat-item">
+                    <div class="stat-number">+120</div>
+                    <div class="stat-label">commerces équipés</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">4,8/5</div>
+                    <div class="stat-label">satisfaction client</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">+15%</div>
+                    <div class="stat-label">de productivité en moyenne</div>
+                </div>
+            </div>
+            
+            <div class="testimonials-cta">
+                <a href="temoignages.html" class="btn btn-secondary">Lire plus d'avis</a>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <!-- Logo et information principale -->
+            <div class="footer-main">
+                <div class="footer-logo">
+                    
+                    
+                </div>
+                
+                <!-- Icônes de réseaux sociaux -->
+                <div class="footer-social">
+                    <a href="#" class="social-icon" aria-label="Facebook">
+                        <i data-lucide="facebook"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Twitter">
+                        <i data-lucide="twitter"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="LinkedIn">
+                        <i data-lucide="linkedin"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Instagram">
+                        <i data-lucide="instagram"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Liens organisés -->
+            <div class="footer-links-grid">
+                <div class="footer-links-column">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="about.html">Qui sommes-nous</a></li>
+                        <li><a href="#features">Fonctionnalités</a></li>
+                        <li><a href="#pricing">Tarifs</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-column">
+                    <h4>Entreprise</h4>
+                    <ul>
+                        <li><a href="about.html">À propos</a></li>
+                        <li><a href="about.html#team">Notre équipe</a></li>
+                        <li><a href="about.html#values">Nos valeurs</a></li>
+                        <li><a href="#">Carrières</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-column">
+                    <h4>Ressources</h4>
+                    <ul>
+                        <li><a href="#">Centre d'aide</a></li>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Webinaires</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-column">
+                    <h4>Légal</h4>
+                    <ul>
+                        <li><a href="#">Conditions</a></li>
+                        <li><a href="#">Confidentialité</a></li>
+                        <li><a href="#">Conformité</a></li>
+                        <li><a href="#">Mentions légales</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Ligne de séparation -->
+            <hr class="footer-divider">
+            
+            <!-- Accès et copyright -->
+            <div class="footer-bottom">
+                <div class="footer-access">
+                    <a href="../#/auth" class="access-link">Connexion client</a>
+                    <span class="separator">|</span>
+                    <a href="/#/admin/login" class="access-link admin-link">Espace administration</a>
+                </div>
+                <p class="copyright">&copy; 2025 PayeSmart. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/video-player.js"></script>
+    <script src="../js/lucide-init.js"></script>
+    <script src="../js/pricing-sync.js"></script>
+    <script src="../js/lightbox.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/features-animation.js"></script>
+    <script src="../js/error-fix.js"></script>
+    <script src="../js/firebase-video.js"></script>
+    <script src="../js/carousel-new.js"></script>
+    <script src="../js/features-carousel.js"></script>
+    <script src="../js/dynamic-admin-links.js"></script>
+    <script src="../js/hardware-animation.js"></script>
+    <script src="../js/feature-toggle.js"></script>
+    <script src="../js/firebase-video.js"></script>
+    <script src="../js/features-animation.js"></script>
+    <script>
+        // Initialisation des icônes Lucide
+        lucide.createIcons();
+        
+        // Initialisation de AOS (Animate on Scroll)
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            startEvent: 'DOMContentLoaded',
+            offset: 50,
+            delay: 50
+        });
+        
+        // Vérification que AOS est correctement chargé
+        console.log('AOS initialized:', typeof AOS);
+    </script>
+    
+    <!-- Script d'améliorations responsives -->
+    <script src="../js/responsive-enhancements.js"></script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+/* 
+ * STYLE POUR LE BOUTON "VOIR LES TARIFS" 
+ * Modification pour avoir un bouton gris foncé visible
+ */
+
+/* Style spécifique pour le bouton "Voir les tarifs" */
+.solutions-cta .btn-outline {
+    background-color: #333333; /* Gris foncé */
+    color: white;
+    border: 2px solid #333333;
+    font-weight: 600;
+    padding: 11px 27px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+/* Effet hover */
+.solutions-cta .btn-outline:hover {
+    background-color: #444444; /* Gris un peu plus clair au survol */
+    border-color: #444444;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Assurer la bonne visibilité du texte */
+.solutions-cta .btn-outline {
+    text-shadow: none;
+    letter-spacing: 0.5px;
+}

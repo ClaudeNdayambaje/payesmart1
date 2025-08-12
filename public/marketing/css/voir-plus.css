@@ -1,0 +1,75 @@
+/* 
+ * ACCESSOIRES - BOUTONS VOIR PLUS
+ * Styles pour la fonctionnalité "Voir plus" des descriptions d'accessoires
+ * Version 1.0
+ */
+
+/* Style par défaut - description masquée */
+.accessoire-description {
+    max-height: 0;
+    overflow: hidden;
+    margin: 0;
+    opacity: 0;
+    transition: all 0.4s ease;
+}
+
+/* Classe à ajouter lors de l'affichage de la description */
+.accessoire-description.visible {
+    max-height: 300px; /* Hauteur maximale pour l'animation */
+    opacity: 1;
+    margin-bottom: 20px;
+    margin-top: 12px;
+}
+
+/* Style du bouton "Voir plus" */
+.voir-plus-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 16px;
+    background-color: rgba(247, 148, 29, 0.1);
+    border: 1px solid rgba(247, 148, 29, 0.2);
+    color: var(--primary-color, #F7941D);
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    justify-content: center;
+    width: fit-content;
+}
+
+.voir-plus-btn:hover {
+    background-color: rgba(247, 148, 29, 0.2);
+    border-color: rgba(247, 148, 29, 0.3);
+}
+
+/* Icône du bouton */
+.voir-plus-btn i {
+    margin-left: 6px;
+    font-size: 0.8rem;
+    transition: transform 0.3s;
+}
+
+/* Rotation de l'icône quand la description est visible */
+.voir-plus-btn.active i {
+    transform: rotate(180deg);
+}
+
+/* Texte du bouton quand la description est visible */
+.voir-plus-btn.active .voir-plus-text {
+    content: "Masquer";
+}
+
+/* Animation subtile pour les boutons */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.voir-plus-btn:focus {
+    animation: pulse 0.4s ease;
+    outline: none;
+}

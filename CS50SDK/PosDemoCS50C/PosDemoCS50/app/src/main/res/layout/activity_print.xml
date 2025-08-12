@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:gravity="center"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:id="@+id/textview_Gray"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:text="@string/selectGray"
+        android:textColor="@color/colorPrimary"
+        android:textSize="25sp" />
+
+    <RadioGroup
+        android:id="@+id/rg_Gray_type"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/RadioButton_high"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@drawable/radio_button_style"
+            android:text=" 1 "
+            android:textSize="20sp"
+            android:textColor="@color/colorPrimaryDark" />
+
+        <RadioButton
+            android:id="@+id/RadioButton_middle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@drawable/radio_button_style"
+            android:text=" 2 "
+            android:textSize="20sp"
+            android:textColor="@color/colorPrimaryDark" />
+
+        <RadioButton
+            android:id="@+id/radioButton_low"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@drawable/radio_button_style"
+            android:text=" 3 "
+            android:textSize="20sp"
+            android:textColor="@color/colorPrimaryDark" />
+
+        <RadioButton
+            android:id="@+id/radioButton_4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@drawable/radio_button_style"
+            android:text=" 4 "
+            android:textSize="20sp"
+            android:textColor="@color/colorPrimaryDark" />
+
+        <RadioButton
+            android:id="@+id/radioButton_5"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@drawable/radio_button_style"
+            android:text=" 5 "
+            android:textSize="20sp"
+            android:textColor="@color/colorPrimaryDark" />
+
+    </RadioGroup>
+
+
+    <TextView
+        android:id="@+id/textview_mode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:text="Printer mode :"
+        android:textColor="@color/colorPrimary"
+        android:textSize="25sp"
+        />
+
+    <RadioGroup
+        android:id="@+id/rg_Gray_mode2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal"
+        >
+
+        <RadioButton
+            android:id="@+id/RadioButton_mode1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@drawable/radio_button_style"
+            android:text="Receipt"
+            android:textSize="20sp"
+            android:textColor="@color/colorPrimaryDark"
+            />
+
+        <RadioButton
+            android:id="@+id/RadioButton_mode2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@drawable/radio_button_style"
+            android:text="Label"
+            android:textSize="20sp"
+            android:textColor="@color/colorPrimaryDark"
+            />
+    </RadioGroup>
+
+
+
+
+
+    <TextView
+        android:id="@+id/textView_msg"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/shape_msg"
+        android:gravity="center"
+        android:textColor="@color/colorAccent"
+        android:textSize="20sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_test"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_button"
+            android:onClick="onClickTest"
+            android:text="Consume"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/button_unicode"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/shape_button"
+            android:onClick="onClickUnicodeTest"
+            android:text="UNICODE"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_barcode"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/shape_button"
+            android:onClick="OnClickBarcode"
+            android:textColor="@color/white"
+            android:text="Barcode" />
+
+        <Button
+            android:id="@+id/btnBmp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/shape_button"
+            android:onClick="onClickBmp"
+            android:textColor="@color/white"
+            android:text="Bitmap" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal">
+
+
+        <Button
+            android:id="@+id/printCycle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_button"
+            android:onClick="onClickCycle"
+            android:textColor="@color/white"
+            android:text="Cycle" />
+
+
+       <Button
+            android:id="@+id/btn_open"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/shape_button"
+            android:onClick="onClickPrnOpen"
+            android:textColor="@color/white"
+            android:visibility="gone"
+            android:text="Print Open" />
+
+        <Button
+            android:id="@+id/btnLong"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/shape_button"
+            android:onClick="onClickLong"
+            android:textColor="@color/white"
+            android:text="Long" />
+
+    </LinearLayout>
+
+
+
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnLabal_single"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/shape_button"
+            android:onClick="onClick_single"
+            android:textColor="@color/white"
+            android:text="single" />
+
+        <Button
+            android:id="@+id/btnLabal_continue"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/shape_button"
+            android:onClick="onClick_continue"
+            android:textColor="@color/white"
+            android:text="continuous" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnLabal_barcode"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/shape_button"
+            android:onClick="onClick_barcode"
+            android:textColor="@color/white"
+            android:text="barcode" />
+
+        <Button
+            android:id="@+id/btnLabal_bitmap"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/shape_button"
+            android:onClick="onClick_bitmap"
+            android:textColor="@color/white"
+            android:text="bitmap" />
+
+    </LinearLayout>
+
+
+
+
+
+    <!--<Button-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:text="Print Simple Api Test"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="48dp"-->
+        <!--android:textSize="20sp"-->
+        <!--android:visibility="gone"-->
+        <!--android:onClick="OnClickPrintSimpleApiTest"-->
+        <!--/>-->
+
+</LinearLayout>

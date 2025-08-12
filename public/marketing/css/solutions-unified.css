@@ -1,0 +1,450 @@
+/* 
+ * SOLUTIONS & PAIEMENTS STYLES UNIFIÉS
+ * Fichier CSS unifié pour tous les styles des solutions et systèmes de paiement du site PayeSmart
+ * Regroupe et harmonise les styles des fichiers :
+ * - payment-section-spacing.css
+ * - payment-solution-detail.css
+ * - payment-solutions-compact.css
+ * - payment-solutions.css
+ * - section-payment-fond.css
+ * - solutions-hero-spacing.css
+ * - solutions-placeholders.css
+ * - solutions.css
+ * Version 1.0 - Août 2025
+ */
+
+/*==================================
+ * 1. STYLES DE BASE DES SOLUTIONS
+ *==================================*/
+
+/* Section solutions principale */
+.solutions-section {
+    padding: 80px 0;
+    position: relative;
+    background-color: #fff;
+}
+
+.solutions-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.solutions-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.solutions-header h2 {
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.solutions-header p {
+    font-size: 18px;
+    color: #666;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Grille des solutions */
+.solutions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+/* Carte de solution */
+.solution-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.solution-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+.solution-card-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.solution-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.solution-card:hover .solution-card-image img {
+    transform: scale(1.05);
+}
+
+.solution-card-content {
+    padding: 25px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.solution-card h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.solution-card p {
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.6;
+    flex-grow: 1;
+}
+
+.solution-card-footer {
+    margin-top: auto;
+}
+
+/*==================================
+ * 2. HERO DES SOLUTIONS
+ *==================================*/
+
+/* Section hero des solutions */
+.solutions-hero {
+    padding: 120px 0 80px;
+    position: relative;
+    background-color: #f8f9fa;
+    overflow: hidden;
+}
+
+.solutions-hero-content {
+    max-width: 600px;
+    position: relative;
+    z-index: 2;
+}
+
+.solutions-hero h1 {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+.solutions-hero p {
+    font-size: 20px;
+    color: #666;
+    margin-bottom: 40px;
+    line-height: 1.6;
+}
+
+.solutions-hero-image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    z-index: 1;
+}
+
+.solutions-hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Ajustements de l'espacement du hero */
+.solutions-hero-spacing {
+    margin-top: -20px;
+    margin-bottom: 40px;
+}
+
+/*==================================
+ * 3. SOLUTIONS DE PAIEMENT
+ *==================================*/
+
+/* Section paiement principale */
+.payment-section {
+    padding: 80px 0;
+    background-color: #f9f9f9;
+}
+
+/* Conteneur des solutions de paiement */
+.payment-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Titre de la section paiement */
+.payment-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.payment-header h2 {
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.payment-header p {
+    font-size: 18px;
+    color: #666;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Grille des méthodes de paiement */
+.payment-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+/* Carte de méthode de paiement */
+.payment-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    padding: 30px;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.payment-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.payment-icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f5f7fa;
+    border-radius: 50%;
+}
+
+.payment-icon img {
+    width: 40px;
+    height: 40px;
+}
+
+.payment-card h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.payment-card p {
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+/* Version compacte des solutions de paiement */
+.payment-compact {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+.payment-compact-item {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    padding: 15px;
+    width: 150px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.payment-compact-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.payment-compact-icon {
+    width: 40px;
+    height: 40px;
+    margin: 0 auto 10px;
+}
+
+.payment-compact-item h4 {
+    font-size: 14px;
+    margin-bottom: 0;
+    color: #333;
+}
+
+/* Détails des solutions de paiement */
+.payment-detail-section {
+    padding: 40px 0;
+}
+
+.payment-detail-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.payment-feature-list {
+    margin-top: 30px;
+}
+
+.payment-feature-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.payment-feature-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 15px;
+    margin-top: 3px;
+    flex-shrink: 0;
+    color: #007bff;
+}
+
+.payment-feature-content h4 {
+    font-size: 18px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.payment-feature-content p {
+    font-size: 15px;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Fond de la section paiement */
+.payment-fond {
+    position: relative;
+    background-color: #f5f7fa;
+    padding: 80px 0;
+    overflow: hidden;
+}
+
+.payment-fond::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../img/patterns/dots-pattern.png') repeat;
+    opacity: 0.05;
+    z-index: 1;
+}
+
+.payment-fond-content {
+    position: relative;
+    z-index: 2;
+}
+
+/* Espacement de la section paiement */
+.payment-section-spacing {
+    padding-top: 60px;
+    padding-bottom: 80px;
+}
+
+/*==================================
+ * 4. PLACEHOLDERS ET VISUELS
+ *==================================*/
+
+/* Placeholders pour les solutions */
+.solution-placeholder {
+    background-color: #f0f2f5;
+    border-radius: 10px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #aaa;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.solution-placeholder i {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+/* Animation des placeholders */
+@keyframes pulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
+}
+
+.solution-placeholder.animated {
+    animation: pulse 2s infinite;
+}
+
+/*==================================
+ * 5. RESPONSIVE
+ *==================================*/
+
+@media (max-width: 992px) {
+    .solutions-hero h1 {
+        font-size: 36px;
+    }
+    
+    .solutions-hero p {
+        font-size: 18px;
+    }
+    
+    .solutions-hero-image {
+        width: 40%;
+    }
+}
+
+@media (max-width: 768px) {
+    .solutions-hero {
+        padding: 100px 0 60px;
+    }
+    
+    .solutions-hero-content {
+        max-width: 100%;
+    }
+    
+    .solutions-hero-image {
+        display: none;
+    }
+    
+    .payment-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}
+
+@media (max-width: 576px) {
+    .solutions-header h2,
+    .payment-header h2 {
+        font-size: 28px;
+    }
+    
+    .solutions-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .payment-compact-item {
+        width: 130px;
+    }
+}

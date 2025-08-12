@@ -1,0 +1,90 @@
+import React from 'react';
+import { SubscriptionStatus } from '../../services/subscriptionVerificationService';
+import { Button } from '../ui/button';
+import { AlertTriangle, ArrowRight, Home, Calendar, Clock } from 'lucide-react';
+
+interface SubscriptionExpiredModalProps {
+  subscriptionStatus: SubscriptionStatus;
+  onClose: () => void;
+}
+
+const SubscriptionExpiredModal: React.FC<SubscriptionExpiredModalProps> = ({ 
+  subscriptionStatus, 
+  onClose 
+}) => {
+  // Formater la date d'expiration si elle existe
+  const formattedDate = subscriptionStatus.subscriptionEndDate 
+    ? new Date(subscriptionStatus.subscriptionEndDate).toLocaleDateString('fr-FR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+      })
+    : '';
+
+  // Déterminer le titre et le message en fonction du statut
+  let title = 'Abonnement expiré';
+  let message = subscriptionStatus.message;
+  
+  if (subscriptionStatus.trialExpired) {
+    title = 'Période d\'essai expirée';
+  } else if (subscriptionStatus.subscriptionCancelled) {
+    title = 'Abonnement annulé';
+  }
+
+  return (
+    <div className="fixed inset-0 bg-gray-900 bg-opacity-75 backdrop-blur-sm flex items-center justify-center z-50">
+      <div className="bg-white rounded-xl shadow-2xl max-w-md w-full p-8 mx-4 border border-gray-100 transform transition-all duration-300 scale-100">
+        <div className="text-center">
+          {/* Icône d'avertissement avec animation subtile */}
+          <div className="mx-auto flex items-center justify-center h-20 w-20 rounded-full bg-red-50 mb-6 animate-pulse duration-2000">
+            {subscriptionStatus.trialExpired ? (
+              <Clock className="h-10 w-10 text-red-500" />
+            ) : (
+              <AlertTriangle className="h-10 w-10 text-red-500" />
+            )}
+          </div>
+          
+          {/* Titre avec style amélioré */}
+          <h3 className="text-2xl font-bold text-gray-800 mb-3">{title}</h3>
+          
+          {/* Ligne de séparation élégante */}
+          <div className="w-16 h-1 bg-red-500 mx-auto mb-4 rounded-full"></div>
+          
+          {/* Message avec meilleure typographie */}
+          <p className="text-gray-600 mb-6 leading-relaxed">{message}</p>
+          
+          {/* Date d'expiration avec style amélioré */}
+          {formattedDate && (
+            <div className="bg-gray-50 py-3 px-4 rounded-lg mb-6 inline-block">
+              <p className="text-sm text-gray-600 flex items-center justify-center gap-2">
+                <Calendar className="h-4 w-4 text-gray-500" />
+                Date d'expiration: <span className="font-bold text-gray-800">{formattedDate}</span>
+              </p>
+            </div>
+          )}
+          
+          {/* Boutons d'action avec meilleur design */}
+          <div className="flex flex-col sm:flex-row justify-center gap-4 mt-2">
+            <Button 
+              onClick={() => window.location.href = window.location.origin + '/marketing/index.html'}
+              className="w-full sm:w-auto bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white text-sm font-medium py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2"
+            >
+              <Home className="h-4 w-4" />
+              Nos formules
+              <ArrowRight className="h-4 w-4" />
+            </Button>
+            
+            <Button 
+              onClick={onClose}
+              className="w-full sm:w-auto bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium py-2 px-4 rounded-lg border border-gray-200 hover:border-gray-300 transition-all duration-300"
+            >
+              Retour
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default SubscriptionExpiredModal;

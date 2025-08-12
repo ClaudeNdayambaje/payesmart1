@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | PayeSmart</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="../img/favicon.png" type="image/png">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../css/styles.css">
+    <!-- language-selector.css intégré dans navigation-unified.css v1.8 -->
+    <link rel="stylesheet" href="../css/lucide-icons.css">
+    <link rel="stylesheet" href="../css/responsive-enhancements.css">
+    <!-- custom-colors.css intégré dans navigation-unified.css v1.8 -->
+    <!-- Le fichier footer.css a été migré vers navigation-unified.css v=1.7 -->
+    
+    <!-- Navigation unifiée avec header transparent intégré -->
+    <link rel="stylesheet" href="../css/navigation-unified.css?v=1.9">
+    
+    <!-- CSS spécifiques à la page contact (chargé après navigation-unified pour éviter les conflits) -->
+    <link rel="stylesheet" href="../css/contact-page-components.css">
+    
+    <style>
+        /* Force la transparence initiale du header sur la page contact */
+        .header {
+            background-color: transparent !important;
+            box-shadow: none !important;
+        }
+        /* Rétablir les styles au scroll */
+        .header.scrolled {
+            background-color: rgba(45, 45, 45, 0.95) !important;
+            backdrop-filter: blur(10px) !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+        }
+    </style>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Scripts -->
+    <script src="../js/language-persistence.js" defer></script>
+    <script src="../js/transparent-header.js"></script>
+    <!-- Script fix-links.js désactivé pour éviter les changements de langue automatiques -->
+    <script src="https://unpkg.com/lucide@0.344.0/dist/umd/lucide.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Responsivité uniquement (préserve le design original) -->
+    <link rel="stylesheet" href="../css/responsive-only.css">
+    <!-- Script redirect-fix.js désactivé pour éviter les changements de langue automatiques -->
+    <script src="../js/language-switcher.js"></script>
+</head>
+<body>
+    <!-- Barre de navigation mobile professionnelle -->
+    <div class="mobile-nav-bar">
+        <div class="mobile-nav-container">
+            <div class="mobile-nav-logo">
+                <img src="../img/logo.png" alt="PayeSmart Logo">
+            </div>
+            
+            <div class="mobile-language-selector">
+                <button class="mobile-language-button">FR <i class="fas fa-chevron-down"></i></button>
+                <div class="mobile-language-dropdown">
+                    <a href="index.html" class="mobile-language-option active" data-lang="fr">Français</a>
+                    <a href="../nl/contact.html" class="mobile-language-option" data-lang="nl">Nederlands</a>
+                    <a href="../en/contact.html" class="mobile-language-option" data-lang="en">English</a>
+                </div>
+            </div>
+            
+            <button class="mobile-menu-button">
+                <span class="mobile-menu-bar"></span>
+                <span class="mobile-menu-bar"></span>
+                <span class="mobile-menu-bar"></span>
+            </button>
+        </div>
+        
+        <div class="mobile-nav-menu">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="solutions.html">Terminaux</a></li>
+                <li><a href="nos-accessoires.html">Accessoires</a></li>
+                <li><a href="about.html">Qui sommes-nous</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+            <div class="mobile-nav-buttons">
+                <a href="http://localhost:3002/#/auth?register=true" class="btn btn-primary">Essai gratuit</a>
+                <a href="http://localhost:3002/#/auth" class="btn btn-primary">Se connecter</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Header desktop avec structure identique aux autres pages -->
+    <header class="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <a href="index.html"><img src="../img/logo.png" alt="PayeSmart Logo"></a>
+                </div>
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="solutions.html">Terminaux</a></li>
+                        <li><a href="nos-accessoires.html">Accessoires</a></li>
+                        <li><a href="about.html">Qui sommes-nous</a></li>
+                        <li><a href="contact.html" class="active">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="header-buttons">
+                    <div class="language-selector">
+                        <button class="language-button">FR <i class="fas fa-chevron-down"></i></button>
+                        <div class="language-dropdown">
+                            <a href="contact.html" class="language-option active" data-lang="fr">Français</a>
+                            <a href="../nl/contact.html" class="language-option" data-lang="nl">Nederlands</a>
+                            <a href="../en/contact.html" class="language-option" data-lang="en">English</a>
+                        </div>
+                    </div>
+                    <a href="http://localhost:3002/#/auth?register=true" class="btn btn-primary">Essai gratuit</a>
+                    <a href="http://localhost:3002/#/auth" class="btn btn-primary">Se connecter</a>
+                </div>
+                <button class="mobile-menu-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+    <!-- Hero Section avec arrière-plan et film sombre - structure identique à la page Qui sommes-nous -->
+    <section class="contact-hero about-hero" style="background-image: url('../img/backgrounds/analyse-ventes-temps-reel.jpg') !important; background-size: cover; background-position: center; position: relative; padding-top: 120px;">
+        <!-- Film sombre transparent par-dessus l'image -->
+        <div style="content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to right, rgba(0,0,0,0.6), rgba(0,0,0,0.4)); opacity: 0.5; z-index: 1; backdrop-filter: brightness(0.8) contrast(1.2);"></div>
+        <!-- Texture overlay ajoutée directement pour garantir l'effet -->
+        <div class="texture-overlay"></div>
+        <div class="container">
+            <div class="contact-hero-content">
+                <h1>Contactez-nous</h1>
+                <div class="hero-divider"></div>
+                <p class="subtitle">Notre équipe est à votre disposition pour répondre à toutes vos questions</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+        <section class="contact-section">
+            <div class="container">
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <h2>Nous sommes là pour vous aider</h2>
+                        <p>Avez-vous des questions sur nos services ou souhaitez-vous planifier une démonstration ? N'hésitez pas à nous contacter par téléphone, e-mail ou en remplissant le formulaire ci-contre.</p>
+                        
+                        <div class="contact-methods">
+                            <div class="contact-method">
+                                <i data-lucide="mail"></i>
+                                <div>
+                                    <h4>E-mail</h4>
+                                    <p>contact@payesmart.com</p>
+                                </div>
+                            </div>
+                            <div class="contact-method">
+                                <i data-lucide="phone"></i>
+                                <div>
+                                    <h4>Téléphone</h4>
+                                    <p>+33 1 23 45 67 89</p>
+                                </div>
+                            </div>
+                            <div class="contact-method">
+                                <i data-lucide="map-pin"></i>
+                                <div>
+                                    <h4>Adresse</h4>
+                                    <p>123 Avenue des Entrepreneurs<br>75001 Paris, France</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-hours">
+                            <h4>Heures d'ouverture</h4>
+                            <p>Lundi - Vendredi: 9:00 - 18:00</p>
+                            <p>Samedi - Dimanche: Fermé</p>
+                        </div>
+                        
+                        <div class="social-links">
+                            <a href="#" class="social-icon"><i data-lucide="facebook"></i></a>
+                            <a href="#" class="social-icon"><i data-lucide="twitter"></i></a>
+                            <a href="#" class="social-icon"><i data-lucide="linkedin"></i></a>
+                            <a href="#" class="social-icon"><i data-lucide="instagram"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-form-container">
+                        <form class="contact-form" id="contactForm">
+                            <div class="form-header">
+                                <h3>Envoyez-nous un message</h3>
+                                <p>Nous répondons dans les 24 heures</p>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="name">Nom complet</label>
+                                <div class="input-icon">
+                                    <i data-lucide="user"></i>
+                                    <input type="text" id="name" name="name" placeholder="Votre nom" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">E-mail</label>
+                                <div class="input-icon">
+                                    <i data-lucide="mail"></i>
+                                    <input type="email" id="email" name="email" placeholder="Votre e-mail" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone">Téléphone</label>
+                                <div class="input-icon">
+                                    <i data-lucide="phone"></i>
+                                    <input type="tel" id="phone" name="phone" placeholder="Votre numéro">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="company">Entreprise</label>
+                                <div class="input-icon">
+                                    <i data-lucide="building"></i>
+                                    <input type="text" id="company" name="company" placeholder="Nom de votre entreprise">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="subject">Sujet</label>
+                                <select id="subject" name="subject" required>
+                                    <option value="">Sélectionnez un sujet</option>
+                                    <option value="general">Question générale</option>
+                                    <option value="demo">Demande de démonstration</option>
+                                    <option value="support">Support technique</option>
+                                    <option value="sales">Ventes</option>
+                                    <option value="partnership">Partenariat</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" rows="4" placeholder="Décrivez votre demande en détail..." required></textarea>
+                            </div>
+                            
+                            <div class="form-group checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="newsletter" name="newsletter">
+                                    <span class="checkmark"></span>
+                                    Je souhaite recevoir des informations sur les nouveautés PayeSmart
+                                </label>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary btn-large">
+                                <i data-lucide="send"></i>
+                                Envoyer le message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <!-- Logo et information principale -->
+            <div class="footer-main">
+                <div class="footer-logo">
+                    
+                    
+                </div>
+                
+                <!-- Icônes de réseaux sociaux -->
+                <div class="footer-social">
+                    <a href="#" class="social-icon" aria-label="Facebook">
+                        <i data-lucide="facebook"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Twitter">
+                        <i data-lucide="twitter"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="LinkedIn">
+                        <i data-lucide="linkedin"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Instagram">
+                        <i data-lucide="instagram"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Liens organisés -->
+            <div class="footer-links-grid">
+                <div class="footer-links-column">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="about.html">Qui sommes-nous</a></li>
+                        <li><a href="solutions.html">Fonctionnalités</a></li>
+                        <li><a href="solutions.html#pricing">Tarifs</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-column">
+                    <h4>Entreprise</h4>
+                    <ul>
+                        <li><a href="about.html">À propos</a></li>
+                        <li><a href="about.html#team">Notre équipe</a></li>
+                        <li><a href="about.html#values">Nos valeurs</a></li>
+                        <li><a href="#">Carrières</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-column">
+                    <h4>Ressources</h4>
+                    <ul>
+                        <li><a href="#">Centre d'aide</a></li>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Webinaires</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-column">
+                    <h4>Légal</h4>
+                    <ul>
+                        <li><a href="#">Conditions</a></li>
+                        <li><a href="#">Confidentialité</a></li>
+                        <li><a href="#">Conformité</a></li>
+                        <li><a href="#">Mentions légales</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Ligne de séparation -->
+            <hr class="footer-divider">
+            
+            <!-- Accès et copyright -->
+            <div class="footer-bottom">
+                <div class="footer-access">
+                    <a href="http://localhost:3001/#/auth" class="access-link">Connexion client</a>
+                    <span class="separator">|</span>
+                    <a href="http://localhost:3001/#/admin/login" class="access-link admin-link">Espace administration</a>
+                </div>
+                <p class="copyright">&copy; 2025 PayeSmart. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/lucide-init.js"></script>
+    <script src="../js/contact.js"></script>
+    
+    <!-- Script de navigation mobile professionnelle -->
+    <script src="../js/mobile-nav.js"></script>
+</body>
+</html>

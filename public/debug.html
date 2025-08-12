@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Débogage</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        #result { margin-top: 20px; padding: 10px; border: 1px solid #ccc; }
+    </style>
+</head>
+<body>
+    <h1>Outil de débogage</h1>
+    <button id="testApp">Tester l'application</button>
+    <div id="result">Résultats s'afficheront ici...</div>
+
+    <script>
+        document.getElementById('testApp').addEventListener('click', async function() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = 'Test en cours...';
+            
+            try {
+                // Test de chargement de l'application
+                const iframe = document.createElement('iframe');
+                iframe.style.display = 'none';
+                document.body.appendChild(iframe);
+                
+                // Capturer les erreurs console
+                let errors = [];
+                iframe.contentWindow.onerror = function(message, source, lineno, colno, error) {
+                    errors.push({ message, source, lineno, colno });
+                    return true;
+                };
+                
+                // Essayer de charger l'application
+                iframe.src = '/';
+                
+                // Attendre quelques secondes
+                await new Promise(resolve => setTimeout(resolve, 5000));
+                
+                // Afficher les résultats
+                if (errors.length > 0) {
+                    resultDiv.innerHTML = '<h3>Erreurs détectées:</h3><pre>' + 
+                        JSON.stringify(errors, null, 2) + '</pre>';
+                } else {
+                    resultDiv.innerHTML = 'Aucune erreur JavaScript détectée, mais l\'application ne s\'affiche toujours pas. Problème potentiel dans le cycle de rendu React.';
+                }
+                
+                document.body.removeChild(iframe);
+            } catch (e) {
+                resultDiv.innerHTML = 'Erreur lors du test: ' + e.message;
+            }
+        });
+    </script>
+</body>
+</html>

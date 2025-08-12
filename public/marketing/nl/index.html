@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PayeSmart | Uw slimme kassabeheersysteem</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/navigation-unified.css?v=1.8">
+    <link rel="stylesheet" href="../css/lucide-icons.css">
+    <link rel="stylesheet" href="../css/buttons-unified.css?v=1.0">
+    <link rel="stylesheet" href="../css/responsive-unified.css?v=1.0">
+    <!-- Le fichier hero-unified.css a été migré vers navigation-unified.css v=1.6 -->
+    <link rel="stylesheet" href="../css/title-style.css">
+    <!-- custom-colors.css intégré dans navigation-unified.css v1.8 -->
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/navigation-unified.css?v=1.8">
+    <link rel="stylesheet" href="../css/loading-spinner.css">
+    <link rel="stylesheet" href="../css/content-sections-unified.css?v=1.0">
+    <link rel="stylesheet" href="../css/navigation-unified.css?v=1.8">
+    <link rel="stylesheet" href="../css/solutions-unified.css?v=1.0">
+    <!-- Responsivité uniquement (préserve le design original) -->
+    <link rel="stylesheet" href="../css/adjustments-unified.css?v=1.0">
+    <link rel="stylesheet" href="../css/dashboard-showcase.css">
+    <link rel="stylesheet" href="../css/app-icon.css">
+    <link rel="stylesheet" href="../css/gallery-unified.css?v=1.0">
+    <link rel="stylesheet" href="../css/testimonials-unified.css?v=1.0">
+    <link rel="stylesheet" href="../css/navigation-unified.css?v=1.8">
+    <link rel="stylesheet" href="../css/mobile-responsive-fixes.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <!-- Les fichiers fullscreen-carousel.css et carousel-unified.css ont été migrés vers navigation-unified.css v=1.7 -->
+    <link rel="stylesheet" href="../css/static-buttons.css">
+    <link rel="stylesheet" href="../css/hero-logo-alignment.css">
+    <link rel="stylesheet" href="../css/free-trial-button.css">
+    <link rel="stylesheet" href="../css/features-carousel.css">
+    <link rel="stylesheet" href="../css/hero-indicators.css">
+    <link rel="stylesheet" href="../css/menu-harmonization.css">
+    <link rel="stylesheet" href="../css/navigation-spacing-fix.css">
+    <!-- La gestion du header est déjà prise en charge par navigation-unified.css -->
+    <!-- Fichier CSS unifié pour les carrousels, remplace tous les fichiers carousel précédents -->
+    <!-- Fichier migré vers navigation-unified.css v=1.7 -->
+    <link rel="stylesheet" href="../css/z-index-adjustments.css">
+    <link rel="stylesheet" href="../css/specialist-button.css">
+    <link rel="stylesheet" href="../css/why-choose-section.css">
+    <link rel="stylesheet" href="../css/key-features.css">
+    <link rel="stylesheet" href="../css/compatible-hardware.css">
+    <link rel="stylesheet" href="../css/testimonials-section.css">
+    <!-- Le fichier footer.css a été migré vers navigation-unified.css v=1.7 -->
+    <!-- language-selector.css intégré dans navigation-unified.css v1.8 -->
+    <link rel="stylesheet" href="../css/static-hero-buttons.css">
+    <link rel="stylesheet" href="../css/hero-vertical-spacing-fix.css">
+    <link rel="stylesheet" href="../css/dark-gray-subtitle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://unpkg.com/lucide@0.344.0/dist/umd/lucide.min.js"></script>
+    <script src="../js/admin-redirect.js"></script>
+    <script src="../js/hero-indicators-fix.js"></script>
+    <script src="../js/language-switcher.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <!-- Script de correction des liens -->
+    <!-- Script fix-links.js désactivé pour éviter les changements de langue automatiques -->
+    <script src="../js/language-persistence.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <img src="../img/logo.png" alt="PayeSmart Logo">
+                </div>
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html" class="active">Home</a></li>
+                        <li><a href="solutions.html">Producten</a></li>
+                        <li><a href="nos-accessoires.html">Accessoires</a></li>
+                        <li><a href="about.html">Over Ons</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="header-buttons">
+                    <div class="language-selector">
+                        <button class="language-button">NL <i class="fas fa-chevron-down"></i></button>
+                        <div class="language-dropdown">
+                            <a href="../fr/index.html" class="language-option" data-lang="fr">Français</a>
+                            <a href="../nl/index.html" class="language-option active" data-lang="nl">Nederlands</a>
+                            <a href="../en/index.html" class="language-option" data-lang="en">English</a>
+                        </div>
+                    </div>
+                    <a href="../#/auth?register=true" class="btn btn-primary">Gratis Proef</a>
+                    <a href="../#/auth" class="btn btn-primary">Inloggen</a>
+                </div>
+                <button class="mobile-menu-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section avec arrière-plan -->
+    <section class="hero hero-animated hero-parallax">
+        <!-- Arrière-plan dynamique -->
+        <div class="hero-background"></div>
+        
+        <!-- Indicateurs du carrousel -->
+        <div class="carousel-indicators">
+            <div class="carousel-indicator active"></div>
+            <div class="carousel-indicator"></div>
+            <div class="carousel-indicator"></div>
+            <div class="carousel-indicator"></div>
+            <div class="carousel-indicator"></div>
+        </div>
+
+        <div class="container">
+
+            
+            <div class="hero-content">
+                <div class="hero-text text-left">
+                    <h1 class="two-line-title">De <span class="text-highlight">alles-in-één</span><br>oplossing voor uw<br>bedrijf</h1>
+                    <p class="two-line-subtitle">PayeSmart, het alles-in-één kassasysteem<br>Verkopen, beheren, analyseren... allemaal zonder moeite.</p>
+                    <div class="hero-buttons">
+                        <a href="#pricing" class="btn btn-primary">Bekijk pakketten</a>
+                        <a href="/#/auth?register=true" class="btn btn-secondary">Gratis proefversie</a>
+                    </div>
+
+                </div>
+                <div class="hero-image">
+                    <img src="../img/dashboard-mockup.png" alt="PayeSmart Dashboard" class="dashboard-image">
+                    <div class="mockup-decoration"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Solutions Complètes -->
+    <section class="hardware-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Een complete oplossing voor uw bedrijf</h2>
+                <p>PayeSmart biedt u alle nodige tools om uw verkooppunt en transacties efficiënt te beheren.</p>
+            </div>
+            
+            <div class="hardware-grid">
+                <!-- Solution 1 : Logiciel de Caisse Intuitif -->
+                <div class="hardware-card">
+                    <div class="hardware-image">
+                        <img src="../img/solutions/logiciel-caisse.png" alt="Logiciel de Caisse Intuitif">
+                    </div>
+                    <div class="hardware-content">
+                        <h3 class="hardware-title">Intuïtieve Kassasoftware</h3>
+                        <p>Onze kassasoftware is ontworpen om eenvoudig te gebruiken te zijn terwijl het krachtige functies biedt.</p>
+                        <div class="hardware-availability" style="display: flex; align-items: center; justify-content: center; margin-bottom: 15px; margin-top: 20px;">
+                            <i class="fas fa-cash-register"></i>
+                            <span>Intuïtieve interface</span>
+                        </div>
+                        <a href="contact.html" class="hardware-btn">Meer info</a>
+                    </div>
+                </div>
+                
+                <!-- Solution 2 : Terminaux de Paiement -->
+                <div class="hardware-card">
+                    <div class="hardware-image">
+                        <img src="../img/solutions/terminaux-paiement.png" alt="Betaalterminals">
+                    </div>
+                    <div class="hardware-content">
+                        <h3 class="hardware-title">Betaalterminals</h3>
+                        <p>Moderne en beveiligde terminals, compatibel met alle huidige betaalmethoden.</p>
+                        <div class="hardware-availability" style="display: flex; align-items: center; justify-content: center; margin-bottom: 15px; margin-top: 20px;">
+                            <i class="fas fa-credit-card"></i>
+                            <span>Alle soorten kaarten</span>
+                        </div>
+                        <a href="contact.html" class="hardware-btn">Meer info</a>
+                    </div>
+                </div>
+                
+                <!-- Solution 3 : Compte Bancaire Intégré -->
+                <div class="hardware-card">
+                    <div class="hardware-image">
+                        <img src="../img/solutions/compte-bancaire.png" alt="Geïntegreerde Bankrekening">
+                    </div>
+                    <div class="hardware-content">
+                        <h3 class="hardware-title">Geïntegreerde Bankrekening</h3>
+                        <p>Ontvang uw geld direct met onze geïntegreerde bankoplossing.</p>
+                        <div class="hardware-availability" style="display: flex; align-items: center; justify-content: center; margin-bottom: 15px; margin-top: 20px;">
+                            <i class="fas fa-university"></i>
+                            <span>Directe uitbetaling</span>
+                        </div>
+                        <a href="contact.html" class="hardware-btn">Meer info</a>
+                    </div>
+                </div>
+                
+                <!-- Solution 4 : Analyses en Temps Réel -->
+                <div class="hardware-card">
+                    <div class="hardware-image">
+                        <img src="../img/solutions/analyses-temps-reel.png" alt="Real-time Analyses">
+                    </div>
+                    <div class="hardware-content">
+                        <h3 class="hardware-title">Real-time Analyses</h3>
+                        <p>Intelligente dashboards die uw verkoopgegevens analyseren.</p>
+                        <div class="hardware-availability" style="display: flex; align-items: center; justify-content: center; margin-bottom: 15px; margin-top: 20px;">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Dashboard overzichten</span>
+                        </div>
+                        <a href="contact.html" class="hardware-btn">Meer info</a>
+                    </div>
+                </div>
+                
+                <!-- Solution 5 : Mobile et Tablet -->
+                <div class="hardware-card">
+                    <div class="hardware-image">
+                        <img src="../img/solutions/mobile-tablet.png" alt="Mobiel en Tablet">
+                    </div>
+                    <div class="hardware-content">
+                        <h3 class="hardware-title">Mobiel en Tablet</h3>
+                        <p>PayeSmart past zich aan al uw apparaten aan voor volledige flexibiliteit.</p>
+                        <div class="hardware-availability" style="display: flex; align-items: center; justify-content: center; margin-bottom: 15px; margin-top: 20px;">
+                            <i class="fas fa-mobile-alt"></i>
+                            <span>Multi-apparaat</span>
+                        </div>
+                        <a href="contact.html" class="hardware-btn">Meer info</a>
+                    </div>
+                </div>
+                
+                <!-- Solution 6 : Support 7j/7 -->
+                <div class="hardware-card">
+                    <div class="hardware-image">
+                        <img src="../img/solutions/support-7j7.png" alt="Support 7j/7">
+                    </div>
+                    <div class="hardware-content">
+                        <h3 class="hardware-title">Support 7d/7</h3>
+                        <p>Ons toegewijde support team is elke dag beschikbaar om u te helpen.</p>
+                        <div class="hardware-availability" style="display: flex; align-items: center; justify-content: center; margin-bottom: 15px; margin-top: 20px;">
+                            <i class="fas fa-headset"></i>
+                            <span>Toegewijde ondersteuning</span>
+                        </div>
+                        <a href="contact.html" class="hardware-btn">Meer info</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Fonctionnalités Clés -->
+    <section class="key-features-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Sleutelfuncties</h2>
+                <p>Ontdek de essentiële tools die PayeSmart de ideale oplossing maken voor uw bedrijf</p>
+            </div>
+            <div class="features-grid">
+                <!-- Feature 1 -->
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-icon blue-bg">
+                        <i data-lucide="shopping-cart"></i>
+                    </div>
+                    <h3>Vereenvoudigde verkoop</h3>
+                    <div class="feature-content">
+                        <p class="feature-short">Snelle betalingen met meerdere methoden (contant, kaarten, QR). Viva Payments-integratie.</p>
+                        <div class="feature-full">
+                            <p>Versnel uw transacties met ons geoptimaliseerde kassasysteem dat alle soorten betalingen accepteert (contant geld, bankpassen, QR-codes, Apple Pay, Google Pay). Volledig geïntegreerd met Viva Payments en andere diensten voor een soepele ervaring zonder risico op fouten. Verkoopverwerking 70% sneller dan met traditionele kassa's.</p>
+                        </div>
+                        <button class="feature-toggle">Meer weergeven</button>
+                    </div>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-icon orange-bg">
+                        <i data-lucide="package"></i>
+                    </div>
+                    <h3>Realtime voorraad</h3>
+                    <div class="feature-content">
+                        <p class="feature-short">Waarschuwingen, geschiedenis en Excel-import om nooit zonder voorraad te zitten.</p>
+                        <div class="feature-full">
+                            <p>Volg elk product nauwkeurig met ons geavanceerde voorraadbeheerssysteem. Ontvang direct waarschuwingen bij lage voorraadniveaus, krijg toegang tot de volledige bewegingsgeschiedenis en importeer/exporteer eenvoudig uw gegevens via Excel. Ons voorspellende algoritme anticipeert op uw aanvullingsbehoeften op basis van seizoensgebonden verkooptrends.</p>
+                        </div>
+                        <button class="feature-toggle">Meer weergeven</button>
+                    </div>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-icon purple-bg">
+                        <i data-lucide="tag"></i>
+                    </div>
+                    <h3>Loyaliteit & promoties</h3>
+                    <div class="feature-content">
+                        <p class="feature-short">Gepersonaliseerde aanbiedingen, loyaliteitspunten, klant QR-codes.</p>
+                        <div class="feature-full">
+                            <p>Kweek een loyale klantenkring met onze meerlaagse loyaliteitsmodule. Maak gepersonaliseerde aanbiedingen op basis van aankoopgeschiedenis, implementeer puntenprogramma's met automatische beloningen en vereenvoudig klantidentificatie via QR-codes. Bedrijven die deze module gebruiken, zien een gemiddelde stijging van 22% in winkelmandje en 35% in klantenretentie.</p>
+                        </div>
+                        <button class="feature-toggle">Meer weergeven</button>
+                    </div>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-icon blue-bg">
+                        <i data-lucide="bar-chart-3"></i>
+                    </div>
+                    <h3>Visuele rapporten</h3>
+                    <div class="feature-content">
+                        <p class="feature-short">Duidelijke statistieken, Excel export, weergaven per product of team.</p>
+                        <div class="feature-full">
+                            <p>Neem weloverwogen beslissingen met onze geavanceerde analytische dashboards. Visualiseer direct uw prestaties met dynamische grafieken, analyseer verkooptrends per periode/product/verkoper en exporteer aangepaste rapporten. Onze voorspellende analyse-engine identificeert groeimogelijkheden en stelt optimalisaties voor op basis van uw specifieke gegevens.</p>
+                        </div>
+                        <button class="feature-toggle">Meer weergeven</button>
+                    </div>
+                </div>
+                
+                <!-- Feature 5 -->
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="feature-icon orange-bg">
+                        <i data-lucide="users"></i>
+                    </div>
+                    <h3>Teambeheer</h3>
+                    <div class="feature-content">
+                        <p class="feature-short">Multi-rol accounts, activiteitstracking, beveiligde machtigingen.</p>
+                        <div class="feature-full">
+                            <p>Optimaliseer de prestaties van uw team met ons geïntegreerde personeelsbeheersysteem. Configureer verschillende toegangsniveaus met gedetailleerde machtigingen, volg de activiteit van elke medewerker in realtime en genereer individuele prestatierapporten. Volledige beveiliging met tweefactorauthenticatie en gedetailleerde actiegeschiedenis voor perfecte traceerbaarheid.</p>
+                        </div>
+                        <button class="feature-toggle">Meer weergeven</button>
+                    </div>
+                </div>
+                
+                <!-- Feature 6 -->
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="600">
+                    <div class="feature-icon purple-bg">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3>Synchronisatie & Cloud</h3>
+                    <div class="feature-content">
+                        <p class="feature-short">Werkt offline, automatische synchronisatie, back-up.</p>
+                        <div class="feature-full">
+                            <p>Werk zonder onderbrekingen dankzij onze hybride cloud/lokale technologie. Blijf verkopen, zelfs zonder internetverbinding, met onze geavanceerde offline modus, en synchroniseer automatisch alle gegevens zodra de verbinding is hersteld. Profiteer van dagelijkse versleutelde back-ups en directe herstel bij incidenten. Compatibel met al uw apparaten voor een omnichannel ervaring.</p>
+                        </div>
+                        <button class="feature-toggle">Meer weergeven</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="features-cta">
+                <a href="solutions.html" class="btn btn-primary">Bekijk alle functies</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Pricing -->
+    <section id="pricing" class="hardware-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Pakketten aangepast aan alle behoeften</h2>
+                <p>Kies het aanbod dat het beste bij uw bedrijf past</p>
+            </div>
+            
+            <div class="hardware-grid">
+                <!-- Plan Pay & Go -->
+                <div class="hardware-card">
+                    <div class="hardware-image" style="display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #4A90E2, #357ABD); min-height: 220px;">
+                        <div style="text-align: center; color: white;">
+                            <i class="fas fa-mobile-alt" style="font-size: 3rem; margin-bottom: 15px;"></i>
+                            <div style="font-size: 2.5rem; font-weight: bold; margin-bottom: 5px;">€29</div>
+                            <div style="font-size: 1rem; opacity: 0.9;">/mois</div>
+                        </div>
+                    </div>
+                    <div class="hardware-content">
+                        <h3 class="hardware-title">Pay & Go</h3>
+                        <p>Ideaal voor kleine bedrijven die hun commerciële activiteit starten.</p>
+                        <div class="hardware-availability" style="display: flex; align-items: center; justify-content: center; margin-bottom: 15px; margin-top: 20px;">
+                            <i class="fas fa-check"></i>
+                            <span>Starter</span>
+                        </div>
+                        <ul style="font-size: 0.9rem; color: #E5E7EB; margin: 15px 0; padding-left: 20px;">
+                            <li>Personeelsbeheer</li>
+                            <li>Multi-winkels</li>
+                            <li>Productbeheer</li>
+                            <li>Loyaliteitsprogramma</li>
+                        </ul>
+                        <a href="http://localhost:5173/#/plans" class="hardware-btn">Kies dit abonnement</a>
+                    </div>
+                </div>
+                
+                <!-- Plan Print & Go (Populaire) -->
+                <div class="hardware-card" style="border-color: #F29D38; position: relative;">
+                    <div style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: #F29D38; color: white; padding: 5px 15px; border-radius: 15px; font-size: 0.8rem; font-weight: bold;">Meest gekozen</div>
+                    <div class="hardware-image" style="display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #F29D38, #E8890B); min-height: 220px;">
+                        <div style="text-align: center; color: white;">
+                            <i class="fas fa-print" style="font-size: 3rem; margin-bottom: 15px;"></i>
+                            <div style="font-size: 2.5rem; font-weight: bold; margin-bottom: 5px;">€79</div>
+                            <div style="font-size: 1rem; opacity: 0.9;">/maand</div>
+                        </div>
+                    </div>
+                    <div class="hardware-content">
+                        <h3 class="hardware-title">Print & Go</h3>
+                        <p>Abonnement met thermische printer voor een complete ervaring.</p>
+                        <div class="hardware-availability" style="display: flex; align-items: center; justify-content: center; margin-bottom: 15px; margin-top: 20px;">
+                            <i class="fas fa-star"></i>
+                            <span>Pro</span>
+                        </div>
+                        <ul style="font-size: 0.9rem; color: #E5E7EB; margin: 15px 0; padding-left: 20px;">
+                            <li>Personeelsbeheer</li>
+                            <li>Multi-winkels</li>
+                            <li>Geavanceerde analyses</li>
+                            <li>Prioritaire ondersteuning</li>
+                        </ul>
+                        <a href="http://localhost:5173/#/plans" class="hardware-btn">Kies dit abonnement</a>
+                    </div>
+                </div>
+                
+                <!-- Plan All-In -->
+                <div class="hardware-card">
+                    <div class="hardware-image" style="display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #8B5CF6, #7C3AED); min-height: 220px;">
+                        <div style="text-align: center; color: white;">
+                            <i class="fas fa-star" style="font-size: 3rem; margin-bottom: 15px;"></i>
+                            <div style="font-size: 2.5rem; font-weight: bold; margin-bottom: 5px;">€149</div>
+                            <div style="font-size: 1rem; opacity: 0.9;">/maand</div>
+                        </div>
+                    </div>
+                    <div class="hardware-content">
+                        <h3 class="hardware-title">All-In</h3>
+                        <p>Complete oplossing voor bedrijven met geavanceerde behoeften.</p>
+                        <div class="hardware-availability" style="display: flex; align-items: center; justify-content: center; margin-bottom: 15px; margin-top: 20px;">
+                            <i class="fas fa-crown"></i>
+                            <span>Enterprise</span>
+                        </div>
+                        <ul style="font-size: 0.9rem; color: #E5E7EB; margin: 15px 0; padding-left: 20px;">
+                            <li>Onbeperkt multi-winkels</li>
+                            <li>Premium dashboard</li>
+                            <li>24/7 ondersteuning</li>
+                            <li>Aanpasbare API</li>
+                        </ul>
+                        <a href="http://localhost:5173/#/plans" class="hardware-btn">Kies dit abonnement</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Matériel compatible -->
+    <section class="hardware-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Betrouwbare en stijlvolle kassamaterialen</h2>
+                <p>PayeSmart werkt op een selectie van krachtige apparatuur, beschikbaar voor aankoop of huur volgens uw behoeften.</p>
+            </div>
+            
+            <div class="hardware-grid">
+                <!-- Produit 1 : SUNMI D3 MINI -->
+                <div class="hardware-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="hardware-image">
+                        <img src="../img/hardware/sunmi-d3mini.png" alt="SUNMI D3 MINI Terminal">
+                    </div>
+                    <div class="hardware-content">
+                        <h3 class="hardware-title">SUNMI D3 MINI</h3>
+                        <div class="hardware-availability" style="display: flex; align-items: center; justify-content: center; margin-bottom: 15px; margin-top: 20px;">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>Koop of huur</span>
+                        </div>
+                        <a href="materiel.html" class="hardware-btn">Meer info</a>
+                    </div>
+                </div>
+                
+                <!-- Produit 2 : SUNMI P3 MIX -->
+                <div class="hardware-card" data-aos="fade-up" data-aos-delay="200" style="margin: 0 auto;">
+                    <div class="hardware-image">
+                        <img src="../img/hardware/sunmi-p3mix.png" alt="SUNMI P3 MIX Terminal">
+                    </div>
+                    <div class="hardware-content">
+                        <h3 class="hardware-title">SUNMI P3 MIX</h3>
+                        <div class="hardware-availability" style="display: flex; align-items: center; justify-content: center; margin-bottom: 15px; margin-top: 20px;">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>Koop of huur</span>
+                        </div>
+                        <a href="materiel.html" class="hardware-btn">Meer info</a>
+                    </div>
+                </div>
+                
+                <!-- Produit 3 : SUNMI T3 PRO -->
+                <div class="hardware-card" data-aos="fade-up" data-aos-delay="300" style="margin: 0 auto;">
+                    <div class="hardware-image">
+                        <img src="../img/hardware/sunmi-t3pro.png" alt="SUNMI T3 PRO Terminal">
+                    </div>
+                    <div class="hardware-content">
+                        <h3 class="hardware-title">SUNMI T3 PRO</h3>
+                        <div class="hardware-availability" style="display: flex; align-items: center; justify-content: center; margin-bottom: 15px; margin-top: 20px;">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>Koop of huur</span>
+                        </div>
+                        <a href="materiel.html" class="hardware-btn">Meer info</a>
+                    </div>
+                </div>
+                
+                <!-- Produit 4 : SUNMI P3 -->
+                <div class="hardware-card" data-aos="fade-up" data-aos-delay="400" style="margin: 0 auto;">
+                    <div class="hardware-image">
+                        <img src="../img/hardware/sunmi-p3.png" alt="SUNMI P3 Terminal">
+                    </div>
+                    <div class="hardware-content">
+                        <h3 class="hardware-title">SUNMI P3</h3>
+                        <div class="hardware-availability" style="display: flex; align-items: center; justify-content: center; margin-bottom: 15px; margin-top: 20px;">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>Koop of huur</span>
+                        </div>
+                        <a href="materiel.html" class="hardware-btn">Meer info</a>
+                    </div>
+                </div>
+                
+                <!-- Produit 5 : Imprimante Thermique -->
+                <div class="hardware-card" data-aos="fade-up" data-aos-delay="500" style="margin: 0 auto;">
+                    <div class="hardware-image">
+                        <img src="../img/hardware/imprimante-thermique.png" alt="Thermische Printer">
+                    </div>
+                    <div class="hardware-content">
+                        <h3 class="hardware-title">Thermische Printer</h3>
+                        <div class="hardware-availability" style="display: flex; align-items: center; justify-content: center; margin-bottom: 15px; margin-top: 20px;">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>Koop of huur</span>
+                        </div>
+                        <a href="materiel.html" class="hardware-btn">Meer info</a>
+                    </div>
+                </div>
+                
+                <!-- Produit 6 : Scanner & Tiroir-caisse -->
+                <div class="hardware-card" data-aos="fade-up" data-aos-delay="600" style="margin: 0 auto;">
+                    <div class="hardware-image">
+                        <img src="../img/hardware/scanner-tiroir.png" alt="Scanner en Kassalade">
+                    </div>
+                    <div class="hardware-content">
+                        <h3 class="hardware-title">Scanner & Kassalade</h3>
+                        <div class="hardware-availability" style="display: flex; align-items: center; justify-content: center; margin-bottom: 15px; margin-top: 20px;">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>Koop of huur</span>
+                        </div>
+                        <a href="materiel.html" class="hardware-btn">Meer info</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hardware-cta">
+                <a href="nos-accessoires.html" class="btn btn-primary">Ontdek al onze apparatuur</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Pourquoi choisir PayeSmart ? -->
+    <section class="why-choose-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Waarom kiezen voor PayeSmart?</h2>
+            </div>
+            <div class="why-choose-grid">
+                <!-- Bloc 1 -->
+                <div class="why-choose-card">
+                    <div class="why-choose-icon">🧩</div>
+                    <h3>All-in-one oplossing</h3>
+                    <p>PayeSmart integreert kassa, voorraadbeheer, CRM en real-time analyses. Eén intuïtieve interface om uw volledige activiteit te beheren, waarmee tot 70% van de administratieve taken worden verminderd.</p>
+                </div>
+                
+                <!-- Bloc 2 -->
+                <div class="why-choose-card">
+                    <div class="why-choose-icon">⚡</div>
+                    <h3>Ultrasimpel</h3>
+                    <p>Ontworpen voor onmiddellijke ingebruikname, zonder onnodige complexiteit. Training in minder dan 30 minuten om direct operationeel te zijn, zelfs zonder technische ervaring.</p>
+                </div>
+                
+                <!-- Bloc 3 -->
+                <div class="why-choose-card">
+                    <div class="why-choose-icon">🔄</div>
+                    <h3>Flexibel en verbonden</h3>
+                    <p>Compatibel met tablets, smartphones en PC's met directe synchronisatie tussen verkooppunten. Modulaire architectuur met meer dan 30 integraties om zich perfect aan te passen aan uw vakgebied.</p>
+                </div>
+                
+                <!-- Bloc 4 -->
+                <div class="why-choose-card">
+                    <div class="why-choose-icon">📈</div>
+                    <h3>Bewezen effectiviteit</h3>
+                    <p>5000+ winkels gebruiken het: +15% verkoop, -30% administratieve tijd, -95% kassafouten. 89% van de gebruikers bereikt een positieve ROI in minder dan 3 maanden.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <!-- Ancienne section Download supprimée et son contenu intégré à la section Features ci-dessus -->
+
+    <!-- Payment Solutions Section -->
+
+    <!-- Section Ils nous font confiance -->
+    <section class="testimonials-section hardware-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Zij vertrouwen ons</h2>
+                <p>Winkeliers, restauranthouders en dienstverleners hebben PayeSmart al met succes geadopteerd.</p>
+            </div>
+            
+            <!-- Témoignages clients -->
+            <div class="testimonials-grid">
+                <!-- Témoignage 1 -->
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="testimonial-avatar">
+                        <img src="../img/testimonials/julie.jpg" alt="Julie - Boutique L'Épure">
+                    </div>
+                    <div class="testimonial-content">
+                        <div class="testimonial-name">Julie - Boutique L'Épure</div>
+                        <div class="testimonial-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="testimonial-quote">
+                            <p>"Met PayeSmart heb ik mijn beheertijd met 40% verminderd!"</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Témoignage 2 -->
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="testimonial-avatar">
+                        <img src="../img/testimonials/thomas.jpg" alt="Thomas - Restaurant Le Bistronome">
+                    </div>
+                    <div class="testimonial-content">
+                        <div class="testimonial-name">Thomas - Restaurant Le Bistronome</div>
+                        <div class="testimonial-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <div class="testimonial-quote">
+                            <p>"Het beheer van bestellingen en voorraden was nog nooit zo eenvoudig!"</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Témoignage 3 -->
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="testimonial-avatar">
+                        <img src="../img/testimonials/sarah.jpg" alt="Sarah - Kapsalon Eclat">
+                    </div>
+                    <div class="testimonial-content">
+                        <div class="testimonial-name">Sarah - Kapsalon Eclat</div>
+                        <div class="testimonial-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="testimonial-quote">
+                            <p>"Mijn klanten waarderen de snelheid van betaling en afspraken maken."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Logos clients -->
+            <div class="client-logos" data-aos="fade-up">
+                <div class="client-logo"><img src="../img/clients/logo1.svg" alt="Client Logo 1"></div>
+                <div class="client-logo"><img src="../img/clients/logo2.svg" alt="Client Logo 2"></div>
+                <div class="client-logo"><img src="../img/clients/logo3.svg" alt="Client Logo 3"></div>
+                <div class="client-logo"><img src="../img/clients/logo4.svg" alt="Client Logo 4"></div>
+                <div class="client-logo"><img src="../img/clients/logo5.svg" alt="Client Logo 5"></div>
+            </div>
+            
+            <!-- Statistiques clés -->
+            <div class="stats-container" data-aos="fade-up">
+                <div class="stat-item">
+                    <div class="stat-number">+120</div>
+                    <div class="stat-label">uitgeruste winkels</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">4,8/5</div>
+                    <div class="stat-label">klanttevredenheid</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">+15%</div>
+                    <div class="stat-label">gemiddelde productiviteit</div>
+                </div>
+            </div>
+            
+            <div class="testimonials-cta">
+                <a href="temoignages.html" class="btn btn-secondary">Meer beoordelingen lezen</a>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <!-- Logo et information principale -->
+            <div class="footer-main">
+                <div class="footer-logo">
+                    
+                    
+                </div>
+                
+                <!-- Icônes de réseaux sociaux -->
+                <div class="footer-social">
+                    <a href="#" class="social-icon" aria-label="Facebook">
+                        <i data-lucide="facebook"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Twitter">
+                        <i data-lucide="twitter"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="LinkedIn">
+                        <i data-lucide="linkedin"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Instagram">
+                        <i data-lucide="instagram"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Liens organisés -->
+            <div class="footer-links-grid">
+                <div class="footer-links-column">
+                    <h4>Navigatie</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">Over ons</a></li>
+                        <li><a href="#features">Functies</a></li>
+                        <li><a href="#pricing">Prijzen</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-column">
+                    <h4>Bedrijf</h4>
+                    <ul>
+                        <li><a href="about.html">Over</a></li>
+                        <li><a href="about.html#team">Ons team</a></li>
+                        <li><a href="about.html#values">Onze waarden</a></li>
+                        <li><a href="#">Carrières</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-column">
+                    <h4>Bronnen</h4>
+                    <ul>
+                        <li><a href="#">Helpcentrum</a></li>
+                        <li><a href="#">Documentatie</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Webinars</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-column">
+                    <h4>Juridisch</h4>
+                    <ul>
+                        <li><a href="#">Voorwaarden</a></li>
+                        <li><a href="#">Privacy</a></li>
+                        <li><a href="#">Compliance</a></li>
+                        <li><a href="#">Wettelijke vermeldingen</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Ligne de séparation -->
+            <hr class="footer-divider">
+            
+            <!-- Accès et copyright -->
+            <div class="footer-bottom">
+                <div class="footer-access">
+                    <a href="http://localhost:3001/#/auth" class="access-link">Klantlogin</a>
+                    <span class="separator">|</span>
+                    <a href="http://localhost:3001/#/admin/login" class="access-link admin-link">Beheeromgeving</a>
+                </div>
+                <p class="copyright">&copy; 2025 PayeSmart. Alle rechten voorbehouden.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/video-player.js"></script>
+    <script src="../js/lucide-init.js"></script>
+    <script src="../js/pricing-sync.js"></script>
+    <script src="../js/lightbox.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/features-animation.js"></script>
+    <script src="../js/error-fix.js"></script>
+    <script src="../js/firebase-video.js"></script>
+    <script src="../js/carousel-new.js"></script>
+    <script src="../js/features-carousel.js"></script>
+    <script src="../js/dynamic-admin-links.js"></script>
+    <script src="../js/hardware-animation.js"></script>
+    <script src="../js/feature-toggle.js"></script>
+    <script src="../js/firebase-video.js"></script>
+    <script src="../js/features-animation.js"></script>
+    <script>
+        // Initialisation des icônes Lucide
+        lucide.createIcons();
+        
+        // Initialisation de AOS (Animate on Scroll)
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            startEvent: 'DOMContentLoaded',
+            offset: 50,
+            delay: 50
+        });
+        
+        // Vérification que AOS est correctement chargé
+        console.log('AOS initialized:', typeof AOS);
+    </script>
+    
+    <!-- Script d'améliorations responsives -->
+    <script src="../js/responsive-enhancements.js"></script>
+
+    <!-- Script de correction des liens d'authentification -->
+    <script src="../js/fix-auth-links.js"></script>
+</body>
+</html>

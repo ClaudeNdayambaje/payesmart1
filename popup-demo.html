@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Démonstration des Dialogues PayeSmart</title>
+  <style>
+    :root {
+      --theme-bg-primary: #1a1d2b;
+      --theme-bg-secondary: #262a3b;
+      --theme-color: #4f46e5;
+      --theme-color-dark: #3730a3;
+      --theme-color-danger: #ef4444;
+      --theme-color-danger-dark: #dc2626;
+      --theme-color-success: #10b981;
+      --theme-color-warning: #f59e0b;
+      --theme-color-border: rgba(255, 255, 255, 0.1);
+      --theme-color-text: #ffffff;
+      --theme-color-text-secondary: rgba(255, 255, 255, 0.8);
+    }
+    
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--theme-bg-primary);
+      color: var(--theme-color-text);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    
+    .container {
+      width: 90%;
+      max-width: 800px;
+      background-color: var(--theme-bg-secondary);
+      border-radius: 12px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      padding: 30px;
+      margin: 20px;
+    }
+    
+    h1 {
+      text-align: center;
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+    
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+    
+    button {
+      padding: 12px 20px;
+      border-radius: 8px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 16px;
+    }
+    
+    .btn-primary {
+      background-color: var(--theme-color);
+      color: white;
+      box-shadow: 0 4px 6px rgba(79, 70, 229, 0.2);
+    }
+    
+    .btn-primary:hover {
+      background-color: var(--theme-color-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(79, 70, 229, 0.3);
+    }
+    
+    .btn-danger {
+      background-color: var(--theme-color-danger);
+      color: white;
+      box-shadow: 0 4px 6px rgba(239, 68, 68, 0.2);
+    }
+    
+    .btn-danger:hover {
+      background-color: var(--theme-color-danger-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(239, 68, 68, 0.3);
+    }
+    
+    .btn-success {
+      background-color: var(--theme-color-success);
+      color: white;
+      box-shadow: 0 4px 6px rgba(16, 185, 129, 0.2);
+    }
+    
+    .btn-success:hover {
+      background-color: var(--theme-color-success);
+      filter: brightness(90%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(16, 185, 129, 0.3);
+    }
+    
+    .btn-warning {
+      background-color: var(--theme-color-warning);
+      color: white;
+      box-shadow: 0 4px 6px rgba(245, 158, 11, 0.2);
+    }
+    
+    .btn-warning:hover {
+      background-color: var(--theme-color-warning);
+      filter: brightness(90%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(245, 158, 11, 0.3);
+    }
+    
+    .result-area {
+      background-color: rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+      padding: 16px;
+      margin-top: 20px;
+      min-height: 60px;
+    }
+    
+    /* Styles pour le modal personnalisé */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      animation: fadeIn 0.2s ease-out;
+    }
+    
+    .modal-content {
+      width: 100%;
+      max-width: 500px;
+      background-color: var(--theme-bg-secondary);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      animation: scaleIn 0.2s ease-out;
+    }
+    
+    .modal-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--theme-color-border);
+    }
+    
+    .modal-title {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 700;
+    }
+    
+    .modal-body {
+      padding: 20px;
+      color: var(--theme-color-text-secondary);
+    }
+    
+    .modal-footer {
+      padding: 16px 20px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      background-color: var(--theme-bg-primary);
+      border-top: 1px solid var(--theme-color-border);
+    }
+    
+    .modal-cancel {
+      padding: 10px 16px;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .modal-cancel:hover {
+      background-color: rgba(255, 255, 255, 0.15);
+      transform: translateY(-1px);
+    }
+    
+    .modal-confirm {
+      padding: 10px 16px;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: white;
+    }
+    
+    .modal-confirm:hover {
+      transform: translateY(-1px);
+      filter: brightness(90%);
+    }
+    
+    .modal-confirm.danger {
+      background-color: var(--theme-color-danger);
+    }
+    
+    .modal-confirm.warning {
+      background-color: var(--theme-color-warning);
+    }
+    
+    .modal-confirm.info {
+      background-color: var(--theme-color);
+    }
+    
+    .modal-confirm.success {
+      background-color: var(--theme-color-success);
+    }
+    
+    /* Styles pour l'alerte personnalisée */
+    .alert {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      max-width: 400px;
+      background-color: var(--theme-bg-secondary);
+      color: white;
+      border-radius: 8px;
+      padding: 16px 20px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      z-index: 1001;
+      animation: slideIn 0.3s ease-out;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    
+    .alert-icon {
+      flex-shrink: 0;
+    }
+    
+    .alert-content {
+      flex-grow: 1;
+    }
+    
+    .alert-title {
+      font-weight: 600;
+      margin: 0 0 8px 0;
+    }
+    
+    .alert-message {
+      margin: 0;
+      color: var(--theme-color-text-secondary);
+    }
+    
+    .alert.info {
+      border-left: 4px solid var(--theme-color);
+    }
+    
+    .alert.warning {
+      border-left: 4px solid var(--theme-color-warning);
+    }
+    
+    .alert.danger {
+      border-left: 4px solid var(--theme-color-danger);
+    }
+    
+    .alert.success {
+      border-left: 4px solid var(--theme-color-success);
+    }
+    
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes scaleIn {
+      from { transform: scale(0.95); }
+      to { transform: scale(1); }
+    }
+    
+    @keyframes slideIn {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    
+    @keyframes slideOut {
+      from {
+        transform: translateX(0);
+        opacity: 1;
+      }
+      to {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Démonstration des Boîtes de Dialogue PayeSmart</h1>
+    
+    <div class="btn-group">
+      <button class="btn-primary" id="showInfoBtn">Boîte de Dialogue Info</button>
+      <button class="btn-warning" id="showWarningBtn">Boîte de Dialogue Avertissement</button>
+      <button class="btn-danger" id="showDangerBtn">Boîte de Dialogue Danger</button>
+      <button class="btn-success" id="showSuccessBtn">Boîte de Dialogue Succès</button>
+    </div>
+    
+    <div class="btn-group">
+      <button class="btn-primary" id="showInfoAlertBtn">Alerte Info</button>
+      <button class="btn-warning" id="showWarningAlertBtn">Alerte Avertissement</button>
+      <button class="btn-danger" id="showDangerAlertBtn">Alerte Erreur</button>
+      <button class="btn-success" id="showSuccessAlertBtn">Alerte Succès</button>
+    </div>
+    
+    <div class="result-area" id="resultArea">
+      Cliquez sur un bouton pour tester les différentes boîtes de dialogue et alertes
+    </div>
+  </div>
+  
+  <!-- Modèle pour le modal -->
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modalTitle">Titre du Modal</h3>
+      </div>
+      <div class="modal-body">
+        <p id="modalMessage">Message du modal</p>
+      </div>
+      <div class="modal-footer">
+        <button class="modal-cancel" id="modalCancel">Annuler</button>
+        <button class="modal-confirm" id="modalConfirm">Confirmer</button>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Références DOM
+    const modal = document.getElementById('modal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalMessage = document.getElementById('modalMessage');
+    const modalCancel = document.getElementById('modalCancel');
+    const modalConfirm = document.getElementById('modalConfirm');
+    const resultArea = document.getElementById('resultArea');
+    
+    // Fonction pour afficher le modal
+    function showModal(title, message, confirmText = 'Confirmer', cancelText = 'Annuler', type = 'info') {
+      return new Promise((resolve) => {
+        // Configurer le modal
+        modalTitle.textContent = title;
+        modalMessage.textContent = message;
+        modalCancel.textContent = cancelText;
+        modalConfirm.textContent = confirmText;
+        
+        // Réinitialiser et appliquer les classes de type
+        modalConfirm.className = 'modal-confirm';
+        modalConfirm.classList.add(type);
+        
+        // Afficher le modal
+        modal.style.display = 'flex';
+        
+        // Gérer le clic sur Annuler
+        const handleCancel = () => {
+          modal.style.display = 'none';
+          modalCancel.removeEventListener('click', handleCancel);
+          modalConfirm.removeEventListener('click', handleConfirm);
+          resolve(false);
+        };
+        
+        // Gérer le clic sur Confirmer
+        const handleConfirm = () => {
+          modal.style.display = 'none';
+          modalCancel.removeEventListener('click', handleCancel);
+          modalConfirm.removeEventListener('click', handleConfirm);
+          resolve(true);
+        };
+        
+        // Ajouter les écouteurs d'événements
+        modalCancel.addEventListener('click', handleCancel);
+        modalConfirm.addEventListener('click', handleConfirm);
+      });
+    }
+    
+    // Fonction pour afficher une alerte
+    function showAlert(message, title, type = 'info', duration = 5000) {
+      // Créer l'élément d'alerte
+      const alert = document.createElement('div');
+      alert.className = `alert ${type}`;
+      
+      // Icône selon le type
+      let iconSvg = '';
+      switch(type) {
+        case 'danger':
+          iconSvg = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="15" y1="9" x2="9" y2="15"></line>
+            <line x1="9" y1="9" x2="15" y2="15"></line>
+          </svg>`;
+          break;
+        case 'warning':
+          iconSvg = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+            <line x1="12" y1="9" x2="12" y2="13"></line>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+          </svg>`;
+          break;
+        case 'success':
+          iconSvg = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>`;
+          break;
+        case 'info':
+        default:
+          iconSvg = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4f46e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+          </svg>`;
+      }
+      
+      // Contenu de l'alerte
+      alert.innerHTML = `
+        <div class="alert-icon">${iconSvg}</div>
+        <div class="alert-content">
+          <h4 class="alert-title">${title}</h4>
+          <p class="alert-message">${message}</p>
+        </div>
+      `;
+      
+      // Ajouter l'alerte au DOM
+      document.body.appendChild(alert);
+      
+      // Supprimer l'alerte après la durée spécifiée
+      if (duration > 0) {
+        setTimeout(() => {
+          alert.style.animation = 'slideOut 0.3s ease-out forwards';
+          setTimeout(() => {
+            document.body.removeChild(alert);
+          }, 300);
+        }, duration);
+      }
+      
+      return alert;
+    }
+    
+    // Configuration des boutons de modal
+    document.getElementById('showInfoBtn').addEventListener('click', async () => {
+      const result = await showModal(
+        'Information',
+        'Ceci est une boîte de dialogue de type information. Elle remplace les alertes natives du navigateur avec un design plus esthétique.',
+        'Compris',
+        'Fermer',
+        'info'
+      );
+      resultArea.textContent = result ? 'Vous avez confirmé la boîte de dialogue d\'information' : 'Vous avez fermé la boîte de dialogue d\'information';
+    });
+    
+    document.getElementById('showWarningBtn').addEventListener('click', async () => {
+      const result = await showModal(
+        'Avertissement',
+        'Attention ! Cette action pourrait entraîner des modifications importantes. Êtes-vous sûr de vouloir continuer ?',
+        'Continuer quand même',
+        'Annuler',
+        'warning'
+      );
+      resultArea.textContent = result ? 'Vous avez confirmé malgré l\'avertissement' : 'Vous avez annulé suite à l\'avertissement';
+    });
+    
+    document.getElementById('showDangerBtn').addEventListener('click', async () => {
+      const result = await showModal(
+        'Action Dangereuse',
+        'Attention ! Cette action est irréversible et supprimera définitivement ces données. Voulez-vous vraiment continuer ?',
+        'Supprimer',
+        'Annuler',
+        'danger'
+      );
+      resultArea.textContent = result ? 'Vous avez confirmé l\'action dangereuse' : 'Vous avez annulé l\'action dangereuse';
+    });
+    
+    document.getElementById('showSuccessBtn').addEventListener('click', async () => {
+      const result = await showModal(
+        'Opération Réussie',
+        'L\'opération a été effectuée avec succès. Souhaitez-vous continuer avec les étapes suivantes ?',
+        'Continuer',
+        'Terminer',
+        'success'
+      );
+      resultArea.textContent = result ? 'Vous avez choisi de continuer' : 'Vous avez choisi de terminer';
+    });
+    
+    // Configuration des boutons d'alerte
+    document.getElementById('showInfoAlertBtn').addEventListener('click', () => {
+      showAlert(
+        'Cette alerte vous informe d\'un événement important dans l\'application.',
+        'Information',
+        'info'
+      );
+      resultArea.textContent = 'Alerte d\'information affichée';
+    });
+    
+    document.getElementById('showWarningAlertBtn').addEventListener('click', () => {
+      showAlert(
+        'Certaines fonctionnalités pourraient ne pas être disponibles en raison d\'une maintenance.',
+        'Avertissement',
+        'warning'
+      );
+      resultArea.textContent = 'Alerte d\'avertissement affichée';
+    });
+    
+    document.getElementById('showDangerAlertBtn').addEventListener('click', () => {
+      showAlert(
+        'Une erreur s\'est produite lors du traitement de votre demande. Veuillez réessayer.',
+        'Erreur',
+        'danger'
+      );
+      resultArea.textContent = 'Alerte d\'erreur affichée';
+    });
+    
+    document.getElementById('showSuccessAlertBtn').addEventListener('click', () => {
+      showAlert(
+        'Votre opération a été traitée avec succès. Les modifications ont été enregistrées.',
+        'Succès',
+        'success'
+      );
+      resultArea.textContent = 'Alerte de succès affichée';
+    });
+  </script>
+</body>
+</html>

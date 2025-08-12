@@ -1,0 +1,79 @@
+/* Styles pour les icônes Lucide */
+
+/* Taille et couleur par défaut des icônes */
+[data-lucide] {
+    width: 24px;
+    height: 24px;
+    stroke-width: 2;
+    stroke: currentColor;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Styles pour les icônes dans les cartes de fonctionnalités */
+.feature-icon [data-lucide] {
+    width: 40px;
+    height: 40px;
+    stroke: white;
+    stroke-width: 1.5;
+}
+
+/* Couleurs spécifiques pour chaque icône de fonctionnalité */
+.feature-card:nth-child(1) .feature-icon {
+    background-color: #4f46e5; /* --color-primary */
+}
+
+.feature-card:nth-child(2) .feature-icon {
+    background-color: #10b981; /* --color-secondary */
+}
+
+.feature-card:nth-child(3) .feature-icon {
+    background-color: #f59e0b; /* --color-accent */
+}
+
+.feature-card:nth-child(4) .feature-icon {
+    background-color: #6366f1; /* Variante de primary */
+}
+
+.feature-card:nth-child(5) .feature-icon {
+    background-color: #14b8a6; /* Variante de secondary */
+}
+
+.feature-card:nth-child(6) .feature-icon {
+    background-color: #f97316; /* Variante de accent */
+}
+
+/* Styles pour les icônes de vérification dans les listes */
+.feature-list [data-lucide="check-circle"] {
+    width: 20px;
+    height: 20px;
+    stroke: var(--primary-color);
+    margin-right: 10px;
+}
+
+/* Styles pour les icônes de vérification dans les forfaits */
+.pricing-features [data-lucide="check"] {
+    width: 18px;
+    height: 18px;
+    stroke: var(--primary-color);
+    margin-right: 10px;
+}
+
+/* Animation au survol des icônes dans les fonctionnalités */
+.feature-card:hover .feature-icon [data-lucide] {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+}
+
+/* Styles pour les icônes dans les témoignages */
+.testimonial-card [data-lucide] {
+    stroke: var(--secondary-color);
+}
+
+/* Styles pour les icônes dans le pied de page */
+.footer [data-lucide] {
+    width: 18px;
+    height: 18px;
+    stroke-width: 1.5;
+}

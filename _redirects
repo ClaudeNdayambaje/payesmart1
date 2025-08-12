@@ -1,0 +1,17 @@
+# Redirection pour les applications SPA
+/* /index.html 200
+
+# Autoriser CORS pour les ressources statiques
+/assets/* 
+  Access-Control-Allow-Origin: *
+
+# Redirection pour les assets statiques
+/assets/* /assets/:splat 200
+
+# Redirection pour les modules JS
+/*.js
+  Content-Type: application/javascript
+
+# Redirection pour les modules ESM
+/*.mjs
+  Content-Type: application/javascript

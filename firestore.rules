@@ -1,0 +1,162 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Règle temporaire pour le développement : autoriser tout accès
+    match /{document=**} {
+      allow read, write: if true;
+    }
+    
+    // Règles pour la collection businesses
+    match /businesses/{businessId} {
+      // Permettre la lecture et l'écriture uniquement au propriétaire de l'entreprise
+      allow read, write: if request.auth != null && request.auth.uid == businessId;
+      
+      // Sous-collections de l'entreprise
+      match /{collection}/{docId} {
+        allow read, write: if request.auth != null && request.auth.uid == businessId;
+      }
+    }
+    
+    // Règles pour les employés
+    // Les employés sont stockés dans une collection globale mais sont liés à une entreprise
+    match /employees/{employeeId} {
+      // Fonction pour vérifier si l'employé appartient à l'entreprise de l'utilisateur connecté
+      function belongsToUserBusiness() {
+        return request.auth != null && 
+               exists(/databases/$(database)/documents/businesses/$(request.auth.uid)) &&
+               resource.data.businessId == request.auth.uid;
+      }
+      
+      // Permettre la lecture et l'écriture uniquement au propriétaire de l'entreprise
+      allow read: if belongsToUserBusiness();
+      allow create, update, delete: if belongsToUserBusiness();
+    }
+    
+    // Règles pour les produits
+    match /products/{productId} {
+      function belongsToUserBusiness() {
+        return request.auth != null && 
+               exists(/databases/$(database)/documents/businesses/$(request.auth.uid)) &&
+               resource.data.businessId == request.auth.uid;
+      }
+      
+      allow read: if belongsToUserBusiness();
+      allow create, update, delete: if belongsToUserBusiness();
+    }
+    
+    // Règles pour les catégories
+    match /categories/{categoryId} {
+      function belongsToUserBusiness() {
+        return request.auth != null && 
+               exists(/databases/$(database)/documents/businesses/$(request.auth.uid)) &&
+               resource.data.businessId == request.auth.uid;
+      }
+      
+      allow read: if belongsToUserBusiness();
+      allow create, update, delete: if belongsToUserBusiness();
+    }
+    
+    // Règles pour les ventes
+    match /sales/{saleId} {
+      function belongsToUserBusiness() {
+        return request.auth != null && 
+               exists(/databases/$(database)/documents/businesses/$(request.auth.uid)) &&
+               resource.data.businessId == request.auth.uid;
+      }
+      
+      allow read: if belongsToUserBusiness();
+      allow create, update, delete: if belongsToUserBusiness();
+    }
+    
+    // Règles pour les mouvements de stock
+    match /stockMovements/{movementId} {
+      function belongsToUserBusiness() {
+        return request.auth != null && 
+               exists(/databases/$(database)/documents/businesses/$(request.auth.uid)) &&
+               resource.data.businessId == request.auth.uid;
+      }
+      
+      allow read: if belongsToUserBusiness();
+      allow create, update, delete: if belongsToUserBusiness();
+    }
+    
+    // Règles pour les commandes fournisseurs
+    match /supplierOrders/{orderId} {
+      function belongsToUserBusiness() {
+        return request.auth != null && 
+               exists(/databases/$(database)/documents/businesses/$(request.auth.uid)) &&
+               resource.data.businessId == request.auth.uid;
+      }
+      
+      allow read: if belongsToUserBusiness();
+      allow create, update, delete: if belongsToUserBusiness();
+    }
+    
+    // Règles pour les cartes de fidélité
+    match /loyaltyCards/{cardId} {
+      function belongsToUserBusiness() {
+        return request.auth != null && 
+               exists(/databases/$(database)/documents/businesses/$(request.auth.uid)) &&
+               resource.data.businessId == request.auth.uid;
+      }
+      
+      allow read: if belongsToUserBusiness();
+      allow create, update, delete: if belongsToUserBusiness();
+    }
+    
+    // Règles pour les promotions
+    match /promotions/{promotionId} {
+      function belongsToUserBusiness() {
+        return request.auth != null && 
+               exists(/databases/$(database)/documents/businesses/$(request.auth.uid)) &&
+               resource.data.businessId == request.auth.uid;
+      }
+      
+      allow read: if belongsToUserBusiness();
+      allow create, update, delete: if belongsToUserBusiness();
+    }
+    
+    // Règles pour les configurations Viva Payments
+    match /vivaPaymentsConfigs/{configId} {
+      // Fonction pour vérifier si l'utilisateur est un SuperAdmin ou AccountManager
+      function isPaymentConfigAdmin() {
+        return request.auth != null && 
+               (get(/databases/$(database)/documents/adminUsers/$(request.auth.uid)).data.role == 'SuperAdmin' || 
+                get(/databases/$(database)/documents/adminUsers/$(request.auth.uid)).data.role == 'AccountManager');
+      }
+      
+      // Permettre la lecture et l'écriture uniquement aux admins autorisés
+      allow read: if isPaymentConfigAdmin();
+      allow create, update: if isPaymentConfigAdmin();
+      allow delete: if isPaymentConfigAdmin();
+    }
+    
+    // Règles pour les terminaux Viva
+    match /vivaTerminals/{terminalId} {
+      // Permettre la lecture et l'écriture uniquement aux admins qui ont accès à la config parente
+      allow read, write: if request.auth != null && 
+                          exists(/databases/$(database)/documents/vivaPaymentsConfigs/$(resource.data.configId)) &&
+                          (get(/databases/$(database)/documents/adminUsers/$(request.auth.uid)).data.role == 'SuperAdmin' || 
+                           get(/databases/$(database)/documents/adminUsers/$(request.auth.uid)).data.role == 'AccountManager');
+    }
+    
+    // Règles pour les logs d'audit des configurations Viva
+    match /vivaConfigAuditLogs/{logId} {
+      // Seuls les SuperAdmin peuvent lire les logs d'audit
+      allow read: if request.auth != null && 
+                  get(/databases/$(database)/documents/adminUsers/$(request.auth.uid)).data.role == 'SuperAdmin';
+      // Les logs sont créés automatiquement et ne peuvent pas être modifiés
+      allow create: if request.auth != null;
+      allow update, delete: if false;
+    }
+    
+    // Règles pour les produits marketing (collection 'produits')
+    match /produits/{productId} {
+      // Permettre l'accès à tous les utilisateurs authentifiés pour le moment
+      // Vous pourrez restreindre plus tard selon vos besoins
+      allow read, write: if request.auth != null;
+    }
+    
+    // Les règles pour adminUsers et settings ont été restaurées à l'état d'origine
+  }
+}

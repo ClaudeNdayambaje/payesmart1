@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Simple</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        .btn { display: inline-block; background: #4a56e2; color: white; padding: 10px 20px; border-radius: 4px; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Test de l'application PayeSmart</h1>
+        <p>Si vous voyez cette page, le serveur web fonctionne correctement.</p>
+        
+        <h2>Tests de navigation</h2>
+        <div>
+            <a href="/" class="btn">Page d'accueil</a>
+            <a href="/#/auth" class="btn">Page d'authentification</a>
+            <a href="/#/admin/login" class="btn">Page d'administration</a>
+        </div>
+        
+        <h2>Diagnostic</h2>
+        <div id="diagnostic"></div>
+    </div>
+
+    <script>
+        // Script de diagnostic simple
+        const diagnosticDiv = document.getElementById('diagnostic');
+        
+        function runDiagnostic() {
+            const tests = [
+                { name: "React disponible", test: () => typeof React !== 'undefined' },
+                { name: "ReactDOM disponible", test: () => typeof ReactDOM !== 'undefined' },
+                { name: "Élément racine présent", test: () => document.getElementById('root') !== null }
+            ];
+            
+            let results = '<ul>';
+            tests.forEach(test => {
+                try {
+                    const passed = test.test();
+                    results += `<li>${test.name}: ${passed ? '✅ Réussi' : '❌ Échoué'}</li>`;
+                } catch (e) {
+                    results += `<li>${test.name}: ❌ Erreur - ${e.message}</li>`;
+                }
+            });
+            results += '</ul>';
+            
+            diagnosticDiv.innerHTML = results;
+        }
+        
+        // Exécuter le diagnostic après chargement
+        window.addEventListener('load', runDiagnostic);
+    </script>
+</body>
+</html>

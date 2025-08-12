@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Producten | PayeSmart - Uw slimme kassabeheeroplossing</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/pricing-enhancements.css">
+    <link rel="stylesheet" href="../css/lucide-icons.css">
+    <link rel="stylesheet" href="../css/button-enhancements.css">
+    <link rel="stylesheet" href="../css/navigation-unified.css?v=1.8">
+    <link rel="stylesheet" href="../css/dark-theme-produits.css">
+    <link rel="stylesheet" href="../css/menu-harmonization.css">
+    <link rel="stylesheet" href="../css/produit-buttons.css">
+    <link rel="stylesheet" href="../css/responsive-enhancements.css">
+    <link rel="stylesheet" href="../css/custom-colors.css">
+    <link rel="stylesheet" href="../css/navigation-buttons-global.css">
+    <link rel="stylesheet" href="../css/dynamic-products.css">
+    <!-- Le fichier footer.css a été migré vers navigation-unified.css v=1.7 -->
+    <!-- language-selector.css intégré dans navigation-unified.css v1.8 -->
+    <link rel="stylesheet" href="../css/solutions-hero-spacing.css?v=1.0">
+    <!-- Script fix-links.js désactivé pour éviter les changements de langue automatiques -->
+    <script src="../js/language-persistence.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Responsivité uniquement (préserve le design original) -->
+    <link rel="stylesheet" href="../css/responsive-only.css">
+    <link rel="stylesheet" href="../css/header-scroll-fix.css">
+    <link rel="stylesheet" href="../css/z-index-fix.css">
+    <!-- La gestion du header est déjà prise en charge par navigation-unified.css -->
+    <link rel="stylesheet" href="../css/navigation-spacing-fix.css">
+    
+    <style>
+        /* Stijlen voor videoknoppen */
+        .btn-video {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #2a2a2a !important; 
+            color: white !important;
+            border-radius: 8px;
+            padding: 12px 20px;
+            margin: 10px 0;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-weight: 500;
+            box-shadow: none;
+        }
+        
+        /* Uitschakelen van overgangen om synchronisatie-effecten te voorkomen */
+        .produit-simple img.produit-image {
+            opacity: 1 !important;
+            transition: none !important;
+            animation: none !important;
+        }
+        
+        /* Stijlen voor de videomodal */
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .video-container {
+            position: relative;
+            width: 80%;
+            max-width: 1200px;
+        }
+        
+        /* Style pour l'overlay de chargement discret */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.2);
+            z-index: 9998;
+            display: none;
+        }
+        
+        .loading-spinner-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #ff8c00;
+            font-size: 2rem;
+        }
+        
+        /* Version rectangle arrondi avec fond gris */
+        .btn-video.alt {
+            background-color: #3c3c3c !important;
+            padding: 15px 25px;
+            border-radius: 12px;
+        }
+        
+        .btn-video:hover {
+            background-color: #222222 !important;
+        }
+        
+        .btn-video i {
+            color: #ff8c00;
+            font-size: 20px;
+            margin-right: 10px;
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            text-align: center;
+            line-height: 20px;
+            border-radius: 50%;
+        }
+        
+        /* Styles pour la modale vidéo */
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .video-container {
+            position: relative;
+            width: 80%;
+            height: 80%;
+            max-width: 1200px;
+        }
+        
+        .video-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            background: transparent;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://unpkg.com/lucide@0.344.0/dist/umd/lucide.min.js"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <a href="index.html"><img src="../img/logo.png" alt="PayeSmart Logo"></a>
+                </div>
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html">Startpagina</a></li>
+                        <li><a href="solutions.html" class="active">Producten</a></li>
+                        <li><a href="nos-accessoires.html">Accessoires</a></li>
+                        <li><a href="about.html">Over ons</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="header-buttons">
+                    <div class="language-selector">
+                        <button class="language-button">NL <i class="fas fa-chevron-down"></i></button>
+                        <div class="language-dropdown">
+                            <a href="../fr/solutions.html" class="language-option" data-lang="fr">Français</a>
+                            <a href="solutions.html" class="language-option active" data-lang="nl">Nederlands</a>
+                            <a href="../en/solutions.html" class="language-option" data-lang="en">English</a>
+                        </div>
+                    </div>
+                    <a href="../#/auth?register=true" class="btn btn-primary">Gratis proefversie</a>
+                    <a href="../#/auth" class="btn btn-primary">Inloggen</a>
+                </div>
+                <button class="mobile-menu-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="produits-hero">
+            <div class="container">
+                <div class="produits-hero-content">
+                    <h1>Onze SUNMI Oplossingen</h1>
+                    <div class="hero-divider"></div>
+
+                    <p class="subtitle">
+                        Ontdek ons complete assortiment SUNMI producten ontworpen om aan al uw commerciële beheersbehoeften te voldoen.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    <!-- Produits Section -->
+    <section class="produits-section">
+            <div class="container">
+                <div class="produits-grid">
+                    <!-- De producten worden dynamisch geladen vanuit Firebase -->
+                    <div class="produits-loading" id="productsLoading">
+                        <div class="loading-spinner"></div>
+                        <p>Producten laden...</p>
+                    </div>
+                </div>
+                
+                <!-- Section d'appel à l'action -->
+                <div class="cta-section">
+                    <h3>Wilt u meer weten over onze SUNMI oplossingen?</h3>
+                    <p>Onze experts staan klaar om u deze producten te presenteren en u te helpen bij het kiezen van de juiste oplossing voor uw winkel.</p>
+                    <a href="#contact" class="btn-cta">Neem contact op</a>
+                </div>
+            </div>
+        </section>
+
+
+
+
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <!-- Logo et information principale -->
+            <div class="footer-main">
+                <div class="footer-logo">
+                    
+                    
+                </div>
+                
+                <!-- Icônes de réseaux sociaux -->
+                <div class="footer-social">
+                    <a href="#" class="social-icon" aria-label="Facebook">
+                        <i data-lucide="facebook"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Twitter">
+                        <i data-lucide="twitter"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="LinkedIn">
+                        <i data-lucide="linkedin"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Instagram">
+                        <i data-lucide="instagram"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Liens organisés -->
+            <div class="footer-links-grid">
+                <div class="footer-links-column">
+                    <h4>Navigatie</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">Over ons</a></li>
+                        <li><a href="index.html#features">Functies</a></li>
+                        <li><a href="index.html#pricing">Prijzen</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-column">
+                    <h4>Bedrijf</h4>
+                    <ul>
+                        <li><a href="about.html">Over ons</a></li>
+                        <li><a href="about.html#team">Ons team</a></li>
+                        <li><a href="about.html#values">Onze waarden</a></li>
+                        <li><a href="#">Carrières</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-column">
+                    <h4>Bronnen</h4>
+                    <ul>
+                        <li><a href="#">Helpcentrum</a></li>
+                        <li><a href="#">Documentatie</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Webinars</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-column">
+                    <h4>Juridisch</h4>
+                    <ul>
+                        <li><a href="#">Voorwaarden</a></li>
+                        <li><a href="#">Privacy</a></li>
+                        <li><a href="#">Compliance</a></li>
+                        <li><a href="#">Wettelijke vermeldingen</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Ligne de séparation -->
+            <hr class="footer-divider">
+            
+            <!-- Accès et copyright -->
+            <div class="footer-bottom">
+                <div class="footer-access">
+                    <a href="http://localhost:3001/#/auth" class="access-link">Klantlogin</a>
+                    <span class="separator">|</span>
+                    <a href="http://localhost:3001/#/admin/login" class="access-link admin-link">Administratieruimte</a>
+                </div>
+                <p class="copyright">&copy; 2025 PayeSmart. Alle rechten voorbehouden.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Video Modal -->
+    <div class="video-modal" id="videoModal">
+        <div class="video-container">
+            <button class="video-close" id="closeVideoModal"><i class="fas fa-times"></i></button>
+            <div id="videoWrapper" style="width:100%; height:80vh; background:#000;">
+                <!-- Le contenu sera inséré ici par JavaScript -->
+            </div>
+            <!-- Message pour activer le son -->
+            <div id="unmuteTip" style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.7); color: white; padding: 10px 20px; border-radius: 5px; display: none; z-index: 1000;">
+                <i class="fas fa-volume-up" style="margin-right: 5px;"></i> Klik om geluid te activeren
+            </div>
+            <!-- Message de débogage vidéo -->
+            <div id="videoDebugElement" style="position: absolute; top: 10px; right: 50px; background: rgba(0,0,0,0.5); color: white; padding: 5px 10px; border-radius: 3px; font-size: 12px; display: none;">
+                Info: Laden...
+            </div>
+        </div>
+    </div>
+
+    <!-- Script pour gérer la modale vidéo -->
+    <script>
+        // Sélection des éléments
+        const videoModal = document.getElementById('videoModal');
+        const videoWrapper = document.getElementById('videoWrapper');
+        const closeVideoModal = document.getElementById('closeVideoModal');
+        
+        // Événement pour fermer la modale
+        closeVideoModal.addEventListener('click', function() {
+            videoModal.style.display = 'none';
+            // Arrêter la vidéo si elle existe
+            const videoPlayer = document.getElementById('videoPlayer');
+            if (videoPlayer) {
+                videoPlayer.pause();
+            }
+        });
+        
+        // Fermer la modale quand on clique en dehors
+        videoModal.addEventListener('click', function(event) {
+            if (event.target === videoModal) {
+                videoModal.style.display = 'none';
+                // Arrêter la vidéo si elle existe
+                const videoPlayer = document.getElementById('videoPlayer');
+                if (videoPlayer) {
+                    videoPlayer.pause();
+                }
+            }
+        });
+        
+        // Le code de gestion vidéo a été déplacé dans video-modal-handler.js
+    </script>
+    
+    <!-- Scripts Firebase pour chargement des produits -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+    
+    <!-- Scripts d'initialisation et fonctionnalités -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/lucide-init.js"></script>
+    <script src="../js/solutions.js"></script>
+
+    
+    <!-- Script pour charger les produits marketing -->
+    <script src="../js/script.js"></script>
+    <script src="../js/nav-mobile.js"></script>
+    <script src="../js/toggleDarkMode.js"></script>
+    <!-- Firebase SDK déjà chargé plus haut -->
+    <!-- Script d'initialisation Firebase -->
+    <script src="../js/nl-translations.js"></script>
+    <script src="../js/firebase-init.js"></script>
+    <script src="../js/produits-display.js"></script>
+    
+    <!-- Script de gestion des modales vidéo -->
+    <script src="../js/video-modal-handler.js"></script>
+
+    <!-- Script de correction des liens d'authentification -->
+    <script src="../js/fix-auth-links.js"></script>
+</body>
+</html>

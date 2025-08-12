@@ -1,0 +1,51 @@
+/* 
+ * CORRECTION GLOBALE DES BOUTONS
+ * Suppression des flèches sur tous les boutons du site
+ * Date: Août 2025
+ */
+
+/* 1. Suppression des flèches sur les boutons de navigation */
+header .btn-primary::after,
+.header .btn-primary::after,
+header .header-buttons .btn::after,
+.header .header-buttons .btn::after,
+.mobile-nav-buttons .btn::after,
+nav .btn::after {
+    content: none !important;
+}
+
+/* 2. Suppression des flèches Font Awesome dans les boutons */
+.btn-primary i.fas.fa-arrow-right,
+.btn-secondary i.fas.fa-arrow-right,
+.btn i.fas.fa-arrow-right,
+.assistance-link i.fas.fa-arrow-right {
+    display: none !important;
+}
+
+/* 3. Suppression des flèches sur tous les types de boutons */
+.hardware-btn::after,
+.btn::after,
+.btn-primary::after,
+.btn-secondary::after,
+a[href="contact.html"].btn::after,
+a[href="about.html"].btn::after,
+a[href="#pricing"].btn::after,
+a[href="#features"].btn::after,
+a[href*="support"]::after,
+a.btn::after {
+    content: none !important;
+}
+
+/* 4. Assurer que la largeur des boutons est correcte sans les flèches */
+header .btn-primary,
+.header .btn-primary,
+header .header-buttons .btn,
+.header .header-buttons .btn,
+.mobile-nav-buttons .btn,
+nav .btn,
+.hardware-btn,
+.btn-primary,
+.btn-secondary,
+a.btn {
+    padding-right: 20px !important;
+}

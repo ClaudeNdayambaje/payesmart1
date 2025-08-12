@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Démo des Dialogues Améliorés</title>
+  <style>
+  /* Style pour améliorer les dialogues natifs dans le navigateur */
+
+  /* Styles pour les dialogues (Surcharge les styles natifs) */
+  dialog {
+    background-color: var(--theme-bg-secondary, #2a2b30);
+    color: #fff;
+    border: 1px solid var(--theme-color-dark, #313236);
+    border-radius: 12px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    padding: 0;
+    max-width: 90%;
+    width: 450px;
+    animation: fadeIn 0.2s ease-out, scaleIn 0.2s ease-out;
+  }
+
+  dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    animation: fadeIn 0.2s ease-out;
+  }
+
+  dialog .dialog-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  dialog .dialog-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    margin: 0;
+  }
+
+  dialog .dialog-body {
+    padding: 20px;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  dialog .dialog-footer {
+    padding: 16px 20px;
+    background-color: var(--theme-bg-primary, #23272f);
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  dialog .dialog-cancel-btn {
+    padding: 10px 16px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  dialog .dialog-cancel-btn:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-1px);
+  }
+
+  dialog .dialog-confirm-btn {
+    padding: 10px 16px;
+    background-color: var(--theme-color-danger, #ef4444);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 2px 5px rgba(239, 68, 68, 0.3);
+  }
+
+  dialog .dialog-confirm-btn:hover {
+    background-color: var(--theme-color-danger-dark, #dc2626);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(239, 68, 68, 0.3);
+  }
+
+  /* Personnaliser les alertes */
+  .custom-alert {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    max-width: 400px;
+    background-color: var(--theme-bg-secondary, #2a2b30);
+    color: #fff;
+    border-radius: 8px;
+    padding: 16px 20px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    z-index: 9999;
+    border-left: 4px solid var(--theme-color, #4f46e5);
+    animation: slideInAlert 0.3s ease-out;
+  }
+
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes scaleIn {
+    from { transform: scale(0.95); }
+    to { transform: scale(1); }
+  }
+
+  @keyframes slideInAlert {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  </style>
+  <style>
+    :root {
+      --theme-bg-primary: #1a1d2b;
+      --theme-bg-secondary: #262a3b;
+      --theme-color: #4f46e5;
+      --theme-color-dark: #3730a3;
+      --theme-color-danger: #ef4444;
+      --theme-color-danger-dark: #dc2626;
+    }
+    
+    body {
+      background-color: var(--theme-bg-primary);
+      color: white;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .container {
+      width: 90%;
+      max-width: 800px;
+      padding: 2rem;
+      background-color: var(--theme-bg-secondary);
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: white;
+    }
+    
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      justify-content: center;
+    }
+    
+    button {
+      padding: 10px 16px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.2s;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    
+    .primary-button {
+      background-color: var(--theme-color);
+      color: white;
+    }
+    
+    .primary-button:hover {
+      background-color: var(--theme-color-dark);
+      transform: translateY(-2px);
+    }
+    
+    .danger-button {
+      background-color: var(--theme-color-danger);
+      color: white;
+    }
+    
+    .danger-button:hover {
+      background-color: var(--theme-color-danger-dark);
+      transform: translateY(-2px);
+    }
+    
+    .result {
+      margin-top: 2rem;
+      padding: 1rem;
+      background-color: rgba(0,0,0,0.2);
+      border-radius: 6px;
+      min-height: 3rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Démo des Boîtes de Dialogue Améliorées</h1>
+    
+    <div class="button-group">
+      <button class="primary-button" id="showDialogBtn">Afficher le Dialog HTML</button>
+      <button class="danger-button" id="showAlertBtn">Afficher l'Alerte Personnalisée</button>
+      <button class="primary-button" id="showConfirmBtn">Afficher la Confirmation</button>
+    </div>
+    
+    <div class="result" id="result">
+      Le résultat s'affichera ici...
+    </div>
+  </div>
+  
+  <dialog id="customDialog">
+    <div class="dialog-header">
+      <h3 class="dialog-title">Dialogue Personnalisé</h3>
+    </div>
+    <div class="dialog-body">
+      <p>Voici un exemple de dialogue personnalisé avec nos nouveaux styles CSS. Ce dialogue est plus esthétique et cohérent avec le design de notre application.</p>
+    </div>
+    <div class="dialog-footer">
+      <button class="dialog-cancel-btn" id="cancelBtn">Annuler</button>
+      <button class="dialog-confirm-btn" id="confirmBtn">Confirmer</button>
+    </div>
+  </dialog>
+  
+  <script>
+    // Éléments DOM
+    const showDialogBtn = document.getElementById('showDialogBtn');
+    const showAlertBtn = document.getElementById('showAlertBtn');
+    const showConfirmBtn = document.getElementById('showConfirmBtn');
+    const customDialog = document.getElementById('customDialog');
+    const cancelBtn = document.getElementById('cancelBtn');
+    const confirmBtn = document.getElementById('confirmBtn');
+    const result = document.getElementById('result');
+    
+    // Gérer l'affichage du dialogue HTML
+    showDialogBtn.addEventListener('click', () => {
+      customDialog.showModal();
+    });
+    
+    // Fermer le dialogue
+    cancelBtn.addEventListener('click', () => {
+      customDialog.close();
+      result.textContent = 'Dialogue fermé avec le bouton Annuler';
+    });
+    
+    // Confirmer le dialogue
+    confirmBtn.addEventListener('click', () => {
+      customDialog.close();
+      result.textContent = 'Dialogue confirmé avec le bouton Confirmer';
+    });
+    
+    // Afficher une alerte personnalisée
+    showAlertBtn.addEventListener('click', () => {
+      // Créer et ajouter l'alerte
+      const alert = document.createElement('div');
+      alert.className = 'custom-alert';
+      alert.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+            <line x1="12" y1="9" x2="12" y2="13"></line>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+          </svg>
+          <div>
+            <strong>Attention!</strong>
+            <p style="margin: 5px 0 0 0;">Ceci est une alerte personnalisée avec animation.</p>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(alert);
+      
+      // Définir une durée et supprimer l'alerte
+      setTimeout(() => {
+        alert.style.opacity = '0';
+        alert.style.transform = 'translateX(100%)';
+        alert.style.transition = 'all 0.3s ease-out';
+        
+        setTimeout(() => {
+          document.body.removeChild(alert);
+        }, 300);
+      }, 3000);
+      
+      result.textContent = 'Alerte personnalisée affichée (disparaît après 3 secondes)';
+    });
+    
+    // Afficher une confirmation
+    showConfirmBtn.addEventListener('click', () => {
+      if (confirm('Voulez-vous vraiment continuer?')) {
+        result.textContent = 'Confirmation acceptée via confirm() natif - vous verrez le style personnalisé';
+      } else {
+        result.textContent = 'Confirmation rejetée via confirm() natif';
+      }
+    });
+  </script>
+</body>
+</html>

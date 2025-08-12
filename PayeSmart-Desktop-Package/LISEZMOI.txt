@@ -1,0 +1,20 @@
+=== PAYESMART DESKTOP - GUIDE D'INSTALLATION ===
+
+Ce package contient l'application PayeSmart Desktop, qui vous permet d'utiliser PayeSmart comme une application native sur votre Mac.
+
+== INSTRUCTIONS D'INSTALLATION ==
+
+1. Double-cliquez sur "installer.command" pour lancer l'installation
+2. Suivez les instructions à l'écran
+3. L'application sera installée dans votre dossier Applications
+
+== REMARQUES IMPORTANTES ==
+
+- Lors du premier lancement, vous devrez peut-être autoriser l'application dans Préférences Système > Sécurité et confidentialité
+- PayeSmart Desktop nécessite Google Chrome pour fonctionner
+
+== SUPPORT ==
+
+Si vous rencontrez des problèmes lors de l'installation ou de l'utilisation de PayeSmart Desktop, veuillez contacter le support technique.
+
+=== MERCI D'UTILISER PAYESMART DESKTOP ===

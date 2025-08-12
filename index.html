@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/popup-styles.css" />
+    <title>PayeSmart</title>
+    
+    <!-- Styles de base pour l'application -->
+    <style>
+      body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    
+    <!-- Ajouter axios depuis un CDN pour résoudre le problème de dépendance externe -->
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.4.0/dist/axios.min.js"></script>
+    
+    <script>
+      // Désactiver temporairement la redirection automatique
+      window.preventRedirect = true;
+      
+      // Rendre axios disponible globalement
+      window.axios = axios;
+      window.axiosModule = {
+        default: axios,
+        ...axios
+      };
+    </script>
+  </head>
+  <body>
+    <!-- Conteneur principal pour l'application -->
+    <div id="root"></div>
+    
+    <!-- Script de chargement de l'application React -->
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

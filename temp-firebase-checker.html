@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Vérificateur Firebase</title>
+  <script type="module">
+    // Import des fonctions Firebase
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
+    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js";
+
+    // Configuration Firebase à remplacer par la configuration réelle de l'application
+    const firebaseConfig = {
+      apiKey: "AIzaSyDVZJ6xqvzwnNQ0Qj2DG8OYKgZdRxNGKGY",
+      authDomain: "payesmart-6e1a0.firebaseapp.com",
+      projectId: "payesmart-6e1a0",
+      storageBucket: "payesmart-6e1a0.appspot.com",
+      messagingSenderId: "595583757267",
+      appId: "1:595583757267:web:8a3db1ed1c4d9b23bf3fdf"
+    };
+
+    // Initialisation de Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Fonction pour vérifier une collection
+    async function checkCollection(collectionName) {
+      try {
+        const results = document.getElementById('results');
+        
+        // Ajouter un titre pour la collection
+        const title = document.createElement('h2');
+        title.textContent = `Collection: ${collectionName}`;
+        results.appendChild(title);
+        
+        // Récupérer les données
+        const querySnapshot = await getDocs(collection(db, collectionName));
+        
+        if (querySnapshot.empty) {
+          const emptyMessage = document.createElement('p');
+          emptyMessage.textContent = `La collection '${collectionName}' est vide.`;
+          results.appendChild(emptyMessage);
+          return;
+        }
+        
+        // Créer un tableau pour les données
+        const data = [];
+        querySnapshot.forEach((doc) => {
+          data.push({
+            id: doc.id,
+            ...doc.data()
+          });
+        });
+        
+        // Afficher le nombre de documents
+        const countMessage = document.createElement('p');
+        countMessage.textContent = `${data.length} document(s) trouvé(s)`;
+        results.appendChild(countMessage);
+        
+        // Afficher les données formatées
+        const pre = document.createElement('pre');
+        pre.style.backgroundColor = '#f5f5f5';
+        pre.style.padding = '10px';
+        pre.style.borderRadius = '5px';
+        pre.style.overflow = 'auto';
+        pre.style.maxHeight = '300px';
+        pre.style.marginBottom = '30px';
+        pre.textContent = JSON.stringify(data, (key, value) => {
+          // Formater les dates Timestamp
+          if (value && value.seconds !== undefined && value.nanoseconds !== undefined) {
+            return new Date(value.seconds * 1000).toISOString();
+          }
+          return value;
+        }, 2);
+        results.appendChild(pre);
+      } catch (error) {
+        console.error(`Erreur lors de la vérification de '${collectionName}':`, error);
+        const errorMsg = document.createElement('p');
+        errorMsg.style.color = 'red';
+        errorMsg.textContent = `Erreur lors de la vérification de '${collectionName}': ${error.message}`;
+        document.getElementById('results').appendChild(errorMsg);
+      }
+    }
+
+    // Attendre que le DOM soit chargé
+    document.addEventListener('DOMContentLoaded', () => {
+      // Récupérer le bouton et ajouter un événement
+      document.getElementById('checkButton').addEventListener('click', async () => {
+        // Effacer les résultats précédents
+        document.getElementById('results').innerHTML = '';
+        
+        // Afficher un message de chargement
+        const loadingMsg = document.createElement('p');
+        loadingMsg.id = 'loading';
+        loadingMsg.textContent = 'Chargement des données...';
+        document.getElementById('results').appendChild(loadingMsg);
+        
+        // Collections à vérifier
+        const collections = [
+          'subscriptions',
+          'subscription_plans',
+          'clients',
+          'businesses'
+        ];
+        
+        // Vérifier chaque collection
+        for (const collectionName of collections) {
+          await checkCollection(collectionName);
+        }
+        
+        // Supprimer le message de chargement
+        document.getElementById('loading').remove();
+      });
+    });
+  </script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    h1 {
+      color: #2a3f9d;
+    }
+    h2 {
+      color: #3f51b5;
+      margin-top: 30px;
+    }
+    button {
+      background-color: #3f51b5;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #303f9f;
+    }
+    pre {
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h1>Vérificateur de Collections Firebase</h1>
+  <p>Cet outil vous permet de vérifier le contenu des collections importantes de votre base de données Firebase.</p>
+  
+  <button id="checkButton">Vérifier les collections</button>
+  
+  <div id="results"></div>
+</body>
+</html>

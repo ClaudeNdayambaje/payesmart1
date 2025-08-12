@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nos Produits | PayeSmart - Votre solution de gestion de caisse intelligente</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/pricing-enhancements.css">
+    <link rel="stylesheet" href="css/lucide-icons.css">
+    <link rel="stylesheet" href="css/button-enhancements.css">
+    <link rel="stylesheet" href="css/produits.css">
+    <link rel="stylesheet" href="css/dark-theme-produits.css">
+    <link rel="stylesheet" href="css/produits-video-gallery.css">
+    <link rel="stylesheet" href="css/menu-harmonization.css">
+    <link rel="stylesheet" href="css/produit-simple.css">
+    <link rel="stylesheet" href="css/produit-buttons.css">
+    <link rel="stylesheet" href="css/responsive-enhancements.css">
+    <link rel="stylesheet" href="css/custom-colors.css">
+    <link rel="stylesheet" href="css/navigation-buttons-global.css">
+    <link rel="stylesheet" href="css/dynamic-products.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Responsivité uniquement (préserve le design original) -->
+    <link rel="stylesheet" href="css/responsive-only.css">
+    
+    <style>
+        /* Styles pour les boutons vidéo */
+        .btn-video {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #2a2a2a !important; 
+            color: white !important;
+            border-radius: 8px;
+            padding: 12px 20px;
+            margin: 10px 0;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-weight: 500;
+            box-shadow: none;
+        }
+        
+        /* Désactivation des transitions pour éviter les effets de synchronisation */
+        .produit-simple img.produit-image {
+            opacity: 1 !important;
+            transition: none !important;
+            animation: none !important;
+        }
+        
+        /* Style pour l'overlay de chargement discret */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.2);
+            z-index: 9998;
+            display: none;
+        }
+        
+        .loading-spinner-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #ff8c00;
+            font-size: 2rem;
+        }
+        
+        /* Version rectangle arrondi avec fond gris */
+        .btn-video.alt {
+            background-color: #3c3c3c !important;
+            padding: 15px 25px;
+            border-radius: 12px;
+        }
+        
+        .btn-video:hover {
+            background-color: #222222 !important;
+        }
+        
+        .btn-video i {
+            color: #ff8c00;
+            font-size: 20px;
+            margin-right: 10px;
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            text-align: center;
+            line-height: 20px;
+            border-radius: 50%;
+        }
+        
+        /* Styles pour la modale vidéo */
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .video-container {
+            position: relative;
+            width: 80%;
+            height: 80%;
+            max-width: 1200px;
+        }
+        
+        .video-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            background: transparent;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://unpkg.com/lucide@0.344.0/dist/umd/lucide.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <img src="img/logo.png" alt="PayeSmart Logo">
+                </div>
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="solutions.html" class="active">Nos Produits</a></li>
+                        <li><a href="nos-accessoires.html">Nos Accessoires</a></li>
+                        <li><a href="about.html">Qui sommes-nous</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="header-buttons">
+                    <a href="/#/auth?register=true" class="btn btn-primary">Essai gratuit</a>
+                    <a href="/#/auth" class="btn btn-primary">Se connecter</a>
+                </div>
+                <button class="mobile-menu-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="produits-hero">
+        <div class="container">
+            <div class="produits-hero-content">
+                <h1>Nos Solutions SUNMI</h1>
+                <div class="hero-divider"></div>
+
+                <p class="subtitle">
+                    Découvrez notre gamme complète de produits SUNMI conçus pour répondre à tous vos besoins de gestion commerciale.
+                </p>
+            </div>
+        </div>
+        <div class="hero-wave">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#252525" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,149.3C960,160,1056,160,1152,138.7C1248,117,1344,75,1392,53.3L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
+        </div>
+    </section>
+
+    <!-- Produits Section -->
+    <section class="produits-section">
+        <div class="container">
+            <!-- Titre et description supprimés sur demande -->
+            
+            <!-- Conteneur pour les produits dynamiques -->
+            <div class="produits-grid">
+                <!-- Les produits seront chargés dynamiquement depuis Firebase -->
+                <div class="produits-loading" id="productsLoading">
+                    <div class="loading-spinner"></div>
+                    <p>Chargement des produits...</p>
+                </div>
+            </div>
+            
+            <!-- Section d'appel à l'action -->
+            <div class="cta-section">
+                <h3>Vous souhaitez en savoir plus sur nos solutions SUNMI?</h3>
+                <p>Nos experts sont disponibles pour vous présenter ces produits et vous aider à choisir la solution adaptée à votre commerce.</p>
+                <a href="#contact" class="btn-cta">Contactez-nous</a>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <!-- Logo et information principale -->
+            <div class="footer-main">
+                <div class="footer-logo">
+                    <img src="img/logo.png" alt="PayeSmart Logo">
+                    <p>Votre solution de gestion de caisse intelligente</p>
+                </div>
+                
+                <!-- Icônes de réseaux sociaux -->
+                <div class="footer-social">
+                    <a href="#" class="social-icon" aria-label="Facebook">
+                        <i data-lucide="facebook"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Twitter">
+                        <i data-lucide="twitter"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="LinkedIn">
+                        <i data-lucide="linkedin"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Instagram">
+                        <i data-lucide="instagram"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Liens organisés -->
+            <div class="footer-links-grid">
+                <div class="footer-links-column">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="about.html">Qui sommes-nous</a></li>
+                        <li><a href="index.html#features">Fonctionnalités</a></li>
+                        <li><a href="index.html#pricing">Tarifs</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-column">
+                    <h4>Entreprise</h4>
+                    <ul>
+                        <li><a href="about.html">À propos</a></li>
+                        <li><a href="about.html#team">Notre équipe</a></li>
+                        <li><a href="about.html#values">Nos valeurs</a></li>
+                        <li><a href="#">Carrières</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-column">
+                    <h4>Ressources</h4>
+                    <ul>
+                        <li><a href="#">Centre d'aide</a></li>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Webinaires</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-column">
+                    <h4>Légal</h4>
+                    <ul>
+                        <li><a href="#">Conditions</a></li>
+                        <li><a href="#">Confidentialité</a></li>
+                        <li><a href="#">Conformité</a></li>
+                        <li><a href="#">Mentions légales</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Ligne de séparation -->
+            <hr class="footer-divider">
+            
+            <!-- Accès et copyright -->
+            <div class="footer-bottom">
+                <div class="footer-access">
+                    <a href="../index.html#/auth" class="access-link">Connexion client</a>
+                    <span class="separator">|</span>
+                    <a href="../index.html#/admin/login" class="access-link admin-link">Espace administration</a>
+                </div>
+                <p class="copyright">&copy; 2025 PayeSmart. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts Firebase pour chargement des produits -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+    
+    <!-- Initialisation Firebase -->
+    <script>
+        // Configuration Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyDGggSUlYtco_HYwVbZqCI4nhvO_J9F8zM",
+            authDomain: "logiciel-de-caisse-7e58e.firebaseapp.com",
+            projectId: "logiciel-de-caisse-7e58e",
+            storageBucket: "logiciel-de-caisse-7e58e.appspot.com",
+            messagingSenderId: "123456789",
+            appId: "1:396116291787:web:6fa2181a551f44b9bfa013"
+        };
+        // Initialiser Firebase
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+    </script>
+    
+    <script src="js/main.js"></script>
+    <script src="js/lucide-init.js"></script>
+    <script src="js/solutions.js"></script>
+    <script src="js/marketing-products.js"></script>
+    
+    <!-- Modale vidéo pour les produits -->
+    <div class="video-modal" id="videoModal">
+        <div class="video-container">
+            <button class="video-close" id="closeVideoModal"><i class="fas fa-times"></i></button>
+            <div id="videoWrapper" style="width:100%; height:80vh; background:#000;">
+                <!-- Le contenu sera inséré ici par JavaScript -->
+            </div>
+            <!-- Message pour activer le son -->
+            <div id="unmuteTip" style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.7); color: white; padding: 10px 20px; border-radius: 5px; display: none; z-index: 1000;">
+                <i class="fas fa-volume-up" style="margin-right: 5px;"></i> Cliquez pour activer le son
+            </div>
+            <!-- Message de débogage vidéo -->
+            <div id="videoDebugElement" style="position: absolute; top: 10px; right: 50px; background: rgba(0,0,0,0.5); color: white; padding: 5px 10px; border-radius: 3px; font-size: 12px; display: none;">
+                Info: Chargement...
+            </div>
+        </div>
+    </div>
+
+    <!-- Script pour gérer la modale vidéo -->
+    <script>
+        // Sélection des éléments
+        const videoModal = document.getElementById('videoModal');
+        const videoWrapper = document.getElementById('videoWrapper');
+        const closeVideoModal = document.getElementById('closeVideoModal');
+        
+        // Événement pour fermer la modale
+        closeVideoModal.addEventListener('click', function() {
+            videoModal.style.display = 'none';
+            // Arrêter la vidéo si elle existe
+            const videoPlayer = document.getElementById('videoPlayer');
+            if (videoPlayer) {
+                videoPlayer.pause();
+            }
+        });
+        
+        // Fermer la modale quand on clique en dehors
+        videoModal.addEventListener('click', function(event) {
+            if (event.target === videoModal) {
+                videoModal.style.display = 'none';
+                // Arrêter la vidéo si elle existe
+                const videoPlayer = document.getElementById('videoPlayer');
+                if (videoPlayer) {
+                    videoPlayer.pause();
+                }
+            }
+        });
+        
+        // Le code de gestion vidéo a été déplacé dans video-modal-handler.js
+    </script>
+
+    <!-- Script pour charger les produits marketing -->
+    <script src="js/script.js"></script>
+    <script src="js/nav-mobile.js"></script>
+    <script src="js/toggleDarkMode.js"></script>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+    <!-- Script d'initialisation Firebase -->
+    <script src="js/firebase-init.js"></script>
+    <!-- Script pour les produits marketing -->
+    <script src="js/marketing-products.js"></script>
+    
+    <!-- Script d'affichage des produits -->
+    <script src="js/produits-display.js"></script>
+    
+    <!-- Script de gestion des modales vidéo -->
+    <script src="js/video-modal-handler.js"></script>
+</body>
+</html>

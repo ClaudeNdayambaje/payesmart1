@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Plans d'abonnement</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f7f9;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2563eb;
+            margin-top: 0;
+        }
+        pre {
+            background-color: #f1f5f9;
+            padding: 15px;
+            border-radius: 4px;
+            overflow: auto;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .note {
+            background-color: #fffbeb;
+            border-left: 4px solid #f59e0b;
+            padding: 10px 15px;
+            margin-bottom: 20px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>API Plans d'abonnement PayeSmart</h1>
+        
+        <div class="note">
+            Cette page sert d'API pour synchroniser les plans d'abonnement entre l'application PayeSmart et le site marketing.
+            Le contenu JSON ci-dessous est automatiquement mis à jour lorsque des modifications sont apportées aux plans d'abonnement.
+        </div>
+        
+        <h2>Plans d'abonnement actuels :</h2>
+        <pre id="plans-data">{
+  "plans": [
+    {
+      "id": "pay-and-go",
+      "name": "Pay & Go",
+      "description": "Idéal pour les petites entreprises",
+      "price": 29.00,
+      "billingCycle": "monthly",
+      "currency": "EUR",
+      "features": [
+        "Gestion des employés",
+        "Multi-magasins",
+        "Gestion des produits",
+        "Gestion des promotions",
+        "Programme de fidélité",
+        "Analyses avancées",
+        "Tableau de bord basique",
+        "Support prioritaire",
+        "API personnalisable",
+        "Gestion des ventes"
+      ],
+      "active": true
+    },
+    {
+      "id": "print-and-go",
+      "name": "Print & Go",
+      "description": "Plan avec imprimante thermique",
+      "price": 79.00,
+      "billingCycle": "monthly",
+      "currency": "EUR",
+      "features": [
+        "Gestion des employés",
+        "Multi-magasins",
+        "Gestion des produits",
+        "Gestion des promotions",
+        "Programme de fidélité",
+        "Analyses avancées",
+        "Tableau de bord basique",
+        "Support prioritaire",
+        "API personnalisable",
+        "Gestion des ventes"
+      ],
+      "active": true,
+      "isPopular": true
+    },
+    {
+      "id": "all-in",
+      "name": "All-In",
+      "description": "Plan All-In",
+      "price": 149.00,
+      "billingCycle": "quarterly",
+      "currency": "EUR",
+      "features": [
+        "Gestion des employés",
+        "Multi-magasins",
+        "Gestion des produits",
+        "Gestion des promotions",
+        "Programme de fidélité",
+        "Analyses avancées",
+        "Tableau de bord basique",
+        "Support prioritaire",
+        "API personnalisable",
+        "Gestion des ventes"
+      ],
+      "active": true
+    }
+  ]
+}</pre>
+    </div>
+    
+    <script src="plans.js"></script>
+</body>
+</html>

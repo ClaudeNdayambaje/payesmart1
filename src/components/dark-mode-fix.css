@@ -1,0 +1,58 @@
+/* Styles pour corriger les problèmes de mode sombre */
+:root.dark {
+  --bg-white-override: var(--color-card-bg) !important;
+  --text-dark-override: var(--color-text) !important;
+  --border-dark-override: var(--color-border) !important;
+}
+
+/* Masquer les barres de défilement tout en conservant la fonctionnalité */
+.overflow-auto,
+.overflow-y-auto,
+.overflow-x-auto,
+#main-content-area,
+.flex-grow.overflow-auto {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+/* Masquer la barre de défilement pour Chrome, Safari et Opera */
+.overflow-auto::-webkit-scrollbar,
+.overflow-y-auto::-webkit-scrollbar,
+.overflow-x-auto::-webkit-scrollbar,
+#main-content-area::-webkit-scrollbar,
+.flex-grow.overflow-auto::-webkit-scrollbar {
+  display: none;
+}
+
+/* Sélecteurs génériques pour les tableaux */
+:root.dark tbody tr {
+  background-color: var(--color-card-bg) !important;
+}
+
+:root.dark tbody tr:nth-child(odd) {
+  background-color: var(--color-card-bg) !important;
+}
+
+:root.dark tbody tr:nth-child(even) {
+  background-color: var(--color-bg-muted) !important;
+}
+
+/* Correction des cellules de tableau */
+:root.dark td {
+  color: var(--color-text) !important;
+}
+
+/* Correction des en-têtes de tableau */
+:root.dark thead tr {
+  background-color: var(--color-background-alt) !important;
+}
+
+:root.dark th {
+  color: var(--color-text-secondary) !important;
+}
+
+/* Surcharge pour les badges de statut */
+:root.dark .status-badge {
+  background-color: var(--badge-bg, var(--color-bg-muted)) !important;
+  color: var(--badge-text, var(--color-text)) !important;
+}

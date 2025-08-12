@@ -1,0 +1,590 @@
+/* 
+ * SECTIONS DE CONTENU STYLES UNIFIÉS
+ * Fichier CSS unifié pour tous les styles de sections de contenu du site PayeSmart
+ * Regroupe et harmonise les styles des fichiers :
+ * - why-choose-section.css
+ * - key-features.css
+ * - download-section.css
+ * Version 1.0 - Août 2025
+ */
+
+/*==================================
+ * 1. SECTION POURQUOI NOUS CHOISIR
+ *==================================*/
+
+/* Section principale */
+.why-choose-section {
+    padding: 80px 0;
+    background-color: #f9fafb;
+    position: relative;
+}
+
+.dark-theme .why-choose-section {
+    background-color: var(--dark-bg);
+    color: #fff;
+}
+
+/* En-tête de la section */
+.why-choose-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.why-choose-header h2 {
+    font-size: 36px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.dark-theme .why-choose-header h2 {
+    color: #fff;
+}
+
+.why-choose-header p {
+    font-size: 18px;
+    color: #666;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.dark-theme .why-choose-header p {
+    color: #ccc;
+}
+
+/* Grille des raisons */
+.reasons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+/* Carte de raison */
+.reason-card {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    padding: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.reason-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+.dark-theme .reason-card {
+    background-color: var(--darker-bg);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Icône de la raison */
+.reason-icon {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(0, 123, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.reason-icon i {
+    font-size: 24px;
+    color: #007bff;
+}
+
+/* Titre et texte de la raison */
+.reason-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.dark-theme .reason-title {
+    color: #fff;
+}
+
+.reason-text {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.6;
+}
+
+.dark-theme .reason-text {
+    color: #aaa;
+}
+
+/* Badges et étiquettes */
+.reason-badge {
+    display: inline-block;
+    background-color: #e6f0ff;
+    color: #007bff;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    margin-top: 15px;
+}
+
+/*==================================
+ * 2. SECTION FONCTIONNALITÉS CLÉS
+ *==================================*/
+
+/* Section principale des fonctionnalités clés */
+.key-features-section {
+    padding: 80px 0;
+    background-color: #fff;
+}
+
+.dark-theme .key-features-section {
+    background-color: var(--darker-bg);
+}
+
+/* En-tête de la section */
+.key-features-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.key-features-header h2 {
+    font-size: 36px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.dark-theme .key-features-header h2 {
+    color: #fff;
+}
+
+.key-features-header p {
+    font-size: 18px;
+    color: #666;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.dark-theme .key-features-header p {
+    color: #ccc;
+}
+
+/* Conteneur des fonctionnalités */
+.key-features-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+
+/* Carte de fonctionnalité */
+.key-feature-card {
+    flex: 0 0 calc(33.333% - 30px);
+    max-width: calc(33.333% - 30px);
+    background-color: #f9fafb;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.key-feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+.dark-theme .key-feature-card {
+    background-color: var(--dark-bg);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Image de la fonctionnalité */
+.key-feature-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.key-feature-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.key-feature-card:hover .key-feature-image img {
+    transform: scale(1.05);
+}
+
+/* Contenu de la fonctionnalité */
+.key-feature-content {
+    padding: 25px;
+}
+
+.key-feature-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.dark-theme .key-feature-title {
+    color: #fff;
+}
+
+.key-feature-description {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.dark-theme .key-feature-description {
+    color: #aaa;
+}
+
+/* Lien en savoir plus */
+.key-feature-link {
+    display: inline-flex;
+    align-items: center;
+    color: #007bff;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.key-feature-link i {
+    margin-left: 5px;
+    transition: transform 0.2s ease;
+}
+
+.key-feature-link:hover {
+    color: #0056b3;
+}
+
+.key-feature-link:hover i {
+    transform: translateX(3px);
+}
+
+/* Version liste des fonctionnalités */
+.key-features-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.key-feature-item {
+    display: flex;
+    align-items: flex-start;
+    background-color: #f9fafb;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.key-feature-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.dark-theme .key-feature-item {
+    background-color: var(--dark-bg);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.key-feature-icon {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(0, 123, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    flex-shrink: 0;
+}
+
+.key-feature-icon i {
+    font-size: 20px;
+    color: #007bff;
+}
+
+.key-feature-text {
+    flex: 1;
+}
+
+.key-feature-text h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.dark-theme .key-feature-text h3 {
+    color: #fff;
+}
+
+.key-feature-text p {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.dark-theme .key-feature-text p {
+    color: #aaa;
+}
+
+/*==================================
+ * 3. SECTION DE TÉLÉCHARGEMENT
+ *==================================*/
+
+/* Section de téléchargement principale */
+.download-section {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #007bff, #00c6ff);
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Forme décorative en arrière-plan */
+.download-section::before {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    top: -150px;
+    right: -100px;
+}
+
+.download-section::after {
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    bottom: -100px;
+    left: -50px;
+}
+
+/* Conteneur de la section */
+.download-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    z-index: 2;
+    padding: 0 30px;
+}
+
+/* Contenu de la section */
+.download-content {
+    flex: 0 0 55%;
+}
+
+.download-title {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.download-description {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+/* Conteneur des boutons */
+.download-buttons {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* Boutons de téléchargement */
+.download-button {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    color: #333;
+    padding: 12px 25px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.download-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    background-color: #f9f9f9;
+}
+
+.download-button i {
+    font-size: 24px;
+    margin-right: 12px;
+}
+
+.download-button span {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.2;
+}
+
+.download-button .btn-small-text {
+    font-size: 12px;
+    font-weight: normal;
+    opacity: 0.7;
+}
+
+.download-button .btn-large-text {
+    font-size: 16px;
+}
+
+/* Image de la section */
+.download-image {
+    flex: 0 0 40%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.download-image img {
+    max-width: 100%;
+    height: auto;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.15));
+}
+
+/* Version sombre de la section */
+.download-section.dark {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+}
+
+/* Compteur de téléchargements */
+.download-stats {
+    display: flex;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.download-stat {
+    text-align: center;
+}
+
+.download-stat-number {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.download-stat-label {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+/*==================================
+ * 4. RESPONSIVE
+ *==================================*/
+
+/* Styles responsive */
+@media (max-width: 992px) {
+    /* Pourquoi nous choisir */
+    .reasons-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+    
+    /* Fonctionnalités clés */
+    .key-feature-card {
+        flex: 0 0 calc(50% - 30px);
+        max-width: calc(50% - 30px);
+    }
+    
+    /* Section de téléchargement */
+    .download-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .download-content {
+        flex: 0 0 100%;
+        margin-bottom: 40px;
+    }
+    
+    .download-buttons {
+        justify-content: center;
+    }
+    
+    .download-stats {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Pourquoi nous choisir */
+    .why-choose-header h2,
+    .key-features-header h2,
+    .download-title {
+        font-size: 30px;
+    }
+    
+    /* Fonctionnalités clés */
+    .key-feature-card {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    
+    /* Section de téléchargement */
+    .download-buttons {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .download-stats {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    /* Pourquoi nous choisir */
+    .reason-card {
+        padding: 20px;
+    }
+    
+    .reason-icon {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .reason-icon i {
+        font-size: 20px;
+    }
+    
+    /* Section de téléchargement */
+    .download-section {
+        padding: 60px 0;
+    }
+    
+    .download-title {
+        font-size: 26px;
+    }
+    
+    .download-description {
+        font-size: 16px;
+    }
+}

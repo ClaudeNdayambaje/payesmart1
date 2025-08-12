@@ -1,0 +1,32 @@
+/* Styles pour améliorer la visibilité du texte sur fond sombre */
+.produit-info p, 
+.section-description p, 
+.produit-content p, 
+.accessoire-description,
+.produit-description,
+.section-header p,
+.produits-hero .subtitle,
+.payment-intro,
+.payment-solutions p,
+.payment-solution-feature p,
+.payment-feature-card p,
+.payment-solutions-content p {
+    color: #ffffff !important;
+    font-weight: 400 !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+}
+
+h2, h3, h4, 
+.section-title, 
+.produit-title {
+    color: #ffffff !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5) !important;
+}
+
+.produit-tagline, 
+.section-subtitle {
+    color: #ff9933 !important;
+    font-weight: 500 !important;
+    filter: brightness(1.2) !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4) !important;
+}

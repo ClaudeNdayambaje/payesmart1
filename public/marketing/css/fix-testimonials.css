@@ -1,0 +1,169 @@
+/* 
+ * Design amélioré des cartes de témoignages
+ * Ce fichier doit être chargé après tous les autres CSS pour garantir la priorité
+ */
+
+/* Nettoyer complètement tous les arrière-plans */
+.testimonial-card,
+.testimonial-card::before,
+.testimonial-card::after,
+.testimonial-card *,
+.testimonial-card *::before,
+.testimonial-card *::after {
+    background-image: none !important;
+    background-color: transparent !important;
+    content: none !important;
+}
+
+/* Appliquer un fond uniforme et élégant aux cartes */
+.testimonials-section .testimonial-card {
+    position: relative;
+    z-index: 5;
+    overflow: hidden;
+    background: linear-gradient(145deg, rgba(45, 45, 50, 0.95), rgba(32, 32, 36, 0.98)) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 18px !important;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25), 0 5px 15px rgba(0, 0, 0, 0.15) !important;
+    padding: 35px 30px !important;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+
+/* Effet de survol amélioré */
+.testimonial-card:hover {
+    transform: translateY(-8px) !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 8px 20px rgba(0, 0, 0, 0.2) !important;
+    border-color: rgba(var(--primary-color-rgb), 0.25) !important;
+}
+
+/* Supprimer spécifiquement tous les textes parasites */
+.testimonial-name::before,
+.testimonial-name::after,
+.testimonial-content::before,
+.testimonial-content::after,
+.testimonial-card::before,
+.testimonial-card::after {
+    content: none !important;
+    display: none !important;
+}
+
+/* Supprimer spécifiquement le texte "VOC" et "201C" en arrière-plan */
+[class*="testimonial"] *::before,
+[class*="testimonial"] *::after {
+    content: none !important;
+}
+
+/* Avatar amélioré */
+.testimonial-avatar {
+    width: 85px !important;
+    height: 85px !important;
+    border-radius: 50% !important;
+    border: 3px solid var(--primary-color) !important;
+    overflow: hidden !important;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25) !important;
+    margin-bottom: 20px !important;
+    position: relative !important;
+}
+
+.testimonial-avatar img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+}
+
+/* Nom du témoin */
+.testimonial-name {
+    font-size: 20px !important;
+    font-weight: 600 !important;
+    color: #fff !important;
+    margin-bottom: 8px !important;
+    letter-spacing: 0.5px !important;
+}
+
+/* Étoiles */
+.testimonial-stars {
+    margin-bottom: 16px !important;
+}
+
+.testimonial-stars i {
+    color: var(--primary-color) !important;
+    font-size: 16px !important;
+    margin-right: 3px !important;
+    transition: transform 0.3s ease !important;
+}
+
+.testimonial-card:hover .testimonial-stars i {
+    transform: scale(1.2) !important;
+}
+
+/* Citation */
+.testimonial-quote {
+    position: relative !important;
+    padding: 10px 5px !important;
+}
+
+.testimonial-quote p {
+    font-size: 18px !important;
+    line-height: 1.6 !important;
+    font-style: italic !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    text-align: center !important;
+    margin: 0 !important;
+}
+
+/* Guillemets décoratifs */
+.testimonial-quote p::before {
+    content: '\201C' !important;
+    font-family: Georgia, serif !important;
+    color: var(--primary-color) !important;
+    font-size: 28px !important;
+    position: relative !important;
+    top: 5px !important;
+    margin-right: 4px !important;
+}
+
+.testimonial-quote p::after {
+    content: '\201D' !important;
+    font-family: Georgia, serif !important;
+    color: var(--primary-color) !important;
+    font-size: 28px !important;
+    position: relative !important;
+    top: 5px !important;
+    margin-left: 4px !important;
+}
+
+/* Espacement */
+.testimonials-grid {
+    gap: 30px !important;
+    padding: 20px 0 !important;
+}
+
+/* Animation */
+@keyframes subtle-glow {
+    0% { box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25), 0 5px 15px rgba(0, 0, 0, 0.15); }
+    50% { box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35), 0 5px 15px rgba(0, 0, 0, 0.25); }
+    100% { box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25), 0 5px 15px rgba(0, 0, 0, 0.15); }
+}
+
+.testimonial-card {
+    animation: subtle-glow 4s infinite alternate ease-in-out !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .testimonial-card {
+        padding: 25px 20px !important;
+    }
+    
+    .testimonial-avatar {
+        width: 70px !important;
+        height: 70px !important;
+    }
+    
+    .testimonial-name {
+        font-size: 18px !important;
+    }
+    
+    .testimonial-quote p {
+        font-size: 16px !important;
+    }
+}

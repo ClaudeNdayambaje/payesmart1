@@ -1,0 +1,57 @@
+/* 
+ * CORRECTION DE LA SECTION D'ASSISTANCE
+ * Résolution du problème d'interactivité dans la section d'assistance
+ * Date: Août 2025
+ */
+
+/* 1. Correction du z-index et de la position pour permettre l'interactivité */
+.assistance-section {
+    position: relative;
+    z-index: 1;
+}
+
+/* 2. Suppression de tout overlay ou couche qui pourrait bloquer l'interaction */
+.assistance-section::before,
+.assistance-section::after {
+    display: none !important;
+}
+
+/* 3. S'assurer que le contenu est interactif */
+.assistance-content,
+.assistance-actions,
+.assistance-features {
+    position: relative;
+    z-index: 5;
+}
+
+/* 4. Correction des boutons pour s'assurer qu'ils sont cliquables */
+.assistance-section .btn,
+.assistance-section .btn-primary,
+.assistance-section .assistance-link {
+    position: relative;
+    z-index: 10;
+    cursor: pointer;
+    pointer-events: auto !important;
+}
+
+/* 5. Éliminer les éventuelles couches transparentes bloquantes */
+.assistance-container {
+    position: relative;
+    z-index: 2;
+    pointer-events: auto !important;
+}
+
+/* 6. Assurer que l'image n'est pas positionnée par-dessus et ne bloque pas les clics */
+.assistance-image {
+    position: relative;
+    z-index: 1;
+}
+
+/* 7. Correction du bouton "Contacter le support" spécifiquement */
+.assistance-section a[href="contact.html"] {
+    display: inline-block;
+    position: relative;
+    z-index: 50;
+    pointer-events: auto !important;
+    cursor: pointer !important;
+}

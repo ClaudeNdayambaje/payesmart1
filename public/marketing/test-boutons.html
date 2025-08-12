@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Boutons | PayeSmart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            line-height: 1.6;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            text-decoration: none;
+            background-color: #4a90e2;
+            color: white;
+            border-radius: 5px;
+            margin: 10px;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background-color: #4a90e2;
+        }
+        .btn-admin {
+            background-color: #28a745;
+        }
+        h1 {
+            color: #333;
+        }
+        .buttons-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test des boutons de redirection</h1>
+    
+    <div class="buttons-section">
+        <h2>1. Liens HTML standards</h2>
+        <a href="/#/auth" class="btn btn-primary">Connexion (lien standard)</a>
+        <a href="/#/admin/login" class="btn btn-admin">Administration (lien standard)</a>
+    </div>
+
+    <div class="buttons-section">
+        <h2>2. Liens avec onclick et JavaScript void</h2>
+        <a href="javascript:void(0);" onclick="location.href='/#/auth'" class="btn btn-primary">Connexion (JavaScript void)</a>
+        <a href="javascript:void(0);" onclick="location.href='/#/admin/login'" class="btn btn-admin">Administration (JavaScript void)</a>
+    </div>
+
+    <div class="buttons-section">
+        <h2>3. Boutons avec onclick</h2>
+        <button onclick="location.href='/#/auth'" class="btn btn-primary">Connexion (bouton)</button>
+        <button onclick="location.href='/#/admin/login'" class="btn btn-admin">Administration (bouton)</button>
+    </div>
+
+    <div class="buttons-section">
+        <h2>4. Liens avec URL absolue</h2>
+        <a href="/#/auth" class="btn btn-primary admin-link">Connexion (URL absolue corrigée)</a>
+        <a href="/#/admin/login" class="btn btn-admin admin-link">Administration (URL absolue corrigée)</a>
+    </div>
+
+    <div class="buttons-section">
+        <h2>5. Fonctions JavaScript dédiées</h2>
+        <a href="javascript:void(0);" onclick="redirectAuth()" class="btn btn-primary">Connexion (fonction)</a>
+        <a href="javascript:void(0);" onclick="redirectAdmin()" class="btn btn-admin">Administration (fonction)</a>
+    </div>
+
+    <script>
+        function redirectAuth() {
+            console.log('Redirection vers Auth');
+            window.location.href = '/#/auth';
+        }
+        
+        function redirectAdmin() {
+            console.log('Redirection vers Admin');
+            window.location.href = '/#/admin/login';
+        }
+    </script>
+    <script src="js/dynamic-admin-links.js"></script>
+</body>
+</html>

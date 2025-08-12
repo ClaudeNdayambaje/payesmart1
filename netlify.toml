@@ -1,0 +1,42 @@
+[build]
+  command = "CI=false npm run build && cp _redirects dist/_redirects"
+  publish = "dist"
+  # Directive ignore désactivée pour permettre le déploiement
+  # ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF ./"
+
+[build.environment]
+  NODE_VERSION = "18"
+  # Flags pour améliorer la compatibilité des modules
+  NPM_FLAGS = "--legacy-peer-deps"
+  VITE_DISABLE_CHUNKS = "true"
+  VITE_EXTERNAL_DEPS = "[\"axios\"]"
+
+# Définition des redirections pour les applications SPA
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = true
+
+# Résoudre spécifiquement les problèmes de modules
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Content-Type = "application/javascript; charset=utf-8"
+
+[[headers]]
+  for = "/axios-patch.js"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+# Configuration de publication automatique
+[context.production]
+  publish = "dist"
+  command = "CI=false npm run build && cp _redirects dist/_redirects"
+
+[context.deploy-preview]
+  publish = "dist"
+  command = "CI=false npm run build && cp _redirects dist/_redirects"
+
+# Configuration optimisée pour Vite/React
+

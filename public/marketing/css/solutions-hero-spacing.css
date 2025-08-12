@@ -1,0 +1,27 @@
+/* 
+ * SOLUTIONS HERO SPACING
+ * Ajustements spécifiques pour corriger l'espacement 
+ * et les problèmes visuels de la section hero des pages produits
+ * Version 1.0 - Août 2025
+ */
+
+/* Ajustements pour éliminer l'effet de double barre */
+.produits-hero {
+    padding-top: 0; /* Supprime l'espace entre le header et la section hero */
+    margin-top: 0; /* Pas de marge supplémentaire */
+    border-top: none; /* Suppression de toute bordure */
+}
+
+/* Correction de la structure pour permettre l'arrière-plan personnalisé */
+/* Fond sombre supprimé pour permettre l'affichage de l'image d'arrière-plan */
+
+/* Adaptation du padding pour le contenu principal */
+.produits-hero-content {
+    padding-top: 100px; /* Ajoute de l'espace pour compenser le header */
+}
+
+/* S'assure que la barre de navigation est bien transparente au début */
+.header:not(.scrolled) {
+    background: transparent !important;
+    box-shadow: none;
+}

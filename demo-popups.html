@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Démonstration des Styles de Pop-up</title>
+  <style>
+    /* Variables de couleur */
+    :root {
+      --theme-bg-primary: #1a1d2b;
+      --theme-bg-secondary: #262a3b;
+      --theme-color: #4f46e5;
+      --theme-color-dark: #3730a3;
+      --theme-color-danger: #ef4444;
+      --theme-color-danger-dark: #dc2626;
+      --theme-color-border: rgba(255, 255, 255, 0.1);
+      --theme-color-text: #ffffff;
+      --theme-color-text-secondary: rgba(255, 255, 255, 0.8);
+    }
+    
+    /* Styles généraux */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--theme-bg-primary);
+      color: var(--theme-color-text);
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+    
+    .container {
+      max-width: 800px;
+      width: 100%;
+      background-color: var(--theme-bg-secondary);
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      padding: 30px;
+      margin-top: 50px;
+    }
+    
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: var(--theme-color-text);
+    }
+    
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+    
+    button {
+      padding: 12px 20px;
+      border-radius: 8px;
+      border: none;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 15px;
+    }
+    
+    .btn-primary {
+      background-color: var(--theme-color);
+      color: white;
+      box-shadow: 0 4px 6px rgba(79, 70, 229, 0.25);
+    }
+    
+    .btn-primary:hover {
+      background-color: var(--theme-color-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 10px rgba(79, 70, 229, 0.3);
+    }
+    
+    .btn-danger {
+      background-color: var(--theme-color-danger);
+      color: white;
+      box-shadow: 0 4px 6px rgba(239, 68, 68, 0.25);
+    }
+    
+    .btn-danger:hover {
+      background-color: var(--theme-color-danger-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 10px rgba(239, 68, 68, 0.3);
+    }
+    
+    .result-box {
+      background-color: rgba(0, 0, 0, 0.2);
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 20px;
+      min-height: 60px;
+    }
+    
+    /* Styles pour les dialogues modaux */
+    .custom-dialog {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      animation: fadeIn 0.2s ease-out;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .dialog-content {
+      background-color: var(--theme-bg-secondary);
+      border-radius: 12px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      width: 90%;
+      max-width: 500px;
+      animation: scaleIn 0.2s ease-out;
+      overflow: hidden;
+    }
+    
+    .dialog-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--theme-color-border);
+    }
+    
+    .dialog-title {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 600;
+    }
+    
+    .dialog-body {
+      padding: 20px;
+      color: var(--theme-color-text-secondary);
+    }
+    
+    .dialog-footer {
+      padding: 16px 20px;
+      background-color: var(--theme-bg-primary);
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      border-top: 1px solid var(--theme-color-border);
+    }
+    
+    .dialog-cancel {
+      padding: 10px 16px;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .dialog-cancel:hover {
+      background-color: rgba(255, 255, 255, 0.15);
+      transform: translateY(-1px);
+    }
+    
+    .dialog-confirm {
+      padding: 10px 16px;
+      background-color: var(--theme-color-danger);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 2px 5px rgba(239, 68, 68, 0.3);
+    }
+    
+    .dialog-confirm:hover {
+      background-color: var(--theme-color-danger-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(239, 68, 68, 0.3);
+    }
+    
+    /* Alerte personnalisée */
+    .custom-alert {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      max-width: 400px;
+      background-color: var(--theme-bg-secondary);
+      color: white;
+      border-radius: 8px;
+      padding: 16px 20px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      z-index: 1001;
+      border-left: 4px solid var(--theme-color);
+      animation: slideInAlert 0.3s ease-out;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    
+    .alert-icon {
+      flex-shrink: 0;
+    }
+    
+    .alert-content {
+      flex-grow: 1;
+    }
+    
+    .alert-title {
+      font-weight: 600;
+      margin: 0 0 5px 0;
+    }
+    
+    .alert-message {
+      margin: 0;
+      color: var(--theme-color-text-secondary);
+    }
+    
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes scaleIn {
+      from { transform: scale(0.95); }
+      to { transform: scale(1); }
+    }
+    
+    @keyframes slideInAlert {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    
+    @keyframes slideOutAlert {
+      from {
+        transform: translateX(0);
+        opacity: 1;
+      }
+      to {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Démonstration des Styles de Pop-up Améliorés</h1>
+    
+    <div class="button-group">
+      <button class="btn-primary" id="showModalBtn">Afficher Modal Personnalisé</button>
+      <button class="btn-danger" id="showAlertBtn">Afficher Alerte Personnalisée</button>
+      <button class="btn-primary" id="showConfirmBtn">Afficher Confirmation</button>
+    </div>
+    
+    <div class="result-box" id="resultBox">
+      Les résultats des interactions s'afficheront ici...
+    </div>
+  </div>
+  
+  <!-- Modal Personnalisé -->
+  <div class="custom-dialog" id="customDialog">
+    <div class="dialog-content">
+      <div class="dialog-header">
+        <h3 class="dialog-title">Confirmation Requise</h3>
+      </div>
+      <div class="dialog-body">
+        <p>Cette boîte de dialogue personnalisée remplace la fonction native window.confirm avec un design plus attrayant qui s'aligne sur le thème de l'application.</p>
+        <p>Voulez-vous confirmer cette action ?</p>
+      </div>
+      <div class="dialog-footer">
+        <button class="dialog-cancel" id="cancelBtn">Annuler</button>
+        <button class="dialog-confirm" id="confirmBtn">Confirmer</button>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Éléments DOM
+    const showModalBtn = document.getElementById('showModalBtn');
+    const showAlertBtn = document.getElementById('showAlertBtn');
+    const showConfirmBtn = document.getElementById('showConfirmBtn');
+    const customDialog = document.getElementById('customDialog');
+    const cancelBtn = document.getElementById('cancelBtn');
+    const confirmBtn = document.getElementById('confirmBtn');
+    const resultBox = document.getElementById('resultBox');
+    
+    // Afficher le modal personnalisé
+    showModalBtn.addEventListener('click', () => {
+      customDialog.style.display = 'flex';
+      resultBox.textContent = 'Modal affiché...';
+    });
+    
+    // Fermer le modal (Annuler)
+    cancelBtn.addEventListener('click', () => {
+      customDialog.style.display = 'none';
+      resultBox.textContent = 'Action annulée via le modal personnalisé.';
+    });
+    
+    // Confirmer l'action
+    confirmBtn.addEventListener('click', () => {
+      customDialog.style.display = 'none';
+      resultBox.textContent = 'Action confirmée via le modal personnalisé !';
+    });
+    
+    // Afficher une alerte personnalisée
+    showAlertBtn.addEventListener('click', () => {
+      // Créer l'élément d'alerte
+      const alertEl = document.createElement('div');
+      alertEl.className = 'custom-alert';
+      alertEl.innerHTML = `
+        <div class="alert-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+        </div>
+        <div class="alert-content">
+          <h4 class="alert-title">Information Importante</h4>
+          <p class="alert-message">Ceci est une alerte personnalisée qui disparaîtra automatiquement.</p>
+        </div>
+      `;
+      
+      // Ajouter au DOM
+      document.body.appendChild(alertEl);
+      
+      // Mettre à jour le résultat
+      resultBox.textContent = 'Alerte personnalisée affichée (disparaît après 5 secondes).';
+      
+      // Faire disparaître l'alerte
+      setTimeout(() => {
+        alertEl.style.animation = 'slideOutAlert 0.3s ease-out forwards';
+        setTimeout(() => {
+          document.body.removeChild(alertEl);
+        }, 300);
+      }, 5000);
+    });
+    
+    // Afficher une confirmation (pour montrer l'amélioration par rapport à window.confirm)
+    showConfirmBtn.addEventListener('click', () => {
+      // Utiliser la méthode confirm native pour démontrer la différence
+      const isConfirmed = confirm("Voulez-vous vraiment continuer avec cette action?");
+      
+      if (isConfirmed) {
+        resultBox.textContent = 'Action confirmée via window.confirm natif (moins attrayant).';
+      } else {
+        resultBox.textContent = 'Action annulée via window.confirm natif.';
+      }
+    });
+  </script>
+</body>
+</html>

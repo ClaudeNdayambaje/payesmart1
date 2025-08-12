@@ -1,0 +1,333 @@
+import dotenv from 'dotenv';
+import express from 'express';
+import cors from 'cors';
+import axios from 'axios';
+import { json, urlencoded } from 'express';
+import { v4 as uuidv4 } from 'uuid';
+
+dotenv.config();
+
+const app = express();
+const PORT = process.env.PORT || 3001;
+
+// Middleware
+app.use(cors());
+app.use(json());
+app.use(urlencoded({ extended: true }));
+
+// Configuration Viva Payments
+const clientId = process.env.REACT_APP_VIVA_CLIENT_ID || 'lkp3am5dr463j0jk78ydtm0s2m3wh9b0pud629yh0an3';
+const clientSecret = process.env.REACT_APP_VIVA_CLIENT_SECRET || 'kceX2ZU5DfYKsmSvsm5se2J988W';
+const isDevelopment = process.env.REACT_APP_ENV !== 'production';
+
+// URLs de base pour l'API Viva Payments
+const TOKEN_URL = isDevelopment
+  ? 'https://demo-accounts.vivapayments.com/connect/token'
+  : 'https://accounts.vivapayments.com/connect/token';
+
+const API_BASE_URL = isDevelopment
+  ? 'https://demo-api.vivapayments.com'
+  : 'https://api.vivapayments.com';
+
+// Fonction utilitaire pour obtenir un token d'accès
+async function getAccessToken() {
+  try {
+    const authString = `${clientId}:${clientSecret}`;
+    const authBase64 = Buffer.from(authString).toString('base64');
+    
+    const params = new URLSearchParams();
+    params.append('grant_type', 'client_credentials');
+    params.append('scope', 'urn:viva:payments:ecr:api');
+    
+    const response = await axios.post(TOKEN_URL, params, {
+      headers: { 
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': `Basic ${authBase64}`
+      },
+      timeout: 15000
+    });
+    
+    return response.data.access_token;
+  } catch (error) {
+    console.error('Erreur lors de l\'obtention du token:', error.message);
+    throw error;
+  }
+}
+
+// 1. Route pour obtenir un token d'accès
+app.post('/api/token', async (req, res) => {
+  try {
+    console.log('Demande de token reçue...');
+    const token = await getAccessToken();
+    console.log('Token obtenu avec succès');
+    res.json({ access_token: token });
+  } catch (error) {
+    console.error('Erreur lors de l\'obtention du token:', error);
+    
+    if (error.response) {
+      res.status(error.response.status).json(error.response.data);
+    } else {
+      res.status(500).json({ error: 'Erreur de connexion au serveur Viva Payments' });
+    }
+  }
+});
+
+// 2. Route pour rechercher les terminaux disponibles
+app.post('/api/terminals', async (req, res) => {
+  try {
+    const token = await getAccessToken();
+    
+    const response = await axios.post(`${API_BASE_URL}/ecr/v1/devices:search`, {
+      statusId: 1  // Status "Live" pour les terminaux actifs
+    }, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
+    
+    res.json(response.data);
+  } catch (error) {
+    console.error('Erreur lors de la recherche des terminaux:', error);
+    
+    if (error.response) {
+      res.status(error.response.status).json(error.response.data);
+    } else {
+      res.status(500).json({ error: 'Erreur lors de la recherche des terminaux' });
+    }
+  }
+});
+
+// 3. Route pour initier une transaction de vente
+app.post('/api/sale', async (req, res) => {
+  try {
+    const { 
+      terminalId, 
+      cashRegisterId, 
+      amount, 
+      merchantReference, 
+      customerTrns,
+      tipAmount = 0,
+      maxInstalments = 0,
+      showReceipt = true
+    } = req.body;
+    
+    // Validation des données
+    if (!terminalId || !cashRegisterId || !amount) {
+      return res.status(400).json({ 
+        error: 'Les paramètres terminalId, cashRegisterId et amount sont requis' 
+      });
+    }
+    
+    const token = await getAccessToken();
+    const sessionId = uuidv4(); // Génère un UUID unique pour chaque transaction
+    
+    const saleData = {
+      sessionId,
+      terminalId,
+      cashRegisterId,
+      amount: parseInt(amount, 10), // Conversion en entier (montant en centimes)
+      currencyCode: '978', // Code EUR
+      merchantReference: merchantReference || `REF-${Date.now()}`,
+      customerTrns: customerTrns || `CUSTOMER-${Date.now()}`,
+      maxInstalments: parseInt(maxInstalments, 10),
+      tipAmount: parseInt(tipAmount, 10),
+      showTransactionResult: true,
+      showReceipt: showReceipt
+    };
+    
+    console.log('Initiation d\'une transaction de vente:', JSON.stringify(saleData, null, 2));
+    
+    await axios.post(`${API_BASE_URL}/ecr/v1/transactions:sale`, saleData, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
+    
+    // La réponse est vide (code 200) si la demande est acceptée
+    res.json({
+      success: true,
+      message: 'Transaction initiée avec succès',
+      sessionId,
+      terminalId,
+      cashRegisterId
+    });
+  } catch (error) {
+    console.error('Erreur lors de l\'initiation de la transaction:', error);
+    
+    if (error.response) {
+      res.status(error.response.status).json(error.response.data);
+    } else {
+      res.status(500).json({ error: 'Erreur lors de l\'initiation de la transaction' });
+    }
+  }
+});
+
+// 4. Route pour obtenir le statut d'une session
+app.get('/api/session/:sessionId', async (req, res) => {
+  try {
+    const { sessionId } = req.params;
+    const token = await getAccessToken();
+    
+    const response = await axios.get(`${API_BASE_URL}/ecr/v1/sessions/${sessionId}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    
+    res.json(response.data);
+  } catch (error) {
+    console.error('Erreur lors de la récupération du statut de session:', error);
+    
+    if (error.response) {
+      // Si status 404, la session est en cours de traitement
+      if (error.response.status === 404) {
+        res.status(202).json({ 
+          message: 'Session en cours de traitement',
+          sessionId: req.params.sessionId
+        });
+      } else {
+        res.status(error.response.status).json(error.response.data);
+      }
+    } else {
+      res.status(500).json({ error: 'Erreur lors de la récupération du statut de session' });
+    }
+  }
+});
+
+// 5. Route pour effectuer un remboursement
+app.post('/api/refund', async (req, res) => {
+  try {
+    const { 
+      terminalId, 
+      cashRegisterId, 
+      parentSessionId, 
+      amount, 
+      merchantReference, 
+      customerTrns,
+      showReceipt = true
+    } = req.body;
+    
+    // Validation des données
+    if (!terminalId || !cashRegisterId || !parentSessionId || !amount) {
+      return res.status(400).json({ 
+        error: 'Les paramètres terminalId, cashRegisterId, parentSessionId et amount sont requis' 
+      });
+    }
+    
+    const token = await getAccessToken();
+    const sessionId = uuidv4(); // Génère un UUID unique pour chaque transaction
+    
+    const refundData = {
+      sessionId,
+      terminalId,
+      cashRegisterId,
+      parentSessionId,
+      amount: parseInt(amount, 10), // Conversion en entier (montant en centimes)
+      currencyCode: '978', // Code EUR
+      merchantReference: merchantReference || `REFUND-${Date.now()}`,
+      customerTrns: customerTrns || `CUSTOMER-REFUND-${Date.now()}`,
+      showTransactionResult: true,
+      showReceipt: showReceipt
+    };
+    
+    console.log('Initiation d\'un remboursement:', JSON.stringify(refundData, null, 2));
+    
+    await axios.post(`${API_BASE_URL}/ecr/v1/transactions:refund`, refundData, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
+    
+    // La réponse est vide (code 200) si la demande est acceptée
+    res.json({
+      success: true,
+      message: 'Remboursement initié avec succès',
+      sessionId,
+      terminalId,
+      cashRegisterId
+    });
+  } catch (error) {
+    console.error('Erreur lors de l\'initiation du remboursement:', error);
+    
+    if (error.response) {
+      res.status(error.response.status).json(error.response.data);
+    } else {
+      res.status(500).json({ error: 'Erreur lors de l\'initiation du remboursement' });
+    }
+  }
+});
+
+// 6. Route pour récupérer l'historique des transactions par date
+app.get('/api/sessions', async (req, res) => {
+  try {
+    const { date } = req.query;
+    const token = await getAccessToken();
+    
+    // Construction de l'URL avec le paramètre de date si fourni
+    let url = `${API_BASE_URL}/ecr/v1/sessions`;
+    if (date) {
+      url += `?date=${date}`;
+    }
+    
+    const response = await axios.get(url, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    
+    res.json(response.data);
+  } catch (error) {
+    console.error('Erreur lors de la récupération des sessions:', error);
+    
+    if (error.response) {
+      res.status(error.response.status).json(error.response.data);
+    } else {
+      res.status(500).json({ error: 'Erreur lors de la récupération des sessions' });
+    }
+  }
+});
+
+// 7. Route pour annuler une session en cours
+app.delete('/api/session/:sessionId', async (req, res) => {
+  try {
+    const { sessionId } = req.params;
+    const { cashRegisterId } = req.query;
+    
+    if (!cashRegisterId) {
+      return res.status(400).json({ error: 'Le paramètre cashRegisterId est requis' });
+    }
+    
+    const token = await getAccessToken();
+    
+    await axios.delete(`${API_BASE_URL}/ecr/v1/sessions/${sessionId}?cashRegisterId=${cashRegisterId}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    
+    res.json({ 
+      success: true,
+      message: 'Session annulée avec succès' 
+    });
+  } catch (error) {
+    console.error('Erreur lors de l\'annulation de la session:', error);
+    
+    if (error.response) {
+      res.status(error.response.status).json(error.response.data);
+    } else {
+      res.status(500).json({ error: 'Erreur lors de l\'annulation de la session' });
+    }
+  }
+});
+
+// Démarrer le serveur
+app.listen(PORT, () => {
+  console.log(`Serveur d'API Viva Payments démarré sur le port ${PORT}`);
+  console.log(`Mode: ${isDevelopment ? 'Développement' : 'Production'}`);
+  console.log(`Client ID: ${clientId}`);
+});
+
+export default app;

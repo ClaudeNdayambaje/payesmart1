@@ -1,0 +1,382 @@
+/* 
+ * BUTTONS STYLES UNIFIED
+ * Fichier CSS unifié pour tous les styles de boutons du site PayeSmart
+ * Regroupe et harmonise les styles des fichiers :
+ * - button-enhancements.css
+ * - admin-button-fix.css
+ * - admin-button.css
+ * - static-buttons.css
+ * - free-trial-button.css
+ * - specialist-button.css
+ * - static-hero-buttons.css
+ * Version 1.0 - Août 2025
+ */
+
+/*==================================
+ * 1. STYLES DE BASE DES BOUTONS
+ *==================================*/
+
+/* Styles généraux des boutons */
+.btn {
+    display: inline-block;
+    font-weight: 500;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.btn:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+.btn:focus {
+    outline: none;
+}
+
+/* Boutons primaires */
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+    color: #fff;
+}
+
+/* Boutons secondaires */
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: #fff;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+    color: #fff;
+}
+
+/* Boutons tertiaires / outline */
+.btn-outline {
+    background-color: transparent;
+    border: 2px solid #007bff;
+    color: #007bff;
+}
+
+.btn-outline:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* Tailles des boutons */
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    border-radius: 0.2rem;
+}
+
+.btn-lg {
+    padding: 0.75rem 1.5rem;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    border-radius: 0.3rem;
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+}
+
+/*==================================
+ * 2. BOUTONS HERO
+ *==================================*/
+
+/* Boutons de la section Hero */
+.hero-buttons {
+    margin-top: 30px;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.hero-btn {
+    padding: 12px 30px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.hero-btn-primary {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    border: none;
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
+}
+
+.hero-btn-primary:hover {
+    background: linear-gradient(135deg, #0056b3, #004494);
+}
+
+.hero-btn-secondary {
+    background-color: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+}
+
+.hero-btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Boutons hero statiques */
+.static-hero-btn {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: color 0.3s ease;
+}
+
+.static-hero-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    z-index: -1;
+    transition: all 0.4s ease-in-out;
+}
+
+.static-hero-btn:hover::before {
+    left: 0;
+}
+
+/*==================================
+ * 3. BOUTONS ADMIN
+ *==================================*/
+
+/* Boutons administrateur */
+.admin-btn {
+    background-color: #343a40;
+    color: #fff;
+    font-weight: 600;
+    border: none;
+    padding: 8px 20px;
+    font-size: 14px;
+    border-radius: 4px;
+}
+
+.admin-btn:hover {
+    background-color: #23272b;
+}
+
+/* Fix des boutons admin */
+.admin-button-container {
+    position: relative;
+    z-index: 999;
+}
+
+.admin-panel-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.admin-panel-btn i {
+    font-size: 16px;
+}
+
+/* Ajustement du z-index */
+.admin-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 1000;
+    background-color: #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    padding: 10px 0;
+    min-width: 200px;
+    display: none;
+}
+
+.admin-dropdown.show {
+    display: block;
+}
+
+/*==================================
+ * 4. BOUTONS SPÉCIALISTES
+ *==================================*/
+
+/* Bouton pour contacter un spécialiste */
+.specialist-btn {
+    background-color: #ff9800;
+    color: #fff;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 30px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.specialist-btn i {
+    font-size: 18px;
+}
+
+.specialist-btn:hover {
+    background-color: #f57c00;
+}
+
+/* Animation du bouton spécialiste */
+@keyframes pulseSpecialist {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.specialist-btn-animated {
+    animation: pulseSpecialist 2s infinite;
+}
+
+/*==================================
+ * 5. BOUTONS D'ESSAI GRATUIT
+ *==================================*/
+
+/* Bouton d'essai gratuit */
+.free-trial-btn {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4);
+}
+
+.free-trial-btn:hover {
+    background-color: #218838;
+}
+
+/* Badge durée essai gratuit */
+.trial-duration-badge {
+    background-color: #fff;
+    color: #28a745;
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 20px;
+    margin-left: 8px;
+    display: inline-block;
+    position: relative;
+    top: -1px;
+}
+
+/*==================================
+ * 6. BOUTONS STATIQUES
+ *==================================*/
+
+/* Boutons qui restent toujours visibles */
+.static-btn {
+    position: fixed;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+/* Bouton retour en haut */
+.back-to-top {
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #007bff;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top i {
+    font-size: 20px;
+}
+
+/* Bouton chat flottant */
+.chat-float-btn {
+    bottom: 90px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #6c5ce7;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(108, 92, 231, 0.4);
+}
+
+.chat-float-btn i {
+    font-size: 24px;
+}
+
+/*==================================
+ * 7. RESPONSIVE
+ *==================================*/
+
+@media (max-width: 768px) {
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .hero-btn {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .static-btn {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .back-to-top {
+        right: 20px;
+        bottom: 20px;
+    }
+    
+    .chat-float-btn {
+        right: 20px;
+        bottom: 70px;
+    }
+}

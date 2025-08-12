@@ -1,0 +1,30 @@
+/* 
+ * CORRECTION POUR BARRE DE NAVIGATION MOBILE TRANSPARENTE
+ * Rend la barre de navigation mobile transparente par défaut, comme en desktop
+ * Date: Août 2025
+ */
+
+/* Barre de navigation mobile transparente par défaut (comme le desktop) */
+.mobile-nav-bar {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* Applique le fond sombre seulement quand on scroll */
+.mobile-nav-bar.scrolled {
+    background-color: rgba(26, 26, 26, 0.95) !important;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Assure que les éléments de la barre sont visibles même sur fond transparent */
+.mobile-nav-container .mobile-nav-logo img {
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.7));
+}
+
+.mobile-language-button,
+.mobile-menu-button,
+.mobile-menu-bar {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+}

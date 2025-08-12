@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:gravity="center"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:text="@string/select"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp" />
+
+    <RadioGroup
+        android:id="@+id/rg_card_type"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radioButton_icc"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@drawable/radio_button_style"
+            android:text="Icc"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="15sp"
+            />
+
+        <RadioButton
+            android:id="@+id/RadioButton_psam1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@drawable/radio_button_style"
+            android:text="Psam1"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="15sp" />
+
+        <RadioButton
+            android:id="@+id/RadioButton_psam2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@drawable/radio_button_style"
+            android:text="Psam2"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="15sp"
+            />
+
+    </RadioGroup>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:text="@string/result"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp" />
+    <!-- Show Msg start -->
+    <TextView
+        android:id="@+id/tv_msg"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/shape_msg"
+        android:textColor="@color/colorAccent"
+        android:gravity="center"
+        android:textSize="20sp" />
+
+    <!-- Show Msg end -->
+
+
+    <!-- Button start -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_SingleTest"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/shape_button"
+            android:textColor="@color/white"
+            android:text="@string/start"
+            android:textSize="30sp"
+            />
+
+    </LinearLayout>
+    <!-- Button end -->
+
+</LinearLayout>

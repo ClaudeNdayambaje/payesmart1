@@ -1,0 +1,6440 @@
+/* 
+ * NAVIGATION STYLES UNIFIED
+ * Fichier CSS unifié pour tous les éléments de navigation du site PayeSmart
+ * Regroupe et harmonise les styles des fichiers :
+ * - navigation-buttons-global.css
+ * - navigation-overlap-fix.css
+ * - navigation-spacing-fix.css
+ * - menu-harmonization.css
+ * - styles.css (partie navigation)
+ * - transparent-header-global.css (intégré complètement v1.9)
+ * - contact-nav-fix.css (intégré v1.2)
+ * - contact-hero-fix.css (intégré v1.2)
+ * - contact-page-components.css (partie navigation, intégré v1.9)
+ * Version 1.9 - Août 2025 - Intégration complète des styles du header transparent
+ */
+
+/*==================================
+ * 1. STRUCTURE DE BASE DE LA NAVIGATION
+ *==================================*/
+
+/* Header et Navigation principale - Version avec transparence */
+/* Couleur orange pour tous les titres h1 */
+h1 {
+    color: #e58509 !important;
+}
+
+/* Styles spécifiques pour la page "Qui sommes-nous" */
+.about-page h1,
+.about-page h2,
+.about-page .section-title,
+.about-page .page-title,
+.about-section h1,
+.about-section h2,
+.about-section .section-title,
+.about-hero h1,
+.about-hero h2 {
+    color: #e58509 !important;
+}
+
+/* Ciblage très spécifique pour le titre "Qui sommes-nous" */
+.about-hero h1,
+.about-hero-content h1,
+section.about-hero h1,
+section h1,
+h1:contains("Qui sommes-nous"),
+h1[data-title="Qui sommes-nous"],
+body.about h1,
+.about-banner h1,
+.page-header h1,
+div h1 {
+    color: #e58509 !important;
+    text-shadow: none !important;
+    background: transparent !important;
+    -webkit-text-fill-color: #e58509 !important;
+}
+
+/* Header et Navigation principale - Version avec transparence */
+/* SPÉCIFICITÉ MAXIMALE POUR SURCHARGER TOUS LES AUTRES STYLES */
+html body header,
+html body .header,
+body header,
+body .header,
+header,
+.header {
+    /* Base styles */
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    background-color: transparent !important;
+    z-index: 9999 !important;
+    box-shadow: none !important;
+    transition: all 0.4s ease !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    padding: 8px 0;
+    height: auto;
+    /* Garantir la fluidité des transitions */
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+    will-change: background-color, box-shadow;
+    pointer-events: auto; /* Assure que les événements de clic sont captés */
+}
+
+/* Styles spécifiques pour le header transparent - FORCE MAXIMALE */
+html body header.transparent,
+html body .header.transparent,
+body header.transparent,
+body .header.transparent,
+header.transparent,
+.header.transparent {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background-image: none !important;
+    background: transparent !important;
+}
+
+/* État lors du défilement - visible avec flou */
+header.scrolled,
+.header.scrolled {
+    background-color: rgba(45, 45, 45, 0.95) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important; /* Support pour Safari */
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.25) !important;
+    transition: all 0.3s ease-in-out !important;
+}
+
+/* Assurer une transition fluide de l'apparition/disparition */
+@keyframes headerFadeIn {
+    from { background-color: transparent; }
+    to { background-color: rgba(45, 45, 45, 0.95); }
+}
+
+.header.scrolled {
+    animation: headerFadeIn 0.3s ease-out forwards;
+}
+
+/* Désactivation complète de la barre en mode mobile */
+@media (max-width: 992px) {
+    .header.scrolled {
+        background: transparent !important;
+        box-shadow: none !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+    }
+}
+
+
+
+/* Ajustement du contenu pour compenser la hauteur de la barre fixe */
+body {
+    /* Réduire le padding pour éviter de pousser le contenu trop bas */
+    padding-top: 0px;
+}
+
+/* Structure interne du header */
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+}
+
+/* Logo */
+.logo img {
+    height: 35px;
+}
+
+/* Styles de navigation principale */
+.main-nav {
+    display: block;
+    margin-left: 50px; /* Ajout d'espace entre le logo et les liens de navigation */
+}
+
+.main-nav ul {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 30px;
+}
+
+/* Styles des liens de navigation - visibilité garantie sur fond transparent */
+header .main-nav a,
+.header .main-nav a {
+    font-weight: 600 !important;
+    color: white !important;
+    position: relative !important;
+    text-decoration: none;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8) !important;
+    pointer-events: auto;
+    cursor: pointer;
+    display: inline-block; /* Assure que les liens sont bien cliquables */
+    padding: 5px 10px; /* Ajoute une zone cliquable plus grande */
+    transition: all 0.3s ease !important;
+    z-index: 10000 !important; /* S'assurer qu'ils sont toujours au-dessus */
+}
+
+/* Style au survol et état actif */
+header .main-nav a.active,
+.header .main-nav a.active,
+header .main-nav a:hover,
+.header .main-nav a:hover {
+    color: var(--primary-color) !important;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Styles pour les boutons du header - visibilité garantie sur fond transparent */
+.header-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+/* Pour les boutons dans le header - assurer la visibilité sur fond transparent */
+header .btn-primary,
+.header .btn-primary {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4) !important;
+    position: relative !important;
+    z-index: 10000 !important; /* S'assurer qu'ils sont toujours au-dessus */
+    transition: all 0.3s ease !important;
+}
+
+/* Garantir la visibilité du logo */
+header .logo img,
+.header .logo img {
+    filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.5)) !important;
+    position: relative !important;
+    z-index: 10000 !important;
+}
+
+/* Garantir la visibilité du sélecteur de langue */
+header .language-selector,
+.header .language-selector {
+    position: relative !important;
+    z-index: 10000 !important;
+}
+
+/* Styles pour le menu mobile */
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1001;
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px 0;
+    background: white; /* Barres blanches au lieu de sombres */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5); /* Ombre légère pour contraste */
+    transition: all 0.3s ease;
+}
+
+/*==================================
+ * 2. ADAPTATION MOBILE
+ *==================================*/
+
+/*==================================
+ * BARRE DE NAVIGATION MOBILE PROFESSIONNELLE
+ *==================================*/
+
+/* Style de base pour la barre de navigation mobile (toujours présent mais géré par media queries) */
+.mobile-nav-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(26, 26, 26, 0.98);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.35);
+    z-index: 2000; /* Assure que la barre est au-dessus de tout */
+    height: 64px;
+    padding: 0;
+    transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    /* Display par défaut */
+    display: none;
+}
+
+.mobile-nav-bar.nav-hidden {
+    transform: translateY(-100%);
+    box-shadow: none;
+}
+
+/* Effet de fond plus intense lors du défilement */
+.mobile-nav-bar.scrolled {
+    background-color: rgba(26, 26, 26, 0.98);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* Container flex pour aligner les éléments à l'intérieur de la barre - Version moderne */
+.mobile-nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    padding: 0 18px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Style pour le logo en mode mobile */
+.mobile-nav-logo {
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.mobile-nav-logo img {
+    height: 100%;
+    width: auto;
+    max-width: 120px;
+    object-fit: contain;
+}
+
+/* Style pour le sélecteur/* Style pour le sélecteur de langue en mode mobile */
+.mobile-language-selector {
+    position: relative;
+    margin: 0 10px;
+}
+
+.mobile-language-button {
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+
+.mobile-language-button i {
+    margin-left: 5px;
+}
+
+.mobile-language-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #2a2a2a;
+    border-radius: 4px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    display: none;
+    min-width: 120px;
+    z-index: 1050;
+}
+
+.mobile-language-dropdown.active {
+    display: flex;
+    flex-direction: column;
+}
+
+.mobile-language-option {
+    padding: 8px 15px;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background 0.2s ease;
+}
+
+.mobile-language-option:hover,
+.mobile-language-option.active {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ====================================================
+   STYLES UNIFIÉS POUR LA PAGE "QUI SOMMES-NOUS"
+   ==================================================== */
+
+/* Section Hero - Page Qui sommes-nous */
+.about-hero {
+    /* Structure et dimensions */
+    position: relative;
+    width: 100%;
+    height: auto;
+    min-height: auto;
+    margin: 0;
+    overflow: visible;
+    z-index: 1;
+    
+    /* Espacement */
+    padding: 120px 0 80px;
+    
+    /* Apparence - fond sombre comme produits-hero */
+    background: var(--dark-bg);
+    color: white;
+    text-align: center;
+}
+
+/* Contenu de la section hero */
+.about-hero .about-hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+/* Titre principal */
+.about-hero h1 {
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    font-family: inherit;
+    line-height: 1.2;
+    color: #e58509 !important;
+    text-shadow: none;
+}
+
+/* Sous-titre */
+.about-hero .section-header {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 40px;
+    position: relative;
+}
+
+.section-header::after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 3px;
+    background: #ff9800;
+    margin: 15px auto 0;
+    border-radius: 0;
+}
+
+/* Diviseur décoratif */
+.hero-divider {
+    background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+    height: 3px;
+    width: 80px;
+    margin: 0 auto 24px;
+    border: none;
+}
+
+/* About section */
+.about-section {
+    padding: 80px 0;
+    background: var(--dark-bg);
+    color: white;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.about-image {
+    position: relative;
+}
+
+.rounded-image {
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    height: auto;
+}
+
+.about-content h2 {
+    font-size: 36px;
+    margin-bottom: 24px;
+    font-family: 'Ubuntu', sans-serif;
+    color: var(--text-dark);
+}
+
+.about-content p {
+    margin-bottom: 20px;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text-medium);
+}
+
+/* Values section */
+.values-section {
+    padding: 80px 0;
+    background-color: #f9fafb;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    margin-top: 60px;
+}
+
+.value-card {
+    background: white;
+    border-radius: 16px;
+    padding: 40px 30px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: var(--transition);
+}
+
+.value-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.value-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    background: var(--primary-color);
+}
+
+.value-card:nth-child(1) .value-icon {
+    background-color: #4f46e5; /* --color-primary */
+}
+
+.value-card:nth-child(2) .value-icon {
+    background-color: #10b981; /* --color-secondary */
+}
+
+.value-card:nth-child(3) .value-icon {
+    background-color: #f59e0b; /* --color-accent */
+}
+
+.value-card:nth-child(4) .value-icon {
+    background-color: #6366f1; /* Variante de primary */
+}
+
+.value-icon [data-lucide] {
+    width: 32px;
+    height: 32px;
+    stroke: white;
+    stroke-width: 1.5;
+}
+
+.value-card h3 {
+    font-size: 22px;
+    margin-bottom: 16px;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.value-card p {
+    color: var(--text-medium);
+}
+
+/* Team section */
+.team-section {
+    padding: 80px 0;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    margin-top: 60px;
+}
+
+.team-member {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: var(--transition);
+}
+
+.team-member:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.team-member-image {
+    height: 300px;
+    overflow: hidden;
+}
+
+.team-member-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.team-member:hover .team-member-image img {
+    transform: scale(1.05);
+}
+
+.team-member h3 {
+    font-size: 22px;
+    margin: 24px 24px 8px;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.team-role {
+    color: var(--primary-color);
+    font-weight: 600;
+    margin: 0 24px 16px;
+}
+
+.team-bio {
+    color: var(--text-medium);
+    margin: 0 24px 24px;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.team-social {
+    display: flex;
+    gap: 16px;
+    margin: 0 24px 24px;
+}
+
+.team-social a {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #f3f4f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.team-social a:hover {
+    background: var(--primary-color);
+}
+
+.team-social a:hover [data-lucide] {
+    stroke: white;
+}
+
+.team-social [data-lucide] {
+    width: 18px;
+    height: 18px;
+    stroke: var(--text-dark);
+    transition: var(--transition);
+}
+
+/* Réinitialisation des marges du body et main pour la page About */
+body.about-page {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+body.about-page main {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Responsive pour tablettes */
+@media (max-width: 768px) {
+    .about-hero {
+        padding-top: 100px;
+        padding-bottom: 60px;
+    }
+    
+    .about-hero-content {
+        padding: 0 15px;
+    }
+    
+    .about-hero h1 {
+        font-size: 36px;
+    }
+    
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .about-image {
+        order: 2;
+    }
+    
+    .about-content {
+        order: 1;
+    }
+    
+    .team-grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .values-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Responsive pour mobiles */
+@media (max-width: 480px) {
+    .about-hero {
+        padding-top: 90px;
+        padding-bottom: 50px;
+    }
+    
+    .about-hero-content {
+        padding: 0 10px;
+    }
+    
+    .about-hero h1 {
+        font-size: 32px;
+    }
+    
+    .values-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+/* Style pour le bouton hamburger moderne */
+.mobile-menu-button {
+    background: none;
+    border: none;
+    width: 44px;
+    height: 44px;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1550;
+    position: relative;
+    transition: all 0.3s ease;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.mobile-menu-bar {
+    width: 22px;
+    height: 2px;
+    background-color: white;
+    transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: relative;
+    border-radius: 2px;
+}
+
+/* Animation des barres lors de l'activation du menu */
+.mobile-menu-button.active {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.mobile-menu-button.active .mobile-menu-bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+    width: 22px;
+}
+
+.mobile-menu-button.active .mobile-menu-bar:nth-child(2) {
+    opacity: 0;
+    transform: translateX(-10px);
+}
+
+.mobile-menu-button.active .mobile-menu-bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+    width: 22px;
+}
+
+/* Style pour le menu mobile déroulant */
+.mobile-nav-menu {
+    position: fixed;
+    top: 60px; /* Hauteur de la barre mobile */
+    left: 0;
+    width: 100%;
+    background-color: #1a1a1a;
+    display: none;
+    flex-direction: column;
+    z-index: 1400;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    max-height: calc(100vh - 60px);
+    overflow-y: auto;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.mobile-nav-menu.active {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.mobile-nav-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.mobile-nav-menu li {
+    width: 100%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    position: relative;
+}
+
+.mobile-nav-menu a {
+    display: flex;
+    align-items: center;
+    padding: 18px 20px;
+    color: white;
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    transition: all 0.25s ease;
+    position: relative;
+}
+
+.mobile-nav-menu a:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 0;
+    background-color: var(--primary-color);
+    opacity: 0.1;
+    transition: width 0.25s ease;
+}
+
+.mobile-nav-menu a:hover:after,
+.mobile-nav-menu a.active:after {
+    width: 5px;
+}
+
+.mobile-nav-menu a:hover,
+.mobile-nav-menu a.active {
+    background-color: rgba(255, 255, 255, 0.03);
+    color: var(--primary-color);
+    padding-left: 25px;
+}
+
+/* Boutons du menu mobile - Version moderne avec disposition horizontale */
+.mobile-nav-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px 15px;
+    gap: 15px;
+    background-color: #222;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.mobile-nav-buttons .btn {
+    flex: 1;
+    text-align: center;
+    padding: 14px 10px;
+    border-radius: 6px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.25s ease;
+    text-transform: uppercase;
+    font-size: 14px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Force l'affichage de la barre de navigation mobile sur TOUS les appareils, quelle que soit la taille */
+.mobile-nav-bar {
+    display: flex !important;
+    flex-direction: column;
+    z-index: 2000; /* Assure que la barre est au-dessus de tout */
+}
+
+/* Affichage conditionnel des headers selon taille d'écran */
+@media (min-width: 993px) {
+    .header {
+        display: block !important;
+    }
+    
+    .mobile-nav-bar {
+        display: none !important;
+    }
+}
+
+@media (max-width: 992px) {
+    .header {
+        display: none !important;
+    }
+    
+    .mobile-nav-bar {
+        display: flex !important;
+    }
+}
+
+/* Les anciennes media queries restent pour compatibilité, mais la barre sera toujours visible maintenant */
+@media screen and (max-width: 992px) {/* Ajustement pour le contenu de la page */
+    body {
+        padding-top: 60px !important; /* Ajuste selon la hauteur de la barre mobile */
+    }
+}
+
+/* Version désactivée des anciens styles mobiles */
+@media (max-width: 992px) {
+    /* Style du menu déroulant mobile */
+    .main-nav ul {
+        flex-direction: column;
+        align-items: flex-start;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        background-color: rgba(45, 45, 45, 0.95);
+        width: 100%;
+        padding: 20px;
+        display: none;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        margin: 0;
+        z-index: 1000;
+    }
+    
+    .main-nav.active ul {
+        display: flex;
+    }
+    
+    .mobile-menu-toggle {
+        display: block;
+    }
+}
+
+/*==================================
+ * 2. BOUTONS DE NAVIGATION
+ *==================================*/
+
+/* Styles des boutons dans le header */
+.header-buttons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-left: auto; /* Pousse les boutons à droite */
+}
+
+/* Style global pour tous les boutons */
+.btn,
+.header-buttons a,
+.nav-button {
+    padding: 12px 20px !important;
+    border-radius: 6px !important;
+    transition: all 0.3s ease !important;
+    text-decoration: none !important;
+    font-weight: 600 !important;
+    display: inline-block !important;
+    border: none !important;
+    font-size: 14px !important;
+    letter-spacing: 0.5px !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) !important;
+    text-align: center !important;
+    line-height: 1.4 !important;
+    min-width: 120px !important;
+}
+
+/* Styles des boutons primaires - sauf Essai gratuit */
+.btn-primary:not([href*="register=true"]) {
+    background-color: #f7941d !important; /* Orange PayeSmart */
+    color: white !important;
+    border: none !important;
+}
+
+/* Style spécifique pour les boutons 'Essai gratuit' - ATTENTION importance maximale */
+body .header .header-buttons a[href*="register=true"],
+body .header a[href*="register=true"].btn,
+body header .header-buttons a[href*="register=true"],
+body header a[href*="register=true"].btn,
+body .btn-primary[href*="register=true"] {
+    background-color: #3498db !important; /* Bleu #3498db */
+    color: white !important;
+    border-color: #3498db !important;
+    z-index: 1000 !important;
+}
+
+/* Version desktop des boutons - design unifié */
+@media (min-width: 1024px) {
+    .btn,
+    .header-buttons a,
+    .nav-button,
+    a.btn {
+        padding: 10px 20px !important;
+        border-radius: 50px !important; /* Boutons plus arrondis */
+        font-size: 14px !important;
+        font-weight: 600 !important;
+        letter-spacing: 0.5px !important;
+        transition: all 0.3s ease !important;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15) !important;
+        text-transform: none !important;
+        min-width: 120px !important;
+        text-align: center !important;
+    }
+    
+    /* Style bouton Essai gratuit */
+    .btn-primary,
+    .header-buttons a[href*="register=true"],
+    a[href*="register=true"].btn {
+        background-color: #3498db !important; /* Bleu comme sur l'image */
+        color: white !important;
+    }
+    
+    /* Style bouton Se connecter */
+    .btn-secondary,
+    .header-buttons a[href*="auth"]:not([href*="register=true"]),
+    a[href*="auth"]:not([href*="register=true"]).btn {
+        background-color: #F29D38 !important; /* Orange identique au bouton En savoir plus */
+        color: white !important;
+    }
+    
+    /* Effet hover plus prononcé */
+    .btn:hover,
+    .header-buttons a:hover,
+    .nav-button:hover {
+        transform: translateY(-3px) !important;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2) !important;
+    }
+}
+
+.btn-primary:hover {
+    background-color: #e58512 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Effet hover spécifique pour les boutons 'Essai gratuit' */
+body .header .header-buttons a[href*="register=true"]:hover,
+body .header a[href*="register=true"].btn:hover,
+body header .header-buttons a[href*="register=true"]:hover,
+body header a[href*="register=true"].btn:hover,
+body .btn-primary[href*="register=true"]:hover {
+    background-color: #2980b9 !important; /* Bleu foncé #2980b9 */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+/*==================================
+ * STYLES INTÉGRÉS DEPUIS CUSTOM-COLORS.CSS
+ * Version: 1.0 - Août 2025
+ *==================================*/
+
+/* Variables de couleurs PayeSmart */
+:root {
+    /* Couleurs de base */
+    --primary-color: #F7941D;
+    --primary-light: #ff9f2b;
+    --primary-dark: #e08207;
+    --secondary-color: #3498db; /* Bleu pour les boutons Essai gratuit */
+    --secondary-light: #3D3D3D;
+    --secondary-dark: #2980b9;
+    --text-light: #f3f4f6;
+    --text-dark: #1f2937;
+    --bg-light: #3D3D3D;
+    --bg-dark: #2D2D2D;
+    --bg-darker: #252525;
+    --bg-light-gray: #4D4D4D;
+}
+
+/* Éléments de fond */
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+}
+
+/* Sections avec fond gris */
+.testimonials, .contact {
+    background-color: var(--bg-darker);
+    color: var(--text-light);
+}
+
+/* Section features avec fond uni prononcé */
+.features {
+    background-color: #1A1A1A; /* Noir profond uni */
+    color: var(--text-light);
+    position: relative;
+    z-index: 1;
+}
+
+.pricing, .demo {
+    background-color: var(--bg-light);
+    color: var(--text-light);
+}
+
+/* Entête - fond transparent ou gris foncé quand scroll */
+.header.scrolled {
+    background: rgba(45, 45, 45, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+/* Footer - gris foncé */
+.footer {
+    background-color: var(--bg-darker);
+    color: var(--text-light);
+}
+
+/* Hero section - dégradé subtil */
+.hero {
+    background: linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
+    color: var(--text-light);
+}
+
+/* Boutons - orange, SAUF boutons Essai gratuit */
+.btn-primary:not([href*="register=true"]) {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+    box-shadow: 0 4px 10px rgba(247, 148, 29, 0.2);
+}
+
+.btn-primary:not([href*="register=true"]):hover {
+    background: var(--primary-light);
+    border-color: var(--primary-light);
+    box-shadow: 0 6px 15px rgba(247, 148, 29, 0.3);
+    transform: translateY(-3px);
+}
+
+/* Boutons secondaires - gris foncé */
+.btn-secondary {
+    background: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: white;
+    box-shadow: 0 4px 10px rgba(52, 152, 219, 0.2);
+}
+
+.btn-secondary:hover {
+    background: var(--secondary-light);
+    border-color: var(--secondary-light);
+    box-shadow: 0 6px 15px rgba(52, 152, 219, 0.3);
+    transform: translateY(-3px);
+}
+
+/* Bouton Admin */
+.btn-admin {
+    background: var(--secondary-color);
+    border: 2px solid var(--secondary-color);
+    color: white;
+}
+
+.btn-admin:hover {
+    background: var(--secondary-light);
+    border-color: var(--secondary-light);
+    transform: translateY(-2px);
+}
+
+/* Cartes et éléments */
+.feature-card, .pricing-card, .testimonial-card, .contact-form-container {
+    background-color: var(--bg-dark);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Styles optimisés pour la section témoignages */
+.testimonials-section {
+    padding: 40px 0;
+    background-color: #1a1a1a;
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 25px;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.testimonial-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #222;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.testimonial-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 12px;
+}
+
+.testimonial-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.testimonial-content {
+    flex: 1;
+}
+
+.testimonial-name {
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #fff;
+}
+
+.testimonial-quote {
+    font-style: italic;
+    font-size: 14px;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+@media (max-width: 992px) {
+    .testimonials-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Section des logos clients */
+.client-logos-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 40px;
+    margin-bottom: 30px;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.client-logo {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 160px;
+    height: 80px;
+    transition: transform 0.3s ease;
+}
+
+.client-logo:hover {
+    transform: translateY(-5px);
+}
+
+.client-logo img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+@media (max-width: 768px) {
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+    }
+    
+    .testimonials-section {
+        padding: 30px 0;
+    }
+    
+    .client-logos-container {
+        gap: 15px;
+    }
+    
+    .client-logo {
+        width: 120px;
+        height: 60px;
+        padding: 10px;
+    }
+}
+
+/* Text highlight */
+.text-highlight {
+    color: var(--primary-color);
+}
+
+/* Social links */
+.social-icon:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+/* Liens footer */
+.footer a:hover {
+    color: var(--primary-color);
+}
+
+/* Hero buttons */
+.hero .btn-primary {
+    box-shadow: 0 0 10px rgba(247, 148, 29, 0.3);
+}
+
+/* Curseur de prix */
+.slider.round {
+    background-color: var(--primary-color);
+}
+
+/* Styles des boutons secondaires */
+.btn-secondary,
+.header-buttons a[href*="auth"]:not([href*="register=true"]),
+a[href*="auth"]:not([href*="register=true"]).btn {
+    background-color: #f8b153 !important; /* Orange plus clair */
+    color: white !important;
+    border: none !important;
+}
+
+.btn-secondary:hover,
+.header-buttons a[href*="auth"]:not([href*="register=true"]):hover,
+a[href*="auth"]:not([href*="register=true"]).btn:hover {
+    background-color: #f8a235 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Espacement entre les boutons */
+.header-buttons .btn:not(:last-child) {
+    margin-right: 5px;
+}
+
+/*==================================
+ * 3. CORRECTIONS D'ESPACEMENT
+ *==================================*/
+
+/* Correction des espacements verticaux */
+.main-nav + section,
+.main-nav + .hero-section,
+.main-nav + main {
+    padding-top: 80px;
+}
+
+/* Correction des chevauchements */
+.main-nav {
+    margin-bottom: -1px;
+}
+
+.main-nav.fixed-top {
+    z-index: 1030;
+}
+
+/* Ajustement des marges internes */
+.nav-container {
+    padding: 0 15px;
+}
+
+.nav-links li {
+    margin: 0 12px;
+}
+
+/*==================================
+ * 4. HARMONISATION DU MENU
+ *==================================*/
+
+/* Style unifié pour tous les menus */
+.site-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.site-nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 100%;
+}
+
+.site-menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.site-menu-item {
+    margin: 0 15px;
+}
+
+.site-menu-link {
+    color: #333;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.site-menu-link:hover {
+    color: #007bff;
+}
+
+/* Sous-menu */
+.site-submenu {
+    position: absolute;
+    background: white;
+    min-width: 200px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    padding: 10px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+
+.site-menu-item:hover .site-submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.site-submenu-item {
+    padding: 8px 20px;
+}
+
+.site-submenu-link {
+    color: #333;
+    font-size: 14px;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    display: block;
+}
+
+.site-submenu-link:hover {
+    color: #007bff;
+}
+
+/*==================================
+ * 5. NAVIGATION RESPONSIVE
+ *==================================*/
+
+/* Styles responsive */
+@media (max-width: 992px) {
+    /* Ajustements des boutons */
+    .nav-button {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+    
+    /* Ajustement des espacements */
+    .nav-links li {
+        margin: 0 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Affichage du menu burger */
+    .menu-toggle {
+        display: block;
+    }
+    
+    /* Animation du menu burger */
+    .menu-open .menu-toggle span:first-child {
+        transform: translateY(8px) rotate(45deg);
+    }
+    
+    .menu-open .menu-toggle span:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .menu-open .menu-toggle span:last-child {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+    
+    /* Navigation mobile */
+    .nav-links {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: rgba(45, 45, 45, 0.95);
+        flex-direction: column;
+        padding: 20px 0;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.3s ease;
+    }
+    
+    .menu-open .nav-links {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+    
+    .nav-links li {
+        margin: 10px 0;
+    }
+    
+    /* Assurer que tous les liens de navigation en mode mobile sont visibles sur fond sombre */
+    .nav-links a, .main-nav.active ul a, .site-menu a {
+        color: white !important;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) !important;
+    }
+    
+    /* Boutons en mode mobile */
+    .nav-buttons {
+        flex-direction: column;
+        width: 100%;
+        padding: 0 20px;
+    }
+    
+    .nav-button {
+        margin: 8px 0;
+        width: 100%;
+        text-align: center;
+    }
+    
+    /* Menu harmonisé en mobile */
+    .site-menu {
+        flex-direction: column;
+    }
+    
+    .site-menu-item {
+        margin: 10px 0;
+    }
+    
+    /* Sous-menu en mobile */
+    .site-submenu {
+        position: static;
+        box-shadow: none;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        padding-left: 20px;
+        min-width: unset;
+        display: none;
+    }
+    
+    .site-menu-item.active .site-submenu {
+        display: block;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Ajustements pour petits écrans */
+    .main-nav {
+        padding: 10px 0;
+    }
+    
+    .nav-container {
+        padding: 0 10px;
+    }
+    
+    .nav-logo {
+        height: 30px;
+    }
+}
+
+/*==================================
+  STYLES SPÉCIFIQUES À LA PAGE CONTACT
+  Intégration des styles de contact-nav-fix.css et contact-hero-fix.css
+==================================*/
+
+/* Styles de navigation pour la page contact */
+.contact-hero {
+    padding-top: 0;
+    margin-top: 80px;
+    background: var(--dark-bg);
+    color: white;
+}
+
+.contact-hero-content {
+    padding-top: 50px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+/* Styles pour les éléments visuels de la page contact */
+.contact-hero .hero-divider {
+    background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+    height: 3px;
+    width: 120px;
+    margin: 30px auto;
+    display: block;
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Styles de typographie pour la page contact */
+.contact-hero h1 {
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 0;
+    font-family: 'Inter', sans-serif;
+    color: #ffffff;
+    text-align: center;
+}
+
+.contact-hero .subtitle {
+    font-size: 20px;
+    line-height: 1.6;
+    color: #ffffff;
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+    opacity: 1;
+}
+
+/*==================================
+ * STYLES POUR LA SECTION SOLUTION COMPLÈTE
+ * Migrés depuis solution-section.css
+ *==================================*/
+
+/* Section solution complète */
+.solution-complete-section {
+    padding: 100px 0;
+    background: #1a1a1a;
+    position: relative;
+    overflow: hidden;
+    color: #ffffff;
+}
+
+.solution-complete-section::before {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: rgba(255, 152, 0, 0.03);
+    border-radius: 50%;
+    top: -100px;
+    left: -100px;
+    z-index: 0;
+}
+
+.solution-complete-section::after {
+    content: '';
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: rgba(255, 82, 34, 0.03);
+    border-radius: 50%;
+    bottom: -200px;
+    right: -200px;
+    z-index: 0;
+}
+
+/* Container pour la section solution */
+.solution-complete-section .container {
+    position: relative;
+    z-index: 1;
+}
+
+/* En-tête de la section solution */
+.solution-complete-section .section-header {
+    margin-bottom: 80px;
+    text-align: center;
+    position: relative;
+}
+
+.solution-complete-section .pre-heading {
+    display: none;
+}
+
+.solution-complete-section .section-header h2 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #ff9800;
+    line-height: 1.3;
+    position: relative;
+}
+
+.solution-complete-section .section-header p {
+    font-size: 1.15rem;
+    color: #ffffff;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+.solution-complete-section .separator-line {
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(to right, rgba(255, 152, 0, 0), rgba(255, 152, 0, 1), rgba(255, 152, 0, 0));
+    margin: 30px auto 0;
+    position: relative;
+}
+
+/* Suppression de l'animation pour un style plus sobre */
+
+/* Container pour les solutions */
+.solutions-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* Rangées des solutions */
+.solution-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 120px;
+    position: relative;
+    flex-wrap: wrap;
+}
+
+/* Points de la timeline */
+.solution-row:before {
+    content: '';
+    width: 16px;
+    height: 16px;
+    background: #ff9800;
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    box-shadow: 0 0 0 4px rgba(255, 152, 0, 0.1);
+}
+
+.solution-row:last-child {
+    margin-bottom: 60px;
+}
+
+.solution-row.reverse {
+    flex-direction: row-reverse;
+}
+
+.solution-row.reverse .solution-content {
+    padding: 30px 90px 30px 20px;
+}
+
+.solution-row::after {
+    content: '';
+    position: absolute;
+    height: 120%;
+    width: 2px;
+    background: linear-gradient(to bottom, rgba(52, 152, 219, 0), rgba(52, 152, 219, 0.9), rgba(52, 152, 219, 0));
+    left: 50%;
+    top: -10%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 6px rgba(52, 152, 219, 0.4);
+    z-index: 1;
+}
+
+.solution-row.reverse::after {
+    left: 50%;
+}
+
+/* Animation supprimée pour un design plus sobre */
+
+/* Image de la solution */
+.solution-image {
+    flex: 0 0 45%;
+    padding: 30px;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Badge sur l'image */
+.image-badge {
+    position: absolute;
+    top: 20px;
+    left: -10px;
+    background: linear-gradient(135deg, #ff7300, #ff9500);
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 4px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+    z-index: 3;
+    transform: translateY(-5px);
+    letter-spacing: 0.5px;
+}
+
+/* Icône flottante */
+.floating-icon {
+    position: absolute;
+    bottom: -20px;
+    right: 30px;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff7300, #ff9500);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    box-shadow: 0 10px 25px rgba(255, 115, 0, 0.4);
+    transition: all 0.3s ease;
+    z-index: 5;
+}
+
+.floating-icon i {
+    font-size: 1.5rem;
+    color: #fff;
+}
+
+/* Image de la solution */
+.solution-image img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s ease;
+    object-fit: cover;
+}
+
+.solution-image img:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Contenu de la solution */
+.solution-content {
+    flex: 0 0 55%;
+    padding: 30px 20px 30px 90px;
+    position: relative;
+    z-index: 3;
+    min-width: 300px;
+}
+
+/* Tag de la solution - complètement supprimé */
+.solution-tag {
+    display: none;
+}
+
+/* Titre de la solution */
+.solution-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #ffffff;
+    position: relative;
+}
+
+.solution-title::after {
+    content: '';
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(to right, rgba(255, 152, 0, 0), rgba(255, 152, 0, 1), rgba(255, 152, 0, 0));
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+}
+
+.solution-row.reverse .solution-title::after {
+    background: linear-gradient(to right, rgba(255, 152, 0, 0), rgba(255, 152, 0, 1), rgba(255, 152, 0, 0));
+    left: 0;
+    right: auto;
+}
+
+/* Description de la solution */
+.solution-description {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #adadad;
+    margin-bottom: 25px;
+}
+
+/* Caractéristiques de la solution - complètement supprimées */
+.solution-features {
+    display: none;
+}
+
+.solution-feature {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+}
+
+.solution-feature:hover {
+    transform: translateX(5px);
+}
+
+.solution-feature i {
+    font-size: 1rem;
+    color: #ff9800;
+    margin-right: 10px;
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 152, 0, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.solution-feature:hover i {
+    background: #ff9800;
+    color: white;
+}
+
+.solution-feature span {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #ffffff;
+}
+
+/* Bouton primaire - spécifique à la section solution */
+.solution-complete-section .btn-primary {
+    background-color: #f7941d !important;
+    color: white !important;
+    padding: 10px 25px !important;
+    border-radius: 50px !important;
+    text-decoration: none !important;
+    font-weight: 600 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    transition: all 0.3s ease !important;
+    border: none !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4) !important;
+    font-size: 0.9rem !important;
+    letter-spacing: 0.5px !important;
+    position: relative !important;
+    z-index: 10 !important;
+}
+
+.solution-complete-section .btn-primary i {
+    margin-left: 8px;
+}
+
+.solution-complete-section .btn-primary:hover {
+    background-color: #e68300 !important;
+    transform: none !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
+}
+
+.solution-complete-section .btn-primary:hover i {
+    transform: none;
+}
+
+/* CTA de la section solution */
+.solutions-cta {
+    margin-top: 80px;
+    padding: 50px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #ff9800, #ff5722);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    box-shadow: 0 15px 30px rgba(255, 152, 0, 0.2);
+}
+
+.cta-content {
+    flex: 0 0 60%;
+    padding: 0 20px;
+}
+
+.cta-content h3 {
+    font-size: 1.8rem;
+    color: white;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.cta-content p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.05rem;
+}
+
+.cta-buttons {
+    flex: 0 0 40%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: flex-end;
+    padding: 0 20px;
+}
+
+/* Bouton secondaire - spécifique à la section solution */
+.solution-complete-section .btn-secondary {
+    background-color: white;
+    color: #ff5722;
+    padding: 12px 28px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.solution-complete-section .btn-secondary:hover {
+    background-color: #f9f9f9;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.solution-complete-section .btn-outline {
+    background-color: transparent;
+    color: white;
+    padding: 11px 27px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+}
+
+.solution-complete-section .btn-outline:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: white;
+    transform: translateY(-3px);
+}
+
+/* Animation pour les éléments au défilement */
+.solution-complete-section [data-aos] {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.solution-complete-section [data-aos].aos-animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.solution-complete-section [data-aos="fade-right"] {
+    transform: translateX(-30px);
+}
+
+.solution-complete-section [data-aos="fade-left"] {
+    transform: translateX(30px);
+}
+
+/* Responsive pour la section solution */
+@media (max-width: 1200px) {
+    .solution-content {
+        padding: 20px 30px;
+    }
+    
+    .solution-complete-section .section-header h2 {
+        font-size: 2.4rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .solution-row, 
+    .solution-row.reverse {
+        flex-direction: column;
+        text-align: center;
+        margin-bottom: 80px;
+        gap: 20px;
+    }
+    
+    .solution-row::after {
+        display: none;
+    }
+    
+    .solution-row:before {
+        display: none !important;
+    }
+    
+    .solution-image, 
+    .solution-content {
+        flex: 0 0 100%;
+        padding: 20px;
+    }
+    
+    .solution-title::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .solution-row.reverse .solution-title::after {
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+    }
+    
+    .solution-feature {
+        justify-content: center;
+        margin-right: 0;
+    }
+    
+    .solution-features {
+        justify-content: center;
+    }
+    
+    .solutions-cta {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .cta-content, 
+    .cta-buttons {
+        flex: 0 0 100%;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+    
+    .solution-complete-section .section-header h2 {
+        font-size: 2rem;
+    }
+    
+    .floating-icon {
+        display: none !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .solution-complete-section {
+        padding: 60px 0;
+    }
+    
+    .solution-complete-section .section-header {
+        margin-bottom: 50px;
+    }
+    
+    .solution-title {
+        font-size: 1.6rem;
+    }
+    
+    .solution-row {
+        margin-bottom: 60px;
+    }
+    
+    .solutions-cta {
+        padding: 30px;
+    }
+}
+
+/* ========================================================
+   STYLES DE LA PAGE PRODUITS (MIGRATION DEPUIS produits.css)
+   ======================================================== */
+
+/* Variables globales additionnelles pour produits */
+:root {
+    --gradient-primary: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+    --gradient-secondary: linear-gradient(135deg, var(--secondary-color), var(--secondary-light));
+    --transition-smooth: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    --dark-bg: var(--bg-dark);
+    --darker-bg: var(--bg-darker);
+    --dark-accent: var(--bg-light-gray);
+}
+
+/* =======================================================
+ * STYLES UNIFIÉS POUR LES SECTIONS HERO AVEC ARRIÈRE-PLAN
+ * Tous les styles d'arrière-plan ont été migrés ici
+ * pour éviter les conflits et garantir la cohérence
+ * ======================================================= */
+
+/* Section hero des produits */
+.produits-hero {
+    background-image: url('../img/backgrounds/Section-Produit/dark-accessoires-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding-top: 70px; /* Espace en haut */
+    padding-bottom: 70px; /* Espace en bas */
+    color: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin-top: 0;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex; /* Utilisation de flexbox pour le centrage */
+    flex-direction: column;
+    justify-content: center; /* Centrage vertical */
+    min-height: calc(100vh - 70px); /* Hauteur minimale pour occuper l'écran */
+    box-shadow: inset 0 -15px 30px rgba(0,0,0,0.4); /* Effet d'ombre intérieure en bas */
+}
+
+/* Film transparent sombre par-dessus l'image d'arrière-plan */
+.produits-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0,0,0,0.6), rgba(0,0,0,0.4));
+    opacity: 0.5; /* Opacité du film noir transparent - fortement réduite pour mieux voir l'image */
+    z-index: 1;
+    backdrop-filter: brightness(0.8) contrast(1.2); /* Effet supplémentaire pour intensifier l'image */
+}
+
+/* Assurer que le contenu reste au-dessus du motif */
+.produits-hero .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Désactivation de la barre en bas pour utiliser uniquement hero-divider */
+.produits-hero::after {
+    display: none;
+}
+
+/* Section hero des accessoires avec arrière-plan photo */
+.accessoires-hero {
+    padding-top: 80px;
+    padding-bottom: 60px;
+    background: linear-gradient(rgba(15, 15, 20, 0.85), rgba(25, 25, 35, 0.9)), url('../img/backgrounds/dark-accessoires-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin-top: 0;
+    min-height: calc(100vh - 70px);
+    z-index: 1;
+    box-shadow: inset 0 -15px 30px rgba(0,0,0,0.4);
+}
+
+/* Texture fine pour les sections héro (motif SVG) */
+.produits-hero .texture-overlay,
+.accessoires-hero .texture-overlay {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.3;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Styles communs pour le contenu des sections hero */
+.produits-hero-content,
+.accessoires-hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 2; /* Assure que le contenu est au-dessus des éléments décoratifs */
+    text-align: center;
+}
+
+/* Titre principal des sections hero */
+.produits-hero-content h1,
+.accessoires-hero-content h1 {
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    font-family: 'Inter', sans-serif;
+    color: #ffffff;
+}
+
+/* Sous-titre des sections hero */
+.produits-hero-content .subtitle,
+.accessoires-hero-content .subtitle {
+    font-size: 20px;
+    line-height: 1.6;
+    color: #ffffff;
+    max-width: 700px;
+    margin: 0 auto;
+    opacity: 0.9;
+}
+
+/* Séparateur (divider) pour les sections hero */
+.hero-divider {
+    background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+    height: 3px;
+    width: 120px;
+    margin: 20px auto;
+    display: block;
+    opacity: 1;
+}
+
+.produits-hero h1 {
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.hero-divider {
+    background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+    height: 3px;
+    width: 120px;
+    margin: 30px auto;
+}
+
+.produits-hero .subtitle {
+    font-size: 20px;
+    line-height: 1.6;
+    color: #ffffff;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.hero-wave {
+    position: relative;
+    margin-top: 10px; /* Réduction de la marge de 20px à 10px */
+    line-height: 0;
+    height: 60px; /* Réduction de la hauteur de 80px à 60px */
+    overflow: hidden;
+}
+
+/* Section "Pourquoi choisir PayeSmart" */
+.why-choose-section {
+    padding: 80px 0;
+    background: linear-gradient(to bottom, #262626, #333333);
+    color: #ffffff;
+}
+
+.why-choose-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-top: 40px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.why-choose-card {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 35px 25px;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(5px);
+}
+
+.why-choose-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.why-choose-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--primary-color);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s ease;
+}
+
+.why-choose-card:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.why-choose-icon {
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+    display: inline-block;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.why-choose-card h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #ffffff;
+}
+
+.why-choose-card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+@media (max-width: 992px) {
+    .why-choose-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .why-choose-section {
+        padding: 60px 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .why-choose-grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .why-choose-card {
+        padding: 30px 20px;
+    }
+}
+
+/* Section principale des produits */
+.produits-section {
+    background-color: var(--darker-bg);
+    padding: 10px 0 60px;
+    color: white;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Styles pour les titres de catégorie */
+.categorie-section {
+    margin: 0 0 20px 0;
+    width: 100%;
+    text-align: center;
+}
+
+/* Style élégant et distinctif pour les titres de catégories sur la page produit */
+.categorie-titre {
+    font-size: 1.65rem;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 15px;
+    text-transform: none;
+    letter-spacing: 0.8px;
+    position: relative;
+    display: inline-block;
+    padding: 8px 15px 8px 20px;
+    border-left: 4px solid var(--primary-color);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Pseudo-élément supprimé */
+
+.categorie-divider {
+    display: none; /* On cache le séparateur car nous utilisons déjà l'effet after du titre */
+}
+
+.why-choose-section .section-header h2 {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: white;
+}
+
+.section-header p {
+    font-size: 18px;
+    color: #ffffff;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Éléments produit */
+.produit-item {
+    display: flex;
+    margin-bottom: 40px;
+    align-items: center;
+    gap: 30px;
+}
+
+.produit-item:last-child {
+    margin-bottom: 0;
+}
+
+.produit-item.reverse {
+    flex-direction: row-reverse;
+}
+
+.produit-content {
+    flex: 1;
+}
+
+.produit-image {
+    flex: 1;
+    position: relative;
+}
+
+.produit-number {
+    font-size: 60px;
+    font-weight: 800;
+    color: var(--primary-color);
+    opacity: 0.3;
+    margin-bottom: 10px;
+    line-height: 1;
+}
+
+.produit-content h3, .produit-info h3 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: white;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.produit-tagline, .produit-info .produit-tagline {
+    font-size: 20px;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    font-weight: 500;
+    filter: brightness(1.2);
+}
+
+.produit-content > p, .produit-info > p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #ffffff;
+    margin-bottom: 30px;
+}
+
+/* Fonctionnalités des produits */
+.produit-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.feature-icon {
+    background: rgba(247, 148, 29, 0.1);
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    flex-shrink: 0;
+}
+
+.feature-icon i {
+    width: 24px;
+    height: 24px;
+}
+
+.feature-text h4 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: white;
+}
+
+.feature-text p {
+    font-size: 16px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Images des produits */
+.produit-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.image-decoration {
+    position: absolute;
+    z-index: -1;
+}
+
+.decoration-dots {
+    background-image: radial-gradient(var(--primary-color) 2px, transparent 2px);
+    background-size: 20px 20px;
+    width: 140px;
+    height: 140px;
+    top: -20px;
+    right: -20px;
+    opacity: 0.3;
+}
+
+.decoration-circle {
+    width: 200px;
+    height: 200px;
+    border: 2px dashed rgba(247, 148, 29, 0.3);
+    border-radius: 50%;
+    bottom: -40px;
+    left: -40px;
+}
+
+/* Responsive design pour produits */
+@media (max-width: 992px) {
+    .produit-item, .produit-item.reverse {
+        flex-direction: column;
+        gap: 40px;
+    }
+    
+    .produit-image {
+        order: -1;
+    }
+    
+    .produits-hero h1 {
+        font-size: 36px;
+    }
+    
+    .produits-hero .subtitle {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 768px) {
+    .produit-features {
+        grid-template-columns: 1fr;
+    }
+    
+    .section-header h2 {
+        font-size: 30px;
+    }
+    
+    .produit-content h3 {
+        font-size: 28px;
+    }
+    
+    .produit-number {
+        font-size: 50px;
+    }
+}
+
+/*==================================
+ * STYLES PRODUIT SIMPLE (MIGRATION DEPUIS produit-simple.css)
+ *==================================*/
+
+/* Styles pour les produits simplifiés sans aucun effet de carte */
+
+/* Structure de base du produit simplifié */
+.produit-simple {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    position: relative;
+    margin-bottom: 30px; /* Réduit de 50px à 30px */
+    margin-top: -20px; /* Décalage vers le haut */
+    padding: 15px 0; /* Réduction du padding vertical */
+    /* Suppression de toute transition pouvant créer un effet */
+    transition: none;
+    /* Pas d'effet de survol */
+    background: transparent;
+}
+
+/* Alternance de l'ordre des éléments pour les produits pairs */
+.produit-simple.reverse {
+    flex-direction: row-reverse;
+}
+
+/* Suppression complète de l'animation au survol */
+.produit-simple:hover {
+    transform: none;
+}
+
+/* Style de l'image - sans ombres ni effets */
+.produit-simple img.produit-image,
+.produit-simple .produit-image.placeholder-container {
+    flex: 1;
+    max-width: 48%;
+    min-width: 300px;
+    max-height: 400px;
+    /* Coins légèrement arrondis uniquement */
+    border-radius: 8px;
+    /* Suppression de toutes les ombres */
+    box-shadow: none;
+    transition: none;
+    object-fit: contain;
+    background-color: rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.produit-simple:hover img.produit-image {
+    box-shadow: none;
+}
+
+/* Informations du produit */
+.produit-simple .produit-info {
+    flex: 1;
+    padding: 20px;
+}
+
+.produit-simple .produit-info h3 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.produit-simple .produit-info .produit-tagline {
+    font-size: 20px;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.produit-simple .produit-info .produit-description {
+    font-size: 18px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 30px;
+}
+
+.produit-simple .btn-produit {
+    display: inline-block;
+    padding: 12px 25px;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: white;
+    border-radius: 9999px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(247, 148, 29, 0.3);
+}
+
+.produit-simple .btn-produit:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(247, 148, 29, 0.4);
+}
+
+/* Titre de catégorie */
+.produits-category-title {
+    font-size: 28px;
+    color: white;
+    margin: 40px 0 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--primary-color);
+    display: inline-block;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .produit-simple, .produit-simple.reverse {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .produit-simple img.produit-image {
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    .produit-simple .produit-info {
+        padding: 20px 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .produit-simple .produit-info h3 {
+        font-size: 26px;
+    }
+    
+    .produit-simple .produit-info .produit-tagline {
+        font-size: 18px;
+    }
+    
+    .produit-simple .produit-info .produit-description {
+        font-size: 16px;
+    }
+}
+
+/*==================================
+ * STYLES GALERIE VIDÉO PRODUITS (MIGRATION DEPUIS produits-video-gallery.css)
+ *==================================*/
+
+/* Styles pour la galerie de produits avec vidéos */
+
+.produits-intro {
+    max-width: 800px;
+    margin: 0 auto 20px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.produits-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+/* Carte de produit */
+.produit-card {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.produit-card.reverse {
+    flex-direction: row-reverse;
+}
+
+.produit-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Conteneur vidéo */
+.produit-preview {
+    flex: 1;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.2);
+    aspect-ratio: 16/9;
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.video-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+.video-placeholder::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: -1;
+}
+
+.video-placeholder:hover {
+    background-color: rgba(247, 148, 29, 0.1);
+}
+
+.video-placeholder i {
+    font-size: 60px;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    filter: drop-shadow(0 0 10px rgba(247, 148, 29, 0.5));
+    transition: transform 0.3s ease;
+}
+
+.video-placeholder:hover i {
+    transform: scale(1.1);
+}
+
+.video-placeholder span {
+    color: white;
+    font-weight: 500;
+    font-size: 18px;
+    padding: 8px 20px;
+    border-radius: 30px;
+    background: rgba(247, 148, 29, 0.2);
+    backdrop-filter: blur(5px);
+}
+
+.produit-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+}
+
+.produit-video.active {
+    display: block;
+}
+
+/* Informations du produit */
+.produit-info {
+    flex: 1;
+    padding: 20px;
+}
+
+.produit-info h3 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.produit-tagline {
+    font-size: 20px;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.produit-description {
+    font-size: 18px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 30px;
+}
+
+.btn-produit {
+    display: inline-block;
+    padding: 12px 25px;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: white;
+    border-radius: 9999px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(247, 148, 29, 0.3);
+}
+
+.btn-produit:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(247, 148, 29, 0.4);
+}
+
+/* Section d'appel à l'action */
+.produits-cta {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 50px;
+    text-align: center;
+    margin-top: 50px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.produits-cta h3 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: white;
+}
+
+.produits-cta p {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 30px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn-primary:not([href*="register=true"]) {
+    display: inline-block;
+    padding: 15px 35px;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: white;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 18px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(247, 148, 29, 0.3);
+}
+
+.btn-primary:not([href*="register=true"]):hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(247, 148, 29, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .produit-card, .produit-card.reverse {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .produit-preview {
+        width: 100%;
+    }
+    
+    .produit-info {
+        width: 100%;
+        padding: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .produits-gallery {
+        gap: 50px;
+    }
+    
+    .produit-info h3 {
+        font-size: 28px;
+    }
+    
+    .produit-tagline {
+        font-size: 18px;
+    }
+    
+    .produit-description {
+        font-size: 16px;
+    }
+    
+    .produits-cta {
+        padding: 30px;
+    }
+    
+    .produits-cta h3 {
+        font-size: 24px;
+    }
+}
+
+/* JavaScript pour activer les vidéos */
+.js-video-active .video-placeholder {
+    display: none;
+}
+
+.js-video-active .produit-video {
+    display: block;
+}
+
+/*==================================
+ * FONCTIONNALITÉS PRODUITS STYLES UNIFIÉS (MIGRATION DEPUIS product-features-unified.css)
+ *==================================*/
+/* 
+ * Regroupe et harmonise les styles des fichiers :
+ * - features-produits.css
+ * - section-features-fond.css
+ * - section-payment-fond.css
+ * - feature-headings.css
+ * - features-cards.css
+ */
+
+/*==================================
+ * 1. CARTES DE FONCTIONNALITÉS
+ *==================================*/
+
+/* Conteneur de grille pour les fonctionnalités */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 40px;
+    margin-bottom: 60px;
+}
+
+/* Carte de fonctionnalité */
+.feature-card {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    padding: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(242, 157, 56, 0.1);
+    overflow: hidden;
+    position: relative;
+}
+
+.feature-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.dark-theme .feature-card {
+    background-color: var(--darker-bg);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Icône de fonctionnalité */
+.feature-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    color: #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    background-size: 200% auto;
+    transition: all 0.3s ease;
+}
+
+.feature-icon i {
+    font-size: 24px;
+    color: #fff;
+}
+
+/* Couleurs d'arrière-plan pour les icônes */
+.blue-bg {
+    background: linear-gradient(135deg, #0D47A1, #1976D2);
+}
+
+.green-bg {
+    background-color: #2ecc71;
+}
+
+.purple-bg {
+    background-color: #9b59b6;
+}
+
+.orange-bg {
+    background: linear-gradient(135deg, #F29D38, #FFAD42);
+}
+
+.red-bg {
+    background-color: #e74c3c;
+}
+
+.teal-bg {
+    background-color: #1abc9c;
+}
+
+/* Titre et texte de la fonctionnalité */
+.feature-card h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    font-weight: 600;
+    color: #333;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.feature-card h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: linear-gradient(90deg, #0D47A1, #F29D38);
+}
+
+.feature-card p {
+    color: #666;
+    line-height: 1.5;
+}
+
+.dark-theme .feature-card h3 {
+    color: #fff;
+}
+
+.dark-theme .feature-card p {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/*==================================
+ * 2. SECTION FEATURES FOND
+ *==================================*/
+
+/* Section avec fond coloré */
+.features-colored-section {
+    background: linear-gradient(135deg, #4A90E2, #357ABD);
+    color: white;
+    padding: 80px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Formes décoratives */
+.features-colored-section::before {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    top: -150px;
+    right: -100px;
+}
+
+.features-colored-section::after {
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    bottom: -100px;
+    left: -50px;
+}
+
+/* En-tête de la section */
+.features-colored-section .section-header {
+    margin-bottom: 60px;
+}
+
+.features-colored-section .section-header h2,
+.features-colored-section .section-header p {
+    color: white;
+}
+
+/* Liste de fonctionnalités */
+.features-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    position: relative;
+    z-index: 2;
+}
+
+.feature-item {
+    flex: 0 0 calc(50% - 15px);
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 30px;
+}
+
+.feature-item-icon {
+    background-color: rgba(255, 255, 255, 0.2);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    flex-shrink: 0;
+}
+
+.feature-item-icon i {
+    color: white;
+    font-size: 20px;
+}
+
+.feature-item-content h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.feature-item-content p {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+}
+
+/*==================================
+ * 3. SECTION PAYMENT FOND
+ *==================================*/
+
+/* Section de paiement avec fond spécial */
+.payment-section {
+    padding: 80px 0;
+    background-color: #f9fafb;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Fond wave */
+.payment-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background-image: url('../img/wave-top.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.payment-section::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background-image: url('../img/wave-bottom.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Conteneur de la section */
+.payment-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px;
+    position: relative;
+    z-index: 2;
+}
+
+/* Contenu du paiement */
+.payment-content {
+    flex: 0 0 45%;
+}
+
+.payment-title {
+    font-size: 36px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.payment-description {
+    font-size: 18px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+/* Liste des méthodes de paiement */
+.payment-methods {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.payment-method {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.payment-method:hover {
+    transform: translateY(-3px);
+}
+
+.payment-method img {
+    height: 30px;
+    margin-right: 10px;
+}
+
+.payment-method span {
+    font-weight: 600;
+    color: #333;
+}
+
+/* Image du paiement */
+.payment-image {
+    flex: 0 0 45%;
+}
+
+.payment-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/*==================================
+ * 4. EN-TÊTES DE FONCTIONNALITÉS
+ *==================================*/
+
+/* En-tête spéciaux pour les fonctionnalités */
+.feature-heading {
+    text-align: center;
+    margin-bottom: 60px;
+    position: relative;
+}
+
+.feature-heading h2 {
+    font-size: 36px;
+    margin-bottom: 15px;
+    font-weight: 700;
+    background: linear-gradient(90deg, #0D47A1, #F29D38);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+}
+
+.feature-heading p {
+    font-size: 18px;
+    color: #666;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Variantes de style */
+.feature-heading.left-aligned {
+    text-align: left;
+}
+
+.feature-heading.left-aligned h2::after {
+    margin-left: 0;
+}
+
+.feature-heading.light h2,
+.feature-heading.light p {
+    color: #fff;
+}
+
+.feature-heading.light h2::after {
+    background-color: #fff;
+}
+
+/* Séparateur décoratif */
+.feature-separator {
+    width: 80px;
+    height: 3px;
+    background-color: #007bff;
+    margin: 20px auto;
+    display: block;
+    opacity: 1;
+}
+
+.feature-separator.left-align {
+    margin-left: 0;
+}
+
+/*==================================
+ * 5. RESPONSIVE
+ *==================================*/
+
+/* Responsive pour tablette */
+@media (max-width: 992px) {
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .feature-item {
+        flex: 0 0 100%;
+    }
+    
+    .payment-container {
+        flex-direction: column;
+    }
+    
+    .payment-content,
+    .payment-image {
+        flex: 0 0 100%;
+    }
+    
+    .payment-image {
+        margin-top: 40px;
+        order: 2;
+    }
+    
+    .payment-content {
+        order: 1;
+    }
+}
+
+/* Responsive pour mobile */
+@media (max-width: 768px) {
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .feature-card {
+        padding: 25px;
+    }
+    
+    .feature-heading h2 {
+        font-size: 28px;
+    }
+    
+    .feature-heading p {
+        font-size: 16px;
+    }
+    
+    .payment-title {
+        font-size: 28px;
+    }
+    
+    .payment-description {
+        font-size: 16px;
+    }
+}
+
+/*==================================
+ * FEATURES STYLES UNIFIÉS (MIGRATION DEPUIS features-unified.css)
+ *==================================*/
+/* 
+ * Regroupe et harmonise les styles des fichiers :
+ * - features-cards.css
+ * - features-carousel.css
+ * - features-grid.css
+ * - features-horizontal.css
+ * - features-produits.css
+ * - features-showcase.css
+ * - features-zigzag.css
+ * - feature-headings.css
+ * - section-features-fond.css
+ */
+
+/*==================================
+ * 1. STRUCTURE DE BASE DES FEATURES
+ *==================================*/
+
+/* Section features principale */
+.key-features-section {
+    padding: 60px 0;
+    background: linear-gradient(135deg, rgba(13, 71, 161, 0.03) 0%, rgba(242, 157, 56, 0.05) 100%);
+    border-top: 1px solid rgba(13, 71, 161, 0.1);
+    border-bottom: 1px solid rgba(242, 157, 56, 0.1);
+}
+
+/* Arrière-plan de section */
+.features-section.bg-light {
+    background: #f9f9f9;
+}
+
+.features-section.bg-dark {
+    background: #2d2d2d;
+    color: white;
+}
+
+/* Conteneur features */
+.features-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Arrière-plan spécial */
+.section-features-fond {
+    background-color: #f8f9fa;
+    background-image: url('../images/pattern-light.svg');
+    background-repeat: repeat;
+    background-size: 400px;
+    position: relative;
+}
+
+.section-features-fond::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255,255,255,0.97), rgba(255,255,255,0.85));
+    z-index: 1;
+}
+
+.section-features-fond .container {
+    position: relative;
+    z-index: 2;
+}
+
+/*==================================
+ * 2. TITRES ET EN-TÊTES
+ *==================================*/
+
+/* Style des titres */
+.features-heading {
+    text-align: center;
+    margin-bottom: 60px;
+    position: relative;
+}
+
+.features-heading h2 {
+    font-size: 36px;
+    margin-bottom: 15px;
+    font-weight: 700;
+    background: linear-gradient(90deg, #0D47A1, #F29D38);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+}
+
+.features-heading p {
+    font-size: 18px;
+    color: #666;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Sous-titres avec icônes */
+.feature-subtitle {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.feature-subtitle i {
+    font-size: 24px;
+    margin-right: 15px;
+    color: #007bff;
+}
+
+.feature-subtitle h3 {
+    font-size: 22px;
+    margin: 0;
+    color: #333;
+}
+
+/* Variantes de couleur */
+.bg-dark .features-heading h2 {
+    color: #fff;
+}
+
+.bg-dark .features-heading p {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Séparateur décoratif */
+.feature-separator {
+    width: 80px;
+    height: 3px;
+    background-color: #007bff;
+    margin: 20px auto;
+    display: block;
+    opacity: 1;
+}
+
+.feature-separator.left-align {
+    margin-left: 0;
+}
+
+/*==================================
+ * 3. CARTES DE FONCTIONNALITÉS
+ *==================================*/
+
+/* Grille de cartes */
+.features-cards {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -15px;
+    justify-content: center;
+}
+
+/* Carte individuelle */
+.feature-card {
+    flex: 0 0 calc(33.333% - 30px);
+    margin: 15px;
+    padding: 30px;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Variante sombre */
+.bg-dark .feature-card {
+    background: #3a3a3a;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Icône de la carte */
+.feature-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    color: #fff;
+    font-size: 32px;
+}
+
+.feature-icon.blue-bg {
+    background: #007bff;
+}
+
+.feature-icon.orange-bg {
+    background: #fd7e14;
+}
+
+.feature-icon.purple-bg {
+    background: #6f42c1;
+}
+
+.feature-icon.green-bg {
+    background: #28a745;
+}
+
+/* Contenu de la carte */
+.feature-content {
+    margin-top: 20px;
+}
+
+.feature-card h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+    font-weight: 600;
+    color: #333;
+}
+
+.feature-card p {
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 0;
+}
+
+/* Textes courts et complets */
+.feature-short {
+    margin-bottom: 15px;
+}
+
+.feature-full {
+    height: 0;
+    overflow: hidden;
+    transition: height 0.3s ease;
+}
+
+.feature-full.active {
+    height: auto;
+    margin-bottom: 15px;
+}
+
+/* Bouton toggle */
+.feature-toggle {
+    background: none;
+    border: 1px solid #007bff;
+    color: #007bff;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.feature-toggle:hover {
+    background: rgba(0, 123, 255, 0.1);
+}
+
+.feature-toggle.active {
+    background: #007bff;
+    color: white;
+}
+
+/* Variantes sombres */
+.bg-dark .feature-card h3 {
+    color: #fff;
+}
+
+.bg-dark .feature-card p {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/*==================================
+ * 4. CAROUSEL DE FONCTIONNALITÉS
+ *==================================*/
+
+/* Container du carousel */
+.features-carousel-container {
+    position: relative;
+    padding: 40px 0;
+    overflow: hidden;
+}
+
+/* Carousel */
+.features-carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 30px;
+    margin-bottom: -30px;
+}
+
+.features-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+/* Slide du carousel */
+.features-carousel-slide {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    padding: 0 15px;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+}
+
+.features-carousel-slide.active {
+    opacity: 1;
+}
+
+/* Contenu du slide */
+.features-carousel-content {
+    background: #fff;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.features-carousel-icon {
+    font-size: 32px;
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+.features-carousel-title {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.features-carousel-description {
+    color: #666;
+    line-height: 1.6;
+    flex-grow: 1;
+}
+
+/* Navigation du carousel */
+.features-carousel-nav {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.carousel-nav-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #007bff;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.carousel-nav-btn:hover {
+    background: #0056b3;
+}
+
+/* Indicateurs du carousel */
+.features-carousel-indicators {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.carousel-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ddd;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.carousel-indicator.active {
+    background: #007bff;
+    transform: scale(1.2);
+}
+
+/*==================================
+ * 5. PRÉSENTATION ZIGZAG
+ *==================================*/
+
+/* Container zigzag */
+.features-zigzag {
+    margin: 80px 0;
+}
+
+/* Élément individuel zigzag */
+.zigzag-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 80px;
+}
+
+.zigzag-item:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+/* Contenu du zigzag */
+.zigzag-content {
+    flex: 0 0 50%;
+    padding: 0 30px;
+}
+
+.zigzag-content h3 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.zigzag-content p {
+    color: #666;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+/* Image du zigzag */
+.zigzag-image {
+    flex: 0 0 50%;
+    padding: 0 30px;
+}
+
+.zigzag-image img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Variante sombre */
+.bg-dark .zigzag-content h3 {
+    color: #fff;
+}
+
+.bg-dark .zigzag-content p {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/*==================================
+ * 6. GRILLE DE FONCTIONNALITÉS
+ *==================================*/
+
+/* Container de la grille */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+/* Élément de la grille */
+.grid-item {
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.grid-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.bg-dark .grid-item {
+    background: #3a3a3a;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Icône de la grille */
+.grid-icon {
+    margin-bottom: 20px;
+    font-size: 32px;
+    color: #007bff;
+}
+
+/* Contenu de la grille */
+.grid-item h3 {
+    margin-bottom: 15px;
+    font-size: 20px;
+    color: #333;
+}
+
+.grid-item p {
+    color: #666;
+    line-height: 1.5;
+}
+
+.bg-dark .grid-item h3 {
+    color: #fff;
+}
+
+.bg-dark .grid-item p {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/*==================================
+ * 7. PRÉSENTATION HORIZONTALE
+ *==================================*/
+
+/* Container horizontal */
+.features-horizontal {
+    margin: 60px 0;
+}
+
+/* Élément horizontal */
+.horizontal-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 40px;
+    padding: 20px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.horizontal-item:hover {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+/* Icône horizontale */
+.horizontal-icon {
+    flex: 0 0 80px;
+    height: 80px;
+    margin-right: 20px;
+    border-radius: 50%;
+    background: rgba(0, 123, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #007bff;
+    font-size: 32px;
+}
+
+/* Contenu horizontal */
+.horizontal-content {
+    flex: 1;
+}
+
+.horizontal-content h3 {
+    margin-bottom: 10px;
+    font-size: 22px;
+    color: #333;
+}
+
+.horizontal-content p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+.bg-dark .horizontal-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.bg-dark .horizontal-content h3 {
+    color: #fff;
+}
+
+.bg-dark .horizontal-content p {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/*==================================
+ * 8. SHOWCASE DE PRODUITS
+ *==================================*/
+
+/* Container showcase */
+.features-showcase {
+    position: relative;
+    padding: 60px 0;
+    background: #f8f9fa;
+    overflow: hidden;
+}
+
+/* Grille showcase */
+.showcase-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 50px;
+    align-items: center;
+}
+
+/* Contenu showcase */
+.showcase-content {
+    padding: 0 20px;
+}
+
+.showcase-content h2 {
+    font-size: 36px;
+    margin-bottom: 25px;
+    color: #333;
+    font-weight: 700;
+}
+
+.showcase-content p {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 30px;
+    line-height: 1.7;
+}
+
+.showcase-content ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0 0 30px;
+}
+
+.showcase-content ul li {
+    padding-left: 30px;
+    position: relative;
+    margin-bottom: 15px;
+    font-size: 16px;
+    color: #444;
+}
+
+.showcase-content ul li:before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #007bff;
+    font-weight: bold;
+}
+
+/* Image showcase */
+.showcase-image {
+    position: relative;
+}
+
+.showcase-image img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+}
+
+/* Variante sombre */
+.bg-dark .features-showcase {
+    background: #222;
+}
+
+.bg-dark .showcase-content h2 {
+    color: #fff;
+}
+
+.bg-dark .showcase-content p,
+.bg-dark .showcase-content ul li {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/*==================================
+ * 9. PRODUITS SPÉCIFIQUES
+ *==================================*/
+
+/* Section produits */
+.produits-section {
+    padding: 70px 0;
+}
+
+/* Liste de produits */
+.produits-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+/* Carte produit */
+.produit-card {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.produit-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Image produit */
+.produit-image {
+    height: 200px;
+    overflow: hidden;
+}
+
+.produit-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.produit-card:hover .produit-image img {
+    transform: scale(1.1);
+}
+
+/* Contenu produit */
+.produit-content {
+    padding: 25px;
+}
+
+.produit-content h3 {
+    font-size: 20px;
+    margin-bottom: 12px;
+    color: #333;
+}
+
+.produit-content p {
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+/* Bouton produit */
+.produit-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #007bff;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.produit-button:hover {
+    background: #0056b3;
+}
+
+/*==================================
+ * 10. RESPONSIVE
+ *==================================*/
+
+/* Grands écrans */
+@media (min-width: 1400px) {
+    .features-container {
+        max-width: 1320px;
+    }
+    
+    .features-heading h2 {
+        font-size: 42px;
+    }
+}
+
+/* Tablettes */
+@media (max-width: 992px) {
+    /* Structure */
+    .features-section {
+        padding: 60px 0;
+    }
+    
+    .features-heading {
+        margin-bottom: 40px;
+    }
+    
+    .features-heading h2 {
+        font-size: 32px;
+    }
+    
+    /* Cartes */
+    .feature-card {
+        flex: 0 0 calc(50% - 30px);
+    }
+    
+    /* Zigzag */
+    .zigzag-item {
+        flex-direction: column !important;
+        margin-bottom: 60px;
+    }
+    
+    .zigzag-content,
+    .zigzag-image {
+        flex: 0 0 100%;
+        padding: 0 15px;
+        margin-bottom: 30px;
+    }
+    
+    /* Grille */
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* Showcase */
+    .showcase-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    /* Produits */
+    .produits-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Mobiles */
+@media (max-width: 768px) {
+    /* Structure */
+    .features-section {
+        padding: 50px 0;
+    }
+    
+    .features-heading {
+        margin-bottom: 30px;
+    }
+    
+    /* Cartes */
+    .feature-card {
+        flex: 0 0 calc(100% - 30px);
+    }
+    
+    /* Grille */
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Éléments horizontaux */
+    .horizontal-item {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .horizontal-icon {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+    
+    /* Produits */
+    .produits-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+/*==================================
+ * PRICING STYLES UNIFIÉS (MIGRATION DEPUIS pricing-unified.css)
+ *==================================*/
+/* 
+ * Regroupe et harmonise les styles des fichiers :
+ * - pricing.css
+ * - pricing-enhancements.css
+ * - pricing-redesign.css
+ * - modern-pricing.css
+ */
+
+/*==================================
+ * 1. STRUCTURE DE BASE DES TARIFS
+ *==================================*/
+
+/* Section pricing principale */
+.pricing-section {
+    padding: 80px 0;
+    position: relative;
+    background-color: #f9f9f9;
+}
+
+/* Conteneur des tarifs */
+.pricing-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* En-tête de la section pricing */
+.pricing-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.pricing-header h2 {
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.pricing-header p {
+    font-size: 18px;
+    color: #666;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Sélecteur de devise */
+.currency-selector {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.currency-selector button {
+    padding: 8px 15px;
+    margin: 0 5px;
+    border: 1px solid #ddd;
+    background: none;
+    color: #666;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.currency-selector button.active {
+    background: #007bff;
+    color: #fff;
+    border-color: #007bff;
+}
+
+/* Toggle annuel/mensuel */
+.pricing-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+.pricing-toggle span {
+    font-size: 16px;
+    color: #666;
+    margin: 0 15px;
+}
+
+.pricing-toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+}
+
+.pricing-toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.pricing-toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.pricing-toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .pricing-toggle-slider {
+    background-color: #007bff;
+}
+
+input:checked + .pricing-toggle-slider:before {
+    transform: translateX(30px);
+}
+
+/* Badge économie */
+.pricing-save-badge {
+    background-color: #28a745;
+    color: white;
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-left: 10px;
+    display: inline-block;
+    position: relative;
+    top: -2px;
+}
+
+/*==================================
+ * 2. CARTES DE TARIFICATION
+ *==================================*/
+
+/* Grille des cartes de pricing */
+.pricing-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+/* Carte pricing individuelle */
+.pricing-card {
+    flex: 1;
+    min-width: 280px;
+    max-width: 350px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.pricing-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Badge populaire */
+.pricing-popular-badge {
+    position: absolute;
+    top: 20px;
+    right: -30px;
+    background-color: #ff6b6b;
+    color: #fff;
+    padding: 8px 40px;
+    font-size: 14px;
+    font-weight: 600;
+    transform: rotate(45deg);
+}
+
+/* En-tête de la carte */
+.pricing-card-header {
+    text-align: center;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 30px;
+}
+
+.pricing-card-header h3 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* Prix */
+.pricing-price {
+    font-size: 48px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pricing-currency {
+    font-size: 24px;
+    position: relative;
+    top: -15px;
+    margin-right: 5px;
+}
+
+.pricing-period {
+    font-size: 16px;
+    color: #888;
+    font-weight: normal;
+    margin-left: 5px;
+}
+
+/* Corps de la carte */
+.pricing-card-body {
+    margin-bottom: 30px;
+}
+
+/* Liste des fonctionnalités */
+.pricing-features {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.pricing-features li {
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    color: #666;
+}
+
+.pricing-features li i {
+    color: #28a745;
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+.pricing-features li.unavailable {
+    color: #aaa;
+    text-decoration: line-through;
+}
+
+.pricing-features li.unavailable i {
+    color: #dc3545;
+}
+
+/* Pied de la carte */
+.pricing-card-footer {
+    text-align: center;
+}
+
+/* Ancien prix */
+.pricing-old-price {
+    text-decoration: line-through;
+    color: #888;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+/* Prix promo */
+.pricing-promo {
+    color: #dc3545;
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+/*==================================
+ * 3. DESIGN MODERNE DES TARIFS
+ *==================================*/
+
+/* Version moderne des cartes */
+.pricing-modern {
+    background-color: #f8f9fa;
+    padding: 100px 0;
+}
+
+.pricing-modern-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Carte moderne */
+.pricing-modern-card {
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    padding: 40px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.pricing-modern-card.highlighted {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+}
+
+.pricing-modern-card.highlighted * {
+    color: #fff;
+}
+
+.pricing-modern-card.highlighted .pricing-features li {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.pricing-modern-card.highlighted .pricing-features li i {
+    color: #fff;
+}
+
+/* En-tête moderne */
+.pricing-modern-header {
+    margin-bottom: 30px;
+}
+
+.pricing-modern-header h3 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.pricing-modern-subheader {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* Prix moderne */
+.pricing-modern-price {
+    font-size: 56px;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.pricing-modern-price small {
+    font-size: 18px;
+    opacity: 0.8;
+}
+
+/* Liste des fonctionnalités moderne */
+.pricing-modern-features {
+    list-style-type: none;
+    padding: 0;
+    margin: 0 0 30px;
+    flex-grow: 1;
+}
+
+.pricing-modern-features li {
+    padding: 12px 0;
+    display: flex;
+    align-items: center;
+}
+
+.pricing-modern-features li i {
+    margin-right: 15px;
+    font-size: 18px;
+}
+
+/* Footer moderne */
+.pricing-modern-footer {
+    margin-top: auto;
+}
+
+.pricing-modern-btn {
+    display: inline-block;
+    width: 100%;
+    padding: 15px;
+    text-align: center;
+    border-radius: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+.pricing-modern-card:not(.highlighted) .pricing-modern-btn {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.pricing-modern-card:not(.highlighted) .pricing-modern-btn:hover {
+    background-color: #e0e0e0;
+}
+
+/*==================================
+ * 4. REDESIGN DES TARIFS
+ *==================================*/
+
+/* Conteneur du redesign */
+.pricing-redesign {
+    padding: 100px 0;
+    background-color: #f8f9fa;
+}
+
+.pricing-redesign-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* En-tête du redesign */
+.pricing-redesign-header {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.pricing-redesign-header h2 {
+    font-size: 42px;
+    font-weight: 800;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.pricing-redesign-header p {
+    font-size: 18px;
+    color: #666;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+/* Switch du redesign */
+.pricing-redesign-switch {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 60px;
+}
+
+.pricing-redesign-switch span {
+    font-size: 16px;
+    font-weight: 500;
+    color: #777;
+}
+
+.pricing-redesign-switch .active {
+    color: #333;
+    font-weight: 600;
+}
+
+/* Slider du redesign */
+.pricing-redesign-slider {
+    width: 70px;
+    height: 36px;
+    background-color: #007bff;
+    border-radius: 18px;
+    margin: 0 15px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.pricing-redesign-slider::before {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 28px;
+    height: 28px;
+    background-color: white;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.pricing-redesign-slider.annual::before {
+    left: 38px;
+}
+
+/* Cartes du redesign */
+.pricing-redesign-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.pricing-redesign-card {
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.pricing-redesign-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+.pricing-redesign-card.highlighted {
+    border: 3px solid #007bff;
+    transform: scale(1.05);
+}
+
+/* En-tête de carte redesign */
+.pricing-redesign-card-header {
+    background-color: #f8f9fa;
+    padding: 30px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+.pricing-redesign-card.highlighted .pricing-redesign-card-header {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.pricing-redesign-plan {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+/* Prix redesign */
+.pricing-redesign-price {
+    font-size: 50px;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.pricing-redesign-card.highlighted .pricing-redesign-price {
+    color: #fff;
+}
+
+.pricing-redesign-currency {
+    font-size: 24px;
+    vertical-align: top;
+}
+
+.pricing-redesign-period {
+    font-size: 16px;
+    color: #888;
+}
+
+/* Corps de carte redesign */
+.pricing-redesign-card-body {
+    padding: 30px;
+}
+
+/* Liste des fonctionnalités redesign */
+.pricing-redesign-features {
+    list-style-type: none;
+    padding: 0;
+    margin: 0 0 30px;
+}
+
+.pricing-redesign-features li {
+    padding: 12px 0;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.pricing-redesign-features li:last-child {
+    border-bottom: none;
+}
+
+.pricing-redesign-features li i {
+    margin-right: 12px;
+    font-size: 16px;
+    color: #28a745;
+}
+
+.pricing-redesign-features li.na i {
+    color: #dc3545;
+}
+
+/* Pied de carte redesign */
+.pricing-redesign-card-footer {
+    padding: 0 30px 30px;
+    text-align: center;
+}
+
+.pricing-redesign-btn {
+    display: inline-block;
+    width: 100%;
+    padding: 15px 20px;
+    border-radius: 8px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.pricing-redesign-btn:hover {
+    background-color: #0069d9;
+}
+
+.pricing-redesign-card:not(.highlighted) .pricing-redesign-btn {
+    background-color: #f8f9fa;
+    color: #333;
+    border: 1px solid #ddd;
+}
+
+.pricing-redesign-card:not(.highlighted) .pricing-redesign-btn:hover {
+    background-color: #e9ecef;
+}
+
+/* Affichage en colonnes pour comparaison */
+.pricing-comparison {
+    overflow-x: auto;
+    padding: 50px 0;
+}
+
+.pricing-comparison-table {
+    width: 100%;
+    min-width: 700px;
+    border-collapse: collapse;
+}
+
+.pricing-comparison-table th,
+.pricing-comparison-table td {
+    padding: 15px 20px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+.pricing-comparison-table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: #333;
+}
+
+.pricing-comparison-table th:first-child,
+.pricing-comparison-table td:first-child {
+    text-align: left;
+    font-weight: 500;
+}
+
+.pricing-comparison-table tr:last-child td {
+    border-bottom: none;
+}
+
+.pricing-comparison-table .check {
+    color: #28a745;
+    font-size: 18px;
+}
+
+.pricing-comparison-table .times {
+    color: #dc3545;
+    font-size: 18px;
+}
+
+/* Badges et labels */
+.pricing-label {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+.pricing-label-success {
+    background-color: #d4edda;
+    color: #28a745;
+}
+
+.pricing-label-primary {
+    background-color: #cfe2ff;
+    color: #0d6efd;
+}
+
+.pricing-label-warning {
+    background-color: #fff3cd;
+    color: #ffc107;
+}
+
+/*==================================
+ * 5. RESPONSIVE PRICING
+ *==================================*/
+
+/* Media queries pour les écrans moyens */
+@media (max-width: 992px) {
+    .pricing-grid {
+        flex-wrap: wrap;
+    }
+    
+    .pricing-card {
+        min-width: 250px;
+        flex: 0 0 calc(50% - 30px);
+        margin-bottom: 30px;
+    }
+    
+    .pricing-redesign-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .pricing-redesign-card.highlighted {
+        grid-column: span 2;
+        margin-bottom: 30px;
+    }
+}
+
+/* Media queries pour les petits écrans */
+@media (max-width: 768px) {
+    .pricing-section,
+    .pricing-modern,
+    .pricing-redesign {
+        padding: 60px 0;
+    }
+    
+    .pricing-header h2,
+    .pricing-modern-header h3,
+    .pricing-redesign-header h2 {
+        font-size: 30px;
+    }
+    
+    .pricing-price,
+    .pricing-modern-price,
+    .pricing-redesign-price {
+        font-size: 40px;
+    }
+    
+    .pricing-card {
+        flex: 0 0 100%;
+    }
+    
+    .pricing-toggle,
+    .pricing-redesign-switch {
+        flex-direction: row;
+        align-items: center;
+    }
+    
+    .pricing-toggle span,
+    .pricing-redesign-switch span {
+        font-size: 14px;
+    }
+}
+
+/* Media queries pour les très petits écrans */
+@media (max-width: 576px) {
+    .pricing-redesign-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .pricing-redesign-card {
+        width: 100%;
+    }
+    
+    .pricing-redesign-card.highlighted {
+        grid-column: span 1;
+    }
+    
+    .pricing-modern-card,
+    .pricing-card {
+        padding: 25px;
+    }
+    
+    .pricing-header h2,
+    .pricing-modern-header h3,
+    .pricing-redesign-header h2 {
+        font-size: 24px;
+    }
+    
+    .pricing-header p,
+    .pricing-modern-subheader,
+    .pricing-redesign-header p {
+        font-size: 16px;
+    }
+}
+
+/*==================================
+ * HERO STYLES UNIFIÉS (MIGRATION DEPUIS hero-unified.css)
+ *==================================*/
+/* 
+ * Regroupe et harmonise les styles des fichiers :
+ * - hero-position-fix.css
+ * - hero-align-left.css
+ * - hero-vertical-spacing-fix.css
+ * - hero-background.css
+ * - hero-indicators.css
+ * - hero-text-position.css
+ * - hero-logo-alignment.css
+ */
+
+/*==================================
+ * 1. STRUCTURE DE BASE HERO
+ *==================================*/
+
+/* Réinitialisation des marges et du padding */
+body, main {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Style de base pour la section hero */
+.hero {
+    position: relative;
+    padding: 200px 0;
+    color: white;
+    overflow: hidden;
+    height: 900px;
+    max-height: 95vh;
+    z-index: 1;
+}
+
+/* Section hero spécifique aux produits */
+.produits-hero {
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: auto !important;
+    padding-top: 120px !important;
+    padding-bottom: 80px !important;
+    background: var(--dark-bg, #2d2d2d) !important;
+    color: white !important;
+    text-align: center !important;
+    margin: 0 !important;
+    z-index: 1 !important;
+    overflow: visible !important;
+}
+
+/* Structure du contenu hero */
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 5;
+}
+
+/* Contenu spécifique pour produits-hero */
+.produits-hero-content {
+    text-align: center !important;
+    max-width: 800px !important;
+    padding: 0 20px !important;
+    width: 100% !important;
+}
+
+/* S'assurer que la section suivante commence immédiatement après */
+.accessoires-section {
+    margin-top: 0 !important;
+    padding-top: 60px !important;
+    background: var(--dark-bg);
+    color: white;
+}
+
+/*==================================
+ * 2. ARRIÈRE-PLAN & EFFETS VISUELS
+ *==================================*/
+
+/* Container pour l'image d'arrière-plan et l'overlay */
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+/* Image d'arrière-plan */
+.hero-background::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    width: calc(100% + 40px);
+    height: calc(100% + 40px);
+    background-image: url('../img/backgrounds/cashier-customer.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    z-index: -2;
+    transform: scale(1.1);
+    transition: all 0.5s ease;
+}
+
+/* Overlay */
+.hero-background::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: none;
+    z-index: -1;
+}
+
+/* Effet de parallaxe au défilement */
+.hero-parallax {
+    background-attachment: fixed;
+}
+
+/* Effet de parallaxe amélioré */
+.hero-parallax .hero-background::before {
+    transform-style: preserve-3d;
+    transform: translateZ(-1px) scale(1.5);
+    animation: subtle-zoom 30s infinite alternate ease-in-out;
+}
+
+/* Animation de zoom lent */
+@keyframes subtle-zoom {
+    0% {
+        transform: translateZ(-1px) scale(1.5);
+    }
+    100% {
+        transform: translateZ(-1px) scale(1.7);
+    }
+}
+
+@keyframes slowZoom {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.05);
+    }
+}
+
+.hero-animated .hero-background::before {
+    animation: slowZoom 20s alternate infinite ease-in-out;
+}
+
+/* Améliorer la visibilité des éléments décoratifs */
+.decorative-circle {
+    opacity: 0.15;
+}
+
+/*==================================
+ * 3. TEXTES ET CONTENUS
+ *==================================*/
+
+/* Styles génériques pour le texte */
+.hero-text {
+    position: relative;
+    z-index: 5;
+}
+
+/* Titres */
+.hero-text h1 {
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    font-size: 50px;
+    margin-bottom: 26px;
+    color: white;
+}
+
+/* Titres sur deux lignes */
+.hero-text h1.two-line-title {
+    margin-bottom: 30px !important;
+    margin-top: 20px !important;
+}
+
+/* Paragraphes */
+.hero-text p {
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
+    font-size: 18px;
+    color: white;
+}
+
+/* Sous-titres sur deux lignes */
+.hero-text p.two-line-subtitle {
+    margin-bottom: 20px !important;
+    margin-top: 25px !important;
+    line-height: 1.6 !important;
+}
+
+/* Style du texte sans fond pour plus de légèreté */
+.hero-text.text-left {
+    padding: 20px 30px;
+    position: relative;
+    z-index: 5;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+    max-width: 550px;
+    margin-bottom: 20px;
+    max-height: none !important;
+    overflow: visible !important;
+}
+
+/*==================================
+ * 4. ALIGNEMENT ET POSITIONNEMENT
+ *==================================*/
+
+/* Aligner tous les éléments à gauche */
+.text-left {
+    text-align: left !important;
+}
+
+/* Structure pour alignement à gauche */
+.hero-content {
+    align-items: flex-start;
+}
+
+/* Texte aligné à gauche */
+.hero-text.text-left {
+    max-width: 800px;
+}
+
+/* Boutons alignés à gauche */
+.hero-text.text-left .hero-buttons {
+    justify-content: flex-start;
+    padding-left: 0;
+}
+
+/* Statistiques alignées à gauche */
+.hero-text.text-left .hero-stats {
+    justify-content: flex-start;
+}
+
+/* Ajustement spécifique des boutons */
+.hero-text .hero-buttons {
+    margin-top: 25px !important;
+    padding-top: 5px !important;
+}
+
+/* Ajustement pour les conteneurs hero spécifiques */
+.hero-slide .hero-text,
+.hero-content .hero-text {
+    padding-bottom: 40px !important;
+}
+
+/*==================================
+ * 5. INDICATEURS ET ÉLÉMENTS DE NAVIGATION
+ *==================================*/
+
+/* Style des indicateurs */
+.hero-indicators {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    z-index: 10;
+}
+
+.hero-indicator {
+    width: 12px;
+    height: 12px;
+    margin: 0 5px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.hero-indicator.active {
+    background-color: #fff;
+    transform: scale(1.2);
+}
+
+/*==================================
+ * 6. BOUTONS ET INTERACTIONS
+ *==================================*/
+
+/* Style amélioré pour les boutons */
+.hero .btn {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transform: translateY(0);
+    transition: all 0.3s ease;
+}
+
+.hero .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/*==================================
+ * 7. RESPONSIVE
+ *==================================*/
+
+/* Responsive pour écrans larges */
+@media (min-width: 1200px) {
+    .hero-text h1 {
+        font-size: 54px;
+    }
+    
+    .hero-text p {
+        font-size: 20px;
+    }
+}
+
+/* Responsive pour tablettes */
+@media (max-width: 992px) {
+    .hero {
+        padding: 160px 0;
+        height: 700px;
+    }
+    
+    .hero-text h1 {
+        font-size: 45px;
+    }
+    
+    .hero-text h1.two-line-title {
+        margin-bottom: 20px !important;
+        margin-top: 15px !important;
+    }
+    
+    .hero-text p.two-line-subtitle {
+        margin-bottom: 18px !important;
+        margin-top: 20px !important;
+    }
+    
+    .hero-text .hero-buttons {
+        margin-top: 22px !important;
+        padding-top: 8px !important;
+    }
+}
+
+/* Responsive pour tablettes plus petites */
+@media (max-width: 768px) {
+    .hero {
+        padding: 130px 0;
+        height: 600px;
+    }
+    
+    .produits-hero {
+        padding-top: 100px !important;
+        padding-bottom: 60px !important;
+    }
+    
+    .hero-content {
+        padding: 0 15px;
+    }
+    
+    .produits-hero-content {
+        padding: 0 15px !important;
+    }
+    
+    .hero-text h1 {
+        font-size: 38px;
+    }
+    
+    .hero-text p {
+        font-size: 16px;
+    }
+    
+    .hero-text h1.two-line-title {
+        margin-bottom: 18px !important;
+        margin-top: 10px !important;
+    }
+    
+    .hero-text p.two-line-subtitle {
+        margin-bottom: 15px !important;
+        margin-top: 15px !important;
+    }
+    
+    .hero-text .hero-buttons {
+        margin-top: 20px !important;
+        padding-top: 5px !important;
+    }
+    
+    .hero-text.text-left {
+        text-align: left;
+        max-width: 100%;
+    }
+}
+
+/* Responsive pour mobiles */
+@media (max-width: 576px) {
+    .hero {
+        padding: 110px 0;
+        height: 500px;
+    }
+    
+    .produits-hero {
+        padding-top: 90px !important;
+        padding-bottom: 50px !important;
+    }
+    
+    .hero-content {
+        padding: 0 10px;
+    }
+    
+    .hero-text h1 {
+        font-size: 32px;
+        margin-bottom: 15px;
+    }
+    
+    .hero-text p {
+        font-size: 15px;
+    }
+    
+    .hero-text .hero-buttons {
+        margin-top: 15px !important;
+    }
+    
+    .hero-text.text-left {
+        padding: 10px 15px;
+    }
+}
+
+/*==================================
+ * FOOTER STYLES UNIFIÉS (MIGRATION DEPUIS footer.css)
+ *==================================*/
+/* 
+ * Regroupe et harmonise les styles du pied de page PaySmart
+ */
+
+/*==================================
+ * 1. STRUCTURE DE BASE DU FOOTER
+ *==================================*/
+
+/* Styles du footer amélioré pour PayeSmart */
+.footer {
+    background-color: #262626;
+    color: #fff;
+    padding: 60px 0 30px;
+    margin-top: 80px;
+}
+
+/* Structure principale */
+.footer-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 40px;
+}
+
+.footer-logo {
+    max-width: 240px;
+}
+
+.footer-logo img {
+    height: 50px;
+    margin-bottom: 15px;
+}
+
+.footer-logo p {
+    color: #ccc;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/*==================================
+ * 2. ICÔNES SOCIALES
+ *==================================*/
+
+/* Icônes sociales */
+.footer-social {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.social-icon i {
+    color: #fff;
+    width: 18px;
+    height: 18px;
+}
+
+.social-icon:hover {
+    background-color: #FF6B00; /* Couleur primaire de PayeSmart */
+    transform: translateY(-3px);
+}
+
+/*==================================
+ * 3. GRILLE DE LIENS
+ *==================================*/
+
+/* Grille de liens */
+.footer-links-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.footer-links-column h4 {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.footer-links-column h4:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    width: 30px;
+    height: 2px;
+    background-color: #FF6B00;
+}
+
+.footer-links-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links-column ul li {
+    margin-bottom: 12px;
+}
+
+.footer-links-column ul li a {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 15px;
+    transition: all 0.2s ease;
+    position: relative;
+    display: inline-block;
+}
+
+.footer-links-column ul li a:hover {
+    color: #fff;
+    transform: translateX(5px);
+}
+
+.footer-links-column ul li a:hover:before {
+    content: '';
+    position: absolute;
+    left: -12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #FF6B00;
+}
+
+/*==================================
+ * 4. SÉPARATEURS ET BAS DE PAGE
+ *==================================*/
+
+/* Séparateur */
+.footer-divider {
+    border: none;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: 0 0 20px 0;
+}
+
+/* Section bas de page */
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+}
+
+.footer-access {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.access-link {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s ease;
+}
+
+.access-link:hover {
+    color: #fff;
+}
+
+.separator {
+    color: #666;
+}
+
+.admin-link {
+    color: #999;
+}
+
+.copyright {
+    color: #999;
+    font-size: 14px;
+    margin: 0;
+}
+
+/*==================================
+ * 5. RESPONSIVE FOOTER
+ *==================================*/
+
+/* Responsive pour tablettes */
+@media (max-width: 992px) {
+    /* Réduction du padding pour un look plus aéré */
+    .footer {
+        padding: 50px 0 25px;
+    }
+    
+    /* Optimisation de la grille pour tablette - 2 colonnes */
+    .footer-links-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px 40px;
+        margin-bottom: 30px;
+    }
+    
+    /* Ajustement du bas de page */
+    .footer-bottom {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+    
+    /* Amélioration de l'espacement des liens */
+    .footer-links-column h4 {
+        margin-bottom: 15px;
+        font-size: 17px;
+    }
+    
+    /* Légère réduction de la taille des textes */
+    .footer-links-column ul li a {
+        font-size: 14px;
+    }
+    
+    /* Centrer les liens d'accès */
+    .footer-access {
+        justify-content: center;
+        width: 100%;
+    }
+    
+    /* Ajustement du logo */
+    .footer-logo img {
+        height: 45px;
+    }
+}
+
+/* Responsive pour petites tablettes */
+@media (max-width: 768px) {
+    /* Structure principale modifiée */
+    .footer {
+        padding: 40px 0 20px;
+    }
+    
+    .footer-main {
+        flex-direction: column;
+        gap: 25px;
+        align-items: center;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    
+    /* Centrage du logo et du texte */
+    .footer-logo {
+        max-width: 280px;
+        text-align: center;
+        margin: 0 auto;
+    }
+    
+    .footer-logo p {
+        font-size: 13px;
+    }
+    
+    /* Centrage des icônes sociales */
+    .footer-social {
+        width: 100%;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+    
+    /* Ajustement des colonnes de liens */
+    .footer-links-grid {
+        gap: 25px 30px;
+    }
+    
+    /* Alignement du titre */
+    .footer-links-column h4:after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .footer-links-column {
+        text-align: center;
+    }
+    
+    /* Style des liens plus grand pour faciliter le toucher */
+    .footer-links-column ul li {
+        margin-bottom: 15px;
+    }
+    
+    /* Désactivation de l'effet de survol sur mobile */
+    .footer-links-column ul li a:hover:before {
+        display: none;
+    }
+    
+    .footer-links-column ul li a:hover {
+        transform: none;
+    }
+}
+
+/* Responsive pour mobiles */
+@media (max-width: 576px) {
+    /* Layout épuré pour mobile */
+    .footer {
+        padding: 30px 0 20px;
+        margin-top: 50px;
+    }
+    
+    /* Masquer toutes les colonnes sauf la partie légale */
+    .footer-links-column:nth-child(1),
+    .footer-links-column:nth-child(2),
+    .footer-links-column:nth-child(3) {
+        display: none;
+    }
+    
+    /* Une seule colonne pour les liens - uniquement légale */
+    .footer-links-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    
+    /* Style de la colonne légale */
+    .footer-links-column {
+        border-bottom: none;
+        padding-bottom: 15px;
+        text-align: center;
+    }
+    
+    /* Titre de la partie légale */
+    .footer-links-column h4 {
+        margin-bottom: 12px;
+        font-size: 16px;
+    }
+    
+    .footer-links-column h4:after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    /* Style des liens légaux */
+    .footer-links-column ul li {
+        margin-bottom: 10px;
+        text-align: center;
+    }
+    
+    /* Simplification du bas de page */
+    .footer-access {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    .separator {
+        display: none;
+    }
+    
+    /* Copyright plus petit */
+    .copyright {
+        font-size: 12px;
+        text-align: center;
+    }
+    
+    /* Réduction de taille des icônes sociales */
+    .social-icon {
+        width: 36px;
+        height: 36px;
+    }
+    
+    /* Centrage des icônes sociales */
+    .footer-social {
+        justify-content: center;
+    }
+    
+    /* Masquer le logo et les informations principales */
+    .footer-logo {
+        display: none;
+    }
+    
+    /* Centrer le contenu du footer */
+    .footer-main {
+        justify-content: center;
+        margin-bottom: 15px;
+    }
+}
+
+/*==================================
+ * CAROUSEL STYLES UNIFIÉS (MIGRATION DEPUIS carousel-unified.css)
+ *==================================*/
+/* 
+ * Styles unifiés pour les carrousels PayeSmart
+ * Version: 1.0
+ * Date: 6 août 2025
+ * 
+ * Ce fichier remplace les fichiers suivants:
+ * - carousel-card-fullwidth-image.css
+ * - carousel-cards-enhanced.css 
+ * - carousel-cards-width.css
+ * - carousel-navigation-spacing.css
+ * - fullscreen-carousel.css
+ */
+
+/*----------------------------------------------
+ * 1. STRUCTURE ET DIMENSIONS DE BASE DES CARTES
+ *----------------------------------------------*/
+.carousel-item-inner {
+    width: 480px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.2) 100%);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    height: 92%;
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.carousel-item-inner:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Adaptation responsive pour la largeur */
+@media (max-width: 768px) {
+    .carousel-item-inner {
+        width: 90%;
+        max-width: 480px;
+    }
+}
+
+/*----------------------------------------------
+ * 2. IMAGES DES CARTES
+ *----------------------------------------------*/
+.carousel-item-image {
+    position: relative;
+    overflow: hidden;
+    height: 300px;
+    width: 100%;
+}
+
+.carousel-item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    transition: transform 0.5s ease;
+}
+
+.carousel-item-inner:hover .carousel-item-image img {
+    transform: scale(1.05);
+}
+
+/* Version responsive pour les images */
+@media screen and (max-width: 768px) {
+    .carousel-item-image {
+        height: 250px;
+    }
+}
+
+/*----------------------------------------------
+ * 3. CONTENU TEXTUEL
+ *----------------------------------------------*/
+.carousel-item-content {
+    padding: 10px 25px;
+    position: relative;
+    background: linear-gradient(180deg, rgba(34, 34, 34, 0.8) 0%, rgba(17, 17, 17, 0.95) 100%);
+    height: 20%;
+}
+
+/* Masquer les paragraphes (sous-titres) selon besoin */
+.carousel-item-content p {
+    display: none;
+    font-size: 13px;
+    line-height: 1.3;
+    color: rgba(255, 255, 255, 0.8);
+    padding-left: 70px;
+}
+
+/* Style pour les titres */
+.carousel-item-content h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-top: 8px;
+    margin-bottom: 0;
+    padding-left: 70px;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/*----------------------------------------------
+ * 4. ICÔNES ET BADGES
+ *----------------------------------------------*/
+.carousel-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #F7941D;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: -30px;
+    left: 25px;
+    box-shadow: 0 5px 15px rgba(247, 148, 29, 0.3);
+    transition: all 0.3s ease;
+}
+
+.carousel-icon i {
+    font-size: 30px;
+    color: #fff;
+}
+
+.carousel-item-inner:hover .carousel-icon {
+    transform: rotate(15deg);
+    background-color: #e58512;
+    animation: pulse 1.2s infinite;
+}
+
+/*----------------------------------------------
+ * 5. NAVIGATION ET CONTRÔLES
+ *----------------------------------------------*/
+.carousel-nav {
+    width: calc(100% + 100px);
+    left: -50px;
+    padding: 0;
+}
+
+.carousel-nav button {
+    background: rgba(247, 148, 29, 0.15);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.carousel-nav button:hover {
+    background: #F7941D;
+}
+
+/* Ajustements responsive pour la navigation */
+@media screen and (max-width: 992px) {
+    .carousel-nav {
+        width: calc(100% + 60px);
+        left: -30px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .carousel-nav {
+        width: calc(100% + 40px);
+        left: -20px;
+    }
+}
+
+/*----------------------------------------------
+ * 6. FULLSCREEN BACKGROUND CAROUSEL
+ *----------------------------------------------*/
+
+/* Fullscreen Background Image Carousel */
+.fullscreen-carousel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.carousel-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center 25%; /* Position ajustée pour une meilleure vue avec la hauteur augmentée */
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+    object-fit: cover; /* Garantit que l'image couvre toute la zone sans déformation */
+    display: none; /* Masquer complètement par défaut */
+    transform: scale(1.05); /* Légèrement agrandi pour éviter les bords blancs potentiels */
+}
+
+/* Seul le slide actif est affiché */
+.carousel-slide.active {
+    display: block;
+    opacity: 1;
+    z-index: 1; /* Assure que le slide actif est au-dessus des autres */
+}
+
+/* Animation pour le fondu enchaîné */
+.carousel-slide.fade-in {
+    animation: fadeIn 2.5s ease forwards;
+}
+
+.carousel-slide.fade-out {
+    animation: fadeOut 2.5s ease forwards;
+}
+
+/*----------------------------------------------
+ * 7. ANIMATIONS
+ *----------------------------------------------*/
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* Overlay pour améliorer la lisibilité du texte */
+.carousel-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+}
+
+/* Indicateurs de transition */
+.carousel-indicators {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+    padding: 5px 10px;
+    background-color: transparent;
+    border-radius: 20px;
+}
+
+.carousel-indicator {
+    width: 30px;
+    height: 4px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.carousel-indicator:focus {
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 0 2px rgba(255, 140, 0, 0.7);
+}
+
+.carousel-indicator:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+    transform: scaleY(1.2);
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+.carousel-indicator.active {
+    background-color: #FF8C00;
+    width: 50px;
+    box-shadow: 0 0 8px rgba(255, 140, 0, 0.5);
+}
+
+/* Animation de clic */
+.carousel-indicator:active {
+    transform: scaleY(0.8);
+}
+
+.carousel-indicator.clicked {
+    animation: pulse 0.3s ease-in-out;
+    background-color: #FF8C00;
+}
+
+/* Messages spécifiques à chaque slide */
+.carousel-message {
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-align: center;
+    width: 80%;
+    max-width: 800px;
+    padding: 15px 20px;
+    background-color: transparent;
+    border-radius: 8px;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    z-index: 1;
+}
+
+.carousel-filename {
+    display: none;
+}
+
+.carousel-filename.active {
+    opacity: 1;
+}
+
+.carousel-message.active {
+    opacity: 1;
+}
+
+/* Optimisations pour les appareils mobiles */
+@media (max-width: 768px) {
+    .fullscreen-carousel {
+        height: 100vh;
+    }
+    
+    .carousel-slide {
+        background-position: center center;
+    }
+    
+    .carousel-message {
+        bottom: 100px;
+        font-size: 1rem;
+        width: 90%;
+    }
+    
+    .carousel-indicators {
+        bottom: 20px;
+    }
+}
+
+/* Uniformisation de la taille des images de produits */
+img.produit-image {
+    max-height: 450px !important; /* Hauteur standardisée pour tous les produits */
+    height: auto;
+    object-fit: contain;
+}
+
+/* Réduction spécifique pour l'image du SUNMI CPad qui est naturellement plus grande */
+img.produit-image[src*="SUNMI CPad"],
+img.produit-image[src*="lox8-sJu"] {
+    max-height: 380px !important; /* Hauteur réduite pour correspondre aux autres produits */
+}
+
+
+/* =======================================================================
+   Intégration du fichier language-selector.css - Version 1.8 - 2025-08-07
+   ======================================================================= */
+
+/* Styles pour le sélecteur de langue */
+.language-selector {
+    position: relative;
+    margin-right: 15px;
+    display: inline-block;
+}
+
+.language-button {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.language-button i {
+    margin-left: 5px;
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+.language-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.language-dropdown {
+    position: absolute;
+    top: calc(100% + 5px);
+    right: 0;
+    background-color: #2D2D2D;
+    border: 1px solid #3D3D3D;
+    border-radius: 0; /* Suppression de l'arrondi */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 140px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+/* Version mobile : ouvre au survol */
+@media (max-width: 768px) {
+    .language-selector:hover .language-dropdown,
+    .language-selector:focus-within .language-dropdown {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+}
+
+/* Version desktop : amélioration du comportement */
+@media (min-width: 769px) {
+    /* Utilise la classe active ou le survol prolongé pour l'affichage */
+    .language-dropdown.active,
+    .language-selector:hover .language-dropdown {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+    
+    /* Petit délai avant l'affichage au survol pour éviter les ouvertures accidentelles */
+    .language-selector {
+        transition-delay: 0.2s;
+    }
+}
+
+.language-selector:hover .language-button i {
+    transform: rotate(180deg);
+}
+
+.language-option {
+    display: block;
+    padding: 10px 15px;
+    color: #f3f4f6;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #3D3D3D;
+}
+
+.language-option:last-child {
+    border-bottom: none;
+}
+
+.language-option:hover {
+    background-color: #3D3D3D;
+}
+
+.language-option.active {
+    background-color: transparent; /* Suppression du background */
+    font-weight: 600;
+    color: var(--primary-color); /* Couleur orange */
+    position: relative;
+}
+
+.language-option.active::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background-color: #F29D38;
+}
+
+/* Mode sombre */
+@media (prefers-color-scheme: dark) {
+    .language-dropdown {
+        background-color: #2D3748;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+    
+    .language-option {
+        color: #e2e8f0;
+    }
+    
+    .language-option:hover {
+        background-color: #3a4556;
+    }
+    
+    .language-option.active {
+        background-color: #3a4556;
+        color: #e2e8f0;
+    }
+}
+
+/* Adaptation pour les appareils mobiles */
+@media (max-width: 768px) {
+    .language-selector {
+        margin-right: 10px;
+    }
+    
+    .language-button {
+        padding: 5px 10px;
+        font-size: 0.9rem;
+    }
+    
+    .language-dropdown {
+        right: -20px;
+    }
+}

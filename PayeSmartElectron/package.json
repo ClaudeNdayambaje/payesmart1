@@ -1,0 +1,89 @@
+{
+  "name": "payesmart-electron",
+  "version": "1.0.0",
+  "description": "Application de bureau PayeSmart",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "nodemon --watch main.js --exec \"electron .\"",
+    "build": "electron-builder",
+    "build:mac": "electron-builder --mac --arm64 --x64",
+    "build:dmg": "electron-builder --mac dmg --arm64 -c.mac.identity=null",
+    "build:win": "electron-builder --win"
+  },
+  "author": "PayeSmart",
+  "license": "ISC",
+  "devDependencies": {
+    "@electron/notarize": "^2.2.0",
+    "electron": "^29.0.0",
+    "electron-builder": "^24.6.4",
+    "electron-packager": "^17.1.2",
+    "nodemon": "^3.0.1"
+  },
+  "dependencies": {
+    "@electron/remote": "^2.1.2",
+    "electron-is-dev": "^2.0.0",
+    "electron-store": "^8.2.0"
+  },
+  "build": {
+    "appId": "com.payesmart.desktop",
+    "productName": "PayeSmart",
+    "files": [
+      "**/*",
+      "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
+      "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}",
+      "!**/node_modules/.bin",
+      "!**/*.{iml,o,hprof,orig,pyc,pyo,rbc,swp,csproj,sln,xproj}",
+      "!.editorconfig",
+      "!**/._*",
+      "!**/{.DS_Store,.git,.hg,.svn,CVS,RCS,SCCS,__pycache__,thumbs.db,.gitignore,.gitattributes}",
+      "!**/node_modules/**/*",
+      "node_modules/@electron/remote/**/*"
+    ],
+    "directories": {
+      "buildResources": "src/assets",
+      "output": "dist"
+    },
+    "mac": {
+      "category": "public.app-category.business",
+      "icon": "src/icon/icon.icns",
+      "target": [
+        "dmg"
+      ],
+      "identity": null,
+      "darkModeSupport": true,
+      "hardenedRuntime": false,
+      "gatekeeperAssess": false,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist"
+    },
+    "dmg": {
+      "background": "src/assets/dmg-background.png",
+      "icon": "src/icon/icon.icns",
+      "iconSize": 100,
+      "sign": false,
+      "window": {
+        "width": 540,
+        "height": 380
+      },
+      "contents": [
+        {
+          "x": 130,
+          "y": 220
+        },
+        {
+          "x": 410,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "win": {
+      "icon": "src/icon/icon.ico",
+      "target": [
+        "nsis"
+      ]
+    }
+  }
+}

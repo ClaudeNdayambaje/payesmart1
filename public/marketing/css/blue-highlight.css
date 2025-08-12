@@ -1,0 +1,27 @@
+/* 
+ * MISE EN ÉVIDENCE DES MOTS-CLÉS DES PUNCHLINES
+ * Ce fichier modifie la couleur des mots-clés en bleu
+ * pour les faire ressortir dans les punchlines du carrousel
+ */
+
+/* Style pour les mots clés en surbrillance */
+.text-highlight {
+    color: #3498db !important; /* Bleu identique au bouton "Essai gratuit" */
+    font-weight: 700; /* Texte en gras pour plus d'emphase */
+}
+
+/* Assurer que le texte reste visible sur fond sombre */
+.hero-text h1 .text-highlight {
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); /* Léger contour pour meilleure lisibilité */
+}
+
+/* Animation subtile pour attirer l'attention */
+@keyframes pulse-highlight {
+    0% { opacity: 0.9; }
+    50% { opacity: 1; }
+    100% { opacity: 0.9; }
+}
+
+.hero-text h1 .text-highlight {
+    animation: pulse-highlight 2s infinite ease-in-out;
+}

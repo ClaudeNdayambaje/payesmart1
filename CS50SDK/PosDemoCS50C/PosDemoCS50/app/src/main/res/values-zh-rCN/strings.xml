@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+    <string name="app_name">SdkDemo</string>
+    <string name="action_settings">设置</string>
+    <string name="spacebar">空格</string>
+    <string name="select">选择类型 : </string>
+    <string name="result">结果 : </string>
+    <string name="start">开 始</string>
+    <string name="strContinue">继续</string>
+    <string name="clean">清除</string>
+    <string name="stop">停 止</string>
+    <string name="icc">SAM</string>
+    <string name="scan">扫描</string>
+    <string name="idcard">IC卡</string>
+    <string name="print">打印机</string>
+    <string name="finger">指纹</string>
+    <string name="mcr">磁卡</string>
+    <string name="picc">NFC</string>
+    <string name="pci">密钥</string>
+    <string name="sys">Sys</string>
+    <string name="swipe">请刷卡...</string>
+    <string name="update">升级</string>
+    <string name="upgrade_os">更新系统OS</string>
+    <string name="test_uart">串口测试</string>
+    <string name="others">其他</string>
+    <string name="signature">签名</string>
+    <string name="key">Key</string>
+    <string name="led">Led</string>
+    <string name="test">Test</string>
+    <string name="Beep">Beep</string>
+    <string name="title_activity_picc">Picc 测试</string>
+    <string name="title_activity_icc">Icc 测试</string>
+    <string name="title_activity_pci">Pci 测试</string>
+    <string name="title_activity_msr">Msr 测试</string>
+    <string name="title_activity_others">Others 测试</string>
+    <string name="title_activity_scan">Scan 测试</string>
+    <string name="title_activity_idcard">IDCard 测试</string>
+    <string name="title_activity_finger">Finger 测试</string>
+    <string name="title_activity_print">print 测试</string>
+    <string name="title_activity_key">Key 测试</string>
+    <string name="wait_time">请NFC卡进行测试...</string>
+    <string name="isOpening">正在打开请稍等...</string>
+    <string name="clik_start">请放卡,点击开始</string>
+    <string name="update_finish">升级成功 \n 请重启应用</string>
+    <string name="update_fail">升级失败</string>
+    <string name="isUpdating">正在升级请稍等... \n 请不要进行其他操作</string>
+    <string name="isMcuOn">正在打开MCU，请稍等... \n  请不要进行其他操作 </string>
+
+    <string name="update_or_not">是否升级？</string>
+    <string name="mcrTitle">mcr打开失败,请重试...</string>
+
+    <string name="emvTips">请插卡进行测试...</string>
+
+    <string name="blockTips">请输入block No.~</string>
+    <string name="writeTips">请输入需要写入的数据~</string>
+
+    <string name="upgradeTips">为了在更新系统时，不会被意外中断，所以在此界面中屏蔽了Back按键事件，确定要继续吗 ？</string>
+
+
+    <string name="upgradeZip">第一步 : 请将需要升级系统的文件，命名为“upgrade.zip”；\n\n第二步 : 将“upgrade.zip”放置在文件系统根目录；\n\n第三步 : 点击按钮，进行升级；</string>
+    <string name="back">返回</string>
+    <string name="more">更多</string>
+    <string name="scanContinuousMode">连续模式</string>
+    <string name="scanNormalMode">正常模式</string>
+    <string name="scanStart">开始 / 停止</string>
+    <string name="scanStop">停止</string>
+    <string name="scanDisable">禁用扫描</string>
+    <string name="scanEnable">启用扫描</string>
+
+    <string name="ok">确定</string>
+    <string name="cancel">取消</string>
+    <string name="file_not_found">没有找到升级固件</string>
+    <string name="file_not_found_update_os">没有找到升级系统OS的文件</string>
+    <string name="selectGray">选择打印浓度 :   </string>
+
+    <string name="title_fiscal">Fiscal</string>
+    <string name="fiscal_test">点击按钮发送命令: 04010030ffcd</string>
+    <string name="fiscal_open">Open</string>
+    <string name="fiscal_send">Send</string>
+    <string name="fiscal_close">Close</string>
+
+    <!-- title -->
+    <string name="title_bluetooth">蓝牙连接</string>
+    <string name="title_writing">请在框内签名</string>
+    <string name="title_home">中国银联</string>
+    <!-- main Menu -->
+    <string-array name="menu_imgs">
+        <item name="icon1">收款</item>
+        <item name="icon1">政府缴费</item>
+        <item name="icon1">转账</item>
+        <item name="icon1">信用卡还款</item>
+        <item name="icon1">游戏币</item>
+        <item name="icon1">余额查询</item>
+        <item name="icon1">话费充值</item>
+        <item name="icon1">彩票</item>
+        <item name="icon1">电影院</item>
+    </string-array>
+    <string name="menu_exit">退出</string>
+    <!-- bluetooth -->
+    <string name="bt_connect_text">轻触图标进行蓝牙连接</string>
+    <!-- handwriting -->
+    <string name="handwrite_tip">请在框内签名</string>
+    <!-- bankname -->
+    <string-array name="bankname">
+        <item name="01020000">工商银行</item>
+        <item name="01030000">农业银行</item>
+        <item name="01040000">中国银行</item>
+        <item name="01050000">建设银行</item>
+        <item name="01000000">邮储银行</item>
+        <item name="03010000">交通银行</item>
+        <item name="03020000">中信银行</item>
+        <item name="03030000">光大银行</item>
+        <item name="03040000">华夏银行</item>
+        <item name="03050000">民生银行</item>
+        <item name="03060000">广发银行</item>
+        <item name="03070000">深发银行</item>
+        <item name="03080000">招商银行</item>
+        <item name="03090000">兴业银行</item>
+        <item name="03100000">浦发银行</item>
+        <item name="01000001">邮政储蓄</item>
+        <item name="04478210">兰州商行</item>
+        <item name="00010000">银联中心</item>
+        <item name="01020000">武汉信合</item>
+        <item name="04325260">宜昌商行</item>
+        <item name="04145210">武汉商行</item>
+    </string-array>
+    <!-- bankid -->
+    <string-array name="bankid">
+        <item name="01020000">01020000</item>
+        <item name="01030000">01030000</item>
+        <item name="01040000">01040000</item>
+        <item name="01050000">01050000</item>
+        <item name="01000000">01000000</item>
+        <item name="03010000">03010000</item>
+        <item name="03020000">03020000</item>
+        <item name="03030000">03030000</item>
+        <item name="03040000">03040000</item>
+        <item name="03050000">03050000</item>
+        <item name="03060000">03060000</item>
+        <item name="03070000">03070000</item>
+        <item name="03080000">03080000</item>
+        <item name="03090000">03090000</item>
+        <item name="03100000">03100000</item>
+        <item name="01000001">01000001</item>
+        <item name="04478210">04478210</item>
+        <item name="00010000">00010000</item>
+        <item name="01020000">01020000</item>
+        <item name="04325260">04325260</item>
+        <item name="04145210">04145210</item>
+    </string-array>
+    <string-array name="keyNo">
+        <item> keyNo 0 </item>
+        <item> keyNo 1 </item>
+        <item> keyNo 2 </item>
+        <item> keyNo 3 </item>
+        <item> keyNo 4 </item>
+        <item> keyNo 5 </item>
+        <item> keyNo 6 </item>
+        <item> keyNo 7 </item>
+        <item> keyNo 8 </item>
+        <item> keyNo 9 </item>
+    </string-array>
+    <string name="title_activity_hello">HelloActivity</string>
+    <string name="title_activity_test">TestActivity</string>
+    <string name="title_activity_icc4428">Icc4428Activity</string>
+    <string name="title_activity_icc4442">Icc4442Activity</string>
+</resources>

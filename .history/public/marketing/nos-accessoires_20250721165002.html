@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nos Accessoires | PayeSmart - Votre solution de gestion de caisse intelligente</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/pricing-enhancements.css">
+    <link rel="stylesheet" href="css/accessoires.css?v=1.2">
+    <link rel="stylesheet" href="css/texte-visible.css?v=1.0">
+    <link rel="stylesheet" href="css/lucide-icons.css">
+    <link rel="stylesheet" href="css/button-enhancements.css">
+    <link rel="stylesheet" href="css/responsive-enhancements.css">
+    <link rel="stylesheet" href="css/menu-harmonization.css">
+    <link rel="stylesheet" href="css/custom-colors.css">
+    <link rel="stylesheet" href="css/dark-theme-produits.css">
+    <link rel="stylesheet" href="css/navigation-buttons-global.css">
+    <link rel="stylesheet" href="css/produits.css">
+    <link rel="stylesheet" href="css/features-produits.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://unpkg.com/lucide@0.344.0/dist/umd/lucide.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Responsivité uniquement (préserve le design original) -->
+    <link rel="stylesheet" href="css/responsive-only.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <img src="img/logo.png" alt="PayeSmart Logo">
+                </div>
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="solutions.html">Nos Produits</a></li>
+                        <li><a href="nos-accessoires.html" class="active">Nos Accessoires</a></li>
+                        <li><a href="about.html">Qui sommes-nous</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="header-buttons">
+                    <a href="/#/auth?register=true" class="btn btn-primary">Essai gratuit</a>
+                    <a href="/#/auth" class="btn btn-primary">Se connecter</a>
+                </div>
+                <button class="mobile-menu-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="produits-hero">
+        <div class="container">
+            <div class="produits-hero-content">
+                <h1>Nos Accessoires</h1>
+                <div class="hero-divider"></div>
+                <p class="subtitle">Des accessoires de qualité pour améliorer votre expérience et maximiser votre productivité</p>
+            </div>
+        </div>
+        <div class="hero-wave">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#252525" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,149.3C960,160,1056,160,1152,138.7C1248,117,1344,75,1392,53.3L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
+        </div>
+    </section>
+
+    <!-- Accessoires Section -->
+    <section class="produits-section accessoires-section" id="accessoires">
+        <div class="container">
+            <!-- Les filtres commencent immédiatement sans titre en doublon -->
+
+            <!-- Catégories de filtrage -->
+            <div class="category-filter">
+                <button class="active" data-filter="all">Tous</button>
+                <button data-filter="impression">Impression</button>
+                <button data-filter="lecteurs">Lecteurs</button>
+                <button data-filter="tiroirs">Tiroirs-caisses</button>
+                <button data-filter="affichage">Affichage</button>
+                <button data-filter="autres">Autres</button>
+            </div>
+
+            <!-- Grille d'accessoires (chargée dynamiquement depuis Firebase) -->
+            <div class="accessoires-grid">
+                <!-- Les accessoires seront chargés dynamiquement depuis Firebase -->
+                <div class="loading-spinner">
+                    <i class="fas fa-spinner fa-spin"></i> Chargement des accessoires...
+                </div>
+
+                <!-- Tous les accessoires sont maintenant chargés dynamiquement depuis Firebase -->
+            </div>
+
+            <!-- Call-to-Action -->
+            <div class="accessoire-cta">
+                <p>Vous ne trouvez pas ce que vous cherchez ?</p>
+                <a href="contact.html" class="btn btn-primary">Contactez-nous</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <!-- Logo et information principale -->
+            <div class="footer-main">
+                <div class="footer-logo">
+                    <img src="img/logo.png" alt="PayeSmart Logo">
+                    <p>Votre solution de gestion de caisse intelligente</p>
+                </div>
+                
+                <!-- Icônes de réseaux sociaux -->
+                <div class="footer-social">
+                    <a href="#" class="social-icon" aria-label="Facebook">
+                        <i data-lucide="facebook"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Twitter">
+                        <i data-lucide="twitter"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="LinkedIn">
+                        <i data-lucide="linkedin"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Instagram">
+                        <i data-lucide="instagram"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Liens organisés -->
+            <div class="footer-links-grid">
+                <div class="footer-links-column">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="about.html">Qui sommes-nous</a></li>
+                        <li><a href="index.html#features">Fonctionnalités</a></li>
+                        <li><a href="index.html#pricing">Tarifs</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-column">
+                    <h4>Entreprise</h4>
+                    <ul>
+                        <li><a href="about.html">À propos</a></li>
+                        <li><a href="about.html#team">Notre équipe</a></li>
+                        <li><a href="about.html#values">Nos valeurs</a></li>
+                        <li><a href="#">Carrières</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-column">
+                    <h4>Ressources</h4>
+                    <ul>
+                        <li><a href="#">Centre d'aide</a></li>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Webinaires</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-column">
+                    <h4>Légal</h4>
+                    <ul>
+                        <li><a href="#">Conditions</a></li>
+                        <li><a href="#">Confidentialité</a></li>
+                        <li><a href="#">Conformité</a></li>
+                        <li><a href="#">Mentions légales</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Ligne de séparation -->
+            <hr class="footer-divider">
+            
+            <!-- Accès et copyright -->
+            <div class="footer-bottom">
+                <div class="footer-access">
+                    <a href="../index.html#/auth" class="access-link">Connexion client</a>
+                    <span class="separator">|</span>
+                    <a href="../index.html#/admin/saas" class="access-link admin-link">Espace administration</a>
+                </div>
+                <p class="copyright">&copy; 2025 PayeSmart. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/nav-mobile.js"></script>
+    <script src="js/toggleDarkMode.js"></script>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-storage-compat.js"></script>
+    
+    <!-- Script d'affichage des accessoires -->
+    <script src="js/accessoires-display.js"></script>
+    <script>
+        // Fonctions de redirection explicites
+        function redirectAuth() {
+            console.log('Redirection vers auth');
+            window.location.href = '/#/auth';
+        }
+        
+        function redirectAdmin() {
+            console.log('Redirection vers admin');
+            window.location.href = '/#/admin/login';
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialiser les icônes Lucide si pas déjà fait par lucide-init.js
+            if (typeof lucide !== 'undefined' && typeof lucide.createIcons === 'function') {
+                lucide.createIcons();
+            }
+            
+            // Filtrage par catégorie (spécifique à la page accessoires)
+            const filterButtons = document.querySelectorAll('.category-filter button');
+            const accessoireCards = document.querySelectorAll('.accessoire-card');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Retirer la classe active de tous les boutons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Ajouter la classe active au bouton cliqué
+                    button.classList.add('active');
+                    
+                    // Récupérer la catégorie à filtrer
+                    const filterValue = button.getAttribute('data-filter');
+                    
+                    // Filtrer les cartes
+                    accessoireCards.forEach(card => {
+                        if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Fonction pour détecter le mode sombre
+            function detectColorScheme() {
+                const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+                if (darkModeMediaQuery.matches) {
+                    document.body.classList.add('dark-mode');
+                } else {
+                    document.body.classList.remove('dark-mode');
+                }
+            }
+
+            // Détecter initialement
+            detectColorScheme();
+            
+            // Écouter les changements
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', detectColorScheme);
+        });
+        
+        // Fonction de déconnexion (cohérence avec les autres pages)
+        function logout() {
+            window.location.href = '/#/auth?logout=true';
+        }
+    </script>
+    <script src="js/dynamic-admin-links.js"></script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+/* 
+ * Correctifs pour le système de thème de PayeSmart
+ * Ce fichier assure la cohérence visuelle entre les différents composants
+ */
+
+/* Correction pour la barre latérale */
+.sidebar {
+  background-color: var(--color-primary) !important;
+  color: var(--color-text-on-primary) !important;
+}
+
+/* S'assurer que les boutons de la barre latérale utilisent la couleur correcte */
+.sidebar button, 
+.sidebar a {
+  color: var(--color-text-on-primary) !important;
+}
+
+.sidebar button:hover, 
+.sidebar a:hover {
+  background-color: var(--color-primary-dark) !important;
+}
+
+/* Correction pour les formulaires */
+input, 
+select, 
+textarea {
+  background-color: var(--color-background) !important;
+  color: var(--color-text) !important;
+  border-color: var(--color-border) !important;
+}
+
+input:focus, 
+select:focus, 
+textarea:focus {
+  border-color: var(--color-primary) !important;
+  outline: 2px solid var(--color-primary-lightest) !important;
+}
+
+/* Correction pour les boutons */
+button.primary {
+  background-color: var(--color-primary) !important;
+  color: var(--color-text-on-primary) !important;
+}
+
+button.primary:hover {
+  background-color: var(--color-primary-hover) !important;
+}
+
+button.secondary {
+  background-color: var(--color-secondary) !important;
+  color: var(--color-text-on-primary) !important;
+}
+
+button.secondary:hover {
+  background-color: var(--color-secondary-hover) !important;
+}
+
+/* Forcer l'application des thèmes pour les tableaux et les cartes */
+.card, .panel, .modal {
+  background-color: var(--color-card-bg) !important;
+  color: var(--color-text) !important;
+  border-color: var(--color-border) !important;
+}
+
+/* Force les couleurs en mode sombre */
+:root.dark .bg-white, 
+html.dark .bg-white, 
+.dark .bg-white {
+  background-color: var(--color-card-bg) !important;
+}
+
+:root.dark .text-gray-700, 
+html.dark .text-gray-700, 
+.dark .text-gray-700 {
+  color: var(--color-text) !important;
+}
+
+/* Assure la visibilité des textes sur fond coloré */
+[class*="bg-primary"] {
+  color: var(--color-text-on-primary) !important;
+}
+
+/* Correction spécifique pour les éléments à fond blanc persistants */
+.dark tr, 
+.dark td, 
+.dark th {
+  background-color: var(--color-card-bg) !important;
+  color: var(--color-text) !important;
+  border-color: var(--color-border) !important;
+}

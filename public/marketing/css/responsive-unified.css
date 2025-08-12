@@ -1,0 +1,580 @@
+/* 
+ * RESPONSIVE STYLES UNIFIED
+ * Fichier CSS unifié pour tous les styles responsives du site PayeSmart
+ * Regroupe et harmonise les styles des fichiers :
+ * - complete-responsive.css
+ * - hardware-section-responsive.css
+ * - mobile-responsive-fixes.css
+ * - responsive-enhancements.css
+ * - responsive-only.css
+ * Version 1.0 - Août 2025
+ */
+
+/*==================================
+ * 1. STYLES RESPONSIVES GLOBAUX
+ *==================================*/
+
+/* Règles de base pour appareils mobiles */
+@media (max-width: 768px) {
+    body {
+        overflow-x: hidden;
+    }
+    
+    .container {
+        width: 100%;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    
+    h1, .h1 {
+        font-size: 32px;
+    }
+    
+    h2, .h2 {
+        font-size: 28px;
+    }
+    
+    h3, .h3 {
+        font-size: 22px;
+    }
+    
+    .section-title {
+        margin-bottom: 30px;
+    }
+    
+    .btn {
+        padding: 10px 20px;
+    }
+    
+    .row {
+        margin-left: -10px;
+        margin-right: -10px;
+    }
+    
+    .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, 
+    .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, 
+    .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, 
+    .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, 
+    .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, 
+    .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, 
+    .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, 
+    .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, 
+    .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, 
+    .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, 
+    .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, 
+    .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    
+    /* Espacements réduits sur mobile */
+    .section-padding {
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+    
+    .mb-30 {
+        margin-bottom: 20px;
+    }
+    
+    .mb-50 {
+        margin-bottom: 30px;
+    }
+}
+
+/* Tablettes */
+@media (min-width: 769px) and (max-width: 991px) {
+    .container {
+        width: 100%;
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+    
+    .section-padding {
+        padding-top: 70px;
+        padding-bottom: 70px;
+    }
+}
+
+/* Petits ordinateurs portables */
+@media (min-width: 992px) and (max-width: 1199px) {
+    .container {
+        width: 960px;
+    }
+}
+
+/* Grands écrans */
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px;
+    }
+}
+
+/*==================================
+ * 2. AMÉLIORATIONS RESPONSIVES
+ *==================================*/
+
+/* Meilleure gestion du menu sur mobile */
+@media (max-width: 768px) {
+    .navbar-collapse {
+        max-height: 400px;
+        overflow-y: auto;
+    }
+    
+    .navbar-nav {
+        margin: 0;
+    }
+    
+    .navbar-nav > li > a {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .navbar-toggle {
+        margin-right: 0;
+    }
+    
+    /* Adaptation des boutons sur mobile */
+    .btn-group-vertical > .btn, 
+    .btn-group > .btn {
+        width: 100%;
+        margin-bottom: 5px;
+        display: block;
+    }
+    
+    /* Amélioration des formulaires sur mobile */
+    input, select, textarea {
+        font-size: 16px !important; /* Évite le zoom sur iOS */
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+    }
+    
+    /* Bouton retour en haut sur mobile */
+    #back-to-top {
+        right: 15px;
+        bottom: 15px;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+    }
+}
+
+/* Améliorations tablettes */
+@media (min-width: 769px) and (max-width: 991px) {
+    .navbar-nav > li > a {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    
+    /* Meilleure gestion des cards sur tablette */
+    .card {
+        margin-bottom: 20px;
+    }
+    
+    /* Ajustements des boutons */
+    .btn {
+        padding: 10px 20px;
+    }
+}
+
+/* Améliorations pour les écrans de taille moyenne */
+@media (min-width: 992px) and (max-width: 1199px) {
+    .navbar-nav > li > a {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+}
+
+/*==================================
+ * 3. CORRECTIONS RESPONSIVE MOBILES
+ *==================================*/
+
+/* Corrections problèmes spécifiques sur mobile */
+@media (max-width: 768px) {
+    /* Empêche le dépassement horizontal */
+    .row {
+        margin-left: -10px;
+        margin-right: -10px;
+    }
+    
+    /* Correction problème de largeur */
+    .container-fluid {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    /* Éviter les textes trop petits */
+    p, li, td, th, label, input, textarea, select {
+        font-size: 14px;
+    }
+    
+    /* Fix pour les menus déroulants */
+    .dropdown-menu {
+        position: static;
+        float: none;
+        width: 100%;
+        box-shadow: none;
+        border: none;
+    }
+    
+    /* Correction pour les modales */
+    .modal-dialog {
+        margin: 10px;
+        width: auto;
+    }
+    
+    /* Fix pour les images responsives qui dépassent */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    /* Fix pour les iframes et vidéos */
+    iframe, video {
+        max-width: 100%;
+    }
+    
+    /* Ajustements des marges et des espacements */
+    .xs-mb-20 {
+        margin-bottom: 20px;
+    }
+    
+    .xs-center {
+        text-align: center;
+    }
+    
+    /* Amélioration des tableaux responsive */
+    .table-responsive {
+        border: none;
+        margin-bottom: 0;
+    }
+    
+    /* Correction des boutons qui s'entassent */
+    .btn-group .btn {
+        margin-bottom: 5px;
+        display: block;
+        float: none;
+        border-radius: 4px !important;
+    }
+}
+
+/* Corrections spécifiques pour très petits écrans */
+@media (max-width: 480px) {
+    h1, .h1 {
+        font-size: 26px;
+    }
+    
+    h2, .h2 {
+        font-size: 22px;
+    }
+    
+    h3, .h3 {
+        font-size: 18px;
+    }
+    
+    /* Ajuster l'espacement vertical */
+    .section-padding {
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+    
+    /* Correction des marges pour les listes */
+    ul, ol {
+        padding-left: 20px;
+    }
+}
+
+/*==================================
+ * 4. RESPONSIVE SECTION MATÉRIEL
+ *==================================*/
+
+/* Responsive pour la section matériel */
+@media (max-width: 768px) {
+    .hardware-section {
+        padding: 40px 0;
+    }
+    
+    .hardware-image {
+        margin-bottom: 30px;
+    }
+    
+    .hardware-section .row {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    
+    .hardware-section .content-col {
+        margin-bottom: 30px;
+    }
+    
+    .hardware-features {
+        margin-top: 20px;
+    }
+    
+    .hardware-features li {
+        margin-bottom: 10px;
+    }
+    
+    .hardware-cta {
+        margin-top: 30px;
+    }
+}
+
+/* Tablettes */
+@media (min-width: 769px) and (max-width: 991px) {
+    .hardware-section {
+        padding: 60px 0;
+    }
+    
+    .hardware-section h2 {
+        font-size: 28px;
+    }
+    
+    .hardware-features li {
+        margin-bottom: 10px;
+    }
+}
+
+/*==================================
+ * 5. STYLES RESPONSIVE UNIQUEMENT
+ *==================================*/
+
+/* Classes qui ne s'appliquent que sur certaines tailles d'écran */
+
+/* Classes visibilité responsive */
+.visible-xs,
+.visible-sm,
+.visible-md,
+.visible-lg {
+    display: none !important;
+}
+
+@media (max-width: 767px) {
+    .visible-xs {
+        display: block !important;
+    }
+    .hidden-xs {
+        display: none !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .visible-sm {
+        display: block !important;
+    }
+    .hidden-sm {
+        display: none !important;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .visible-md {
+        display: block !important;
+    }
+    .hidden-md {
+        display: none !important;
+    }
+}
+
+@media (min-width: 1200px) {
+    .visible-lg {
+        display: block !important;
+    }
+    .hidden-lg {
+        display: none !important;
+    }
+}
+
+/* Classes d'alignement responsive */
+@media (max-width: 767px) {
+    .text-xs-left {
+        text-align: left;
+    }
+    .text-xs-center {
+        text-align: center;
+    }
+    .text-xs-right {
+        text-align: right;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .text-sm-left {
+        text-align: left;
+    }
+    .text-sm-center {
+        text-align: center;
+    }
+    .text-sm-right {
+        text-align: right;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .text-md-left {
+        text-align: left;
+    }
+    .text-md-center {
+        text-align: center;
+    }
+    .text-md-right {
+        text-align: right;
+    }
+}
+
+@media (min-width: 1200px) {
+    .text-lg-left {
+        text-align: left;
+    }
+    .text-lg-center {
+        text-align: center;
+    }
+    .text-lg-right {
+        text-align: right;
+    }
+}
+
+/* Classes de marges responsive */
+@media (max-width: 767px) {
+    .xs-mt-0 {
+        margin-top: 0 !important;
+    }
+    .xs-mb-0 {
+        margin-bottom: 0 !important;
+    }
+    .xs-ml-0 {
+        margin-left: 0 !important;
+    }
+    .xs-mr-0 {
+        margin-right: 0 !important;
+    }
+    .xs-pt-0 {
+        padding-top: 0 !important;
+    }
+    .xs-pb-0 {
+        padding-bottom: 0 !important;
+    }
+    .xs-pl-0 {
+        padding-left: 0 !important;
+    }
+    .xs-pr-0 {
+        padding-right: 0 !important;
+    }
+}
+
+/*==================================
+ * 6. RESPONSIVE COMPLET
+ *==================================*/
+
+/* Styles responsives additionnels pour assurer la compatibilité complète */
+
+/* Header responsive */
+@media (max-width: 768px) {
+    .header {
+        padding: 15px 0;
+    }
+    
+    .logo img {
+        max-height: 40px;
+    }
+    
+    .nav-menu {
+        width: 100%;
+    }
+}
+
+/* Section hero responsive */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 100px 0 70px;
+        text-align: center;
+    }
+    
+    .hero-section h1 {
+        font-size: 32px;
+        line-height: 1.3;
+    }
+    
+    .hero-section p {
+        font-size: 16px;
+        line-height: 1.6;
+        margin-bottom: 30px;
+    }
+    
+    .hero-image {
+        margin-top: 40px;
+        max-width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+/* Features responsive */
+@media (max-width: 768px) {
+    .features-section {
+        padding: 50px 0;
+    }
+    
+    .feature-box {
+        margin-bottom: 30px;
+    }
+    
+    .feature-icon {
+        margin-bottom: 15px;
+    }
+}
+
+/* Pricing responsive */
+@media (max-width: 768px) {
+    .pricing-section {
+        padding: 50px 0;
+    }
+    
+    .pricing-table {
+        margin-bottom: 30px;
+    }
+}
+
+/* Testimonials responsive */
+@media (max-width: 768px) {
+    .testimonials-section {
+        padding: 50px 0;
+    }
+    
+    .testimonial-box {
+        padding: 20px;
+    }
+    
+    .testimonial-author img {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+/* Footer responsive */
+@media (max-width: 768px) {
+    .footer {
+        padding: 50px 0 20px;
+        text-align: center;
+    }
+    
+    .footer-links {
+        margin-bottom: 30px;
+    }
+    
+    .footer-logo {
+        margin-bottom: 20px;
+    }
+    
+    .footer-social {
+        margin-top: 20px;
+    }
+    
+    .footer-bottom {
+        margin-top: 30px;
+        text-align: center;
+    }
+}

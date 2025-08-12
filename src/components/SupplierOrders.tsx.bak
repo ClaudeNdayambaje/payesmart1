@@ -1,0 +1,768 @@
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import { SupplierOrder } from '../types';
+import { getSupplierOrders, receiveSupplierOrder, updateSupplierOrderStatus, deleteSupplierOrder } from '../services/supplierOrderService';
+import { getCurrentBusinessId } from '../services/businessService';
+import { format } from 'date-fns';
+import { 
+  PackagePlus, 
+  Loader2, 
+  Clock,
+  CheckCircle,
+  Package,
+  HelpCircle,
+  MoreVertical,
+  Trash2,
+  Edit
+} from 'lucide-react';
+import { Button } from "../components/ui/button";
+
+interface SupplierOrdersProps {
+  onCreateOrder: (onSuccess?: () => void) => void;
+  onEditOrder?: (orderId: string, onSuccess?: () => void) => void;
+}
+
+const SupplierOrders: React.FC<SupplierOrdersProps> = ({ onCreateOrder, onEditOrder }) => {
+  // Référence pour savoir si le composant est monté
+  const isMounted = React.useRef(true);
+
+  // Nettoyer la référence au démontage
+  React.useEffect(() => {
+    isMounted.current = true;
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
+  
+  // États
+  const [orders, setOrders] = useState<SupplierOrder[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [refreshKey, setRefreshKey] = useState(0);
+  const [processingOrderId, setProcessingOrderId] = useState<string | null>(null);
+  const [filterStatus, setFilterStatus] = useState<SupplierOrder['status'] | null>(null);
+  const [sortBy, setSortBy] = useState<'date' | 'amount'>('date');
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('list');
+  const [statusUpdateModalOpen, setStatusUpdateModalOpen] = useState(false);
+  const [selectedOrderId, setSelectedOrderId] = useState<string | null>(null);
+  const [currentBusinessId, setCurrentBusinessId] = useState<string>('business1');
+
+  // Récupérer l'ID de l'entreprise actuelle
+  useEffect(() => {
+    const fetchBusinessId = async () => {
+      try {
+        const businessId = await getCurrentBusinessId();
+        if (businessId) {
+          setCurrentBusinessId(businessId);
+        }
+      } catch (error) {
+        console.error('Erreur lors de la récupération du businessId:', error);
+      }
+    };
+    
+    fetchBusinessId();
+  }, []);
+
+  // Charger les commandes fournisseurs
+  const loadOrders = useCallback(async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      
+      const fetchedOrders = await getSupplierOrders();
+      
+      if (isMounted.current) {
+        setOrders(fetchedOrders);
+      }
+    } catch (err) {
+      console.error('Erreur lors du chargement des commandes:', err);
+      if (isMounted.current) {
+        setError('Impossible de charger les commandes fournisseurs. Veuillez réessayer.');
+      }
+    } finally {
+      if (isMounted.current) {
+        setLoading(false);
+      }
+    }
+  }, []);
+
+  // Charger les commandes au montage et lors du rafraîchissement
+  useEffect(() => {
+    loadOrders();
+  }, [loadOrders, refreshKey]);
+
+  // Formater la date
+  const formatDate = (date: Date) => {
+    return format(date, 'dd/MM/yyyy');
+  };
+
+  // Formater le montant
+  const formatAmount = (amount: number) => {
+    return `${amount.toFixed(2)} €`;
+  };
+
+  // Trier et filtrer les commandes
+  const sortedAndFilteredOrders = useMemo(() => {
+    // Cloner les commandes
+    let filtered = [...orders];
+    
+    // Filtrer par statut si nécessaire
+    if (filterStatus) {
+      filtered = filtered.filter(order => order.status === filterStatus);
+    }
+    
+    // Trier les commandes
+    filtered.sort((a, b) => {
+      if (sortBy === 'date') {
+        return b.orderDate.getTime() - a.orderDate.getTime();
+      } else {
+        return b.totalAmount - a.totalAmount;
+      }
+    });
+    
+    return filtered;
+  }, [orders, filterStatus, sortBy]);
+
+  // Rafraîchir les commandes
+  const handleRefresh = useCallback(() => {
+    setRefreshKey(prev => prev + 1);
+  }, []);
+
+  // Obtenir l'icône en fonction du statut
+  const getStatusIcon = (status: SupplierOrder['status']) => {
+    switch (status) {
+      case 'pending':
+        return <Clock size={14} className="mr-1" />;
+      case 'confirmed':
+        return <CheckCircle size={14} className="mr-1" />;
+      case 'delivered':
+        return <Package size={14} className="mr-1" />;
+      default:
+        return <HelpCircle size={14} className="mr-1" />;
+    }
+  };
+
+  // Obtenir le texte du statut
+  const getStatusText = (status: SupplierOrder['status']) => {
+    switch (status) {
+      case 'pending':
+        return 'En attente';
+      case 'confirmed':
+        return 'Confirmée';
+      case 'delivered':
+        return 'Livrée';
+      default:
+        return 'Inconnu';
+    }
+  };
+
+  // Réceptionner une commande
+  const handleReceiveOrder = async (orderId: string) => {
+    try {
+      setProcessingOrderId(orderId);
+      setError(null);
+      
+      const success = await receiveSupplierOrder(orderId);
+      
+      if (success) {
+        handleRefresh();
+      } else {
+        setError('Impossible de réceptionner la commande. Veuillez réessayer.');
+      }
+    } catch (err) {
+      console.error('Erreur lors de la réception de la commande:', err);
+      setError('Une erreur s\'est produite lors de la réception de la commande.');
+    } finally {
+      setProcessingOrderId(null);
+    }
+  };
+
+  // Ouvrir la modal de mise à jour du statut
+  const openStatusUpdateModal = (orderId: string) => {
+    setSelectedOrderId(orderId);
+    setStatusUpdateModalOpen(true);
+  };
+  
+  // Mettre à jour le statut d'une commande
+  const handleUpdateStatus = async (orderId: string, newStatus: 'pending' | 'confirmed' | 'delivered') => {
+    try {
+      setProcessingOrderId(orderId);
+      setError(null);
+      
+      let success = false;
+      
+      // Si la commande est marquée comme livrée, utiliser receiveSupplierOrder pour mettre à jour le stock
+      if (newStatus === 'delivered') {
+        success = await receiveSupplierOrder(orderId);
+      } else {
+        // Pour les autres statuts, utiliser updateSupplierOrderStatus
+        success = await updateSupplierOrderStatus(orderId, newStatus);
+      }
+      
+      if (success) {
+        setStatusUpdateModalOpen(false);
+        // Recharger les commandes pour mettre à jour la liste
+        setRefreshKey(prev => prev + 1);
+      } else {
+        setError(`Impossible de mettre à jour le statut de la commande vers ${newStatus}.`);
+      }
+    } catch (err) {
+      console.error('Erreur lors de la mise à jour du statut:', err);
+      setError('Une erreur s\'est produite lors de la mise à jour du statut.');
+    } finally {
+      setProcessingOrderId(null);
+    }
+  };
+
+  // Modifier une commande
+  const handleEditOrder = (orderId: string) => {
+    if (onEditOrder) {
+      onEditOrder(orderId, () => {
+        // Callback de succès: Recharger les commandes
+        setRefreshKey(prev => prev + 1);
+      });
+    }
+  };
+
+  // Supprimer une commande
+  const handleDeleteOrder = async (orderId: string) => {
+    if (processingOrderId) return;
+    
+    if (!window.confirm('Êtes-vous sûr de vouloir supprimer cette commande ?')) {
+      return;
+    }
+    
+    try {
+      setProcessingOrderId(orderId);
+      
+      const success = await deleteSupplierOrder(orderId);
+      
+      if (success) {
+        // Actualiser la liste des commandes
+        setRefreshKey(prev => prev + 1);
+      } else {
+        setError('Échec de la suppression. Veuillez réessayer.');
+      }
+    } catch (err) {
+      console.error('Erreur lors de la suppression de la commande:', err);
+      setError('Une erreur s\'est produite lors de la suppression de la commande.');
+    } finally {
+      setProcessingOrderId(null);
+    }
+  };
+
+  // Obtenir la couleur en fonction du statut
+  const getStatusColor = (status: SupplierOrder['status']) => {
+    switch (status) {
+      case 'pending':
+        return 'text-yellow-500 bg-yellow-50';
+      case 'confirmed':
+        return 'text-blue-500 bg-blue-50';
+      case 'delivered':
+        return 'text-green-500 bg-green-50';
+      default:
+        return 'text-gray-500 bg-gray-50';
+    }
+  };
+  
+  // Obtenir la couleur des badges pour la vue liste
+  const getStatusTagColor = (status: SupplierOrder['status']) => {
+    switch (status) {
+      case 'pending':
+        return 'bg-yellow-100 text-yellow-800';
+      case 'confirmed':
+        return 'bg-blue-100 text-blue-800';
+      case 'delivered':
+        return 'bg-green-100 text-green-800';
+      default:
+        return 'bg-gray-100 text-gray-800';
+    }
+  };
+
+  return (
+    <div className="flex-1 p-6 overflow-auto">
+      <div className="max-w-[2000px] mx-auto">
+        {/* En-tête avec les actions */}
+      <div className="flex justify-between items-center mb-4">
+        <h1 className="text-2xl font-bold text-gray-800">Commandes Fournisseurs</h1>
+        
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+          <Button 
+            variant="outline" 
+            size="sm" 
+            onClick={handleRefresh}
+            disabled={loading}
+            className="flex items-center"
+          >
+            {loading ? (
+              <Loader2 size={16} className="mr-2 animate-spin" />
+            ) : (
+              <Clock size={16} className="mr-2" />
+            )}
+            Rafraîchir
+          </Button>
+          
+          <Button 
+            variant="default" 
+            size="sm" 
+            onClick={() => onCreateOrder(() => handleRefresh())}
+            className="flex items-center"
+          >
+            <PackagePlus size={16} className="mr-2" />
+            Nouvelle commande
+          </Button>
+        </div>
+      </div>
+
+        {/* KPI - Nombre de commandes */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div className="bg-white p-4 rounded-lg shadow border border-gray-200">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm text-gray-500">Commandes totales</p>
+              <p className="text-2xl font-bold text-indigo-600">{orders.length}</p>
+              <p className="text-xs text-gray-500 mt-1">Toutes périodes confondues</p>
+            </div>
+            <div className="bg-indigo-100 p-3 rounded-full">
+              <PackagePlus className="text-indigo-600" size={24} />
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white p-4 rounded-lg shadow border border-gray-200">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm text-gray-500">Commandes en attente</p>
+              <p className="text-2xl font-bold text-yellow-600">{orders.filter(o => o.status === 'pending').length}</p>
+              <p className="text-xs text-gray-500 mt-1">À confirmer</p>
+            </div>
+            <div className="bg-yellow-100 p-3 rounded-full">
+              <Clock className="text-yellow-600" size={24} />
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white p-4 rounded-lg shadow border border-gray-200">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm text-gray-500">Commandes livrées</p>
+              <p className="text-2xl font-bold text-green-600">{orders.filter(o => o.status === 'delivered').length}</p>
+              <p className="text-xs text-gray-500 mt-1">Stock mis à jour</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Filtres et options d'affichage */}
+        <div className="flex flex-wrap justify-between items-center mb-4 gap-4">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+            <button 
+              onClick={() => setFilterStatus(null)} 
+              className={`px-3 py-1 rounded-md text-sm ${!filterStatus ? 'bg-primary text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+            >
+              Tous
+            </button>
+            <button 
+              onClick={() => setFilterStatus('pending')} 
+              className={`px-3 py-1 rounded-md text-sm ${filterStatus === 'pending' ? 'bg-yellow-100 text-yellow-800' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+            >
+              En attente
+            </button>
+            <button 
+              onClick={() => setFilterStatus('confirmed')} 
+              className={`px-3 py-1 rounded-md text-sm ${filterStatus === 'confirmed' ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+            >
+              Confirmées
+            </button>
+            <button 
+              onClick={() => setFilterStatus('delivered')} 
+              className={`px-3 py-1 rounded-md text-sm ${filterStatus === 'delivered' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+            >
+              Livrées
+            </button>
+          </div>
+          
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+            <div className="text-sm text-gray-500 mr-2">Trier par:</div>
+            <button 
+              onClick={() => setSortBy('date')} 
+              className={`px-3 py-1 rounded-md text-sm ${sortBy === 'date' ? 'bg-primary text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+            >
+              Date
+            </button>
+            <button 
+              onClick={() => setSortBy('amount')} 
+              className={`px-3 py-1 rounded-md text-sm ${sortBy === 'amount' ? 'bg-primary text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+            >
+              Montant
+            </button>
+          </div>
+          
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+            <div className="text-sm text-gray-500 mr-2">Vue:</div>
+            <button 
+              onClick={() => setViewMode('grid')} 
+              className={`px-3 py-1 rounded-md text-sm ${viewMode === 'grid' ? 'bg-primary text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+            >
+              Grille
+            </button>
+            <button 
+              onClick={() => setViewMode('list')} 
+              className={`px-3 py-1 rounded-md text-sm ${viewMode === 'list' ? 'bg-primary text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+            >
+              Liste
+            </button>
+          </div>
+        </div>
+      </div>
+        
+        {/* Message d'erreur */}
+            onClick={() => setFilterStatus('pending')} 
+            className={`px-3 py-1 rounded-md text-sm ${filterStatus === 'pending' ? 'bg-yellow-100 text-yellow-800' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+          >
+            En attente
+          </button>
+          <button 
+            onClick={() => setFilterStatus('confirmed')} 
+            className={`px-3 py-1 rounded-md text-sm ${filterStatus === 'confirmed' ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+          >
+            Confirmées
+          </button>
+          <button 
+            onClick={() => setFilterStatus('delivered')} 
+            className={`px-3 py-1 rounded-md text-sm ${filterStatus === 'delivered' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+          >
+            Livrées
+          </button>
+        </div>
+        
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+          <div className="text-sm text-gray-500 mr-2">Trier par:</div>
+          <button 
+            onClick={() => setSortBy('date')} 
+            className={`px-3 py-1 rounded-md text-sm ${sortBy === 'date' ? 'bg-primary text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+          >
+            Date
+          </button>
+          <button 
+            onClick={() => setSortBy('amount')} 
+            className={`px-3 py-1 rounded-md text-sm ${sortBy === 'amount' ? 'bg-primary text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+          >
+            Montant
+          </button>
+        </div>
+        
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+          <div className="text-sm text-gray-500 mr-2">Vue:</div>
+          <button 
+            onClick={() => setViewMode('grid')} 
+            className={`px-3 py-1 rounded-md text-sm ${viewMode === 'grid' ? 'bg-primary text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+          >
+            Grille
+          </button>
+          <button 
+            onClick={() => setViewMode('list')} 
+            className={`px-3 py-1 rounded-md text-sm ${viewMode === 'list' ? 'bg-primary text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+          >
+            Liste
+          </button>
+        </div>
+      </div>
+      
+        {/* Message d'erreur */}
+        {error && (
+        <div className="bg-red-50 text-red-700 p-3 rounded-md mb-4 flex items-start">
+          <HelpCircle className="h-5 w-5 mr-2 mt-0.5 flex-shrink-0" />
+          <div>{error}</div>
+        </div>
+      )}
+      
+        {/* Indicateur de chargement */}
+        {loading && orders.length === 0 ? (
+        <div className="flex flex-col items-center justify-center py-12 bg-white rounded-lg shadow border border-gray-200">
+          <Loader2 size={40} className="animate-spin text-primary mb-4" />
+          <p className="text-gray-500">Chargement des commandes...</p>
+        </div>
+        ) : orders.length === 0 ? (
+        <div className="bg-white rounded-lg border border-gray-200 p-8 text-center shadow">
+          <PackagePlus size={48} className="mx-auto text-gray-300 mb-4" />
+          <h3 className="text-lg font-medium mb-2">Aucune commande fournisseur</h3>
+          <p className="text-gray-500 mb-6">Créez votre première commande pour approvisionner votre stock</p>
+          <Button onClick={() => onCreateOrder(() => handleRefresh())}>
+            Créer une commande
+          </Button>
+        </div>
+        ) : viewMode === 'list' ? (
+        <div className="bg-white rounded-lg shadow overflow-hidden">
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead>
+                <tr className="bg-gray-50">
+
+                  <th className="px-4 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-600">
+                    <div className="flex items-center">
+                      <Clock size={14} className="mr-2 text-gray-400" />
+                      Date / Référence
+                    </div>
+                  </th>
+                  <th className="px-4 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-600">
+                    <div className="flex items-center">
+                      <CheckCircle size={14} className="mr-2 text-gray-400" />
+                      Statut
+                    </div>
+                  </th>
+                  <th className="px-4 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-600">
+                    <div className="flex items-center">
+                      <Package size={14} className="mr-2 text-gray-400" />
+                      Produits
+                    </div>
+                  </th>
+                  <th scope="col" className="px-6 py-3 text-right text-xs font-medium uppercase tracking-wider text-gray-600">
+                    <div className="flex items-center justify-end">
+                      Montant
+                    </div>
+                  </th>
+                  <th scope="col" className="px-6 py-3 text-center text-xs font-medium uppercase tracking-wider text-gray-600">
+                    <div className="flex items-center justify-center">
+                      Actions
+                    </div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {sortedAndFilteredOrders.map((order: SupplierOrder) => (
+                  <tr key={order.id} className="hover:bg-gray-50 transition-colors border-t">
+                    <td className="px-4 py-2 whitespace-nowrap">
+                      <div className="flex flex-col space-y-1">
+                        <span className="text-sm font-medium text-gray-900">{formatDate(order.orderDate)}</span>
+                        <span className="text-xs text-gray-500">CMD-{order.id.slice(-6)}</span>
+                      </div>
+                    </td>
+                    <td className="px-4 py-2 whitespace-nowrap">
+                      <div className="flex items-center">
+                        <div className={`h-7 flex items-center px-2.5 py-1 rounded-full text-xs font-medium ${getStatusTagColor(order.status)}`}>
+                          {getStatusIcon(order.status)}
+                          <span className="ml-1.5">{getStatusText(order.status)}</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="px-4 py-2">
+                      <details className="group">
+                        <summary className="cursor-pointer text-sm font-medium text-primary hover:text-primary-dark flex items-center">
+                          <span>{order.products.length} produit{order.products.length > 1 ? 's' : ''}</span>
+                          <span className="text-xs ml-2 group-open:rotate-180 transition-transform">▼</span>
+                        </summary>
+                        <div className="mt-3 space-y-1.5 text-sm bg-gray-50 rounded-md p-3 max-h-60 overflow-y-auto">
+                          {order.products.map(({ product, quantity }: { product: any, quantity: number }, index: number) => (
+                            <div key={index} className="flex justify-between items-center py-1.5 border-b border-gray-100 last:border-0">
+                              <span className="font-medium truncate max-w-[200px]">{product.name}</span>
+                              <span className="ml-4 bg-white px-2 py-0.5 rounded-full text-xs">{quantity} unité{quantity > 1 ? 's' : ''}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </details>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-right">
+                      <span className="text-base font-semibold text-gray-900">{formatAmount(order.totalAmount)}</span>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-center">
+                      <div className="flex items-center justify-center space-x-3">
+                        <button
+                          onClick={() => openStatusUpdateModal(order.id)}
+                          className="p-2 bg-blue-50 text-blue-600 rounded-full hover:bg-blue-100 transition-colors"
+                          title="Modifier le statut"
+                          disabled={processingOrderId === order.id}
+                        >
+                          <MoreVertical size={16} />
+                        </button>
+                        
+                        {onEditOrder && (
+                          <button
+                            onClick={() => handleEditOrder(order.id)}
+                            className="p-2 bg-green-50 text-green-600 rounded-full hover:bg-green-100 transition-colors"
+                            title="Modifier la commande"
+                            disabled={processingOrderId === order.id}
+                          >
+                            <Edit size={16} />
+                          </button>
+                        )}
+                        
+                        <button
+                          onClick={() => handleDeleteOrder(order.id)}
+                          className="p-2 bg-red-50 text-red-600 rounded-full hover:bg-red-100 transition-colors"
+                          title="Supprimer la commande"
+                          disabled={processingOrderId === order.id}
+                        >
+                          {processingOrderId === order.id ? (
+                            <Loader2 size={16} className="animate-spin" />
+                          ) : (
+                            <Trash2 size={16} />
+                          )}
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {sortedAndFilteredOrders.map((order: SupplierOrder) => (
+            <div key={order.id} className="bg-white border border-gray-200 rounded-lg shadow overflow-hidden hover:shadow-md transition-shadow duration-200">
+              <div className="p-4 border-b border-gray-100">
+                <div className="flex justify-between items-start">
+                  <div>
+                    <div className="text-sm font-medium text-gray-900">{formatDate(order.orderDate)}</div>
+                    <div className="text-xs text-gray-500">#{order.id.slice(0, 8)}</div>
+                  </div>
+                  <div className={`px-2.5 py-1 rounded-full text-xs font-medium ${getStatusTagColor(order.status)}`}>
+                    {getStatusIcon(order.status)}
+                    <span className="ml-1.5">{getStatusText(order.status)}</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="p-4 space-y-3">
+                <div className="mb-3">
+                  <div className="text-xs font-medium uppercase text-gray-500 mb-1">Produits</div>
+                  <div className="text-sm">
+                    {order.products.length > 0 
+                      ? `${order.products.length} produit${order.products.length > 1 ? 's' : ''}`
+                      : 'Aucun produit'
+                    }
+                  </div>
+                </div>
+                
+                <div className="mb-3">
+                  <div className="text-xs font-medium uppercase text-gray-500 mb-1">Montant total</div>
+                  <div className="text-lg font-medium">{formatAmount(order.totalAmount)}</div>
+                </div>
+              </div>
+              
+              <div className="px-4 py-3 bg-gray-50 border-t border-gray-100 flex items-center justify-between">
+                <div className="flex space-x-2">
+                  {order.status === 'confirmed' && (
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => handleReceiveOrder(order.id)}
+                      disabled={processingOrderId === order.id}
+                      className="flex items-center"
+                    >
+                      {processingOrderId === order.id ? (
+                        <Loader2 size={14} className="mr-1 animate-spin" />
+                      ) : (
+                        <Package size={14} className="mr-1" />
+                      )}
+                      Réceptionner
+                    </Button>
+                  )}
+                  
+                  {onEditOrder && (
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      onClick={() => handleEditOrder(order.id)}
+                      disabled={processingOrderId === order.id}
+                      className="flex items-center"
+                    >
+                      <Edit size={14} className="mr-1" />
+                      Modifier
+                    </Button>
+                  )}
+                </div>
+                
+                <button
+                  onClick={() => handleDeleteOrder(order.id)}
+                  className="p-1 text-red-500 hover:bg-red-50 rounded-full"
+                  title="Supprimer la commande"
+                  disabled={processingOrderId === order.id}
+                >
+                  {processingOrderId === order.id ? (
+                    <Loader2 size={16} className="animate-spin" />
+                  ) : (
+                    <Trash2 size={16} />
+                  )}
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+      
+        {/* Modal pour la mise à jour du statut des commandes */}
+        {statusUpdateModalOpen && selectedOrderId && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 overflow-y-auto">
+          <div className="border border-gray-200 rounded-lg p-6 max-w-md w-full bg-white shadow-lg">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-lg font-medium">Modifier le statut de la commande</h3>
+              <button 
+                onClick={() => setStatusUpdateModalOpen(false)}
+                className="text-gray-500 hover:text-gray-700"
+              >
+                <MoreVertical size={20} />
+              </button>
+            </div>
+            
+            <div className="space-y-4">
+              <p className="text-sm text-gray-600">Sélectionnez le nouveau statut pour cette commande :</p>
+              
+              <div className="grid grid-cols-1 gap-3">
+                <button
+                  onClick={() => handleUpdateStatus(selectedOrderId, 'pending')}
+                  className="flex items-center justify-between p-3 border rounded-lg hover:bg-gray-50"
+                  disabled={processingOrderId === selectedOrderId}
+                >
+                  <div className="flex items-center">
+                    <Clock className="w-5 h-5 text-yellow-500 mr-2" />
+                    <span>En attente</span>
+                  </div>
+                </button>
+                
+                <button
+                  onClick={() => handleUpdateStatus(selectedOrderId, 'confirmed')}
+                  className="flex items-center justify-between p-3 border rounded-lg hover:bg-gray-50"
+                  disabled={processingOrderId === selectedOrderId}
+                >
+                  <div className="flex items-center">
+                    <CheckCircle className="w-5 h-5 text-blue-500 mr-2" />
+                    <span>Confirmée</span>
+                  </div>
+                </button>
+                
+                <button
+                  onClick={() => handleUpdateStatus(selectedOrderId, 'delivered')}
+                  className="flex items-center justify-between p-3 border rounded-lg hover:bg-gray-50"
+                  disabled={processingOrderId === selectedOrderId}
+                >
+                  <div className="flex items-center">
+                    <Package className="w-5 h-5 text-green-500 mr-2" />
+                    <span>Livrée</span>
+                  </div>
+                </button>
+              </div>
+              
+              {processingOrderId === selectedOrderId && (
+                <div className="flex justify-center mt-2">
+                  <Loader2 size={24} className="animate-spin text-blue-500" />
+                </div>
+              )}
+              
+              <div className="flex justify-end pt-4 border-t">
+                <button
+                  onClick={() => setStatusUpdateModalOpen(false)}
+                  className="px-4 py-2 mr-2 border rounded-md hover:bg-gray-50"
+                  disabled={processingOrderId === selectedOrderId}
+                >
+                  Annuler
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default SupplierOrders;

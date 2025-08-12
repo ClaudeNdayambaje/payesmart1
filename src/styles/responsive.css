@@ -1,0 +1,113 @@
+/* Responsive Styles pour l'application principale */
+
+/* Styles pour les tablettes et petits écrans */
+@media (max-width: 1024px) {
+  /* Ajustement de la mise en page principale */
+  .flex.h-screen {
+    flex-direction: column;
+  }
+  
+  /* Ajustement de la barre latérale */
+  .h-screen.w-20 {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  
+  /* Réorganisation des boutons de la barre latérale */
+  .h-screen.w-20 .flex-1 {
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 0 0.5rem;
+  }
+  
+  /* Ajustement de la grille de produits */
+  .grid-cols-4, .grid-cols-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  
+  /* Ajustement de la barre de recherche */
+  .w-96 {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+/* Styles pour les téléphones mobiles */
+@media (max-width: 640px) {
+  /* Ajustement de l'en-tête */
+  .flex.justify-between.items-center {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  /* Ajustement de la barre de recherche sur mobile */
+  .w-96, .relative.w-96 {
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  /* Ajustement de la grille de produits pour mobile */
+  .grid-cols-4, .grid-cols-3, .grid-cols-2 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+  
+  /* Ajustement du panier */
+  .w-1\/3, .w-1\/4, .w-1\/5 {
+    width: 100%;
+  }
+  
+  /* Ajustement des modales */
+  .max-w-4xl, .max-w-3xl, .max-w-2xl {
+    width: 95%;
+    margin: 0 auto;
+  }
+  
+  /* Ajustement des formulaires */
+  .grid.grid-cols-2 {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Ajustement des boutons */
+  .flex.gap-2, .flex.gap-3, .flex.gap-4 {
+    flex-wrap: wrap;
+  }
+  
+  /* Amélioration de la lisibilité des textes */
+  .text-sm {
+    font-size: 0.875rem;
+  }
+  
+  /* Ajustement des marges et paddings */
+  .p-6 {
+    padding: 1rem;
+  }
+}
+
+/* Styles pour les très petits écrans */
+@media (max-width: 380px) {
+  /* Réduction supplémentaire des paddings */
+  .p-4, .p-5, .p-6 {
+    padding: 0.75rem;
+  }
+  
+  /* Ajustement des tailles de texte */
+  .text-2xl {
+    font-size: 1.25rem;
+  }
+  
+  .text-xl {
+    font-size: 1.125rem;
+  }
+  
+  /* Ajustement des boutons */
+  .btn, button {
+    padding: 0.5rem 0.75rem;
+  }
+}

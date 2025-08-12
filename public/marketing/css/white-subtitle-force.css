@@ -1,0 +1,46 @@
+/* 
+ * white-subtitle-force.css
+ * Force la couleur blanche pour les sous-titres avec une spécificité maximale
+ */
+
+/* Force la couleur blanche avec spécificité maximale */
+.hero .two-line-subtitle,
+.hero-content .two-line-subtitle,
+.hero-text .two-line-subtitle,
+p.two-line-subtitle,
+.two-line-subtitle {
+    color: white !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7) !important;
+    font-weight: 500 !important;
+}
+
+/* Styles inline pour s'assurer que ça marche même avec du JavaScript */
+.hero .two-line-subtitle[style],
+.hero-content .two-line-subtitle[style],
+.hero-text .two-line-subtitle[style],
+p.two-line-subtitle[style],
+.two-line-subtitle[style] {
+    color: white !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Ajustement pour les écrans plus petits */
+@media (max-width: 768px) {
+    .hero .two-line-subtitle,
+    .hero-content .two-line-subtitle,
+    .hero-text .two-line-subtitle,
+    p.two-line-subtitle,
+    .two-line-subtitle {
+        color: white !important;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7) !important;
+    }
+}
+
+/* Spécificité encore plus élevée pour les cas extrêmes */
+html body .hero .hero-content .hero-text .two-line-subtitle,
+html body .hero .two-line-subtitle,
+html body p.two-line-subtitle,
+html body .two-line-subtitle {
+    color: white !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7) !important;
+}

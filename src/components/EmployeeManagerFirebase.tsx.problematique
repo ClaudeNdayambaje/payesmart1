@@ -1,0 +1,869 @@
+import React, { useState, useEffect, useContext } from 'react';
+import { Employee, Shift, EmployeeStats } from '../types';
+import { UserPlus, Users, Clock, BarChart2, Search, Loader2, AlertTriangle } from 'lucide-react';
+import { showConfirmDialog, showAlert } from '../utils/dialogUtils';
+import { 
+  getEmployees, 
+  addEmployee, 
+  updateEmployee, 
+  deleteEmployee,
+  getShifts,
+  addShift as addShiftService,
+  updateShift as updateShiftService
+} from '../services/employeeService';
+import { uploadAndResizeImage } from '../services/fileService';
+import { getCurrentBusinessId } from '../services/businessService';
+import { useTheme } from '../contexts/ThemeContext';
+import { AppContext } from '../App';
+import { canPerformAction } from '../services/permissionService';
+import { format } from 'date-fns';
+import { addDoc, collection } from 'firebase/firestore';
+import { db } from '../firebase';
+import { Timestamp } from 'firebase/firestore';
+
+// Importer les sous-composants
+import EmployeeList from './employee/EmployeeList';
+import EmployeeForm from './employee/EmployeeForm';
+import ShiftManager from './employee/ShiftManager';
+import EmployeeStatsComponent from './employee/EmployeeStats';
+
+const EmployeeManagerFirebase: React.FC = () => {
+  const [employees, setEmployees] = useState<Employee[]>([]);
+  const [shifts, setShifts] = useState<Shift[]>([]);
+  const [stats] = useState<Record<string, EmployeeStats>>({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  
+  // Récupérer l'employé actuel depuis le contexte
+  const { currentEmployee } = useContext(AppContext);
+  
+  // Fonctions pour vérifier les permissions spécifiques
+  const canAddEmployees = () => {
+    // L'admin peut tout faire
+    if (currentEmployee?.role === 'admin') return true;
+    
+    // Pour les autres rôles, vérifier la permission spécifique
+    return canPerformAction(currentEmployee, 'add_employee');
+  };
+  
+  const canEditEmployees = (employeeId?: string) => {
+    // L'admin peut tout faire
+    if (currentEmployee?.role === 'admin') return true;
+    
+    // Si l'employé veut modifier son propre profil et a la permission de changer son mot de passe
+    if (employeeId && currentEmployee?.id === employeeId && 
+        canPerformAction(currentEmployee, 'employees.change_own_password')) {
+      return true;
+    }
+    
+    // Pour les autres rôles, vérifier la permission spécifique
+    return canPerformAction(currentEmployee, 'edit_employee');
+  };
+  
+  const canDeleteEmployees = () => {
+    // L'admin peut tout faire
+    if (currentEmployee?.role === 'admin') return true;
+    
+    // Pour les autres rôles, vérifier la permission spécifique
+    return canPerformAction(currentEmployee, 'delete_employee');
+  };
+  
+  const canManageShifts = () => {
+    // L'admin peut tout faire
+    if (currentEmployee?.role === 'admin') return true;
+    
+    // Pour les autres rôles, vérifier la permission spécifique
+    return canPerformAction(currentEmployee, 'manage_shifts');
+  };
+  
+  const { theme } = useTheme();
+  
+  const [activeTab, setActiveTab] = useState<'list' | 'shifts' | 'stats'>('list');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [showAddEmployee, setShowAddEmployee] = useState(false);
+  const [showEditEmployee, setShowEditEmployee] = useState<Employee | undefined>(undefined);
+  const [showAddShift, setShowAddShift] = useState(false);
+  const [selectedShiftDate, setSelectedShiftDate] = useState<Date | null>(null);
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [isSubmitting, setIsSubmitting] = useState(false); // État pour suivre la soumission du formulaire
+
+  // Forcer l'application du thème lors du chargement du composant
+  useEffect(() => {
+    // Déclencher l'événement forceThemeUpdate pour s'assurer que le thème est correctement appliqué
+    const event = new CustomEvent('forceThemeUpdate', {
+      detail: { 
+        theme: theme, 
+        timestamp: Date.now() 
+      }
+    });
+    document.dispatchEvent(event);
+    console.log(`EmployeeManagerFirebase: Événement forceThemeUpdate déclenché au chargement avec thème: ${theme}`);
+  }, [theme]);
+
+  // Fonction pour récupérer les employés (déclarée en dehors de useEffect pour pouvoir être réutilisée)
+  const fetchEmployees = async () => {
+    try {
+      setLoading(true);
+      console.log("Début du chargement des employés");
+      
+      // Utiliser la fonction getEmployees qui récupère automatiquement le businessId
+      const employeesData = await getEmployees();
+      console.log("Données des employés récupérées:", employeesData);
+      
+      if (employeesData && employeesData.length > 0) {
+        console.log("Nombre d'employés récupérés:", employeesData.length);
+        console.log("Premier employé:", employeesData[0]);
+        setEmployees(employeesData as any);
+      } else {
+        console.warn("Aucun employé récupéré ou tableau vide");
+        // Forcer la mise à jour même avec un tableau vide
+        setEmployees([]);
+      }
+      
+      setError(null);
+    } catch (err) {
+      console.error("Erreur lors de la récupération des employés:", err);
+      setError("Impossible de charger les employés. Veuillez réessayer.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Charger les employés avec une vérification supplémentaire pour l'admin principal
+  useEffect(() => {
+    fetchEmployees();
+  }, [currentEmployee]);
+
+  useEffect(() => {
+    const fetchShifts = async () => {
+      try {
+        const businessId = getCurrentBusinessId();
+        if (!businessId) return;
+        
+        // On utilise un casting 'as any' pour contourner les incompatibilités de type
+        const shiftsData = await getShifts();
+        setShifts(shiftsData as any);
+      } catch (err) {
+        console.error("Erreur lors de la récupération des shifts:", err);
+      }
+    };
+
+    fetchShifts();
+  }, [currentEmployee]);
+
+  // Fonction locale pour ajouter un shift directement à Firestore
+  const addShiftDirectly = async (shift: any) => {
+    try {
+      console.log("Tentative d'ajout direct de shift à Firestore");
+      
+      // Récupérer le businessId directement
+      const businessIdStr = localStorage.getItem("businessId") || "";
+      if (!businessIdStr) {
+        console.error("BusinessId manquant");
+        return null;
+      }
+      
+      // Créer un objet de données propre pour Firestore
+      const shiftData = {
+        employeeId: shift.employeeId,
+        businessId: businessIdStr, // Utilisation directe de la chaîne
+        status: shift.status || 'scheduled',
+        notes: shift.notes || '',
+        // Conversion des dates en timestamps Firestore
+        start: shift.start ? Timestamp.fromDate(shift.start) : null,
+        end: shift.end ? Timestamp.fromDate(shift.end) : null,
+        breaks: shift.breaks || [],
+        createdAt: Timestamp.now()
+      };
+      
+      console.log("Données du shift pour Firestore:", shiftData);
+      
+      // Ajouter directement à Firestore
+      const docRef = await addDoc(collection(db, 'shifts'), shiftData);
+      
+      console.log("Shift ajouté avec succès, ID:", docRef.id);
+      return docRef.id;
+    } catch (error) {
+      console.error("Erreur lors de l'ajout direct du shift:", error);
+      return null;
+    }
+  };
+
+  // Gérer l'ajout d'un shift
+  const handleAddShift = async (employeeId: string, start: Date, end: Date) => {
+    try {
+      console.log("handleAddShift appelé avec:", {employeeId, start: start.toISOString(), end: end.toISOString()});
+      
+      // Récupérer le businessId directement du localStorage plutôt que via la fonction asynchrone
+      const businessIdStr = localStorage.getItem("businessId");
+      
+      if (!businessIdStr) {
+        console.error("Business ID manquant");
+        setError("Identifiant d'entreprise non trouvé");
+        return;
+      }
+      
+      // Créer un nouvel objet avec le businessId comme chaîne de caractères
+      const newShift = {
+        employeeId,
+        // Assurons-nous que c'est une chaîne et non une Promise
+        businessId: businessIdStr,
+        start,
+        end,
+        status: 'scheduled',
+        breaks: [],
+      };
+      
+      // Loguer pour le débogage
+      console.log("Type de businessId:", typeof newShift.businessId);
+      console.log("Valeur de businessId:", newShift.businessId);
+      console.log("Tentative d'ajout d'un shift:", newShift);
+      
+      // Utiliser notre fonction directe au lieu du service
+      const shiftId = await addShiftDirectly(newShift);
+      console.log("Shift ajouté avec succès, ID:", shiftId);
+      
+      if (shiftId) {
+        setShifts(prev => [...prev, { ...newShift, id: shiftId } as any]);
+        setShowAddShift(false);
+        setSelectedShiftDate(null);
+      }
+    } catch (err) {
+      console.error("Erreur lors de l'ajout du shift:", err);
+      setError("Impossible d'ajouter l'horaire. Veuillez réessayer.");
+    }
+  };
+
+  // Compatibilité avec la signature existante pour handleUpdateShift
+  const handleUpdateShift = async (idOrShift: string | Partial<Shift>, updates?: Partial<Shift>) => {
+    try {
+      // Si le premier argument est une chaîne (id), utiliser l'ancien format
+      if (typeof idOrShift === 'string' && updates) {
+        await updateShiftService(idOrShift, updates as any);
+        setShifts(prev => 
+          prev.map(shift => shift.id === idOrShift ? { ...shift, ...updates } as any : shift)
+        );
+      } 
+      // Si le premier argument est un objet (shift), utiliser le nouveau format
+      else if (typeof idOrShift === 'object' && idOrShift.id) {
+        const updatedShift = idOrShift;
+        await updateShiftService(updatedShift.id, updatedShift as any);
+        setShifts(prev => 
+          prev.map(shift => shift.id === updatedShift.id ? { ...shift, ...updatedShift } as any : shift)
+        );
+      }
+    } catch (err) {
+      console.error("Erreur lors de la mise à jour du shift:", err);
+    }
+  };
+
+  // Gérer l'ajout d'un employé
+  const handleAddEmployee = async (employeeData: Partial<Employee>, avatarFile?: File | null) => {
+    try {
+      setIsSubmitting(true);
+      setError(null);
+      console.log("Début de l'ajout d'un employé avec les données:", employeeData);
+      
+      // Récupérer le businessId directement du localStorage
+      const businessIdStr = localStorage.getItem("businessId");
+      if (!businessIdStr) {
+        console.error("Identifiant d'entreprise non trouvé dans localStorage");
+        setError("Identifiant d'entreprise non trouvé");
+        return;
+      }
+      
+      // Préparer les données de l'employé
+      const newEmployee = {
+        ...employeeData,
+        businessId: businessIdStr,
+        createdAt: new Date(),
+        active: true
+      };
+      
+      console.log("Permissions dans les données de l'employé:", 
+        Array.isArray(newEmployee.permissions) ? 
+          `Tableau de ${newEmployee.permissions.length} éléments` : 
+          "Non défini ou pas un tableau");
+      
+      // Gérer l'upload de l'avatar si présent
+      if (avatarFile) {
+        try {
+          console.log("Tentative d'upload de l'avatar...");
+          const avatarUrl = await uploadAndResizeImage(avatarFile, 'employees');
+          newEmployee.avatarUrl = avatarUrl;
+          console.log("Avatar uploadé avec succès:", avatarUrl ? "URL valide" : "URL vide");
+        } catch (avatarError) {
+          console.error("Erreur lors de l'upload de l'avatar:", avatarError);
+          // Continuer même si l'upload de l'avatar échoue
+        }
+      }
+      
+      // Ajouter l'employé
+      console.log("Appel du service addEmployee...");
+      const result = await addEmployee(newEmployee as any);
+      console.log("Résultat de l'ajout de l'employé:", result);
+      
+      // Vérifier si nous avons un ID valide
+      if (result && result.id) {
+        console.log("Employé ajouté avec succès, ID:", result.id);
+        // Mettre à jour la liste des employés avec l'employé retourné par le service
+        setEmployees(prev => [...prev, result]);
+        setShowAddEmployee(false);
+        // Recharger la liste des employés pour s'assurer qu'elle est à jour
+        fetchEmployees();
+      } else {
+        console.error("Aucun ID d'employé retourné après l'ajout");
+        setError("Erreur lors de l'ajout de l'employé: aucun identifiant retourné");
+      }
+    } catch (err) {
+      console.error("Erreur lors de l'ajout de l'employé:", err);
+      setError(`Impossible d'ajouter l'employé: ${err instanceof Error ? err.message : 'Erreur inconnue'}`);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  // Gérer la modification d'un employé
+  const handleEditEmployee = (employee: Employee) => {
+    console.log('Tentative de modification employé:', employee.id, 'par utilisateur:', currentEmployee?.id, 'role:', currentEmployee?.role);
+    
+    // Si l'utilisateur est un caissier, vérifier qu'il ne peut modifier que son propre profil
+    if (currentEmployee?.role === 'cashier' && currentEmployee.id !== employee.id) {
+      alert("Vous n'avez pas la permission de modifier ce profil.");
+      return;
+    }
+    
+    // Pour les caissiers, afficher uniquement le formulaire de modification du mot de passe
+    if (currentEmployee?.role === 'cashier' && currentEmployee.id === employee.id) {
+      console.log('Ouverture du formulaire de modification du mot de passe pour le caissier');
+      // Ouvrir uniquement le formulaire de modification de mot de passe
+      setShowEditEmployee({
+        ...employee,
+        _passwordChangeOnly: true // Propriété spéciale pour indiquer que seule la modification du mot de passe est autorisée
+      } as any);
+    } else {
+      // Pour les autres rôles, afficher le formulaire complet
+      setShowEditEmployee(employee);
+    }
+  };
+
+  // Gérer la suppression d'un employé
+  const handleDeleteEmployee = async (employeeId: string) => {
+    try {
+      // Trouver l'employé dans la liste
+      const employee = employees.find(emp => emp.id === employeeId);
+      
+      // Vérifier si c'est l'administrateur principal
+      if (employee?.isMainAdmin) {
+        showAlert('Vous ne pouvez pas supprimer l\'administrateur principal.', 'Action non autorisée', 'error');
+        return;
+      }
+
+      // Afficher la boîte de dialogue de confirmation avec notre utilitaire
+      const confirmed = await showConfirmDialog(
+        'Êtes-vous sûr de vouloir supprimer cet employé ?', 
+        'Suppression d\'employé', 
+        'Supprimer', 
+        'Annuler',
+        'danger'
+      );
+      
+      if (!confirmed) return;
+      
+      setLoading(true);
+      
+      // Vérifier s'il y a un compte utilisateur associé
+      if (employee?.firebaseUid) {
+        console.log('Compte utilisateur Firebase associé:', employee.firebaseUid);
+        // Si vous avez une fonction pour supprimer le compte utilisateur Firebase
+        // await deleteUserAccount(employee.firebaseUid);
+      }
+
+      await deleteEmployee(employeeId);
+      
+      setEmployees(prevEmployees => 
+        prevEmployees.filter(emp => emp.id !== employeeId)
+      );
+      
+      console.log('Employé supprimé avec succès');
+    } catch (error: any) {
+      console.error('Erreur lors de la suppression de l\'employé:', error);
+      setError('Erreur lors de la suppression de l\'employé: ' + (error instanceof Error ? error.message : String(error)));
+    } finally {
+      setLoading(false);
+    }
+  };
+  
+  // Gérer la mise à jour d'un employé
+  const handleUpdateEmployee = async (employeeData: Partial<Employee>, avatarFile?: File | null) => {
+    if (!showEditEmployee) return;
+    
+    try {
+      // Vérifier que l'ID de l'employé est présent
+      if (!employeeData.id) {
+        setError("ID de l'employé manquant");
+        return;
+      }
+      
+      console.log("Mise à jour employé - données reçues:", employeeData);
+      console.log("Avatar URL reçue:", employeeData.avatarUrl ? 
+        `présent (longueur: ${employeeData.avatarUrl.length})` : 'vide');
+      
+      // Préparer les données de mise à jour
+      const updatedEmployee = { ...employeeData };
+      
+      // Gérer l'upload de l'avatar si présent
+      if (avatarFile) {
+        try {
+          console.log("Tentative d'upload d'un nouveau fichier d'avatar");
+          const avatarUrl = await uploadAndResizeImage(avatarFile, 'employees');
+          updatedEmployee.avatarUrl = avatarUrl;
+          console.log("Nouvel avatar uploadé:", avatarUrl ? avatarUrl.substring(0, 30) + "..." : "vide");
+        } catch (uploadError) {
+          console.error("Erreur lors de l'upload de l'avatar:", uploadError);
+          setError("Erreur lors du téléchargement de l'avatar. Veuillez réessayer.");
+          return;
+        }
+      } else if (employeeData.avatarUrl === '') {
+        // Si l'avatarUrl est une chaîne vide, cela signifie que l'utilisateur veut supprimer l'avatar
+        console.log("Suppression de l'avatar demandée");
+        updatedEmployee.avatarUrl = '';
+      }
+      
+      // S'assurer que l'avatarUrl est TOUJOURS incluse dans les données de mise à jour
+      // même si c'est une chaîne vide (pour supprimer l'avatar)
+      console.log("Avatar URL finale incluse dans la mise à jour:", updatedEmployee.avatarUrl ? 
+        `présent (longueur: ${updatedEmployee.avatarUrl.length})` : 'vide');
+      
+      // Mettre à jour l'employé
+      const success = await updateEmployee(updatedEmployee.id, updatedEmployee as any);
+      
+      if (success) {
+        console.log("Mise à jour réussie, rafraîchissement de la liste des employés");
+        
+        // Mettre à jour la liste des employés
+        setEmployees(prev => {
+          const updated = prev.map(emp => {
+            if (emp.id === updatedEmployee.id) {
+              // Créer un nouvel objet avec toutes les propriétés de l'employé existant
+              // puis appliquer les mises à jour, en s'assurant que l'avatarUrl est inclus
+              const updated = { 
+                ...emp, 
+                ...updatedEmployee,
+                avatarUrl: updatedEmployee.avatarUrl
+              };
+              console.log("Employé mis à jour dans la liste:", updated.id, "avatar:", updated.avatarUrl ? "présent" : "vide");
+              return updated as any;
+            }
+            return emp;
+          });
+          return updated;
+        });
+        
+        // Forcer un rafraîchissement des données
+        setTimeout(() => {
+          const fetchEmployees = async () => {
+            try {
+              const businessId = getCurrentBusinessId();
+              // Ajouter ici le code pour récupérer les employés mis à jour
+              const updatedEmployees = await getEmployees(businessId);
+              setEmployees(updatedEmployees);
+            } catch (error) {
+              console.error("Erreur lors du rafraîchissement des employés:", error);
+            }
+          };
+          
+          // Exécuter la fonction fetchEmployees
+          fetchEmployees();
+        }, 1000); // délai d'une seconde pour permettre aux mises à jour de se terminer
+
+  // Afficher un indicateur de chargement si les données sont en cours de chargement
+  if (loading && employees.length === 0) {
+    return (
+      <div className="flex items-center justify-center h-full">
+        <div className="text-center">
+          <Loader2 className="h-8 w-8 animate-spin mx-auto mb-2 text-primary" />
+          <p>Chargement des données...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Afficher un message d'erreur si une erreur s'est produite
+  if (error && employees.length === 0) {
+    return (
+      <div className="flex items-center justify-center h-full">
+        <div className="text-center text-red-500">
+          <AlertTriangle className="h-8 w-8 mx-auto mb-2" />
+          <p>{error}</p>
+          <button 
+            className="mt-4 px-4 py-2 bg-primary text-white rounded hover:bg-primary-dark"
+            onClick={() => window.location.reload()}
+          >
+            Réessayer
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-col h-full w-full min-h-screen bg-[color:var(--color-bg)]">
+      {/* En-tête avec onglets */}
+      <div className="p-6 border-b bg-[color:var(--color-card-bg)] sticky top-0 z-10 shadow-md border-[color:var(--color-border)]">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 max-w-7xl mx-auto">
+          <div className="flex items-center">
+            <Users className="h-8 w-8 mr-3" style={{ color: 'var(--color-primary)' }} />
+            <h2 className="text-2xl font-bold text-[color:var(--color-text)]">Gestion des employés</h2>
+          </div>
+          
+          <div className="flex items-center space-x-4">
+            <div className="relative">
+              <Search className="h-5 w-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-[color:var(--color-text-secondary)]" />
+              <input
+                type="text"
+                placeholder="Rechercher un employé..."
+                className="pl-10 pr-4 py-2.5 border border-[color:var(--color-border)] rounded-lg focus:outline-none focus:ring-2 w-64 bg-[color:var(--color-input-bg)] text-[color:var(--color-text)]"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </div>
+            
+            {canAddEmployees() && (
+              <button
+                className="px-3 py-2 bg-[color:var(--color-primary)] text-white rounded-lg hover:opacity-80 flex items-center gap-1"
+                onClick={() => setShowAddEmployee(true)}
+              >
+                <UserPlus className="h-4 w-4" />
+                <span>Nouvel employé</span>
+              </button>
+            )}
+          </div>
+        </div>
+        
+        <div className="flex space-x-1 mt-6 max-w-7xl mx-auto border-b border-[color:var(--color-border)]">
+          <button
+            className={`flex items-center px-6 py-3 font-medium text-sm rounded-t-lg transition-all duration-200 ${activeTab === 'list' 
+              ? 'bg-[color:var(--color-card-bg)] border-t border-l border-r border-[color:var(--color-border)] shadow-sm -mb-px' 
+              : 'text-[color:var(--color-text-secondary)] hover:bg-[color:var(--color-bg-muted)]'}`}
+            style={{
+              color: activeTab === 'list' ? 'var(--color-primary)' : undefined,
+            }}
+            onClick={() => setActiveTab('list')}
+          >
+            <Users className="h-5 w-5 mr-2" />
+            Employés
+          </button>
+          {true && (
+            <button
+              className={`flex items-center px-6 py-3 font-medium text-sm rounded-t-lg transition-all duration-200 ${activeTab === 'shifts' 
+                ? 'bg-[color:var(--color-card-bg)] border-t border-l border-r border-[color:var(--color-border)] shadow-sm -mb-px' 
+                : 'text-[color:var(--color-text-secondary)] hover:bg-[color:var(--color-bg-muted)]'}`}
+              style={{
+                color: activeTab === 'shifts' ? 'var(--color-primary)' : undefined,
+              }}
+              onClick={() => setActiveTab('shifts')}
+            >
+              <Clock className="h-5 w-5 mr-2" />
+              Horaires
+            </button>
+          )}
+          <button
+            className={`flex items-center px-6 py-3 font-medium text-sm rounded-t-lg transition-all duration-200 ${activeTab === 'stats' 
+              ? 'bg-[color:var(--color-card-bg)] border-t border-l border-r border-[color:var(--color-border)] shadow-sm -mb-px' 
+              : 'text-[color:var(--color-text-secondary)] hover:bg-[color:var(--color-bg-muted)]'}`}
+            style={{
+              color: activeTab === 'stats' ? 'var(--color-primary)' : undefined,
+            }}
+            onClick={() => setActiveTab('stats')}
+          >
+            <BarChart2 className="h-5 w-5 mr-2" />
+            Statistiques
+          </button>
+        </div>
+      </div>
+      
+      {/* Contenu principal */}
+      <div className="flex-1 overflow-auto bg-[color:var(--color-bg)] flex-grow relative">
+        {activeTab === 'list' && (
+          <EmployeeList 
+            employees={employees}
+            searchQuery={searchQuery}
+            viewMode={viewMode}
+            setViewMode={setViewMode}
+            onEdit={handleEditEmployee}
+            onDelete={(id) => handleDeleteEmployee(id)} 
+            searchQuery={searchQuery}
+            onAddShift={(selectedDate) => {
+              console.log("ShiftManager - onAddShift appelé avec date:", selectedDate ? format(selectedDate, 'yyyy-MM-dd') : 'aucune date');
+              // Si une date est sélectionnée, la stocker pour le formulaire
+              if (selectedDate) {
+                setSelectedShiftDate(selectedDate);
+              } else {
+                setSelectedShiftDate(new Date());
+              }
+              setShowAddShift(true);
+            }}
+            onUpdateShift={handleUpdateShift}
+            canManage={canManageShifts()}
+          />
+        )}
+        
+        {activeTab === 'stats' && (
+          <EmployeeStatsComponent 
+            employees={employees}
+            stats={stats}
+            searchQuery={searchQuery}
+          />
+        )}
+      </div>
+      
+      {/* Modal pour ajouter/modifier un employé */}
+      {(showAddEmployee || showEditEmployee) && (
+        <EmployeeForm
+          employee={showEditEmployee}
+          onSave={showEditEmployee ? handleUpdateEmployee : handleAddEmployee}
+          onCancel={() => {
+            setShowAddEmployee(false);
+            setShowEditEmployee(undefined);
+          }}
+          isEdit={!!showEditEmployee}
+          isPasswordChangeOnly={showEditEmployee && (showEditEmployee as any)?._passwordChangeOnly === true}
+        />
+      )}
+      
+      {/* Modal pour ajouter un shift */}
+      {showAddShift && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-[color:var(--color-card-bg)] rounded-lg shadow-xl w-full max-w-md">
+            <div className="flex justify-between items-center p-4 border-b border-[color:var(--color-border)]">
+              <h2 className="text-xl font-semibold text-[color:var(--color-text)]">
+                Ajouter un horaire
+                {selectedShiftDate && (
+                  <span className="ml-2 text-sm text-[color:var(--color-text-secondary)]">
+                    pour le {format(selectedShiftDate, 'dd/MM/yyyy')}
+                  </span>
+                )}
+              </h2>
+              <button
+                className="text-[color:var(--color-text-secondary)] hover:text-[color:var(--color-text)]"
+                onClick={() => {
+                  setShowAddShift(false);
+                  setSelectedShiftDate(null);
+                }}
+              >
+                &times;
+              </button>
+            </div>
+            
+            <form
+              className="p-4"
+              onSubmit={(e) => {
+                e.preventDefault();
+                
+                if (isSubmitting) return; // Éviter les soumissions multiples
+                setIsSubmitting(true);
+                
+                console.log("Formulaire soumis - Ajout d'horaire");
+                
+                // Logique pour ajouter un shift
+                const formData = new FormData(e.currentTarget);
+                const employeeId = formData.get('employeeId') as string;
+                const startDate = formData.get('startDate') as string;
+                const startTime = formData.get('startTime') as string;
+                const endDate = formData.get('endDate') as string;
+                const endTime = formData.get('endTime') as string;
+                
+                // Vérifier que tous les champs sont remplis
+                if (!employeeId || !startDate || !startTime || !endDate || !endTime) {
+                  console.error("Formulaire incomplet:", {employeeId, startDate, startTime, endDate, endTime});
+                  alert("Veuillez remplir tous les champs du formulaire");
+                  setIsSubmitting(false);
+                  return;
+                }
+                
+                console.log("Données du formulaire:", {employeeId, startDate, startTime, endDate, endTime});
+                
+                try {
+                  // Créer les objets Date
+                  const start = new Date(`${startDate}T${startTime}`);
+                  const end = new Date(`${endDate}T${endTime}`);
+                  
+                  if (isNaN(start.getTime()) || isNaN(end.getTime())) {
+                    throw new Error("Dates invalides");
+                  }
+                  
+                  console.log("Dates formatées:", {
+                    startStr: `${startDate}T${startTime}`,
+                    endStr: `${endDate}T${endTime}`,
+                    start: start.toISOString(), 
+                    end: end.toISOString()
+                  });
+                  
+                  handleAddShift(employeeId, start, end)
+                    .finally(() => {
+                      setIsSubmitting(false);
+                    });
+                } catch (err) {
+                  console.error("Erreur lors de la création des dates:", err);
+                  alert("Format de date invalide. Veuillez vérifier les valeurs saisies.");
+                  setIsSubmitting(false);
+                }
+              }}
+            >
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-[color:var(--color-text-secondary)] mb-1">
+                  Employé
+                </label>
+                <select
+                  name="employeeId"
+                  className="w-full p-2 border border-[color:var(--color-border)] rounded-md bg-[color:var(--color-input-bg)] text-[color:var(--color-text)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-primary)]"
+                  required
+                  defaultValue=""
+                >
+                  <option value="" disabled>Sélectionner un employé</option>
+                  {employees.map((employee) => (
+                    <option key={employee.id} value={employee.id}>
+                      {employee.firstName} {employee.lastName}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              
+              <div className="mb-4 grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-[color:var(--color-text-secondary)] mb-1">
+                    Date de début
+                  </label>
+                  <input
+                    type="date"
+                    name="startDate"
+                    className="w-full p-2 border border-[color:var(--color-border)] rounded-md bg-[color:var(--color-input-bg)] text-[color:var(--color-text)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-primary)]"
+                    required
+                    defaultValue={selectedShiftDate ? format(selectedShiftDate, 'yyyy-MM-dd') : format(new Date(), 'yyyy-MM-dd')}
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-[color:var(--color-text-secondary)] mb-1">
+                    Heure de début
+                  </label>
+                  <input
+                    type="time"
+                    name="startTime"
+                    className="w-full p-2 border border-[color:var(--color-border)] rounded-md bg-[color:var(--color-input-bg)] text-[color:var(--color-text)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-primary)]"
+                    required
+                    defaultValue="09:00"
+                  />
+                </div>
+              </div>
+              
+              <div className="mb-4 grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-[color:var(--color-text-secondary)] mb-1">
+                    Date de fin
+                  </label>
+                  <input
+                    type="date"
+                    name="endDate"
+                    className="w-full p-2 border border-[color:var(--color-border)] rounded-md bg-[color:var(--color-input-bg)] text-[color:var(--color-text)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-primary)]"
+                    required
+                    defaultValue={selectedShiftDate ? format(selectedShiftDate, 'yyyy-MM-dd') : format(new Date(), 'yyyy-MM-dd')}
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-[color:var(--color-text-secondary)] mb-1">
+                    Heure de fin
+                  </label>
+                  <input
+                    type="time"
+                    name="endTime"
+                    className="w-full p-2 border border-[color:var(--color-border)] rounded-md bg-[color:var(--color-input-bg)] text-[color:var(--color-text)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-primary)]"
+                    required
+                    defaultValue="17:00"
+                  />
+                </div>
+              </div>
+              
+              <div className="flex justify-end space-x-2 mt-6">
+                <button
+                  type="button"
+                  className="px-4 py-2 border border-[color:var(--color-border)] rounded-md hover:bg-[color:var(--color-bg-muted)] text-[color:var(--color-text)]"
+                  onClick={(e) => {
+                    e.preventDefault(); // Empêcher le comportement par défaut
+                    e.stopPropagation(); // Arrêter la propagation de l'événement
+                    console.log("Bouton Annuler cliqué");
+                    setShowAddShift(false);
+                    setSelectedShiftDate(null);
+                  }}
+                >
+                  Annuler
+                </button>
+                <button
+                  type="submit"
+                  className={`px-4 py-2 bg-[color:var(--color-primary)] text-white rounded-md hover:bg-[color:var(--color-primary-dark)] ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
+                  disabled={isSubmitting}
+                  onClick={(e) => {
+                    // Ce gestionnaire est un backup si le onSubmit du formulaire ne fonctionne pas
+                    if (!e.currentTarget.form) {
+                      console.log("Bouton Ajouter cliqué - via onClick car form est null");
+                      e.preventDefault();
+                      // Ne pas continuer si c'est déjà en soumission
+                      if (isSubmitting) return;
+                      setIsSubmitting(true);
+                      
+                      // Récupérer les données manuellement
+                      const employeeSelect = document.querySelector('select[name="employeeId"]') as HTMLSelectElement;
+                      const startDateInput = document.querySelector('input[name="startDate"]') as HTMLInputElement;
+                      const startTimeInput = document.querySelector('input[name="startTime"]') as HTMLInputElement;
+                      const endDateInput = document.querySelector('input[name="endDate"]') as HTMLInputElement;
+                      const endTimeInput = document.querySelector('input[name="endTime"]') as HTMLInputElement;
+                      
+                      const employeeId = employeeSelect?.value;
+                      const startDate = startDateInput?.value;
+                      const startTime = startTimeInput?.value;
+                      const endDate = endDateInput?.value;
+                      const endTime = endTimeInput?.value;
+                      
+                      // Vérifier si les valeurs sont valides
+                      if (!employeeId || !startDate || !startTime || !endDate || !endTime) {
+                        console.error("Formulaire incomplet (onClick):", {employeeId, startDate, startTime, endDate, endTime});
+                        alert("Veuillez remplir tous les champs du formulaire");
+                        setIsSubmitting(false);
+                        return;
+                      }
+                      
+                      try {
+                        // Créer les objets Date
+                        const start = new Date(`${startDate}T${startTime}`);
+                        const end = new Date(`${endDate}T${endTime}`);
+                        
+                        handleAddShift(employeeId, start, end)
+                          .finally(() => {
+                            setIsSubmitting(false);
+                          });
+                      } catch (err) {
+                        console.error("Erreur lors de la création des dates (onClick):", err);
+                        alert("Format de date invalide. Veuillez vérifier les valeurs saisies.");
+                        setIsSubmitting(false);
+                      }
+                    }
+                  }}
+                >
+                  {isSubmitting ? (
+                    <span className="flex items-center">
+                      <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                      En cours...
+                    </span>
+                  ) : 'Ajouter'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+      {/* Notre utilitaire confirmUtils crée automatiquement les boîtes de dialogue */}
+    </div>
+  );
+};
+
+export default EmployeeManagerFirebase;

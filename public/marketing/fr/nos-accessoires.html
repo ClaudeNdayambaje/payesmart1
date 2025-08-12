@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nos Accessoires | PayeSmart</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="../img/favicon.png" type="image/png">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../css/styles.css">
+    <!-- Fichier CSS unifié pour les accessoires, remplace tous les fichiers accessoires précédents -->
+    <link rel="stylesheet" href="../css/accessoires-unified.css?v=1.0">
+    <link rel="stylesheet" href="../css/texte-visible.css?v=1.0">
+    <link rel="stylesheet" href="../css/voir-plus.css?v=1.0">
+    <link rel="stylesheet" href="../css/lucide-icons.css">
+    <link rel="stylesheet" href="../css/responsive-enhancements.css">
+    <link rel="stylesheet" href="../css/custom-colors.css">
+    <link rel="stylesheet" href="../css/dark-theme-produits.css">
+    <link rel="stylesheet" href="../css/navigation-unified.css?v=1.9">
+    <link rel="stylesheet" href="../css/features-produits.css">
+    <link rel="stylesheet" href="../css/accessoires-grid-fix.css">
+    <!-- Le fichier footer.css a été migré vers navigation-unified.css v=1.7 -->
+    <!-- language-selector.css intégré dans navigation-unified.css v1.8 -->
+    <link rel="stylesheet" href="../css/hero-position-fix.css">
+    <link rel="stylesheet" href="../css/supprimer-badges.css?v=1.0">
+    <!-- Corrections pour les filtres de catégories -->
+    <link rel="stylesheet" href="../css/category-filters-fix.css?v=1.1">
+    
+    <!-- Navigation unifiée -->
+    <link rel="stylesheet" href="../css/navigation-unified.css?v=1.9">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+    
+    <!-- Scripts -->
+    <script src="../js/language-persistence.js" defer></script>
+    <script src="../js/transparent-header.js"></script>
+    <!-- Script fix-links.js désactivé pour éviter les changements de langue automatiques -->
+    <script src="https://unpkg.com/lucide@0.344.0/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+    <!-- Barre de navigation mobile professionnelle -->
+    <div class="mobile-nav-bar">
+        <div class="mobile-nav-container">
+            <div class="mobile-nav-logo">
+                <img src="../img/logo.png" alt="PayeSmart Logo">
+            </div>
+            
+            <div class="mobile-language-selector">
+                <button class="mobile-language-button">FR <i class="fas fa-chevron-down"></i></button>
+                <div class="mobile-language-dropdown">
+                    <a href="nos-accessoires.html" class="mobile-language-option active" data-lang="fr">Français</a>
+                    <a href="../nl/nos-accessoires.html" class="mobile-language-option" data-lang="nl">Nederlands</a>
+                    <a href="../en/nos-accessoires.html" class="mobile-language-option" data-lang="en">English</a>
+                </div>
+            </div>
+            
+            <button class="mobile-menu-button">
+                <span class="mobile-menu-bar"></span>
+                <span class="mobile-menu-bar"></span>
+                <span class="mobile-menu-bar"></span>
+            </button>
+        </div>
+        
+        <div class="mobile-nav-menu">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="solutions.html">Terminaux</a></li>
+                <li><a href="nos-accessoires.html" class="active">Accessoires</a></li>
+                <li><a href="about.html">Qui sommes-nous</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="mobile-nav-buttons">
+                <a href="http://localhost:3002/#/auth?register=true" class="btn btn-primary">Essai gratuit</a>
+                <a href="http://localhost:3002/#/auth" class="btn btn-primary">Se connecter</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Header desktop -->
+    <header class="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <a href="index.html"><img src="../img/logo.png" alt="PayeSmart Logo"></a>
+                </div>
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="solutions.html">Terminaux</a></li>
+                        <li><a href="nos-accessoires.html" class="active">Accessoires</a></li>
+                        <li><a href="about.html">Qui sommes-nous</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="header-buttons">
+                    <div class="language-selector">
+                        <button class="language-button">FR <i class="fas fa-chevron-down"></i></button>
+                        <div class="language-dropdown">
+                            <a href="nos-accessoires.html" class="language-option active" data-lang="fr">Français</a>
+                            <a href="../nl/nos-accessoires.html" class="language-option" data-lang="nl">Nederlands</a>
+                            <a href="../en/nos-accessoires.html" class="language-option" data-lang="en">English</a>
+                        </div>
+                    </div>
+                    <a href="http://localhost:3002/#/auth?register=true" class="btn btn-primary">Essai gratuit</a>
+                    <a href="http://localhost:3002/#/auth" class="btn btn-primary">Se connecter</a>
+                </div>
+                <button class="mobile-menu-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section avec arrière-plan et film sombre -->
+        <section class="produits-hero" style="background-image: url('../img/backgrounds/experience-client-moderne.jpg') !important; background-size: cover; background-position: center; position: relative;">
+            <!-- Film sombre transparent par-dessus l'image -->
+            <div style="content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to right, rgba(0,0,0,0.6), rgba(0,0,0,0.4)); opacity: 0.5; z-index: 1; backdrop-filter: brightness(0.8) contrast(1.2);"></div>
+            <!-- Texture overlay ajoutée directement pour garantir l'effet -->
+            <div class="texture-overlay"></div>
+            <div class="container">
+                <div class="produits-hero-content">
+                    <h1>Nos Accessoires</h1>
+                    <div class="hero-divider"></div>
+                    <p class="subtitle">
+                        Découvrez notre gamme d'accessoires pour compléter<br>
+                        votre solution de caisse PayeSmart.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Accessoires Section -->
+        <section class="accessoires-section">
+            <div class="container">
+                
+                <!-- Catégories d'accessoires -->
+                <div class="filter-title">Filtrer par catégorie:</div>
+                <div class="category-filter">
+                    <button class="active" data-category="all">Tous</button>
+                    <button data-category="scanner">Scanner</button>
+                    <button data-category="imprimante-thermique">Imprimante thermique</button>
+                    <button data-category="tiroir-caisse">Tiroir-caisse</button>
+                    <button data-category="ecran">Écran</button>
+                    <button data-category="autre">Autre</button>
+                </div>
+                
+                <!-- Grille d'accessoires -->
+                <div class="accessoires-grid">
+                    <!-- Accessoire 1 -->
+                    <div class="accessoire-card" data-category="scanner">
+                        <div class="accessoire-image">
+                            <img src="../img/accessoires/scanner-barcode.jpg" alt="Scanner de code-barres">
+                        </div>
+                        <div class="accessoire-details">
+                            <h3>Scanner de Code-barres 1D/2D</h3>
+                            <p>Scanner haute performance pour codes-barres 1D et 2D. Idéal pour les commerces à volume élevé.</p>
+                            <a href="#contact" class="btn-cta">Demander un devis</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Accessoire 2 -->
+                    <div class="accessoire-card" data-category="imprimante-thermique">
+                        <div class="accessoire-image">
+                            <img src="../img/accessoires/printer-thermal.jpg" alt="Imprimante thermique">
+                        </div>
+                        <div class="accessoire-details">
+                            <h3>Imprimante Thermique 80mm</h3>
+                            <p>Imprimante rapide et fiable pour tickets de caisse. Compatible avec notre logiciel PayeSmart.</p>
+                            <a href="#contact" class="btn-cta">Demander un devis</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Accessoire 3 -->
+                    <div class="accessoire-card" data-category="tiroir-caisse">
+                        <div class="accessoire-image">
+                            <img src="../img/accessoires/terminal-paiement.jpg" alt="Terminal de paiement">
+                        </div>
+                        <div class="accessoire-details">
+                            <h3>Terminal de Paiement PayeSmart</h3>
+                            <p>Terminal de paiement électronique sécurisé compatible avec toutes les cartes bancaires.</p>
+                            <a href="#contact" class="btn-cta">Demander un devis</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Section d'appel à l'action -->
+                <div class="cta-section">
+                    <h3>Vous souhaitez en savoir plus sur nos accessoires?</h3>
+                    <p>Nos experts sont disponibles pour vous présenter notre gamme complète d'accessoires et vous aider à choisir les solutions adaptées à votre commerce.</p>
+                    <a href="contact.html" class="btn-cta">Contactez-nous</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <!-- Logo et information principale -->
+            <div class="footer-main">
+                <div class="footer-logo">
+                    
+                    
+                </div>
+                
+                <!-- Icônes de réseaux sociaux -->
+                <div class="footer-social">
+                    <a href="#" class="social-icon" aria-label="Facebook">
+                        <i data-lucide="facebook"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Twitter">
+                        <i data-lucide="twitter"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="LinkedIn">
+                        <i data-lucide="linkedin"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Instagram">
+                        <i data-lucide="instagram"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Liens organisés -->
+            <div class="footer-links-grid">
+                <div class="footer-links-column">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="about.html">Qui sommes-nous</a></li>
+                        <li><a href="solutions.html">Fonctionnalités</a></li>
+                        <li><a href="solutions.html#pricing">Tarifs</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-column">
+                    <h4>Entreprise</h4>
+                    <ul>
+                        <li><a href="about.html">À propos</a></li>
+                        <li><a href="about.html#team">Notre équipe</a></li>
+                        <li><a href="about.html#values">Nos valeurs</a></li>
+                        <li><a href="#">Carrières</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-column">
+                    <h4>Ressources</h4>
+                    <ul>
+                        <li><a href="#">Centre d'aide</a></li>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Webinaires</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-column">
+                    <h4>Légal</h4>
+                    <ul>
+                        <li><a href="#">Conditions</a></li>
+                        <li><a href="#">Confidentialité</a></li>
+                        <li><a href="#">Conformité</a></li>
+                        <li><a href="#">Mentions légales</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Ligne de séparation -->
+            <hr class="footer-divider">
+            
+            <!-- Accès et copyright -->
+            <div class="footer-bottom">
+                <div class="footer-access">
+                    <a href="http://localhost:3001/#/auth" class="access-link">Connexion client</a>
+                    <span class="separator">|</span>
+                    <a href="http://localhost:3001/#/admin/login" class="access-link admin-link">Espace administration</a>
+                </div>
+                <p class="copyright">&copy; 2025 PayeSmart. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Script pour les filtres de catégories -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const filterButtons = document.querySelectorAll('.category-filter button');
+        const accessoireCards = document.querySelectorAll('.accessoire-card');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Retirer la classe active de tous les boutons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Ajouter la classe active au bouton cliqué
+                this.classList.add('active');
+                
+                // Récupérer la catégorie à filtrer
+                const filterValue = this.getAttribute('data-category');
+                
+                // Filtrer les cartes
+                accessoireCards.forEach(card => {
+                    if (filterValue === 'all') {
+                        card.style.display = 'block';
+                    } else {
+                        const cardCategory = card.getAttribute('data-category');
+                        if (cardCategory === filterValue) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    }
+                });
+            });
+        });
+    });
+    </script>
+    
+    <!-- Script pour le comportement de scroll du header -->
+    <script src="../js/responsive-enhancements.js"></script>
+    
+    <!-- Script de chargement des accessoires -->
+    <script src="../js/accessoires-display.js?v=2.3"></script>
+    
+    <!-- Scripts de correction des filtres -->
+    <script src="../js/accessoires-category-fix.js?v=1.0"></script>
+    
+    <!-- Script de navigation mobile professionnelle -->
+    <script src="../js/mobile-nav.js"></script>
+
+</body>
+</html>

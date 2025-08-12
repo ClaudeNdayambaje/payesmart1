@@ -1,0 +1,23 @@
+/* Styles pour le date picker en mode sombre */
+.dark input[type="date"] {
+  color-scheme: dark;
+}
+
+/* Styles pour le calendrier natif en mode sombre */
+.dark ::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+/* Styles spécifiques pour les pop-up de calendrier natifs en mode sombre */
+@media (prefers-color-scheme: dark) {
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+  }
+}
+
+/* En mode sombre, on force les couleurs du widget calendrier */
+.dark input[type="date"] {
+  background-color: #374151; /* gray-700 */
+  color: white;
+  border-color: #4B5563; /* gray-600 */
+}

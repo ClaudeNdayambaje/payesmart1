@@ -1,0 +1,72 @@
+/* 
+ * OPTIMISATION DE L'AFFICHAGE MOBILE DES SECTIONS HERO
+ * Améliore l'organisation du texte et des boutons sur les écrans mobiles
+ * Date: Août 2025
+ */
+
+/* Optimisation globale pour toutes les sections hero en mobile */
+@media (max-width: 767px) {
+    /* 1. Ajustement des contenus hero */
+    .hero-content {
+        padding: 0 15px;
+        margin-top: 20px;
+    }
+    
+    /* 2. Amélioration des titres sur deux lignes */
+    .two-line-title {
+        font-size: 36px !important;
+        line-height: 1.2 !important;
+        margin-bottom: 15px !important;
+        text-align: center !important;
+    }
+    
+    /* 3. Optimisation des sous-titres */
+    .two-line-subtitle {
+        font-size: 16px !important;
+        line-height: 1.4 !important;
+        margin-bottom: 25px !important;
+        text-align: center !important;
+    }
+    
+    /* 4. Centrage et espacement des boutons */
+    .hero-buttons {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 12px !important;
+        margin-top: 25px !important;
+        margin-bottom: 30px !important;
+    }
+    
+    /* 5. Boutons plus larges en mobile */
+    .hero-buttons .btn {
+        min-width: 220px !important;
+        text-align: center !important;
+        padding: 12px 25px !important;
+        margin: 0 !important;
+        font-size: 16px !important;
+    }
+    
+    /* 6. Centrer le texte qui serait aligné à gauche */
+    .hero-text.text-left {
+        text-align: center !important;
+        padding: 20px 0px !important;
+    }
+    
+    /* 7. Amélioration de la visibilité des éléments de mise en évidence */
+    .text-highlight {
+        padding: 0 2px !important;
+    }
+}
+
+/* Optimisations spécifiques pour les petits mobiles */
+@media (max-width: 380px) {
+    .two-line-title {
+        font-size: 32px !important;
+    }
+    
+    .hero-buttons .btn {
+        min-width: 200px !important;
+        font-size: 15px !important;
+    }
+}

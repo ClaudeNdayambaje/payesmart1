@@ -1,0 +1,489 @@
+/* 
+ * TÉMOIGNAGES STYLES UNIFIÉS
+ * Fichier CSS unifié pour tous les styles de témoignages du site PayeSmart
+ * Regroupe et harmonise les styles des fichiers :
+ * - testimonials-section.css
+ * - testimonials-redesign.css
+ * Version 1.0 - Août 2025
+ */
+
+/*==================================
+ * 1. STRUCTURE DE BASE DES TÉMOIGNAGES
+ *==================================*/
+
+/* Section témoignages principale */
+.testimonials-section {
+    padding: 80px 0;
+    background-color: #f9f9f9;
+    position: relative;
+}
+
+/* Conteneur des témoignages */
+.testimonials-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* En-tête de la section témoignages */
+.testimonials-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.testimonials-header h2 {
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.testimonials-header p {
+    font-size: 18px;
+    color: #666;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Carrousel des témoignages */
+.testimonials-carousel {
+    position: relative;
+    margin: 0 auto;
+    max-width: 900px;
+}
+
+/* Conteneur de diapositives */
+.testimonials-slides {
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    scroll-behavior: smooth;
+}
+
+/* Diapositive individuelle */
+.testimonial-slide {
+    min-width: 100%;
+    transition: transform 0.5s ease;
+    padding: 0 20px;
+}
+
+/* Navigation du carrousel */
+.testimonials-controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.testimonials-controls button {
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #333;
+    cursor: pointer;
+    padding: 10px;
+    margin: 0 10px;
+    transition: all 0.3s ease;
+}
+
+.testimonials-controls button:hover {
+    color: #007bff;
+    transform: scale(1.2);
+}
+
+/* Indicateurs de diapositives */
+.testimonials-indicators {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.testimonials-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #ddd;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.testimonials-indicator.active {
+    background-color: #007bff;
+    transform: scale(1.2);
+}
+
+/* Statistiques des témoignages - Design amélioré */
+.stats-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 60px;
+    padding: 40px 0;
+    background: rgba(15, 15, 15, 0.3);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.stat-item {
+    text-align: center;
+    padding: 0 40px;
+    margin: 20px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-5px);
+}
+
+.stat-item:not(:last-child):after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    height: 60px;
+    width: 1px;
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.stat-number {
+    font-size: 56px;
+    font-weight: 700;
+    color: #e58509; /* Orange de la charte graphique */
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, #e58509, #ff9f30);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 2px 15px rgba(229, 133, 9, 0.3);
+}
+
+.stat-label {
+    font-size: 18px;
+    color: #aaa;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+
+/*==================================
+ * 2. DESIGN REDESIGN DES TÉMOIGNAGES
+ *==================================*/
+
+/* Version redesignée des témoignages */
+.testimonials-redesign {
+    background-color: #fff;
+    padding: 100px 0;
+}
+
+/* Carte de témoignage redesignée */
+.testimonial-card {
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    padding: 40px;
+    margin: 0 20px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
+}
+
+/* Contenu du témoignage */
+.testimonial-content {
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 20px;
+}
+
+.testimonial-content:before {
+    content: '\\201C';
+    position: absolute;
+    left: 0;
+    top: -15px;
+    font-size: 60px;
+    color: #007bff;
+    font-family: Georgia, serif;
+    line-height: 1;
+    opacity: 0.3;
+}
+
+.testimonial-text {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #555;
+    font-style: italic;
+}
+
+/* Auteur du témoignage */
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.testimonial-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 15px;
+}
+
+.testimonial-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.testimonial-info {
+    flex: 1;
+}
+
+.testimonial-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.testimonial-position {
+    font-size: 14px;
+    color: #666;
+}
+
+.testimonial-rating {
+    display: flex;
+    margin-top: 5px;
+}
+
+.testimonial-rating i {
+    color: #ffc107;
+    margin-right: 3px;
+}
+
+/* Variante grille */
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+/* Version compacte */
+.testimonial-compact {
+    padding: 30px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.testimonial-compact .testimonial-text {
+    font-size: 16px;
+}
+
+.testimonial-compact .testimonial-avatar {
+    width: 40px;
+    height: 40px;
+}
+
+/* Version avec logo d'entreprise */
+.testimonial-with-logo {
+    display: flex;
+    align-items: center;
+}
+
+.testimonial-logo {
+    width: 100px;
+    height: auto;
+    margin-right: 30px;
+    flex-shrink: 0;
+}
+
+.testimonial-logo img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Boutons de navigation redesignés */
+.testimonials-nav {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    z-index: 2;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.testimonials-prev,
+.testimonials-next {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    pointer-events: auto;
+}
+
+.testimonials-prev {
+    left: -25px;
+}
+
+.testimonials-next {
+    right: -25px;
+}
+
+.testimonials-prev i,
+.testimonials-next i {
+    color: #333;
+    font-size: 20px;
+}
+
+.testimonials-prev:hover,
+.testimonials-next:hover {
+    background-color: #007bff;
+    transform: scale(1.1);
+}
+
+.testimonials-prev:hover i,
+.testimonials-next:hover i {
+    color: #fff;
+}
+
+/*==================================
+ * 3. ANIMATIONS ET EFFETS VISUELS
+ *==================================*/
+
+/* Animation d'apparition */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 40px, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.testimonial-animate {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+/* Effet de citation */
+.testimonial-quote {
+    position: relative;
+}
+
+.testimonial-quote:before,
+.testimonial-quote:after {
+    font-family: Georgia, serif;
+    position: absolute;
+    color: rgba(0, 123, 255, 0.1);
+    font-size: 120px;
+    line-height: 0;
+}
+
+.testimonial-quote:before {
+    content: '\\201C';
+    left: -20px;
+    top: 40px;
+}
+
+.testimonial-quote:after {
+    content: '\\201D';
+    right: -20px;
+    bottom: -30px;
+}
+
+/*==================================
+ * 4. RESPONSIVE
+ *==================================*/
+
+@media (max-width: 992px) {
+    .testimonials-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .stat-item {
+        padding: 0 30px;
+    }
+    
+    .testimonial-with-logo {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .testimonial-logo {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .testimonials-header h2 {
+        font-size: 30px;
+    }
+    
+    .stat-item {
+        width: 100%;
+        margin: 10px 0;
+    }
+    
+    .stat-item:after {
+        display: none;
+    }
+    
+    .testimonials-nav {
+        position: relative;
+        margin-top: 30px;
+        height: 50px;
+    }
+    
+    .testimonials-prev {
+        left: 30%;
+    }
+    
+    .testimonials-next {
+        right: 30%;
+    }
+    
+    .testimonial-card {
+        padding: 30px 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .testimonial-text {
+        font-size: 16px;
+    }
+    
+    .stat-number {
+        font-size: 36px;
+    }
+    
+    .testimonials-prev {
+        left: 20%;
+    }
+    
+    .testimonials-next {
+        right: 20%;
+    }
+}

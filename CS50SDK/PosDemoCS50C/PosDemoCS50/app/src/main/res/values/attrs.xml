@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+     <declare-styleable name="mGridLayout">
+        <attr name="numColumns" format="integer" />
+        <attr name="itemMargin" format="integer" />
+         <attr name="gridLineColor" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="NumKeyBoard">
+        <attr name="gbColor" format="color|reference" />
+        <attr name="deleteDrawable" format="reference" />
+    </declare-styleable>
+
+</resources>

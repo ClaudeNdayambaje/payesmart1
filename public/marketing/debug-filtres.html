@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnostic des Filtres d'Accessoires</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #ff6b00;
+        }
+        .debug-section {
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+        .log {
+            background-color: #f8f8f8;
+            border-left: 3px solid #ff6b00;
+            padding: 10px;
+            margin: 10px 0;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+        button {
+            padding: 8px 12px;
+            background-color: #ff6b00;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #e05f00;
+        }
+        .test-buttons {
+            margin: 20px 0;
+        }
+        .category-filter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .category-filter button {
+            background-color: #eee;
+            color: #333;
+        }
+        .category-filter button.active {
+            background-color: #ff6b00;
+            color: white;
+        }
+        .accessoire-card {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Diagnostic des Filtres d'Accessoires</h1>
+    
+    <div class="debug-section">
+        <h2>Configuration HTML actuelle</h2>
+        <div id="html-config"></div>
+    </div>
+    
+    <div class="debug-section">
+        <h2>Test des Filtres</h2>
+        <div class="category-filter">
+            <button data-category="all" class="active">Tous</button>
+            <button data-category="scanner">Scanner</button>
+            <button data-category="imprimante-thermique">Imprimante thermique</button>
+            <button data-category="tiroir-caisse">Tiroir-caisse</button>
+            <button data-category="ecran">Écran</button>
+            <button data-category="autre">Autre</button>
+        </div>
+        
+        <div class="accessoires-grid">
+            <div class="accessoire-card" data-category="scanner">
+                <h3>Scanner Test</h3>
+                <p>Catégorie: scanner</p>
+            </div>
+            <div class="accessoire-card" data-category="imprimante-thermique">
+                <h3>Imprimante Test</h3>
+                <p>Catégorie: imprimante-thermique</p>
+            </div>
+            <div class="accessoire-card" data-category="tiroir-caisse">
+                <h3>Tiroir Test</h3>
+                <p>Catégorie: tiroir-caisse</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="debug-section">
+        <h2>Logs</h2>
+        <div id="logs" class="log"></div>
+    </div>
+    
+    <div class="test-buttons">
+        <button id="test-config">Tester la configuration</button>
+        <button id="test-selectors">Tester les sélecteurs</button>
+    </div>
+    
+    <script>
+        // Fonction pour ajouter un log
+        function log(message) {
+            const logsDiv = document.getElementById('logs');
+            logsDiv.innerHTML += message + '\n';
+            console.log(message);
+        }
+        
+        // Fonction pour afficher la configuration HTML
+        function displayHtmlConfig() {
+            const configDiv = document.getElementById('html-config');
+            const filterButtons = document.querySelectorAll('.category-filter button');
+            const accessoireCards = document.querySelectorAll('.accessoire-card');
+            
+            let html = '<h3>Boutons de filtre</h3><ul>';
+            filterButtons.forEach(button => {
+                html += `<li>Texte: "${button.textContent}" | data-category: "${button.getAttribute('data-category')}" | data-filter: "${button.getAttribute('data-filter')}"</li>`;
+            });
+            html += '</ul><h3>Cartes d\'accessoires</h3><ul>';
+            
+            accessoireCards.forEach(card => {
+                html += `<li>Titre: "${card.querySelector('h3').textContent}" | data-category: "${card.getAttribute('data-category')}"</li>`;
+            });
+            html += '</ul>';
+            
+            configDiv.innerHTML = html;
+        }
+        
+        // Test de fonctionnement des filtres
+        function setupCategoryFilter() {
+            log('🔧 Configuration des filtres...');
+            const accessoireCards = document.querySelectorAll('.accessoire-card');
+            const filterButtons = document.querySelectorAll('.category-filter button');
+            
+            log(`📊 ${filterButtons.length} boutons de filtre trouvés`);
+            log(`📊 ${accessoireCards.length} cartes d'accessoires trouvées`);
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    log(`🖱️ Clic sur le bouton: ${button.textContent}`);
+                    
+                    // Retirer la classe active de tous les boutons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Ajouter la classe active au bouton cliqué
+                    button.classList.add('active');
+                    
+                    // Récupérer la catégorie à filtrer
+                    const filterValue = button.getAttribute('data-category');
+                    log(`🔍 Filtrage par: ${filterValue}`);
+                    
+                    // Filtrer les cartes
+                    accessoireCards.forEach(card => {
+                        const cardCategory = card.getAttribute('data-category');
+                        log(`🔄 Vérification carte: ${card.querySelector('h3').textContent}, catégorie=${cardCategory}`);
+                        
+                        if (filterValue === 'all') {
+                            card.style.display = 'block';
+                            log(`✅ Carte affichée (all): ${card.querySelector('h3').textContent}`);
+                        } else if (cardCategory === filterValue) {
+                            card.style.display = 'block';
+                            log(`✅ Carte affichée (match): ${card.querySelector('h3').textContent}`);
+                        } else {
+                            card.style.display = 'none';
+                            log(`❌ Carte masquée: ${card.querySelector('h3').textContent}`);
+                        }
+                    });
+                });
+            });
+            
+            log('✅ Configuration des filtres terminée');
+        }
+        
+        // Test des sélecteurs
+        function testSelectors() {
+            log('\n🔍 Test des sélecteurs...');
+            
+            // Test des sélecteurs de boutons
+            log('\nTest des sélecteurs de boutons:');
+            log(`data-category="all": ${document.querySelector('.category-filter button[data-category="all"]') ? 'Trouvé ✅' : 'Non trouvé ❌'}`);
+            log(`data-filter="all": ${document.querySelector('.category-filter button[data-filter="all"]') ? 'Trouvé ✅' : 'Non trouvé ❌'}`);
+            log(`data-category="scanner": ${document.querySelector('.category-filter button[data-category="scanner"]') ? 'Trouvé ✅' : 'Non trouvé ❌'}`);
+            log(`data-filter="scanner": ${document.querySelector('.category-filter button[data-filter="scanner"]') ? 'Trouvé ✅' : 'Non trouvé ❌'}`);
+            
+            // Test de récupération des attributs
+            log('\nTest de récupération des attributs:');
+            const allButton = document.querySelector('.category-filter button[data-category="all"]');
+            if (allButton) {
+                log(`Bouton "Tous" - getAttribute('data-category'): ${allButton.getAttribute('data-category')}`);
+                log(`Bouton "Tous" - getAttribute('data-filter'): ${allButton.getAttribute('data-filter')}`);
+            } else {
+                log('Bouton "Tous" avec data-category="all" non trouvé ❌');
+            }
+            
+            // Test des cartes
+            log('\nTest des cartes:');
+            log(`data-category="scanner": ${document.querySelector('.accessoire-card[data-category="scanner"]') ? 'Trouvé ✅' : 'Non trouvé ❌'}`);
+            log(`data-filter="scanner": ${document.querySelector('.accessoire-card[data-filter="scanner"]') ? 'Trouvé ✅' : 'Non trouvé ❌'}`);
+        }
+        
+        // Initialisation au chargement de la page
+        document.addEventListener('DOMContentLoaded', () => {
+            log('🚀 Page de diagnostic chargée');
+            displayHtmlConfig();
+            setupCategoryFilter();
+            
+            // Listeners pour les boutons de test
+            document.getElementById('test-config').addEventListener('click', displayHtmlConfig);
+            document.getElementById('test-selectors').addEventListener('click', testSelectors);
+        });
+    </script>
+</body>
+</html>

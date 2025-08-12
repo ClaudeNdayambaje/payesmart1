@@ -1,0 +1,42 @@
+/* 
+ * AJUSTEMENT DE L'ESPACEMENT DES BARRES DE TITRE
+ * Réduit l'espace entre les titres et les barres de séparation
+ * Date: Août 2025
+ */
+
+/* Réduction de l'espacement entre le titre et la barre */
+.produits-hero-content h1 {
+    margin-bottom: 10px;
+}
+
+/* Réduction des marges de la barre de séparation */
+.produits-hero-content .hero-divider {
+    margin: 10px auto 20px;
+}
+
+/* Ajustement spécifique pour les sections intérieures */
+section:not(.hero) .produits-hero-content h1 {
+    margin-bottom: 10px;
+}
+
+section:not(.hero) .produits-hero-content .hero-divider {
+    margin: 10px auto 20px;
+}
+
+/* Pour garantir que les ajustements s'appliquent à toutes les sections */
+.section-header h1 + .hero-divider,
+.produits-hero-content h1 + .hero-divider {
+    margin-top: 10px;
+}
+
+/* Augmentation de l'espace entre le texte descriptif et les cartes de forfaits */
+#pricing .produits-hero-content,
+.hardware-section .produits-hero-content {
+    margin-bottom: 40px;
+}
+
+/* Styles pour l'espacement des grilles de cartes */
+#pricing .hardware-grid,
+.hardware-section .hardware-grid {
+    margin-top: 30px;
+}

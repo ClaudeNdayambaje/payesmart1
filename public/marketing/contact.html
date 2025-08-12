@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | PayeSmart - Votre solution de gestion de caisse intelligente</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/pricing-enhancements.css">
+    <link rel="stylesheet" href="css/lucide-icons.css">
+    <link rel="stylesheet" href="css/button-enhancements.css">
+    <link rel="stylesheet" href="css/contact.css">
+    <link rel="stylesheet" href="css/responsive-enhancements.css">
+    <link rel="stylesheet" href="css/menu-harmonization.css">
+    <link rel="stylesheet" href="css/custom-colors.css">
+    <link rel="stylesheet" href="css/dark-theme-contact.css">
+    <link rel="stylesheet" href="css/navigation-buttons-global.css">
+    <link rel="stylesheet" href="css/navigation-unified.css?v=1.8">
+    <!-- Le fichier footer.css a été migré vers navigation-unified.css v=1.7 -->
+    <link rel="stylesheet" href="css/language-selector.css">
+    <link rel="stylesheet" href="css/navigation-overlap-fix.css">
+    <!-- Script fix-links.js désactivé pour éviter les changements de langue automatiques -->
+    <script src="./js/language-persistence.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://unpkg.com/lucide@0.344.0/dist/umd/lucide.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Responsivité uniquement (préserve le design original) -->
+    <link rel="stylesheet" href="css/responsive-only.css">
+    <!-- Script redirect-fix.js désactivé pour éviter les changements de langue automatiques -->
+    <script src="js/language-switcher.js"></script>
+    <script src="./js/language-dropdown-toggle.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <img src="img/logo.png" alt="PayeSmart Logo">
+                </div>
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="./fr/index.html">Accueil</a></li>
+                        <li><a href="./solutions.html">Terminaux</a></li>
+                        <li><a href="./nos-accessoires.html">Accessoires</a></li>
+                        <li><a href="./about.html">Qui sommes-nous</a></li>
+                        <li><a href="./contact.html" class="active">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="header-buttons">
+                    <div class="language-selector">
+                        <button class="language-button">FR <i class="fas fa-chevron-down"></i></button>
+                        <div class="language-dropdown">
+                            <a href="./fr/index.html" class="language-option active" data-lang="fr">Français</a>
+                            <a href="./nl/contact.html" class="language-option" data-lang="nl">Nederlands</a>
+                            <a href="./en/contact.html" class="language-option" data-lang="en">English</a>
+                        </div>
+                    </div>
+                    <a href="/#/auth?register=true" class="btn btn-primary">Essai gratuit</a>
+                    <a href="/#/auth" class="btn btn-primary">Se connecter</a>
+                </div>
+                <button class="mobile-menu-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="contact-hero">
+        <div class="container">
+            <div class="contact-hero-content">
+                <h1>Contactez-nous</h1>
+                <p class="subtitle">Notre équipe est à votre disposition pour répondre à toutes vos questions</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h2>Nous sommes là pour vous aider</h2>
+                    <p>Vous avez des questions sur nos services ou vous souhaitez planifier une démonstration ? N'hésitez pas à nous contacter par téléphone, email ou en remplissant le formulaire ci-contre.</p>
+                    
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <i data-lucide="mail"></i>
+                            <div>
+                                <h4>Email</h4>
+                                <p>contact@payesmart.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-method">
+                            <i data-lucide="phone"></i>
+                            <div>
+                                <h4>Téléphone</h4>
+                                <p>+33 1 23 45 67 89</p>
+                            </div>
+                        </div>
+                        <div class="contact-method">
+                            <i data-lucide="map-pin"></i>
+                            <div>
+                                <h4>Adresse</h4>
+                                <p>123 Avenue des Entrepreneurs<br>75001 Paris, France</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-hours">
+                        <h4>Heures d'ouverture</h4>
+                        <p>Lundi - Vendredi: 9h00 - 18h00</p>
+                        <p>Samedi - Dimanche: Fermé</p>
+                    </div>
+                    
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i data-lucide="facebook"></i></a>
+                        <a href="#" class="social-icon"><i data-lucide="twitter"></i></a>
+                        <a href="#" class="social-icon"><i data-lucide="linkedin"></i></a>
+                        <a href="#" class="social-icon"><i data-lucide="instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="contact-form-container">
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-header">
+                            <h3>Envoyez-nous un message</h3>
+                            <p>Nous vous répondrons dans les 24 heures</p>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="name">Nom complet</label>
+                            <div class="input-icon">
+                                <i data-lucide="user"></i>
+                                <input type="text" id="name" name="name" placeholder="Votre nom" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <div class="input-icon">
+                                <i data-lucide="mail"></i>
+                                <input type="email" id="email" name="email" placeholder="Votre email" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Téléphone</label>
+                            <div class="input-icon">
+                                <i data-lucide="phone"></i>
+                                <input type="tel" id="phone" name="phone" placeholder="Votre téléphone">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Sujet</label>
+                            <div class="input-icon">
+                                <i data-lucide="help-circle"></i>
+                                <select id="subject" name="subject" required>
+                                    <option value="">Sélectionnez un sujet</option>
+                                    <option value="demo">Demande de démonstration</option>
+                                    <option value="pricing">Information sur les prix</option>
+                                    <option value="support">Support technique</option>
+                                    <option value="partnership">Partenariat</option>
+                                    <option value="other">Autre</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" placeholder="Comment pouvons-nous vous aider ?" rows="5" required></textarea>
+                        </div>
+                        
+                        <div class="form-group checkbox-group">
+                            <input type="checkbox" id="privacy" name="privacy" required>
+                            <label for="privacy">J'accepte la <a href="#">politique de confidentialité</a></label>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-secondary btn-block">Envoyer le message</button>
+                        
+                        <div class="form-success" id="formSuccess">
+                            <i data-lucide="check-circle"></i>
+                            <h4>Message envoyé !</h4>
+                            <p>Nous vous répondrons dans les plus brefs délais.</p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section">
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.142047342144!2d2.3354330156743847!3d48.87456857928921!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e38f817b573%3A0x48d69c30470e7aeb!2sPlace%20de%20l&#39;Op%C3%A9ra%2C%2075009%20Paris!5e0!3m2!1sfr!2sfr!4v1648231556993!5m2!1sfr!2sfr" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Questions fréquentes</h2>
+                <p>Vous ne trouvez pas la réponse à votre question ? Contactez-nous !</p>
+            </div>
+            
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Comment puis-je obtenir une démonstration de PayeSmart ?</h4>
+                        <i data-lucide="chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Vous pouvez demander une démonstration gratuite en remplissant le formulaire de contact ci-dessus ou en nous appelant directement. Un de nos conseillers vous contactera pour organiser une session personnalisée.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Combien de temps dure la période d'essai gratuit ?</h4>
+                        <i data-lucide="chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>La période d'essai gratuit de PayeSmart dure 14 jours. Pendant cette période, vous avez accès à toutes les fonctionnalités de la version Pro pour tester notre solution dans vos conditions réelles d'utilisation.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Puis-je changer de forfait à tout moment ?</h4>
+                        <i data-lucide="chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Oui, vous pouvez changer de forfait à tout moment. Si vous passez à un forfait supérieur, la différence sera calculée au prorata. Si vous passez à un forfait inférieur, le changement prendra effet à la fin de votre cycle de facturation actuel.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Comment fonctionne le support technique ?</h4>
+                        <i data-lucide="chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Selon votre forfait, vous avez accès à différents niveaux de support. Le forfait Starter inclut le support par email, le forfait Pro ajoute le support prioritaire, et le forfait Enterprise offre un support dédié 24/7 avec un temps de réponse garanti.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <!-- Logo et information principale -->
+            <div class="footer-main">
+                <div class="footer-logo">
+                    
+                    
+                </div>
+                
+                <!-- Icônes de réseaux sociaux -->
+                <div class="footer-social">
+                    <a href="#" class="social-icon" aria-label="Facebook">
+                        <i data-lucide="facebook"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Twitter">
+                        <i data-lucide="twitter"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="LinkedIn">
+                        <i data-lucide="linkedin"></i>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Instagram">
+                        <i data-lucide="instagram"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Liens organisés -->
+            <div class="footer-links-grid">
+                <div class="footer-links-column">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="fr/index.html">Accueil</a></li>
+                        <li><a href="about.html">Qui sommes-nous</a></li>
+                        <li><a href="fr/index.html#features">Fonctionnalités</a></li>
+                        <li><a href="fr/index.html#pricing">Tarifs</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-column">
+                    <h4>Entreprise</h4>
+                    <ul>
+                        <li><a href="about.html">À propos</a></li>
+                        <li><a href="about.html#team">Notre équipe</a></li>
+                        <li><a href="about.html#values">Nos valeurs</a></li>
+                        <li><a href="#">Carrières</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-column">
+                    <h4>Ressources</h4>
+                    <ul>
+                        <li><a href="#">Centre d'aide</a></li>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Webinaires</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-column">
+                    <h4>Légal</h4>
+                    <ul>
+                        <li><a href="#">Conditions</a></li>
+                        <li><a href="#">Confidentialité</a></li>
+                        <li><a href="#">Conformité</a></li>
+                        <li><a href="#">Mentions légales</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Ligne de séparation -->
+            <hr class="footer-divider">
+            
+            <!-- Accès et copyright -->
+            <div class="footer-bottom">
+                <div class="footer-access">
+                    <a href="../index.html#/auth" class="access-link">Connexion client</a>
+                    <span class="separator">|</span>
+                    <a href="../index.html#/admin/login" class="access-link admin-link">Espace administration</a>
+                </div>
+                <p class="copyright">&copy; 2025 PayeSmart. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/lucide-init.js"></script>
+    <script src="js/contact.js"></script>
+</body>
+</html>

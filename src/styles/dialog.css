@@ -1,0 +1,215 @@
+/* Amélioration des boîtes de dialogue */
+.dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.dialog-container {
+  background-color: var(--theme-bg-secondary, #2a2b30);
+  border-radius: 12px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  width: 90%;
+  max-width: 450px;
+  max-height: 90vh;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  animation: scaleIn 0.2s ease-out;
+  transform: translateY(0);
+}
+
+.dialog-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dialog-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  margin: 0;
+}
+
+.dialog-body {
+  padding: 20px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 16px;
+}
+
+.dialog-footer {
+  padding: 12px 20px;
+  background-color: var(--theme-bg-primary, #23272f);
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dialog-cancel-btn {
+  padding: 8px 16px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.dialog-cancel-btn:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+.dialog-confirm-btn {
+  padding: 8px 16px;
+  background-color: var(--theme-color-danger, #ef4444);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 5px rgba(239, 68, 68, 0.3);
+}
+
+.dialog-confirm-btn:hover {
+  background-color: var(--theme-color-danger-dark, #dc2626);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(239, 68, 68, 0.3);
+}
+
+.dialog-confirm-btn.warning {
+  background-color: var(--theme-color-warning, #f59e0b);
+  box-shadow: 0 2px 5px rgba(245, 158, 11, 0.3);
+}
+
+.dialog-confirm-btn.warning:hover {
+  background-color: var(--theme-color-warning-dark, #d97706);
+  box-shadow: 0 4px 8px rgba(245, 158, 11, 0.3);
+}
+
+.dialog-confirm-btn.info {
+  background-color: var(--theme-color, #4f46e5);
+  box-shadow: 0 2px 5px rgba(79, 70, 229, 0.3);
+}
+
+.dialog-confirm-btn.info:hover {
+  background-color: var(--theme-color-dark, #4338ca);
+  box-shadow: 0 4px 8px rgba(79, 70, 229, 0.3);
+}
+
+.dialog-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 16px;
+  flex-shrink: 0;
+}
+
+.dialog-icon-danger {
+  color: #ef4444;
+}
+
+.dialog-icon-warning {
+  color: #f59e0b;
+}
+
+.dialog-icon-info {
+  color: #4f46e5;
+}
+
+.dialog-content {
+  display: flex;
+  align-items: flex-start;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.95) translateY(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Style pour les alertes améliorées */
+.custom-alert {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  max-width: 400px;
+  background-color: var(--theme-bg-secondary, #2a2b30);
+  color: #fff;
+  border-radius: 8px;
+  padding: 16px 20px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  z-index: 9999;
+  border-left: 4px solid var(--theme-color, #4f46e5);
+  animation: slideIn 0.3s ease-out;
+  display: flex;
+  align-items: flex-start;
+}
+
+.custom-alert.warning {
+  border-left-color: var(--theme-color-warning, #f59e0b);
+}
+
+.custom-alert.error {
+  border-left-color: var(--theme-color-danger, #ef4444);
+}
+
+.custom-alert.success {
+  border-left-color: var(--theme-color-success, #10b981);
+}
+
+.alert-close {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.alert-close:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

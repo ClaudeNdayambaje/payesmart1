@@ -1,0 +1,120 @@
+/* Style pour améliorer les dialogues natifs dans le navigateur */
+
+/* Styles pour les dialogues (Surcharge les styles natifs) */
+dialog {
+  background-color: var(--theme-bg-secondary, #2a2b30);
+  color: #fff;
+  border: 1px solid var(--theme-color-dark, #313236);
+  border-radius: 12px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  padding: 0;
+  max-width: 90%;
+  width: 450px;
+  animation: fadeIn 0.2s ease-out, scaleIn 0.2s ease-out;
+}
+
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.2s ease-out;
+}
+
+dialog .dialog-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+dialog .dialog-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  margin: 0;
+}
+
+dialog .dialog-body {
+  padding: 20px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+dialog .dialog-footer {
+  padding: 16px 20px;
+  background-color: var(--theme-bg-primary, #23272f);
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+dialog .dialog-cancel-btn {
+  padding: 10px 16px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+dialog .dialog-cancel-btn:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+dialog .dialog-confirm-btn {
+  padding: 10px 16px;
+  background-color: var(--theme-color-danger, #ef4444);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 5px rgba(239, 68, 68, 0.3);
+}
+
+dialog .dialog-confirm-btn:hover {
+  background-color: var(--theme-color-danger-dark, #dc2626);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(239, 68, 68, 0.3);
+}
+
+/* Personnaliser les alertes */
+.custom-alert {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  max-width: 400px;
+  background-color: var(--theme-bg-secondary, #2a2b30);
+  color: #fff;
+  border-radius: 8px;
+  padding: 16px 20px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  z-index: 9999;
+  border-left: 4px solid var(--theme-color, #4f46e5);
+  animation: slideInAlert 0.3s ease-out;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.95); }
+  to { transform: scale(1); }
+}
+
+@keyframes slideInAlert {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

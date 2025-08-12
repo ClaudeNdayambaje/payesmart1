@@ -1,0 +1,45 @@
+/* 
+ * VARIATION DE COULEURS POUR LES BOUTONS
+ * Application d'une couleur bleue aux boutons secondaires
+ * Date: Août 2025
+ */
+
+/* Style pour les boutons primaires (conserve la couleur orange) */
+.hero-buttons .btn-primary {
+    background: linear-gradient(135deg, #e58509 0%, #ff9900 100%);
+    color: #fff;
+    border: none;
+}
+
+.hero-buttons .btn-primary:hover {
+    background: linear-gradient(135deg, #ff9900 0%, #e58509 100%);
+}
+
+/* Style pour les boutons secondaires (nouvelle couleur bleue) */
+.hero-buttons .btn-secondary {
+    background: #3498db;
+    color: #fff;
+    border: none;
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+}
+
+.hero-buttons .btn-secondary:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+}
+
+/* Style spécifique pour les paires de boutons en mobile */
+@media (max-width: 767px) {
+    /* Espacement supplémentaire entre boutons de couleurs différentes */
+    .hero-buttons {
+        gap: 15px;
+    }
+    
+    /* Assurer une largeur égale pour les deux types de boutons */
+    .hero-buttons .btn {
+        width: 100%;
+        max-width: 220px;
+        text-align: center;
+        padding: 12px 20px;
+    }
+}

@@ -1,0 +1,407 @@
+/* Styles personnalisés pour la page de connexion PayeSmart */
+
+:root {
+  --ps-dark-gray: #2F2F2F;
+  --ps-orange: #F7941D;
+  --ps-orange-light: #FFA94D;
+  --ps-light-gray: #444444;
+  --ps-white: #ffffff;
+  --ps-darker-gray: #232323;
+}
+
+/* Style pour l'overlay de la modale de déconnexion */
+.modal-overlay {
+  background-color: var(--ps-darker-gray) !important;
+  background: linear-gradient(120deg, var(--ps-dark-gray) 0%, var(--ps-darker-gray) 100%) !important;
+}
+
+/* Style pour le formulaire de la modale de déconnexion - identique au style des cartes profil dans l'image */
+.modal-dialog {
+  /* Couleur de fond exactement comme les cartes de profil */
+  background-color: #1e1e1e !important;
+  /* Bordure arrondie comme les cartes */
+  border-radius: 0.5rem !important;
+  /* Pas de bordure visible comme sur l'image */
+  border: none !important;
+  /* Pas d'effet d'ombre comme sur l'image */
+  box-shadow: none !important;
+  color: var(--ps-white) !important;
+  /* Espacement intérieur comme les cartes de profil */
+  padding: 1rem !important;
+  /* Positionnement et transition */
+  position: relative !important;
+  transition: all 0.3s ease !important;
+  overflow: hidden !important;
+}
+
+/* Style pour l'en-tête de la modale - style minimaliste comme les cartes */
+.modal-header {
+  border-bottom: none !important;
+  background-color: transparent !important;
+  padding-bottom: 0.5rem !important;
+}
+
+/* Style pour le pied de page de la modale - style minimaliste comme les cartes */
+.modal-footer {
+  background-color: transparent !important;
+  border-top: none !important;
+  justify-content: center !important;
+  padding-top: 0.5rem !important;
+}
+
+/* Styles du fond - version améliorée */
+.ps-login-background {
+  background: #2F2F2F !important; /* Utiliser des couleurs en dur plutôt que des variables */
+  background: linear-gradient(120deg, #2F2F2F 0%, #232323 100%) !important;
+  color: #ffffff !important;
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  z-index: 0;
+}
+
+/* Animation de loading orange - similaire à l'écran de chargement */
+@keyframes pulse-orange {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(247, 148, 29, 0.4);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 20px rgba(247, 148, 29, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(247, 148, 29, 0);
+  }
+}
+
+/* Barre de progression comme sur l'écran de chargement */
+.ps-progress-bar {
+  height: 4px;
+  width: 0;
+  background-color: var(--ps-orange);
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: progress-animate 2s ease-in-out infinite;
+}
+
+@keyframes progress-animate {
+  0% {
+    width: 0;
+  }
+  50% {
+    width: 100%;
+  }
+  100% {
+    width: 0;
+  }
+}
+
+/* Barre de progression orange */
+.login-loading-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  overflow: hidden;
+  background-color: rgba(35, 35, 35, 0.5);
+}
+
+.login-loading-progress {
+  width: 100%;
+  height: 100%;
+  background-color: var(--ps-orange);
+  animation: loading-progress 1.5s ease-in-out infinite;
+  transform-origin: left;
+}
+
+@keyframes loading-progress {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Styles du conteneur principal - design épuré comme l'écran de chargement */
+.ps-login-container {
+  background-color: #323232 !important;
+  border: none !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important;
+  backdrop-filter: blur(10px) !important;
+  border-radius: 12px !important;
+}
+
+/* Styles des boutons principaux - design moderne */
+.ps-btn-primary {
+  background-color: var(--ps-orange) !important;
+  color: white !important;
+  transition: all 0.3s ease !important;
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(247, 148, 29, 0.25) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.ps-btn-primary::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: -100% !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent) !important;
+  transition: 0.5s !important;
+}
+
+.ps-btn-primary:hover::before {
+  left: 100% !important;
+}
+
+.ps-btn-primary:hover {
+  background-color: #e68700 !important; /* Version plus foncée de l'orange */
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 16px rgba(247, 148, 29, 0.5) !important;
+}
+
+/* Styles des points PIN */
+.ps-pin-dot {
+  border: 1px solid #444 !important;
+}
+
+.ps-pin-dot-filled {
+  background-color: var(--ps-orange) !important;
+  border-color: var(--ps-orange) !important;
+}
+
+/* Style du pavé numérique */
+.ps-numpad-button {
+  background-color: var(--ps-darker-gray) !important;
+  border: 1px solid #444 !important;
+  color: white !important;
+  transition: all 0.2s ease !important;
+}
+
+/* Style des champs de saisie - design épuré comme l'écran de chargement */
+.ps-input {
+  background-color: #2a2a2a !important;
+  border: none !important;
+  color: white !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2) !important;
+}
+
+.ps-input:focus {
+  background-color: #2d2d2d !important;
+  box-shadow: 0 0 0 2px rgba(247, 148, 29, 0.3) !important;
+}
+
+/* Style des boutons secondaires - design épuré */
+.ps-btn-secondary {
+  background-color: rgba(35, 35, 35, 0.5) !important;
+  border: none !important;
+  color: white !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.ps-btn-secondary::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: -100% !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent) !important;
+  transition: 0.5s !important;
+}
+
+.ps-btn-secondary:hover::before {
+  left: 100% !important;
+}
+
+.ps-btn-secondary:hover {
+  background-color: rgba(35, 35, 35, 0.7) !important;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Style des cartes utilisateurs */
+
+/* Style du séparateur "ou" */
+.ps-login-container .relative span {
+  background-color: #323232 !important;
+  color: rgba(255, 255, 255, 0.7) !important;
+  padding: 0 16px !important;
+}
+
+.ps-login-container .relative .border-t {
+  border-color: rgba(80, 80, 80, 0.3) !important;
+}
+
+/* Style du texte et du lien d'inscription */
+.ps-login-container p {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.ps-login-container button[type="button"] {
+  color: var(--ps-orange) !important;
+}
+.ps-user-card {
+  /* Même couleur que l'arrière-plan principal pour donner l'impression de transparence */
+  background-color: #2F2F2F !important;
+  /* Bordure bien visible */
+  border: 1.5px solid rgba(150, 150, 150, 0.6) !important;
+  transition: all 0.3s ease !important;
+  position: relative !important;
+  /* Assure que toute la carte est entourée par la bordure */
+  border-radius: 0.5rem !important;
+  overflow: hidden !important;
+  /* Aucun effet d'ombre par défaut */
+  box-shadow: none !important;
+}
+
+.ps-user-card:hover, .ps-user-card.selected {
+  /* Bordure orange plus fine et élégante */
+  border: 1.5px solid var(--ps-orange) !important;
+  /* Fond transparent au survol et à la sélection */
+  background-color: transparent !important;
+  /* Léger effet de lueur orange plutôt qu'une ombre */
+  box-shadow: 0 0 8px 0 rgba(247, 148, 29, 0.2) !important;
+}
+
+/* Style des avatars utilisateurs */
+.ps-user-avatar {
+  /* Même couleur que l'arrière-plan principal */
+  background-color: #2F2F2F !important;
+  /* Contour bien visible */
+  border: 1.5px solid rgba(150, 150, 150, 0.6) !important;
+  /* Styles pour les images de profil */
+  position: relative !important;
+}
+
+/* Style pour les images de profil dans les avatars */
+.ps-user-avatar img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+}
+
+/* Style de l'avatar lors du survol de la carte */
+.ps-user-card:hover .ps-user-avatar,
+.ps-user-card.selected .ps-user-avatar {
+  /* Adopter la bordure orange lors de la sélection ou du survol */
+  border-color: var(--ps-orange) !important;
+  /* Rendre le fond transparent lors du survol ou de la sélection */
+  background-color: transparent !important;
+}
+
+/* Style des messages d'erreur */
+.ps-error-box {
+  background-color: rgba(220, 38, 38, 0.1) !important;
+  border: 1px solid rgba(220, 38, 38, 0.3) !important;
+  color: #fca5a5 !important;
+  transition: all 0.2s ease !important;
+}
+
+.ps-numpad-button:hover {
+  background-color: var(--ps-orange) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Assure que le texte devient blanc au survol du bouton pour un meilleur contraste */
+.ps-numpad-button:hover span {
+  color: white !important;
+}
+
+/* Style des textes */
+.ps-text-white {
+  color: white !important;
+}
+
+.ps-text-muted {
+  color: #aaa !important;
+}
+
+/* Styles supplémentaires pour la page d'authentification */
+.ps-login-background label {
+  color: white !important;
+  display: block !important;
+  margin-bottom: 5px !important;
+}
+
+.ps-login-background p {
+  color: #e0e0e0 !important;
+}
+
+.ps-login-background h2 {
+  color: var(--ps-orange) !important;
+  margin-bottom: 10px !important;
+}
+
+.ps-login-background .text-gray-700 {
+  color: #e0e0e0 !important;
+}
+
+/* Correction des problèmes d'affichage */
+.ps-login-background input {
+  background-color: var(--ps-darker-gray) !important;
+  color: white !important;
+  border: 1px solid #444 !important;
+}
+
+.ps-login-background button {
+  color: white !important;
+}
+
+/* Assurer que les conteneurs sont visibles */
+.ps-login-background .bg-\[\.\.\.\] {
+  background-color: var(--ps-darker-gray) !important;
+}
+
+/* Style des éléments utilisateurs */
+.ps-user-card {
+  border: 1px solid #444 !important;
+  background-color: var(--ps-darker-gray) !important;
+  transition: all 0.3s ease !important;
+}
+
+.ps-user-card:hover {
+  border-color: var(--ps-orange) !important;
+  transform: translateY(-4px) !important;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3) !important;
+}
+
+.ps-user-avatar {
+  background-color: var(--ps-dark-gray) !important;
+}
+
+/* Animations */
+.ps-pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(247, 148, 29, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(247, 148, 29, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(247, 148, 29, 0);
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "plans": [
+    {
+      "id": "pay-and-go",
+      "name": "Pay & Go",
+      "description": "Idéal pour les petites entreprises",
+      "price": 29.00,
+      "billingCycle": "monthly",
+      "currency": "EUR",
+      "features": [
+        "Gestion des employés",
+        "Multi-magasins",
+        "Gestion des produits",
+        "Gestion des promotions",
+        "Programme de fidélité",
+        "Analyses avancées",
+        "Tableau de bord basique",
+        "Support prioritaire",
+        "API personnalisable",
+        "Gestion des ventes"
+      ],
+      "active": true,
+      "isPopular": false
+    },
+    {
+      "id": "print-and-go",
+      "name": "Print & Go",
+      "description": "Plan avec imprimante thermique",
+      "price": 79.00,
+      "billingCycle": "monthly",
+      "currency": "EUR",
+      "features": [
+        "Gestion des employés",
+        "Multi-magasins",
+        "Gestion des produits",
+        "Gestion des promotions",
+        "Programme de fidélité",
+        "Analyses avancées",
+        "Tableau de bord basique",
+        "Support prioritaire",
+        "API personnalisable",
+        "Gestion des ventes"
+      ],
+      "active": true,
+      "isPopular": true
+    },
+    {
+      "id": "all-in",
+      "name": "All-In",
+      "description": "Plan All-In",
+      "price": 149.00,
+      "billingCycle": "quarterly",
+      "currency": "EUR",
+      "features": [
+        "Gestion des employés",
+        "Multi-magasins",
+        "Gestion des produits",
+        "Gestion des promotions", 
+        "Programme de fidélité",
+        "Analyses avancées",
+        "Tableau de bord basique",
+        "Support prioritaire",
+        "API personnalisable",
+        "Gestion des ventes"
+      ],
+      "active": true,
+      "isPopular": false
+    }
+  ]
+}

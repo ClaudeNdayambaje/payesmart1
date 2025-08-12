@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <!-- Orientation, 0 - portrait, 1 - landscape, 2 - all -->
+    <integer name="orientation">0</integer>
+</resources>

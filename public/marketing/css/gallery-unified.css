@@ -1,0 +1,466 @@
+/* 
+ * GALERIE ET LIGHTBOX STYLES UNIFIÉS
+ * Fichier CSS unifié pour tous les styles de galerie d'images et lightbox du site PayeSmart
+ * Regroupe et harmonise les styles des fichiers :
+ * - image-gallery.css
+ * - lightbox.css
+ * - lightbox-custom.css
+ * Version 1.0 - Août 2025
+ */
+
+/*==================================
+ * 1. STRUCTURE DE BASE DE LA GALERIE
+ *==================================*/
+
+/* Galerie de fonctionnalités */
+.features-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 30px 0;
+    align-items: flex-start;
+}
+
+.main-feature-image {
+    flex: 0 0 60%;
+    max-width: 60%;
+}
+
+.secondary-images {
+    flex: 0 0 35%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.secondary-image {
+    width: 100%;
+    height: auto;
+}
+
+.image-placeholder {
+    background-color: #f0f0f0;
+    border: 2px dashed #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    color: #666;
+    font-weight: 500;
+}
+
+/* Structure de base de la galerie */
+.image-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-gap: 20px;
+    padding: 20px 0;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.gallery-image {
+    width: 100%;
+    height: 0;
+    padding-bottom: 75%; /* 4:3 aspect ratio */
+    position: relative;
+}
+
+.gallery-image img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.gallery-item:hover .gallery-image img {
+    transform: scale(1.05);
+}
+
+.gallery-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .gallery-caption {
+    opacity: 1;
+}
+
+.gallery-caption h4 {
+    margin: 0 0 5px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.gallery-caption p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+/*==================================
+ * 2. STYLES DE BASE LIGHTBOX
+ *==================================*/
+
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.lightbox.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.lightbox-content {
+    position: relative;
+    max-width: 80%;
+    max-height: 80%;
+    margin: 20px;
+    overflow: hidden;
+}
+
+.lightbox-image {
+    max-width: 100%;
+    max-height: 80vh;
+    display: block;
+    margin: 0 auto;
+}
+
+.lightbox-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.lightbox-close:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.lightbox-prev,
+.lightbox-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.lightbox-prev {
+    left: 20px;
+}
+
+.lightbox-next {
+    right: 20px;
+}
+
+.lightbox-prev:hover,
+.lightbox-next:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+/*==================================
+ * 3. STYLES LIGHTBOX PERSONNALISÉS
+ *==================================*/
+
+/* Style personnalisé pour le lightbox */
+.lightbox-custom {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox-custom.active {
+    display: flex;
+    animation: lightboxFadeIn 0.3s ease forwards;
+}
+
+@keyframes lightboxFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.lightbox-container {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+}
+
+.lightbox-img {
+    max-width: 100%;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transform: scale(0.95);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.lightbox-custom.active .lightbox-img {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.lightbox-caption {
+    position: absolute;
+    bottom: -50px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    font-size: 16px;
+    padding: 10px;
+}
+
+.lightbox-nav {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+}
+
+.lightbox-btn {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 24px;
+    margin: 0 20px;
+    transition: all 0.2s ease;
+}
+
+.lightbox-btn:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+.lightbox-prev-btn {
+    margin-left: -80px;
+}
+
+.lightbox-next-btn {
+    margin-right: -80px;
+}
+
+.lightbox-close-btn {
+    position: absolute;
+    top: -60px;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.15);
+    border: none;
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 20px;
+    transition: all 0.2s ease;
+}
+
+.lightbox-close-btn:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: rotate(90deg);
+}
+
+/* Compteur d'images */
+.lightbox-counter {
+    position: absolute;
+    bottom: -50px;
+    right: 0;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+}
+
+/* Transition entre les images */
+.lightbox-img.fade-out {
+    opacity: 0;
+    transform: scale(0.9);
+}
+
+.lightbox-img.fade-in {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Indicateurs miniatures */
+.lightbox-thumbnails {
+    position: absolute;
+    bottom: -80px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    overflow-x: auto;
+    padding: 10px 0;
+}
+
+.lightbox-thumbnail {
+    width: 60px;
+    height: 40px;
+    border-radius: 3px;
+    overflow: hidden;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: all 0.2s ease;
+}
+
+.lightbox-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.lightbox-thumbnail.active {
+    opacity: 1;
+    transform: scale(1.1);
+    box-shadow: 0 0 0 2px #fff;
+}
+
+/*==================================
+ * 4. RESPONSIVE
+ *==================================*/
+
+/* Styles responsive pour la galerie */
+@media (max-width: 768px) {
+    .features-gallery {
+        flex-direction: column;
+    }
+    
+    .main-feature-image, 
+    .secondary-images {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    
+    .image-gallery {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+    
+    .lightbox-content {
+        max-width: 95%;
+    }
+    
+    .lightbox-prev-btn {
+        margin-left: -50px;
+    }
+    
+    .lightbox-next-btn {
+        margin-right: -50px;
+    }
+}
+
+@media (max-width: 576px) {
+    .lightbox-prev,
+    .lightbox-next {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+    }
+    
+    .lightbox-prev {
+        left: 10px;
+    }
+    
+    .lightbox-next {
+        right: 10px;
+    }
+    
+    .lightbox-close {
+        top: 10px;
+        right: 10px;
+        width: 30px;
+        height: 30px;
+        font-size: 18px;
+    }
+    
+    .lightbox-thumbnails {
+        bottom: -70px;
+    }
+    
+    .lightbox-thumbnail {
+        width: 40px;
+        height: 30px;
+    }
+}

@@ -1,0 +1,62 @@
+/* 
+ * Fix pour la barre de menu sur les pages du site marketing
+ * Ce fichier assure que l'effet de défilement fonctionne correctement
+ * avec un arrière-plan transparent qui devient visible seulement au défilement
+ * comme sur la page "Qui sommes-nous"
+ */
+
+/* Renforcement de la priorité des styles pour l'en-tête lors du défilement */
+.header.scrolled {
+    background-color: rgba(45, 45, 45, 0.95) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important; /* Support pour Safari */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+    transition: all 0.3s ease !important;
+}
+
+/* S'assurer que le texte reste visible sur fond sombre */
+.header.scrolled .main-nav a {
+    color: white !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !important;
+}
+
+.header.scrolled .main-nav a.active {
+    color: var(--primary-color) !important;
+}
+
+/* Couleur claire pour les liens quand le header est transparent */
+.header:not(.scrolled) .main-nav a {
+    color: white !important;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.5) !important; /* Ombre pour améliorer la visibilité sur fonds clairs */
+}
+
+.header:not(.scrolled) .main-nav a.active {
+    color: var(--primary-color) !important;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Fix pour le comportement de transition */
+.header {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    z-index: 1000 !important; /* Augmentation du z-index pour s'assurer qu'il est toujours au-dessus */
+    transition: background-color 0.3s ease, transform 0.3s ease, backdrop-filter 0.3s ease !important;
+    background-color: transparent !important; /* Transparent par défaut */
+    backdrop-filter: none !important; /* Aucun effet de flou par défaut */
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none !important; /* Pas d'ombre par défaut */
+}
+
+/* Garantir que le script responsive-enhancements.js fonctionne correctement */
+html:not(.is-mobile) .header,
+html.is-mobile .header {
+    transition-property: background-color, transform !important;
+}
+
+/* Boutons dans l'en-tête lors du défilement */
+.header.scrolled .btn-primary {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+}

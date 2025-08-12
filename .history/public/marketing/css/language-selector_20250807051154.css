@@ -1,0 +1,133 @@
+/* Styles pour le sélecteur de langue */
+.language-selector {
+    position: relative;
+    margin-right: 15px;
+    display: inline-block;
+}
+
+.language-button {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.language-button i {
+    margin-left: 5px;
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+.language-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.language-dropdown {
+    position: absolute;
+    top: calc(100% + 5px);
+    right: 0;
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    width: 140px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+/* Version mobile : ouvre au survol */
+@media (max-width: 768px) {
+    .language-selector:hover .language-dropdown,
+    .language-selector:focus-within .language-dropdown {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+}
+
+/* Version desktop : ouvre seulement quand la classe 'active' est présente */
+.language-dropdown.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.language-selector:hover .language-button i {
+    transform: rotate(180deg);
+}
+
+.language-option {
+    display: block;
+    padding: 10px 15px;
+    color: #333;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+    font-size: 0.9rem;
+}
+
+.language-option:hover {
+    background-color: #f5f5f5;
+}
+
+.language-option.active {
+    background-color: #f0f0f0;
+    font-weight: 600;
+    color: #333;
+    position: relative;
+}
+
+.language-option.active::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background-color: #F29D38;
+}
+
+/* Mode sombre */
+@media (prefers-color-scheme: dark) {
+    .language-dropdown {
+        background-color: #2D3748;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+    
+    .language-option {
+        color: #e2e8f0;
+    }
+    
+    .language-option:hover {
+        background-color: #3a4556;
+    }
+    
+    .language-option.active {
+        background-color: #3a4556;
+        color: #e2e8f0;
+    }
+}
+
+/* Adaptation pour les appareils mobiles */
+@media (max-width: 768px) {
+    .language-selector {
+        margin-right: 10px;
+    }
+    
+    .language-button {
+        padding: 5px 10px;
+        font-size: 0.9rem;
+    }
+    
+    .language-dropdown {
+        right: -20px;
+    }
+}
