@@ -228,7 +228,7 @@
                                 <span>Gestion des stocks</span>
                             </div>
                         </div>
-                        <a href="contact.html" class="btn btn-primary">En savoir plus <i class="fas fa-arrow-right"></i></a>
+                        <button id="openFeaturesPopup" class="btn btn-primary">En savoir plus <i class="fas fa-arrow-right"></i></button>
                     </div>
                 </div>
                 
@@ -748,6 +748,78 @@
         
         // Vérification que AOS est correctement chargé
         console.log('AOS initialized:', typeof AOS);
+        
+        // Fonctionnalités Popup
+        document.addEventListener('DOMContentLoaded', function() {
+            const openButton = document.getElementById('openFeaturesPopup');
+            const overlay = document.getElementById('featuresPopupOverlay');
+            const closeButton = document.getElementById('featuresPopupClose');
+            const popup = document.getElementById('featuresPopupContainer');
+            const focusableElements = document.querySelectorAll('#featuresPopupContainer button, #featuresPopupContainer a');
+            let lastFocusedElement = null;
+            
+            function openPopup() {
+                lastFocusedElement = document.activeElement;
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                setTimeout(() => {
+                    closeButton.focus();
+                }, 100);
+            }
+            
+            function closePopup() {
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+                if (lastFocusedElement) {
+                    lastFocusedElement.focus();
+                }
+            }
+            
+            function handleTabKey(e) {
+                if (!overlay.classList.contains('active')) return;
+                
+                const firstFocusableElement = focusableElements[0];
+                const lastFocusableElement = focusableElements[focusableElements.length - 1];
+                
+                if (e.key === 'Tab') {
+                    if (e.shiftKey) {
+                        if (document.activeElement === firstFocusableElement) {
+                            e.preventDefault();
+                            lastFocusableElement.focus();
+                        }
+                    } else {
+                        if (document.activeElement === lastFocusableElement) {
+                            e.preventDefault();
+                            firstFocusableElement.focus();
+                        }
+                    }
+                }
+            }
+            
+            function handleEscape(e) {
+                if (e.key === 'Escape' && overlay.classList.contains('active')) {
+                    closePopup();
+                }
+            }
+            
+            function handleOutsideClick(e) {
+                if (e.target === overlay) {
+                    closePopup();
+                }
+            }
+            
+            if (openButton) {
+                openButton.addEventListener('click', openPopup);
+            }
+            
+            if (closeButton) {
+                closeButton.addEventListener('click', closePopup);
+            }
+            
+            document.addEventListener('keydown', handleTabKey);
+            document.addEventListener('keydown', handleEscape);
+            overlay.addEventListener('click', handleOutsideClick);
+        });
     </script>
     
     <!-- Script d'améliorations responsives -->
@@ -758,5 +830,129 @@
     
     <!-- Script de correction des liens d'authentification -->
     <script src="../js/fix-auth-links.js"></script>
+    
+    <!-- Script de correction de la popup -->
+    <script src="../js/popup-fix.js"></script>
+    
+    <!-- Popup des fonctionnalités complètes -->
+    <div class="features-popup-overlay" id="featuresPopupOverlay">
+        <div class="features-popup-container" id="featuresPopupContainer" style="overflow: hidden;">
+            <button class="features-popup-close" id="featuresPopupClose" aria-label="Fermer la popup">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <!-- En-tête de la popup avec image -->
+            
+            <!-- Titres déplacés hors du header -->
+            <div class="features-popup-titles" style="padding-bottom: 0; margin-bottom: 15px;">
+                <h2>Logiciel de Caisse PayeSmart</h2>
+                <div class="title-separator"></div>
+                <h3>Un système complet pour tous vos besoins commerciaux</h3>
+            </div>
+            
+            <!-- Contenu principal des fonctionnalités en grille -->
+            <div class="features-content" style="padding-top: 0;">
+                <h3 class="features-section-title">Fonctionnalités Premium</h3>
+                
+                <div class="functionalities-grid">
+                    <!-- Première rangée -->
+                    <div class="functionality-card">
+                        <div class="functionality-icon" style="background-color: #F29D38;">
+                            <i class="fas fa-shopping-cart" style="color: white !important; font-size: 24px;"></i>
+                        </div>
+                        <h4 class="functionality-title">Gestion des Ventes Intuitive</h4>
+                        <p class="functionality-description">Vendez rapidement grâce à une interface moderne et fluide, avec saisie instantanée, tous moyens de paiement et tickets personnalisés à votre image.</p>
+                    </div>
+                    
+                    <div class="functionality-card">
+                        <div class="functionality-icon" style="background-color: #3498db;">
+                            <i class="fas fa-box"></i>
+                        </div>
+                        <h4 class="functionality-title">Gestion de Stock Intelligente</h4>
+                        <p class="functionality-description">Contrôlez vos produits en temps réel avec alertes automatiques, historique clair et gestion simplifiée des commandes fournisseurs.</p>
+                    </div>
+                    
+                    <div class="functionality-card">
+                        <div class="functionality-icon" style="background-color: #9b59b6;">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <h4 class="functionality-title">Promotions et Fidélité</h4>
+                        <p class="functionality-description">Attirez et fidélisez vos clients grâce à des promotions flexibles, points cumulables et cartes de fidélité numériques avec QR code.</p>
+                    </div>
+                    
+                    <!-- Deuxième rangée -->
+                    <div class="functionality-card">
+                        <div class="functionality-icon" style="background-color: #e74c3c;">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <h4 class="functionality-title">Analyse et Rapports Détaillés</h4>
+                        <p class="functionality-description">Suivez vos ventes et performances en temps réel avec un tableau de bord clair et des rapports faciles à exporter.</p>
+                    </div>
+                    
+                    <div class="functionality-card">
+                        <div class="functionality-icon" style="background-color: #2ecc71;">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h4 class="functionality-title">Gestion des Employés</h4>
+                        <p class="functionality-description">Organisez votre équipe avec des droits d'accès personnalisés, un suivi d'activité précis et une sécurité renforcée.</p>
+                    </div>
+                    
+                    <div class="functionality-card">
+                        <div class="functionality-icon" style="background-color: #1abc9c;">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <h4 class="functionality-title">Personnalisation Complète</h4>
+                        <p class="functionality-description">Adaptez l'application à votre image avec des thèmes variés, votre logo et une interface aux couleurs de votre marque.</p>
+                    </div>
+                </div>
+                
+
+                
+                <!-- Section paiement et sécurité -->
+                <div class="payment-security">
+                    <div class="payment-section full-width-image">
+                        <img src="../img/payment-methods.png" alt="Moyens de paiement acceptés" class="full-width-payment-image">
+                    </div>
+                    
+                    <div class="security-section">
+                        <h3 class="security-title">Sécurité garantie</h3>
+                        <p class="security-content">Votre entreprise et vos clients méritent une protection optimale. Notre système offre:</p>
+                        <div class="security-list">
+                            <div class="security-item">
+                                <i class="fas fa-shield-alt"></i>
+                                <div class="security-item-content">Conformité PCI DSS pour les transactions par carte</div>
+                            </div>
+                            <div class="security-item">
+                                <i class="fas fa-lock"></i>
+                                <div class="security-item-content">Chiffrement des données de bout en bout</div>
+                            </div>
+                            <div class="security-item">
+                                <i class="fas fa-user-shield"></i>
+                                <div class="security-item-content">Gestion avancée des permissions utilisateur</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+
+            </div>
+            
+            <!-- CTA sticky -->
+            <div class="features-cta">
+                <div class="cta-text">
+                    <div class="cta-title">Prêt à révolutionner votre commerce?</div>
+                    <div class="cta-subtitle">Essayez PayeSmart gratuitement pendant 14 jours</div>
+                </div>
+                <div class="cta-buttons">
+                    <a href="http://localhost:3002/#/auth?register=true" class="cta-btn cta-btn-primary">
+                        <i class="fas fa-rocket"></i> Démarrer l'essai gratuit
+                    </a>
+                    <a href="contact.html" class="cta-btn cta-btn-secondary">
+                        <i class="fas fa-phone-alt"></i> Contacter un conseiller
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
