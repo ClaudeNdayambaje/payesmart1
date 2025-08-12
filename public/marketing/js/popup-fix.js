@@ -18,10 +18,28 @@ document.addEventListener('DOMContentLoaded', function() {
             ctaButtons.style.justifyContent = 'center';
             ctaButtons.style.flexWrap = 'nowrap';
             
-            // Forcer l'overflow visible pour le conteneur
+            // Forcer l'overflow visible et ajuster la largeur selon le device
             const popupContainer = document.getElementById('featuresPopupContainer');
             if (popupContainer) {
                 popupContainer.style.overflow = 'visible';
+                
+                // Adapter la largeur sur mobile
+                function adjustPopupWidth() {
+                    if (window.innerWidth <= 576) {
+                        popupContainer.style.width = '98%';
+                        popupContainer.style.margin = '5px auto';
+                    } else if (window.innerWidth <= 768) {
+                        popupContainer.style.width = '95%';
+                        popupContainer.style.margin = '15px auto';
+                    } else {
+                        popupContainer.style.width = '90%';
+                        popupContainer.style.margin = '30px auto';
+                    }
+                }
+                
+                // Ajuster immédiatement et à chaque redimensionnement
+                adjustPopupWidth();
+                window.addEventListener('resize', adjustPopupWidth);
             }
             
             // Corrige le CTA pour qu'il ne soit pas sticky

@@ -48,6 +48,7 @@
 .features-popup-container {
     position: relative;
     max-width: 1000px;
+    width: 90%; /* Ajout d'une largeur relative */
     margin: 30px auto;
     background: #222222;
     border-radius: 16px;
@@ -62,6 +63,33 @@
 
 .features-popup-overlay.active .features-popup-container {
     transform: translateY(0);
+}
+
+/* Media queries pour la popup sur mobile */
+@media (max-width: 768px) {
+    .features-popup-container {
+        width: 95%;
+        margin: 15px auto;
+    }
+}
+
+@media (max-width: 576px) {
+    .features-popup-container {
+        width: 95%;
+        margin: 10px auto;
+        border-radius: 16px;
+    }
+    
+    .features-popup-titles,
+    .features-content {
+        padding-left: 15px;
+        padding-right: 15px;
+        border-radius: 16px 16px 0 0;
+    }
+    
+    .features-content {
+        border-radius: 0 0 16px 16px;
+    }
 }
 
 /* Bouton de fermeture */

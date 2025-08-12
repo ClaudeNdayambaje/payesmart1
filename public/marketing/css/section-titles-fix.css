@@ -1,0 +1,41 @@
+/* 
+ * CORRECTION TAILLE DES TITRES DE SECTIONS
+ * Réduit la taille des titres h1 sur la page d'accueil
+ * Version 1.0 - Août 2025
+ */
+
+/* Ciblage spécifique des titres h1 dans les sections de la page d'accueil */
+.solution-complete-section h1,
+.pricing-section h1,
+.hardware-section h1,
+.why-us-section h1,
+.testimonials-section h1,
+.produits-hero-content h1 {
+    font-size: 2.8rem !important; /* Taille réduite (était environ 3.5rem) */
+    line-height: 1.2 !important;
+    margin-bottom: 15px;
+}
+
+/* Ajustement responsive pour tablettes */
+@media (max-width: 992px) {
+    .solution-complete-section h1,
+    .pricing-section h1,
+    .hardware-section h1,
+    .why-us-section h1,
+    .testimonials-section h1,
+    .produits-hero-content h1 {
+        font-size: 2.4rem !important;
+    }
+}
+
+/* Ajustement responsive pour mobiles */
+@media (max-width: 576px) {
+    .solution-complete-section h1,
+    .pricing-section h1,
+    .hardware-section h1,
+    .why-us-section h1,
+    .testimonials-section h1,
+    .produits-hero-content h1 {
+        font-size: 2rem !important;
+    }
+}
