@@ -3728,19 +3728,34 @@ a[href*="auth"]:not([href*="register=true"]).btn:hover {
 
 /* Style élégant et distinctif pour les titres de catégories sur la page produit */
 .categorie-titre {
-    font-size: 2rem;
-    font-weight: 600;
-    color: #F29D38;
-    margin-bottom: 20px;
-    text-transform: none;
-    letter-spacing: 0.5px;
-    position: relative;
-    display: block;
-    padding: 10px 0;
-    text-align: center;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-    width: 100%;
-    background-color: #222222;
+    background-color: transparent !important;
+    color: #FFFFFF !important;
+    font-size: 1.8rem !important;
+    padding: 5px 20px !important;
+    margin-top: 10px !important;
+    margin-bottom: 20px !important;
+    font-weight: 700 !important;
+    width: 100% !important;
+    text-align: center !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    position: relative !important;
+    display: inline-block !important;
+    text-transform: none !important;
+    letter-spacing: 0 !important;
+}
+
+/* Barre orange à côté du texte */
+.categorie-titre::before {
+    content: "";
+    display: inline-block !important;
+    width: 4px !important;
+    height: 1.2em !important;
+    background-color: #F29D38 !important;
+    margin-right: 15px !important;
+    vertical-align: middle !important;
+    position: relative !important;
+    top: -0.05em !important;
 }
 
 /* Pseudo-élément supprimé */
