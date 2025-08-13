@@ -39,8 +39,7 @@
         background-clip: text !important;
         -webkit-text-fill-color: transparent !important;
         color: transparent !important;
-        font-weight: inherit !important;
-        font-size: inherit !important;
+        font-weight: 800 !important;
     }
     
     /* Effet de soulignement élégant pour le texte en surbrillance */
