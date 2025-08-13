@@ -1,0 +1,54 @@
+/* 
+ * RESTAURATION DU STYLE DES TITRES DE CATÉGORIES
+ * Rétablit le style original des titres dans la page solutions/terminaux
+ * Version 1.0 - Août 2025
+ */
+
+/* Style pour les titres de catégories */
+h2.categorie-titre {
+    background-color: #1d1d1d !important;
+    color: #F29D38 !important;
+    font-size: 2.5rem !important;
+    padding: 15px 20px !important;
+    margin-bottom: 30px !important;
+    border-left: 4px solid #F29D38 !important;
+    font-weight: 700 !important;
+    width: 100% !important;
+    text-align: left !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    position: relative !important;
+    display: block !important;
+    text-transform: none !important;
+    letter-spacing: 0 !important;
+}
+
+/* Restauration complète du style avec les bonnes couleurs et dimensions */
+.categorie-produits {
+    margin-bottom: 50px !important;
+}
+
+/* Assurez-vous que ces styles ont la priorité */
+.produits-section h2.categorie-titre,
+.produits-grid h2.categorie-titre {
+    background-color: #1d1d1d !important;
+    color: #F29D38 !important;
+    font-size: 2.5rem !important;
+    border-left: 4px solid #F29D38 !important;
+    padding: 15px 20px !important;
+    margin: 30px 0 !important;
+}
+
+/* Style pour le cas où les titres seraient générés via JavaScript */
+.category-header, 
+.product-category-title,
+h2[data-category],
+.categorie-titre {
+    background-color: #1d1d1d !important;
+    color: #F29D38 !important;
+    font-size: 2.5rem !important;
+    padding: 15px 20px !important;
+    margin-bottom: 30px !important;
+    border-left: 4px solid #F29D38 !important;
+    font-weight: 700 !important;
+}
